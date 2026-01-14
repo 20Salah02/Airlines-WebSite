@@ -12,6 +12,13 @@ import HandleDestination from "../hooks/mainFormDestination"
 import { DateRange } from "react-day-picker"
 
 export default function Form(){
+    type Airport ={
+    id : number
+    name : string
+    city : string
+    country : string
+    iata : string
+    }
     const firstDayDefault = new Date();
     const lastDayDefault = new Date();
     lastDayDefault.setDate(firstDayDefault.getDate() + 5)
@@ -26,8 +33,8 @@ export default function Form(){
     const firstDay = formatDate(selectDate?.from)
     const lastDay = formatDate(selectDate?.to)
 
-    const [destinationFrom, setDestinationFrom] = useState<any>(null);
-    const [destinationTo, setDestinationTo] = useState<any>(null);
+    const [destinationFrom, setDestinationFrom] = useState<Airport | null>(null);
+    const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
     
     function formatDate(date?: Date) {
         if (!date) return ""
