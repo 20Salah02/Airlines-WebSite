@@ -1,10 +1,17 @@
 
 import FlightsNav from "../flies/[flies]/Containers/nav"
+import FliesHeader from "../flies/[flies]/Containers/header"
+import FlightResults from "../flies/[flies]/Containers/flightsresults"
+
 export default function Flies(){
 
     return(
-        <div className="bg-zinc-100">
-            <div><FlightsNav/></div>
+        <div className="bg-zinc-100 ">
+            <div className="mx-8">
+                <div><FlightsNav/></div>
+                <div><FliesHeader/></div>
+                <div><FlightResults/></div>
+            </div>
         </div>
     )
 }
