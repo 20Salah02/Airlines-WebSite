@@ -1,6 +1,6 @@
 "use client"
 //
-import { useState } from "react"
+import { use, useState } from "react"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
@@ -23,10 +23,12 @@ export default function Form(){
         from : firstDayDefault ,
         to : lastDayDefault
     })
-
     const firstDay = formatDate(selectDate?.from)
     const lastDay = formatDate(selectDate?.to)
 
+    const [destinationFrom, setDestinationFrom] = useState<any>(null);
+    const [destinationTo, setDestinationTo] = useState<any>(null);
+    
     function formatDate(date?: Date) {
         if (!date) return ""
         return new Intl.DateTimeFormat("en-GB", {
@@ -39,7 +41,7 @@ export default function Form(){
 
     return(
 
-        <div className="absolute top-110 flex justify-center w-full bg-slat-100    flex-col">
+        <div className="absolute top-110 flex justify-center w-full bg-slat-100 ">
             <form onSubmit={(e) => e.preventDefault()} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className=" container border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-[white]">
 
                 <div className="w-1/4 py-4 flex justify-between text-[17px] ">
@@ -53,10 +55,20 @@ export default function Form(){
                     </div>
                 </div>
                 <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-center">
-                    <div>
-                        <input className="h-12 w-65 pl-2" placeholder="From"></input>
-                        <span>|</span>
-                        <input className="h-12 w-65 pl-2" placeholder="to"></input>
+                    <div className="flex items-center">
+                    <HandleDestination
+                        placeholder="From"
+                        value={destinationFrom?.name || ""}
+                        onSelect={(airport) => setDestinationFrom(airport)}
+                    />
+
+                    <span className="mx-2">|</span>
+
+                    <HandleDestination
+                        placeholder="To"
+                        value={destinationTo?.name || ""}
+                        onSelect={(airport) => setDestinationTo(airport)}
+                    />
                     </div>
 
                     <div>
@@ -108,9 +120,6 @@ export default function Form(){
                     </div>
             </form>
 
-            <div>
-                <HandleDestination/>
-            </div>
             
         </div>
     )

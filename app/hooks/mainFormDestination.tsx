@@ -3,8 +3,8 @@
 //
 import { useState , useEffect , useMemo } from "react";
 // icons
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlane } from "@fortawesome/free-solid-svg-icons";
 
 
 type airportApi ={
@@ -14,7 +14,13 @@ type airportApi ={
     country : string
     iata : string
 }
-export default function HandleDestination(){
+
+type props ={
+    value : string
+    onSelect : (airport : airportApi) => void
+    placeholder : string
+}
+export default function HandleDestination({value , onSelect , placeholder} : props){
     const [data, setData] = useState<airportApi[]>([]);
     const [query, setQuery] = useState("");
 
@@ -34,14 +40,16 @@ export default function HandleDestination(){
         item.iata.toLowerCase().includes(q)
         ).slice(0 ,15);
     }, [query, data]);
+
+
     
       if (!data) return <p>Loading...</p>;
         console.log("data is" + data)
     return (
-    <div className="bg-gray-400" style={{ position: "relative", width: "300px" }}>
+    <div style={{ position: "relative", width: "300px" }}>
         <input
         type="text"
-        placeholder="ابحث عن مطار أو مدينة"
+        placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         style={{ width: "100%", padding: "10px" }}
@@ -49,30 +57,29 @@ export default function HandleDestination(){
 
         {/* Autocomplete */}
         {result.length > 0 && (
-        <ul className="h-70"
-            style={{
-            overflowY : "auto",
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            background: "#111",
-            border: "1px solid #333",
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-            zIndex: 10,
-            }}
+        <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll w-130"
+            style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}
         >
             {result.map((item, index) => (
             <li
+                className=" rounded-md  hover:bg-gray-200"
                 key={`${item.iata}-${index}`}
-                style={{ padding: "10px", cursor: "pointer", }}
                 onClick={() => {
-                setQuery(item.name); 
+                setQuery(`${item.city}  (${item.iata})`); 
                 }}
             >
-                {item.name} – {item.city} ({item.iata}) 
+                <div className="flex items-center border-b py-2 mx-4 pb-2  border-b-gray-500 cursor-pointer">
+                    <div className="mr-3">
+                        <FontAwesomeIcon icon={faPlane}/>
+                    </div>
+                    <div className="w-full">
+                        <h3 className="font-bold">{item.city}, {item.country}</h3>
+                        <h5 className="mt-2">{item.name}</h5>
+                    </div>
+                    <div className="flex justify-end items-end font-bold mr-4 ">
+                        <h4>{item.iata}</h4>
+                    </div>
+                </div>
             </li>
             ))}
         </ul>
@@ -81,4 +88,3 @@ export default function HandleDestination(){
     );
 
 }
-// https://www.qatarairways.com/app/booking/flight-selection?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=CMN&toStation=JKT&departing=2026-01-23&returning=2026-01-25&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N
