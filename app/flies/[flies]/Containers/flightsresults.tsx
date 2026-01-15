@@ -38,15 +38,18 @@ export default function FlightResults(){
                     <div className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
                 </div>
 
-                <div className="flex justify-between ">
-                    <button className="flex flex-col border border-gray-300 rounded-2xl py-17 px-28 mr-4">
-                        <p>Economie</p>
-                        <h2>MAD 2000</h2>
-                    </button>
-                    <button className=" justify-start border border-gray-300 rounded-2xl py-17 px-28">
-                        <p>Business</p>
-                        <h2>MAD 4000</h2>
-                    </button>
+                <div className="flex justify-between transition ">
+                    <div className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                        <p className="text-gray-600">Economy</p>
+                        <h2 className="text-4xl font-light flex pt-5">MAD 2,000</h2>
+                        <h6 className="font-extralight text-green-800">special offer</h6>
+                    </div>
+                    <div className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                        <p className="text-gray-600">Business</p>
+                        <h2 className="text-4xl font-light flex pt-5">MAD 6,000</h2>
+                        <h6 className="font-extralight text-green-800">special offer</h6>
+                    </div>
+
                 </div>
             </div>
         </div>

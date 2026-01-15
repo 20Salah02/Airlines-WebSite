@@ -1,6 +1,8 @@
 "use client"
 //
-import { use, useState } from "react"
+import Link from "next/link"
+//
+import { useState } from "react"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
@@ -123,7 +125,9 @@ export default function Form(){
                 </div>
                     <div className="flex justify-end w-full mt-7 items-center">
                         <p className="text-gray-600 mr-5">+Add promo code</p>
-                        <button className="bg-blue-500 border-2 border-blue-500 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                        <Link href="/flies">
+                            <button className="bg-blue-500 border-2 border-blue-500 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                        </Link>
                     </div>
             </form>
 
