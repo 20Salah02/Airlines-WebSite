@@ -66,6 +66,7 @@ export default function HandleDestination({value , onSelect , placeholder} : pro
                 key={`${item.iata}-${index}`}
                 onClick={() => {
                 setQuery(`${item.city}  (${item.iata})`); 
+                onSelect(item)
                 }}
             >
                 <div className="flex items-center border-b py-2 mx-4 pb-2  border-b-gray-500 cursor-pointer">

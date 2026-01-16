@@ -1,11 +1,22 @@
+"use client"
 
 import Link from "next/link"
 import Image from "next/image"
+import { useSearchParams } from "next/navigation"
+
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser , faRightLeft , faCalendar , faUsers , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
 
 export default function FlightsNav(){
+
+    const search = useSearchParams()
+
+    const departIata =search.get("departureIata")
+    const arriveIata =search.get("arriveIata")
+    const firstDay = search.get("firstday")
+    const lastDay = search.get("lastday")
+    const passengers = search.get("passengers")
 
     return(
         <div>
@@ -22,9 +33,9 @@ export default function FlightsNav(){
                 <li>
                     <div className="flex items-center p-4 border border-gray-300 rounded-4xl cursor-pointer">
                         <div className="flex items-center px-5 border-r border-gray-300">
-                            <h3>DOH</h3>
+                            <h3>{departIata}</h3>
                             <p className="w-5 mx-3 text-red-900"><FontAwesomeIcon icon={faRightLeft}/></p>
-                            <h3>CMN</h3>
+                            <h3>{arriveIata}</h3>
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>

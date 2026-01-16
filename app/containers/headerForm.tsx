@@ -4,6 +4,8 @@ import Link from "next/link"
 //
 import { useState } from "react"
 //
+import { useRouter } from "next/navigation"
+//
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 //
@@ -47,11 +49,18 @@ export default function Form(){
         }).format(date)
     }
 
+    //
+    const router = useRouter()
+    const handleSearch = () => {
+        router.push(
+            `/flies?departureCity=${destinationFrom?.city}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveIata=${destinationTo?.iata}&firstday=${firstDay}&lastday=${lastDay}&passengers=${passengersText}`
+        )
+    }
 
     return(
 
         <div className="absolute top-110 flex justify-center w-full bg-slat-100 ">
-            <form onSubmit={(e) => e.preventDefault()} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className=" container border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-[white]">
+            <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className=" container border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-[white]">
 
                 <div className="w-1/4 py-4 flex justify-between text-[17px] ">
                     <div>
@@ -125,9 +134,8 @@ export default function Form(){
                 </div>
                     <div className="flex justify-end w-full mt-7 items-center">
                         <p className="text-gray-600 mr-5">+Add promo code</p>
-                        <Link href="/flies">
-                            <button className="bg-blue-500 border-2 border-blue-500 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
-                        </Link>
+
+                        <button onClick={handleSearch} className="bg-blue-500 border-2 border-blue-500 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
                     </div>
             </form>
 
