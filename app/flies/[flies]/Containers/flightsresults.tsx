@@ -1,10 +1,12 @@
-
+"use client"
 //
-
+import { useSearchParams } from "next/navigation"
 
 export default function FlightResults(){
     
-
+    const search = useSearchParams()
+    const departIata =search.get("departureIata")
+    const arriveIata =search.get("arriveIata")
     return(
         <div>
             <div className="flex justify-between items-center"> 
@@ -33,8 +35,8 @@ export default function FlightResults(){
                             <p>12:10</p>
                         </div>
                         <div className="flex justify-between text-gray-600 text-[20px]">
-                            <p>DOH</p>
-                            <p>CMN</p>
+                            <p>{departIata}</p>
+                            <p>{arriveIata}</p>
                         </div>
                     </div>
                     <div className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>

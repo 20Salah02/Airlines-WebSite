@@ -43,7 +43,7 @@ export default function FlightsNav(){
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-6 mr-3  text-red-900"><FontAwesomeIcon icon={faUsers}/></p>
-                            <h3>1 Passenger</h3>
+                            <h3>{passengers}</h3>
                         </div>
                         <div className="flex items-center px-5 text-red-900">
                             <p className="w-5 mr-3"><FontAwesomeIcon icon={faMagnifyingGlass}/></p>
