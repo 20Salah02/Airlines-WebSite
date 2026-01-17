@@ -39,7 +39,7 @@ export default function FlightsNav(){
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>
-                            <h3>Fri, 23 Jan-Sun 25 Jan</h3>
+                            <h3>{firstDay}-{lastDay}</h3>
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-6 mr-3  text-red-900"><FontAwesomeIcon icon={faUsers}/></p>

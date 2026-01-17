@@ -1,6 +1,5 @@
 "use client"
-//
-import Link from "next/link"
+
 //
 import { useState } from "react"
 //
@@ -48,12 +47,24 @@ export default function Form(){
             year: "numeric",
         }).format(date)
     }
+    //
+
+    const startDate = new Date(firstDay)
+    const endDate = new Date(lastDay)
+
+    function formatFlightDate(date: Date) {
+        return new Intl.DateTimeFormat("en-GB", {
+            weekday: "short",
+            day: "2-digit",
+            month: "short",
+        }).format(date)
+    }
 
     //
     const router = useRouter()
     const handleSearch = () => {
         router.push(
-            `/flies?departureCity=${destinationFrom?.city}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveIata=${destinationTo?.iata}&firstday=${firstDay}&lastday=${lastDay}&passengers=${passengersText}`
+            `/flies?departureCity=${destinationFrom?.city}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveIata=${destinationTo?.iata}&firstday=${formatFlightDate(startDate)}&lastday=${formatFlightDate(endDate)}&passengers=${passengersText.slice(0,12)}`
         )
     }
 
