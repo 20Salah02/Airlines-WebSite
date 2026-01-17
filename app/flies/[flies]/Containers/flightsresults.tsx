@@ -6,14 +6,17 @@ import { useState } from "react"
 import { useSearchParams } from "next/navigation"
 //
 import EcoClass from "./class/economieClass"
+import BusinessClass from "./class/businessClass"
 
 export default function FlightResults(){
 
     const [openEcoClass , setopenEcoClass] = useState<boolean>(false)
+    const [openBusinessClass , setOpenBusinessClass] = useState<boolean>(false)
     
     const search = useSearchParams()
     const departIata =search.get("departureIata")
     const arriveIata =search.get("arriveIata")
+
     return(
         <div>
             <div className="flex justify-between items-center"> 
@@ -50,16 +53,16 @@ export default function FlightResults(){
                         <div className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
                     </div>
 
-                    <div onClick={()=>setopenEcoClass(prev => !prev)} className="flex justify-between  ">
-                        <div className="flex flex-col relative">
-                            <div className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                    <div className="flex justify-between  ">
+                        <div   className="flex flex-col relative">
+                            <div onClick={()=>setopenEcoClass(prev => !prev)} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                                 <p className="text-gray-600">Economy</p>
                                 <h2 className="text-4xl font-light flex pt-5">MAD 2,000</h2>
                                 <h6 className="font-extralight text-green-800">special offer</h6>
                             </div>
 
                         </div>
-                        <div className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                        <div onClick={()=> setOpenBusinessClass(prev => !prev)} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                             <p className="text-gray-600">Business</p>
                             <h2 className="text-4xl font-light flex pt-5">MAD 6,000</h2>
                             <h6 className="font-extralight text-green-800">special offer</h6>
@@ -69,6 +72,7 @@ export default function FlightResults(){
 
                     
                 </div>
+                <div>
                    <div
                         className={`
                             overflow-hidden transition-all duration-500 ease-in-out
@@ -76,8 +80,17 @@ export default function FlightResults(){
                         `}
                         >
                         <EcoClass />
-                        </div>
+                    </div>
+                   <div
+                        className={`
+                            overflow-hidden transition-all duration-500 ease-in-out
+                            ${openBusinessClass ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
+                        `}
+                        >
+                        <BusinessClass />
+                    </div>
 
+                </div>
             </div>
         </div>
     )
