@@ -64,7 +64,7 @@ export default function Form(){
     const router = useRouter()
     const handleSearch = () => {
         router.push(
-            `/flies?departureCity=${destinationFrom?.city}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveIata=${destinationTo?.iata}&firstday=${formatFlightDate(startDate)}&lastday=${formatFlightDate(endDate)}&passengers=${passengersText.slice(0,12)}`
+            `/flies?departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${formatFlightDate(startDate)}&lastday=${formatFlightDate(endDate)}&passengers=${passengersText.slice(0,12)}`
         )
     }
 

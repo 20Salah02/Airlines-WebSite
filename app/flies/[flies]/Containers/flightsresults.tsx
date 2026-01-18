@@ -7,18 +7,28 @@ import { useSearchParams } from "next/navigation"
 //
 import EcoClass from "./class/economieClass"
 import BusinessClass from "./class/businessClass"
+import FlightDetails from "./flightDetails"
 
 export default function FlightResults(){
 
-    const [openEcoClass , setopenEcoClass] = useState<boolean>(false)
-    const [openBusinessClass , setOpenBusinessClass] = useState<boolean>(false)
+    const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
+    const [openResult , setOpenResult] = useState<boolean>(false)
     
     const search = useSearchParams()
     const departIata =search.get("departureIata")
     const arriveIata =search.get("arriveIata")
 
+    function handleOpenEco(){
+        setopenClass(prev => (prev === "eco" ? null : "eco"))
+    }
+
+    function handleOpenBusiness(){
+        setopenClass(prev => (prev === "business" ? null : "business"))
+    }
+
     return(
-        <div>
+        <div className="relative">
+
             <div className="flex justify-between items-center"> 
                 <div>
                     <h2 className="font-bold pb-3 text-[18px]">15 results</h2>
@@ -50,33 +60,31 @@ export default function FlightResults(){
                                 <p>{arriveIata}</p>
                             </div>
                         </div>
-                        <div className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
+                        <div onClick={() => setOpenResult(prev => !prev)} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
                     </div>
 
                     <div className="flex justify-between  ">
                         <div   className="flex flex-col relative">
-                            <div onClick={()=>setopenEcoClass(prev => !prev)} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                            <div onClick={handleOpenEco} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                                 <p className="text-gray-600">Economy</p>
                                 <h2 className="text-4xl font-light flex pt-5">MAD 2,000</h2>
                                 <h6 className="font-extralight text-green-800">special offer</h6>
                             </div>
 
                         </div>
-                        <div onClick={()=> setOpenBusinessClass(prev => !prev)} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                        <div onClick={handleOpenBusiness} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                             <p className="text-gray-600">Business</p>
                             <h2 className="text-4xl font-light flex pt-5">MAD 6,000</h2>
                             <h6 className="font-extralight text-green-800">special offer</h6>
                         </div>
-
-                    </div>
-
-                    
+                    </div> 
                 </div>
+
                 <div>
                    <div
                         className={`
                             overflow-hidden transition-all duration-500 ease-in-out
-                            ${openEcoClass ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
+                            ${openClass === "eco" ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
                         `}
                         >
                         <EcoClass />
@@ -84,13 +92,20 @@ export default function FlightResults(){
                    <div
                         className={`
                             overflow-hidden transition-all duration-500 ease-in-out
-                            ${openBusinessClass ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
+                            ${openClass === "business" ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
                         `}
                         >
                         <BusinessClass />
                     </div>
 
                 </div>
+            </div>
+
+
+            <div className={`overflow-hidden transition-all absolute -top-100  h-screen z-40 w-full
+                ${openResult ? "opacity-100 -right-180" : "-right-380 "} 
+            `}>
+                <FlightDetails/>
             </div>
         </div>
     )
