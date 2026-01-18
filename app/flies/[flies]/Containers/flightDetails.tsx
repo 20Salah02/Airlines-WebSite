@@ -19,7 +19,7 @@ export default function FlightDetails(){
 
     return(
         
-        <div className="bg-white p-5 w-1/2 border-l border-l-gray-300 h-screen space-y-20">
+        <div className="bg-white p-5 border-l border-l-gray-300 h-screen space-y-20">
             <h1 className="flex justify-center text-xl">Flight details</h1>
             <div className="space-y-3 mb-15">
                 <h2 className="font-medium">{departureCity} to {arriveCity}</h2>

@@ -1,7 +1,7 @@
 "use client"
 
 //
-import { useState } from "react"
+import { useState , useEffect } from "react"
 //
 import { useSearchParams } from "next/navigation"
 //
@@ -26,8 +26,22 @@ export default function FlightResults(){
         setopenClass(prev => (prev === "business" ? null : "business"))
     }
 
+    // stop scroll
+    useEffect(() => {
+        if (openResult) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [openResult]);
+
+
     return(
-        <div className="relative">
+        <div>
 
             <div className="flex justify-between items-center"> 
                 <div>
@@ -102,11 +116,26 @@ export default function FlightResults(){
             </div>
 
 
-            <div className={`overflow-hidden transition-all absolute -top-100  h-screen z-40 w-full
-                ${openResult ? "opacity-100 -right-180" : "-right-380 "} 
-            `}>
-                <FlightDetails/>
+            {openResult && (
+            <div
+                className="fixed inset-0 z-40 bg-black/40"
+                onClick={() => setOpenResult(false)} 
+            >
+                <div
+                className={`
+                    absolute top-0 right-0 h-screen w-1/2 bg-white
+                    transition-transform duration-300
+                    translate-x-0
+                    
+                `}
+                onClick={(e) => e.stopPropagation()} 
+                >
+                <FlightDetails />
+                </div>
             </div>
+            )}
+
+
         </div>
     )
 }
