@@ -19,22 +19,22 @@ export default function FlightDetails(){
 
     return(
         
-        <div className="bg-white p-5 border-l border-l-gray-300 h-screen space-y-20">
+        <div className="bg-white p-9 border-l border-l-gray-300 h-screen space-y-20">
             <h1 className="flex justify-center text-xl">Flight details</h1>
             <div className="space-y-3 mb-15">
-                <h2 className="font-medium">{departureCity} to {arriveCity}</h2>
+                <h2 className="font-medium text-lg">{departureCity} to {arriveCity}</h2>
                 <h3 className="text-gray-600">{firstDay} {dateYear}</h3>
             </div>
             <div className="flex space-x-8">
-                <div className="space-y-16">
+                <div className="space-y-14">
                     <p>10:00</p>
                     <p>2h 10m</p>
                     <p>12:10</p>
                 </div>
                 <p className="flex items-center">L</p>
-                <div className="space-y-10">
+                <div className="space-y-7">
                     <div>
-                        <h2>{departureCity}</h2>
+                        <h2 className="font-medium">{departureCity}</h2>
                         <h3 className="text-gray-600">{departureName}</h3>
                     </div>
                     <div>
@@ -42,7 +42,7 @@ export default function FlightDetails(){
                         <h3 className="text-gray-600">Operated by Garuda Indonesia</h3>
                     </div>
                     <div>
-                        <h2>{arriveCity}</h2>
+                        <h2 className="font-medium">{arriveCity}</h2>
                         <h3 className="text-gray-600">{arriveName}</h3>
                     </div>
                 </div>

@@ -126,7 +126,6 @@ export default function FlightResults(){
                     absolute top-0 right-0 h-screen w-1/2 bg-white
                     transition-transform duration-300
                     translate-x-0
-                    
                 `}
                 onClick={(e) => e.stopPropagation()} 
                 >
