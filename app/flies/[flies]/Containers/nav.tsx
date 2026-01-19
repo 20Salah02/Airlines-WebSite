@@ -3,7 +3,8 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-
+//
+import FlightEdit from "./flightEdit"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser , faRightLeft , faCalendar , faUsers , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
@@ -58,6 +59,9 @@ export default function FlightsNav(){
                     </li>
                 </Link>
             </ul>
+            <div>
+                <FlightEdit/>
+            </div>
         </div>
     )
 }
