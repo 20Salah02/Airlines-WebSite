@@ -34,16 +34,17 @@ export default function FlightEdit(){
                         <p>30 Jan 2026</p>
                     </div>
                 </div>
-                <div>
-                    <p>Passenger / Class</p>
+                <div className=" w-full border rounded-md border-gray-300 p-2">
+                    <p className="text-gray-600 text-xs">Passenger / Class</p>
                     <div>
                         <p>1 Passenger Economy</p>
                     </div>
                 </div>
-                <div>
-                    <p>+ Add Promo Code</p>
-                    <button>Seach flight</button>
-                </div>
+                    <div className=" w-full space-y-4 items-center">
+                        <p className="text-gray-600 mr-5">+Add promo code</p>
+
+                        <button className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                    </div>
             </div>
         </div>
     )
