@@ -4,6 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 //
+import { useState , useEffect} from "react"
+//
 import FlightEdit from "./flightEdit"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,6 +13,7 @@ import { faUser , faRightLeft , faCalendar , faUsers , faMagnifyingGlass} from "
 
 export default function FlightsNav(){
 
+    const [openFormEdit , setOpenFormEdit] = useState<boolean>(false)
     const search = useSearchParams()
 
     const departIata =search.get("departureIata")
@@ -18,6 +21,14 @@ export default function FlightsNav(){
     const firstDay = search.get("firstday")
     const lastDay = search.get("lastday")
     const passengers = search.get("passengers")
+
+    useEffect(() => {
+        if(openFormEdit){
+            document.body.style.overflow = "hidden"
+        }else{
+            document.body.style.overflow = ""
+        }
+    } , [openFormEdit])
 
     return(
         <div>
@@ -31,7 +42,7 @@ export default function FlightsNav(){
                         priority
                     />
                 </li></Link>
-                <li>
+                <li onClick={() => setOpenFormEdit(prev => !prev)}>
                     <div className="flex items-center p-4 border border-gray-300 rounded-4xl cursor-pointer">
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <h3>{departIata}</h3>
@@ -59,9 +70,23 @@ export default function FlightsNav(){
                     </li>
                 </Link>
             </ul>
-            <div>
-                <FlightEdit/>
+            {openFormEdit && (
+            <div
+                className="fixed inset-0 z-40 bg-black/40"
+                onClick={() => setOpenFormEdit(false)} 
+            >
+                <div
+                className={`
+                    absolute top-0 right-0 h-screen w-1/2 bg-white
+                    transition-transform duration-300
+                    translate-x-0
+                `}
+                onClick={(e) => e.stopPropagation()} 
+                >
+                <FlightEdit />
+                </div>
             </div>
+            )}
         </div>
     )
 }

@@ -5,8 +5,9 @@ export default function FlightDetails(){
 
     const search = useSearchParams()
     
-    const departIata =search.get("departureIata")
-    const arriveIata =search.get("arriveIata")
+    // const departIata =search.get("departureIata")
+    // const arriveIata =search.get("arriveIata")
+    
     const firstDay = search.get("firstday")
     const departureName = search.get("departureName")
     const arriveName = search.get("arriveName")

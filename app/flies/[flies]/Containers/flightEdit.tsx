@@ -1,10 +1,23 @@
+"use client"
 
-
+import { useState } from "react"
+//
+import HandleDestination from "@/app/hooks/mainFormDestination"
 
 export default function FlightEdit(){
 
+    type Airport ={
+    id : number
+    name : string
+    city : string
+    country : string
+    iata : string
+    }
+
+    const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
+
     return(
-        <div className="bg-white w-1/2 p-9 border-l border-l-gray-300 h-screen space-y-10">
+        <div className=" bg-white w-full p-9 border-l border-l-gray-300 h-screen space-y-10">
             <h1 className="flex justify-center text-xl">Modify Search</h1>
             <div className="space-y-6">
                 <div className="flex space-x-5">
@@ -18,8 +31,12 @@ export default function FlightEdit(){
                     </div>
                 </div>
                 <div className="flex flex-col border rounded-md border-gray-300 " >
-                    <div className="py-2 px-2">
-                        <input className="py-2 w-full" type="text" placeholder="From"/>
+                    <div className="py-2 px-2 w-full">
+                        <HandleDestination
+                        placeholder="from"
+                        value={destinationFrom?.name || ""}
+                        onSelect={(airport) => setDestinationFrom(airport)}
+                        />
                         <hr className="text-gray-300" />
                         <input className="py-2 w-full" type="text" placeholder="To"/>
                     </div>
