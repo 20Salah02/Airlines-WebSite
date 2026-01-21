@@ -3,6 +3,12 @@
 import { useState } from "react"
 //
 import HandleDestination from "@/app/hooks/mainFormDestination"
+import HandleDate from "@/app/hooks/mainFormDate"
+//
+import { DateRange } from "react-day-picker"
+//
+import { useSearchParams } from "next/navigation"
+
 
 export default function FlightEdit(){
 
@@ -13,8 +19,29 @@ export default function FlightEdit(){
     country : string
     iata : string
     }
+    //
+    function formatDate(date?: Date) {
+       if (!date) return ""
+       return new Intl.DateTimeFormat("en-GB", {
+           day: "2-digit",
+           month: "short",
+           year: "numeric",
+       }).format(date)
+   }
+    const search = useSearchParams()
+    const firstDay = search.get("firstday")
+    const lastDay = search.get("lastday")
 
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
+    const [openCalendar , setopenCalendare] = useState<boolean>(false)
+    const [selectDate, setSelectDate] = useState<DateRange | undefined>({
+    from: firstDay ? new Date(firstDay) : undefined,
+    to: lastDay ? new Date(lastDay) : undefined,
+    })
+
+
+    console.log("set open ====" + openCalendar )
+
 
     return(
         <div className=" bg-white w-full p-9 border-l border-l-gray-300 h-screen space-y-10">
@@ -38,20 +65,30 @@ export default function FlightEdit(){
                         onSelect={(airport) => setDestinationFrom(airport)}
                         />
                         <hr className="text-gray-300" />
-                        <input className="py-2 w-full" type="text" placeholder="To"/>
-                    </div>
+                        <HandleDestination
+                        placeholder="to"
+                        value={destinationFrom?.name || ""}
+                        onSelect={(airport) => setDestinationFrom(airport)}
+                        />       
+                    </div>            
                 </div>
-                <div className="flex w-full border rounded-md border-gray-300 p-2">
+                <div onClick={() => setopenCalendare(prev => !prev)} className="flex w-full border rounded-md border-gray-300 p-2  ">
                     <div className="w-1/2 space-y-1.5">
                         <p className="text-gray-600 text-xs">Departure</p>
-                        <p>23 Jan 2026</p>
+                        <p>{formatDate(selectDate?.from)}</p>
                     </div>
                     <div className="w-1/2 space-y-1.5">
                         <p className="text-gray-600 text-xs">Return</p>
-                        <p>30 Jan 2026</p>
+                        <p>{formatDate(selectDate?.to)}</p>
                     </div>
                 </div>
                 <div className=" w-full border rounded-md border-gray-300 p-2">
+                    {openCalendar && (
+                        <div className="absolute h-1/2  top-1/5 left-4 w-full">
+                            <HandleDate selected={selectDate} onSelectDate={setSelectDate} setIsOpen={setopenCalendare}/>
+                        </div>
+                    )}
+                    
                     <p className="text-gray-600 text-xs">Passenger / Class</p>
                     <div>
                         <p>1 Passenger Economy</p>

@@ -57,7 +57,7 @@ export default function HandleDestination({value , onSelect , placeholder} : pro
 
         {/* Autocomplete */}
         {result.length > 0 && (
-        <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll w-130"
+        <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll w-130 z-40 "
             style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}
         >
             {result.map((item, index) => (
@@ -69,7 +69,7 @@ export default function HandleDestination({value , onSelect , placeholder} : pro
                 onSelect(item)
                 }}
             >
-                <div className="flex items-center border-b py-2 mx-4 pb-2  border-b-gray-500 cursor-pointer">
+                <div className="flex items-center border-b py-2 mx-4 pb-2   border-b-gray-500 cursor-pointer">
                     <div className="mr-3">
                         <FontAwesomeIcon icon={faPlane}/>
                     </div>
