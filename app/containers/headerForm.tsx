@@ -52,19 +52,19 @@ export default function Form(){
     const startDate = new Date(firstDay)
     const endDate = new Date(lastDay)
 
-    function formatFlightDate(date: Date) {
-        return new Intl.DateTimeFormat("en-GB", {
-            weekday: "short",
-            day: "2-digit",
-            month: "short",
-        }).format(date)
-    }
+    // function formatFlightDate(date: Date) {
+    //     return new Intl.DateTimeFormat("en-GB", {
+    //         weekday: "short",
+    //         day: "2-digit",
+    //         month: "short",
+    //     }).format(date)
+    // }
 
     //
     const router = useRouter()
     const handleSearch = () => {
         router.push(
-            `/flies?departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${formatFlightDate(startDate)}&lastday=${formatFlightDate(endDate)}&passengers=${passengersText.slice(0,12)}`
+            `/flies?departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${startDate?.toISOString()}&lastday=${endDate?.toISOString()}&passengers=${passengersText.slice(0,12)}`
         )
     }
 

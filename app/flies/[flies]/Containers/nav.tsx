@@ -13,6 +13,16 @@ import { faUser , faRightLeft , faCalendar , faUsers , faMagnifyingGlass} from "
 
 export default function FlightsNav(){
 
+    function formatNavDate(dateStr?: string | null) {
+    if (!dateStr) return ""
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) return ""
+    return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+    })
+    }
+
     const [openFormEdit , setOpenFormEdit] = useState<boolean>(false)
     const search = useSearchParams()
 
@@ -51,7 +61,7 @@ export default function FlightsNav(){
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>
-                            <h3>{firstDay}-{lastDay}</h3>
+                            <h3>{formatNavDate(firstDay)}-{formatNavDate(lastDay)}</h3>
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-6 mr-3  text-red-900"><FontAwesomeIcon icon={faUsers}/></p>
