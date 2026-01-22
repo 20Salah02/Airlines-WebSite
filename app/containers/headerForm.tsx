@@ -27,8 +27,8 @@ export default function Form(){
     lastDayDefault.setDate(firstDayDefault.getDate() + 5)
 
     const [openPassengers , setOpenPassengers] = useState<boolean>(false)
-    const [openCalendar , setopenCalendare] = useState<boolean>(false)
     const [passengersText , setpassengersText] = useState<string>("1 Passenger Economy")
+    const [openCalendar , setopenCalendare] = useState<boolean>(false)
     const [selectDate , setSelectDate] = useState<DateRange | undefined>({
         from : firstDayDefault ,
         to : lastDayDefault

@@ -4,6 +4,7 @@ import { useState } from "react"
 //
 import HandleDestination from "@/app/hooks/mainFormDestination"
 import HandleDate from "@/app/hooks/mainFormDate"
+import HandlePassengers from "@/app/hooks/mainFormPassengers"
 //
 import { DateRange } from "react-day-picker"
 //
@@ -32,6 +33,8 @@ export default function FlightEdit(){
     const firstDay = search.get("firstday")
     const lastDay = search.get("lastday")
 
+    const [openPassengers , setOpenPassengers] = useState<boolean>(false)
+    const [passengersText , setpassengersText] = useState<string>("1 Passenger Economy")
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
     const [openCalendar , setopenCalendare] = useState<boolean>(false)
     const [selectDate, setSelectDate] = useState<DateRange | undefined>({
@@ -89,9 +92,18 @@ export default function FlightEdit(){
                         </div>
                     )}
                     
-                    <p className="text-gray-600 text-xs">Passenger / Class</p>
                     <div>
-                        <p>1 Passenger Economy</p>
+                        <p className="text-gray-600 text-xs">Passenger / Class</p>
+                        <div >
+                            <p></p>
+                        </div>
+                        <div>
+                            {openPassengers && (
+                                <div className="absolute top-full left-0 mt-2 bg-white w-full z-50 shadow-lg">
+                                <HandlePassengers setPassengersText={setpassengersText} isOpen={setOpenPassengers}/>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                     <div className=" w-full space-y-4 items-center">
