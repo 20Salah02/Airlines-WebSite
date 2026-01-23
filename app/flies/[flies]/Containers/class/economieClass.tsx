@@ -8,11 +8,18 @@ import { faCalendarCheck , faCheck, faSuitcase, faSuitcaseRolling, faTicket } fr
 
 export default function EcoClass(){
 
+    const fares = [
+        { id: "eco-classic", title: "Economy Classic", price: 2000 },
+        { id: "eco-convenienc", title: "Economy Convenienc", price: 2125 },
+        { id: "eco-comfort", title: "Economy Comfort", price: 2825 },
+        { id: "bus-comfort", title: "Business Comfort", price: 7825 },
+    ]
+
     return(
         <div className="grid grid-cols-4 gap-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">Economy Classic</h1>
+                    <h1 className="text-3xl font-light text-gray-600">{fares.}</h1>
                     <div className="mt-7">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,000</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
