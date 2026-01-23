@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 //
+import { useRouter } from "next/navigation"
+//
 import HandleDestination from "@/app/hooks/mainFormDestination"
 import HandleDate from "@/app/hooks/mainFormDate"
 import HandlePassengers from "@/app/hooks/mainFormPassengers"
@@ -10,8 +12,11 @@ import { DateRange } from "react-day-picker"
 //
 import { useSearchParams } from "next/navigation"
 
+type FlightEditProps = {
+  setOpenFormEdit: (v: boolean) => void
+}
 
-export default function FlightEdit(){
+export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
 
     type Airport ={
     id : number
@@ -29,13 +34,20 @@ export default function FlightEdit(){
            year: "numeric",
        }).format(date)
    }
-    const search = useSearchParams()
+
+   //
+   const search = useSearchParams()
+
     const firstDay = search.get("firstday")
     const lastDay = search.get("lastday")
 
+   //
     const [openPassengers , setOpenPassengers] = useState<boolean>(false)
-    const [passengersText , setpassengersText] = useState<string>("1 Passenger Economy")
+    const [passengersText , setPassengersText] = useState<string>("1 Passenger Economie")
+
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
+    const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
+
     const [openCalendar , setopenCalendare] = useState<boolean>(false)
     const [selectDate, setSelectDate] = useState<DateRange | undefined>({
     from: firstDay ? new Date(firstDay) : undefined,
@@ -43,7 +55,14 @@ export default function FlightEdit(){
     })
 
 
-    console.log("set open ====" + openCalendar )
+    //
+    const router = useRouter()
+    const handleSearch = () => {
+    router.push(
+        `/flies?departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${selectDate?.from?.toISOString()}&lastday=${selectDate?.to?.toISOString()}&passengers=${passengersText}`
+    )
+    setOpenFormEdit(false)
+    }
 
 
     return(
@@ -70,8 +89,8 @@ export default function FlightEdit(){
                         <hr className="text-gray-300" />
                         <HandleDestination
                         placeholder="to"
-                        value={destinationFrom?.name || ""}
-                        onSelect={(airport) => setDestinationFrom(airport)}
+                        value={destinationTo?.name || ""}
+                        onSelect={(airport) => setDestinationTo(airport)}
                         />       
                     </div>            
                 </div>
@@ -87,21 +106,21 @@ export default function FlightEdit(){
                 </div>
                 <div className=" w-full border rounded-md border-gray-300 p-2">
                     {openCalendar && (
-                        <div className="absolute h-1/2  top-1/5 left-4 w-full">
+                        <div className="absolute h-1/2  top-1/5 left-4 w-full  z-50">
                             <HandleDate selected={selectDate} onSelectDate={setSelectDate} setIsOpen={setopenCalendare}/>
                         </div>
                     )}
                     
-                    <div>
+                    <div className="relative z-10">
                         <p className="text-gray-600 text-xs">Passenger / Class</p>
-                        <div >
-                            <p></p>
+                        <div onClick={() => setOpenPassengers(prev => !prev)} >
+                            <p>{passengersText}</p>
                         </div>
                         <div>
                             {openPassengers && (
-                                <div className="absolute top-full left-0 mt-2 bg-white w-full z-50 shadow-lg">
-                                <HandlePassengers setPassengersText={setpassengersText} isOpen={setOpenPassengers}/>
-                                </div>
+                            <div className="absolute -top-80 left-0 mt-2 bg-white w-full shadow-lg">
+                                <HandlePassengers setPassengersText={setPassengersText} isOpen={setOpenPassengers}/>
+                            </div>
                             )}
                         </div>
                     </div>
@@ -109,9 +128,9 @@ export default function FlightEdit(){
                     <div className=" w-full space-y-4 items-center">
                         <p className="text-gray-600 mr-5">+Add promo code</p>
 
-                        <button className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                        <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
                     </div>
             </div>
-        </div>
+            </div>
     )
 }

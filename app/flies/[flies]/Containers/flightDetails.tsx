@@ -15,8 +15,17 @@ export default function FlightDetails(){
     const arriveCity = search.get("arriveCity")
     // const lastDay = search.get("lastday")
 
-    const dateNow = new Date()
-    const dateYear = dateNow.getFullYear()
+
+    function formatNavDate(dateStr?: string | null) {
+    if (!dateStr) return ""
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) return ""
+    return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    })
+    }
 
     return(
         
@@ -24,7 +33,7 @@ export default function FlightDetails(){
             <h1 className="flex justify-center text-xl">Flight details</h1>
             <div className="space-y-3 mb-15">
                 <h2 className="font-medium text-lg">{departureCity} to {arriveCity}</h2>
-                <h3 className="text-gray-600">{firstDay} {dateYear}</h3>
+                <h3 className="text-gray-600">{formatNavDate(firstDay)}</h3>
             </div>
             <div className="flex space-x-8">
                 <div className="space-y-14">

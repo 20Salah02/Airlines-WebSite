@@ -93,7 +93,7 @@ export default function FlightsNav(){
                 `}
                 onClick={(e) => e.stopPropagation()} 
                 >
-                <FlightEdit />
+                <FlightEdit setOpenFormEdit={setOpenFormEdit} />
                 </div>
             </div>
             )}

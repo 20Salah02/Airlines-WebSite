@@ -40,13 +40,15 @@ export default function Form(){
     const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
     
     function formatDate(date?: Date) {
-        if (!date) return ""
-        return new Intl.DateTimeFormat("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-        }).format(date)
+    if (!date || isNaN(date.getTime())) return ""
+    
+    return new Intl.DateTimeFormat("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+    }).format(date)
     }
+
     //
 
     const startDate = new Date(firstDay)
