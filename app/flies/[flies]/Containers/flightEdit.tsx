@@ -59,7 +59,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     const router = useRouter()
     const handleSearch = () => {
     router.push(
-        `/flies?departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${selectDate?.from?.toISOString()}&lastday=${selectDate?.to?.toISOString()}&passengers=${passengersText}`
+        `/flies?step=outbound&departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${selectDate?.from?.toISOString()}&lastday=${selectDate?.to?.toISOString()}&passengers=${passengersText}`
     )
     setOpenFormEdit(false)
     }

@@ -1,6 +1,7 @@
 "use client"
 
 //
+//
 import Image from "next/image"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,18 +9,12 @@ import { faCalendarCheck , faCheck, faSuitcase, faSuitcaseRolling, faTicket } fr
 
 export default function EcoClass(){
 
-    const fares = [
-        { id: "eco-classic", title: "Economy Classic", price: 2000 },
-        { id: "eco-convenienc", title: "Economy Convenienc", price: 2125 },
-        { id: "eco-comfort", title: "Economy Comfort", price: 2825 },
-        { id: "bus-comfort", title: "Business Comfort", price: 7825 },
-    ]
 
     return(
         <div className="grid grid-cols-4 gap-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">{fares.}</h1>
+                    <h1 className="text-3xl font-light text-gray-600">Economy Classic</h1>
                     <div className="mt-7">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,000</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
@@ -156,3 +151,6 @@ export default function EcoClass(){
         </div>
     )
 }
+//https://www.qatarairways.com/app/booking/flight-selection?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=DOH&toStation=CGK&departing=2026-02-14&returning=2026-02-21&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N
+//https://www.qatarairways.com/app/booking/flight-selection?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=DOH&toStation=CGK&departing=2026-02-14&returning=2026-02-21&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N&boundType=I&oBoundId=BC1-2-OFR-5738588490506538-4-1-1
+//https://www.qatarairways.com/app/booking/passenger?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=DOH&toStation=CGK&departing=2026-02-14&returning=2026-02-21&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N&boundType=I&oBoundId=BC1-2-OFR-5738588490506538-4-1-1&airOfferItemId=03c93993-4589-4356-8576-7f1ad3a17e11&iBoundId=BU2-2-1I0QRZ_181WPQ5Q6PPXQP72DQR7W01X3C6N&dataId=5JaGCbDaXKW4

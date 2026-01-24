@@ -17,6 +17,7 @@ export default function FlightResults(){
     const search = useSearchParams()
     const departIata =search.get("departureIata")
     const arriveIata =search.get("arriveIata")
+    const step = search.get("step")
 
     function handleOpenEco(){
         setopenClass(prev => (prev === "eco" ? null : "eco"))
