@@ -6,6 +6,8 @@ export default function BookingConfirmation(){
     return(
         <div className="flex">
             <FlightsNav/>
+            <FlightsNav/>
+
         </div>
     )
 }
