@@ -18,7 +18,7 @@ export default function BusinessClass(){
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 7,825</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
-                    <Link href="/">
+                    <Link href="/confirmeBooking">
                     <h4 className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">Select fare</h4>
                     </Link>
                 </div>

@@ -6,7 +6,7 @@ import FlightResults from "../flies/Booking/Containers/flightsresults"
 export default function Flies(){
 
     return(
-        <div className="bg-zinc-100 ">
+        <div className="bg-zinc-100 container">
             <div className="mx-8">
                 <div><FlightsNav/></div>
                 <div><FliesHeader/></div>
