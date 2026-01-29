@@ -1,10 +1,11 @@
 "use client"
 
+import PassengerForm from "./passengerDetailsForm"
 
 export default function PassengerDetails(){
 
     return(
-        <div className=" w-1/2 space-y-9">
+        <div className="relative w-1/2 space-y-9 bg-zinc-100">
             <h2 className="text-4xl text-gray-600 font-light ">{`Who's travelling?`}</h2>
             <div className="flex justify-between items-center bg-white rounded-2xl p-4 cursor-pointer">
                 <div className="flex items-center space-x-2.5">
@@ -23,6 +24,11 @@ export default function PassengerDetails(){
                 <h4>If you need to change any passenger details, you will have to enter your passenger details again.</h4>
             </div>
             <button className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Continue to contact details</button>
+
+            
+            <div className="">
+                <PassengerForm/>
+            </div>
         </div>
     )
 }
