@@ -1,5 +1,5 @@
 
-import FlightsNav from "../../flies/[flies]/Containers/nav"
+import FlightsNav from "../flies/Booking/Containers/nav"
 import TripDetails from "./containers/tripDetails"
 
 
