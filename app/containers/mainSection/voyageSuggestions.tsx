@@ -6,7 +6,7 @@ export default function VoyageSuggetions(){
     return(
         <div className="relative mt-62">
             <div>
-                <h2></h2>
+                <h2>Salah</h2>
                 <h3></h3>
             </div>
             <div>
