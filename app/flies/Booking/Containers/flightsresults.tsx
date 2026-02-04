@@ -16,17 +16,15 @@ export default function FlightResults(){
     const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
     const [openResult , setOpenResult] = useState<boolean>(false)
     
-    const { booking, setBooking } = useBooking();
+    const { booking, } = useBooking();
     
     const search = useSearchParams()
-    const step = search.get("step"); // outbound / return
+    const step = search.get("step"); 
 
     const isOutbound = step !== "return";
 
     const from = isOutbound ? booking.from : booking.to;
     const to = isOutbound ? booking.to : booking.from;
-
-    // const step = search.get("step")
 
     function handleOpenEco(){
         setopenClass(prev => (prev === "eco" ? null : "eco"))

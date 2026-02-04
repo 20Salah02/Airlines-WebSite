@@ -1,30 +1,30 @@
+"use client"
 
+// context
+import { useBooking } from "@/app/contexts/bookingContext";
+//
 import { useSearchParams } from "next/navigation"
 
 export default function FlightDetails(){
 
+    const {booking} = useBooking()
     const search = useSearchParams()
-    
-    // const departIata =search.get("departureIata")
-    // const arriveIata =search.get("arriveIata")
-    
-    const firstDay = search.get("firstday")
-    const departureName = search.get("departureName")
-    const arriveName = search.get("arriveName")
-    const departureCity = search.get("departureCity")
-    const arriveCity = search.get("arriveCity")
-    // const lastDay = search.get("lastday")
 
+    const step = search.get("step")
+    const isOutbound = step !== "return"
 
-    function formatNavDate(dateStr?: string | null) {
-    if (!dateStr) return ""
-    const date = new Date(dateStr)
-    if (isNaN(date.getTime())) return ""
+    const from = isOutbound ? booking.from : booking.to
+    const to = isOutbound ? booking.to : booking.to
+    const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return
+    
+
+    function formatDate(date?: Date | null) {
+    if (!date) return "";
     return date.toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "short",
-        year: "numeric"
-    })
+        year : "numeric"
+    });
     }
 
     return(
@@ -32,8 +32,8 @@ export default function FlightDetails(){
         <div className="bg-white p-9 border-l border-l-gray-300 h-screen space-y-20">
             <h1 className="flex justify-center text-xl">Flight details</h1>
             <div className="space-y-3 mb-15">
-                <h2 className="font-medium text-lg">{departureCity} to {arriveCity}</h2>
-                <h3 className="text-gray-600">{formatNavDate(firstDay)}</h3>
+                <h2 className="font-medium text-lg">{from?.city} to {to?.city}</h2>
+                <h3 className="text-gray-600">{formatDate(firstDay)}</h3>
             </div>
             <div className="flex space-x-8">
                 <div className="space-y-14">
@@ -44,16 +44,16 @@ export default function FlightDetails(){
                 <p className="flex items-center">L</p>
                 <div className="space-y-7">
                     <div>
-                        <h2 className="font-medium">{departureCity}</h2>
-                        <h3 className="text-gray-600">{departureName}</h3>
+                        <h2 className="font-medium">{from?.city}</h2>
+                        <h3 className="text-gray-600">{from?.name}</h3>
                     </div>
                     <div>
                         <h2>QR6381 - Boeing 777-300</h2>
                         <h3 className="text-gray-600">Operated by Garuda Indonesia</h3>
                     </div>
                     <div>
-                        <h2 className="font-medium">{arriveCity}</h2>
-                        <h3 className="text-gray-600">{arriveName}</h3>
+                        <h2 className="font-medium">{to?.city}</h2>
+                        <h3 className="text-gray-600">{to?.name}</h3>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,9 @@
 "use client"
 
+// context 
+
+import { useBooking } from "@/app/contexts/bookingContext"
+//
 import { useState } from "react"
 //
 import { useRouter } from "next/navigation"
@@ -26,20 +30,25 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     iata : string
     }
     //
-    function formatDate(date?: Date) {
-       if (!date) return ""
-       return new Intl.DateTimeFormat("en-GB", {
-           day: "2-digit",
-           month: "short",
-           year: "numeric",
-       }).format(date)
-   }
+    function formatDate(date?: Date | null) {
+    if (!date) return "";
+    return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year : "numeric"
+    });
+    }
 
    //
-   const search = useSearchParams()
+    const { booking, setBooking} = useBooking()
 
-    const firstDay = search.get("firstday")
-    const lastDay = search.get("lastday")
+    const search = useSearchParams()
+    const step = search.get("step")
+
+    const isOutbound = step !== "return"
+
+    const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return
+    const lastDay = isOutbound ? booking.dates?.return : booking.dates?.departure
 
    //
     const [openPassengers , setOpenPassengers] = useState<boolean>(false)
@@ -58,11 +67,26 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     //
     const router = useRouter()
     const handleSearch = () => {
-    router.push(
-        `/flies?step=outbound&departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${selectDate?.from?.toISOString()}&lastday=${selectDate?.to?.toISOString()}&passengers=${passengersText}`
-    )
+    if (!destinationFrom || !destinationTo) return;
+
+    setBooking(prev => ({
+    ...prev,
+    from: destinationFrom,
+    to: destinationTo,
+    dates: {
+        departure: selectDate?.from,
+        return: selectDate?.to,
+    },
+    passengers: passengersText,
+    tripType : "round-trip",
+    }));
+
+
+
+    router.push("/flies?step=outbound");
+
     setOpenFormEdit(false)
-    }
+    };
 
 
     return(

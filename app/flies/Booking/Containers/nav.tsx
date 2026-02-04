@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import Image from "next/image"
+// context
+import { useBooking } from "@/app/contexts/bookingContext"
 import { useSearchParams } from "next/navigation"
 //
 import { useState , useEffect} from "react"
@@ -13,24 +15,30 @@ import { faUser , faRightLeft , faCalendar , faUsers , faMagnifyingGlass} from "
 
 export default function FlightsNav(){
 
-    function formatNavDate(dateStr?: string | null) {
-    if (!dateStr) return ""
-    const date = new Date(dateStr)
-    if (isNaN(date.getTime())) return ""
+    function formatNavDate(date?: Date | null) {
+    if (!date) return "";
     return date.toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "short",
-    })
+    });
     }
 
-    const [openFormEdit , setOpenFormEdit] = useState<boolean>(false)
-    const search = useSearchParams()
 
-    const departIata =search.get("departureIata")
-    const arriveIata =search.get("arriveIata")
-    const firstDay = search.get("firstday")
-    const lastDay = search.get("lastday")
-    const passengers = search.get("passengers")
+    const [openFormEdit , setOpenFormEdit] = useState<boolean>(false)
+
+    const { booking, } = useBooking();
+    
+    const search = useSearchParams()
+    const step = search.get("step"); // outbound / return
+
+    const isOutbound = step !== "return";
+
+    const from = isOutbound ? booking.from : booking.to;
+    const to = isOutbound ? booking.to : booking.from;
+    const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return;
+    const lastDay = isOutbound ? booking.dates?.return : booking.dates?.departure;
+
+    const passengers = booking.passengers || "1 Passenger";
 
     useEffect(() => {
         if(openFormEdit){
@@ -55,9 +63,9 @@ export default function FlightsNav(){
                 <li onClick={() => setOpenFormEdit(prev => !prev)}>
                     <div className="flex items-center p-4 border border-gray-300 rounded-4xl cursor-pointer">
                         <div className="flex items-center px-5 border-r border-gray-300">
-                            <h3>{departIata}</h3>
+                            <h3>{from?.iata}</h3>
                             <p className="w-5 mx-3 text-red-900"><FontAwesomeIcon icon={faRightLeft}/></p>
-                            <h3>{arriveIata}</h3>
+                            <h3>{to?.iata}</h3>
                         </div>
                         <div className="flex items-center px-5 border-r border-gray-300">
                             <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>

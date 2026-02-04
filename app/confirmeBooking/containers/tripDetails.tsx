@@ -1,7 +1,34 @@
 "use client"
 
+// context
+import { useBooking } from "@/app/contexts/bookingContext";
 // 
+import { useSearchParams } from "next/navigation";
+
 export default function TripDetails(){
+
+
+    function formatDate(date?: Date | null) {
+    if (!date) return "";
+    return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year : "numeric"
+    });
+    }
+
+
+    //
+    const {booking} = useBooking()
+    const search = useSearchParams()
+
+    const step = search.get("step")
+    const isOutbound = step !== "return"
+
+    const from = isOutbound ? booking.from : booking.to
+    const to = isOutbound ? booking.to : booking.from
+    const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return;
+    const lastDay = isOutbound ? booking.dates?.return : booking.dates?.departure;
 
 
     return(
@@ -13,15 +40,15 @@ export default function TripDetails(){
             <div>
                 <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                     <div className="space-y-1">
-                        <h2 className="text-[18px] font-medium text-red-900">Doha to Jakarta</h2>
-                        <h3 className="text-[15px] text-gray-700">Sat , 14 Feb 2026</h3>
+                        <h2 className="text-[18px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
+                        <h3 className="text-[15px] text-gray-700">{formatDate(firstDay)}</h3>
                     </div>
                     <p>{">"}</p>
                 </div>
                 <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                     <div className="space-y-1">
-                        <h2 className="text-[18px] font-medium text-red-900">Jakarta to Doha</h2>
-                        <h3 className="text-[15px] text-gray-700">Sat , 21 Feb 2026</h3>
+                        <h2 className="text-[18px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
+                        <h3 className="text-[15px] text-gray-700">{formatDate(lastDay)}</h3>
                     </div>
                     <p>{">"}</p>
                 </div>
