@@ -11,18 +11,22 @@ type Airport = {
   iata: string;
 };
 
+
+
 type Booking = {
   from: Airport | null;
   to: Airport | null;
-  date: {
+  dates: {           
     departure?: Date;
     return?: Date;
   } | null;
-  passenger: string;
+  passengers: string;  
   tripType: "one-way" | "round-trip";
   outboundFlight: string | null;
   returnFlight: string | null;
 };
+
+
 
 type BookingContextType = {
   booking: Booking;
@@ -39,8 +43,8 @@ export default function BookingProvider({ children }: BookingProviderProps) {
   const [booking, setBooking] = useState<Booking>({
     from: null,
     to: null,
-    date: null,
-    passenger: "",
+    dates: null,
+    passengers: "",
     tripType: "round-trip",
     outboundFlight: null,
     returnFlight: null,
@@ -54,4 +58,10 @@ export default function BookingProvider({ children }: BookingProviderProps) {
 }
 
 
-export const useBooking = () => useContext(BookingContext)
+export const useBooking = () => {
+  const context = useContext(BookingContext);
+  if (!context) {
+    throw new Error("useBooking must be used inside BookingProvider");
+  }
+  return context;
+};

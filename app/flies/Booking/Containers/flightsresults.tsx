@@ -1,5 +1,7 @@
 "use client"
 
+//context
+import { useBooking } from "@/app/contexts/bookingContext"
 //
 import { useState , useEffect } from "react"
 //
@@ -14,9 +16,16 @@ export default function FlightResults(){
     const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
     const [openResult , setOpenResult] = useState<boolean>(false)
     
+    const { booking, setBooking } = useBooking();
+    
     const search = useSearchParams()
-    const departIata =search.get("departureIata")
-    const arriveIata =search.get("arriveIata")
+    const step = search.get("step"); // outbound / return
+
+    const isOutbound = step !== "return";
+
+    const from = isOutbound ? booking.from : booking.to;
+    const to = isOutbound ? booking.to : booking.from;
+
     // const step = search.get("step")
 
     function handleOpenEco(){
@@ -71,8 +80,8 @@ export default function FlightResults(){
                                 <p>12:10</p>
                             </div>
                             <div className="flex justify-between text-gray-600 text-[20px]">
-                                <p>{departIata}</p>
-                                <p>{arriveIata}</p>
+                                <p>{from?.iata}</p>
+                                <p>{to?.iata}</p>
                             </div>
                         </div>
                         <div onClick={() => setOpenResult(prev => !prev)} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>

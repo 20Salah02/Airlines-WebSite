@@ -1,5 +1,7 @@
 "use client"
 
+// context
+import { useBooking } from "../contexts/bookingContext"
 //
 import { useState } from "react"
 //
@@ -51,24 +53,30 @@ export default function Form(){
 
     //
 
-    const startDate = new Date(firstDay)
-    const endDate = new Date(lastDay)
-
-    // function formatFlightDate(date: Date) {
-    //     return new Intl.DateTimeFormat("en-GB", {
-    //         weekday: "short",
-    //         day: "2-digit",
-    //         month: "short",
-    //     }).format(date)
-    // }
+    const { setBooking } = useBooking();
 
     //
     const router = useRouter()
     const handleSearch = () => {
-        router.push(
-            `/flies?step=outbound&departureCity=${destinationFrom?.city}&departureName=${destinationFrom?.name}&departureIata=${destinationFrom?.iata}&arriveCity=${destinationTo?.city}&arriveName=${destinationTo?.name}&arriveIata=${destinationTo?.iata}&firstday=${startDate?.toISOString()}&lastday=${endDate?.toISOString()}&passengers=${passengersText.slice(0,12)}`
-        )
-    }
+    if (!destinationFrom || !destinationTo) return;
+
+    setBooking(prev => ({
+    ...prev,
+    from: destinationFrom,
+    to: destinationTo,
+    dates: {
+        departure: selectDate?.from,
+        return: selectDate?.to,
+    },
+    passengers: passengersText,
+    tripType : "round-trip",
+    }));
+
+
+
+    router.push("/flies?step=outbound");
+    };
+
 
     return(
 
