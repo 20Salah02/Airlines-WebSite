@@ -5,6 +5,7 @@ import { useBooking } from "@/app/contexts/bookingContext";
 // 
 import { useSearchParams } from "next/navigation";
 
+
 export default function TripDetails(){
 
 
@@ -29,6 +30,12 @@ export default function TripDetails(){
     const to = isOutbound ? booking.to : booking.from
     const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return;
     const lastDay = isOutbound ? booking.dates?.return : booking.dates?.departure;
+    const goingPrice = isOutbound ? booking.outboundFlight?.price ?? 0 : booking.returnFlight?.price ?? 0;
+    const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
+    
+
+    const totalPrice = goingPrice  + returnPrice 
+    const formatTotalPrice = totalPrice.toLocaleString()
 
 
     return(
@@ -56,7 +63,7 @@ export default function TripDetails(){
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
                     <h2 className="text-[18px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[18px] text-red-900">MAD 2,000</h3>
+                    <h3 className="font-medium text-[18px] text-red-900">MAD {formatTotalPrice}</h3>
                 </div>
                 <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
             </div>

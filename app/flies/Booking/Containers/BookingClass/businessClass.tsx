@@ -2,12 +2,17 @@
 
 //
 import Image from "next/image"
-import Link from "next/link"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck , faCheck, faSuitcase, faSuitcaseRolling, faTicket } from "@fortawesome/free-solid-svg-icons"
 
-export default function BusinessClass(){
+//
+import { FareType } from "@/app/contexts/bookingContext"
+
+type BusClassProps = {
+  onSelect: (fare: FareType, price: number) => void;
+};
+export default function BusinessClass({onSelect} : BusClassProps){
 
     return(
         <div className="grid grid-cols-3 gap-4">
@@ -18,9 +23,11 @@ export default function BusinessClass(){
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 7,825</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
-                    <Link href="/confirmeBooking">
-                    <h4 className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">Select fare</h4>
-                    </Link>
+                    <h4
+                        onClick={() => onSelect("Business Comfort" , 7825)} 
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                            Select fare
+                    </h4>
                 </div>
                 <div className="text-gray-600">
                     <h3 className="font-medium">Benefits and fees per adult passenger</h3>
@@ -60,7 +67,11 @@ export default function BusinessClass(){
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 9,125</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
-                    <h4 className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">Select fare</h4>
+                    <h4 
+                        onClick={() => onSelect("Business Elite" , 9125)}
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                            Select fare
+                    </h4>
                 </div>
                 <div className="text-gray-600">
                     <h3 className="font-medium">Benefits and fees per adult passenger</h3>

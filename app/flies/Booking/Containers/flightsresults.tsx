@@ -66,7 +66,7 @@ export default function FlightResults(){
         if (isOutbound && booking.tripType === "round-trip") {
             router.push("?step=return");
         } else {
-            router.push("/confirm");
+            router.push("/confirmeBooking");
         }
     }
 
@@ -140,7 +140,7 @@ export default function FlightResults(){
                             ${openClass === "business" ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
                         `}
                         >
-                        <BusinessClass />
+                        <BusinessClass onSelect={handleSelectFare} />
                     </div>
 
                 </div>
