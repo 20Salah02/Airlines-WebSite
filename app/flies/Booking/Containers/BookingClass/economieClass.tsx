@@ -7,7 +7,15 @@ import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarCheck , faCheck, faSuitcase, faSuitcaseRolling, faTicket } from "@fortawesome/free-solid-svg-icons"
 
-export default function EcoClass(){
+//
+import { FareType } from "@/app/contexts/bookingContext"
+
+
+type EcoClassProps = {
+  onSelect: (fare: FareType, price: number) => void;
+};
+
+export default function EcoClass({onSelect} : EcoClassProps){
 
 
     return(
@@ -19,7 +27,11 @@ export default function EcoClass(){
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,000</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
-                    <h4 className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">Select fare</h4>
+                    <h4 
+                        onClick={() => onSelect("Economy Classic" , 2000)}
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                            Select fare
+                    </h4>
                 </div>
                 <div className="text-gray-600">
                     <h3 className="font-medium">Benefits and fees per adult passenger</h3>
@@ -55,8 +67,11 @@ export default function EcoClass(){
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,125</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
-                    <h4 className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">Select fare</h4>
-                </div>
+                    <h4 
+                        onClick={() => onSelect("Economy Convenienc" , 2125)}
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                            Select fare
+                    </h4>                </div>
                 <div className="text-gray-600">
                     <h3 className="font-medium">Benefits and fees per adult passenger</h3>
                     <ul className="space-y-6 mt-4">
@@ -95,7 +110,11 @@ export default function EcoClass(){
                         <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,825</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
-                    <h4 className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">Select fare</h4>
+                    <h4 
+                        onClick={() => onSelect("Economy Comfort" , 2825)}
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                            Select fare
+                    </h4>               
                 </div>
                 <div className="text-gray-600">
                     <h3 className="font-medium">Benefits and fees per adult passenger</h3>
@@ -142,7 +161,11 @@ export default function EcoClass(){
                         <div className="mt-7">
                             <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 7,825</h2>
                         </div>
-                        <h4 className="flex justify-center mt-auto py-4 my-5 w-full border border-red-900 bg-red-900 rounded-4xl text-xl font-medium cursor-pointer hover:bg-red-950 duration-300">Select fare</h4>
+                        <h4
+                            onClick={()=> onSelect("Business Comfort" , 7825)}
+                            className="flex justify-center mt-auto py-4 my-5 w-full border border-red-900 bg-red-900 rounded-4xl text-xl font-medium cursor-pointer hover:bg-red-950 duration-300">
+                                Select fare
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -151,6 +174,3 @@ export default function EcoClass(){
         </div>
     )
 }
-//https://www.qatarairways.com/app/booking/flight-selection?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=DOH&toStation=CGK&departing=2026-02-14&returning=2026-02-21&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N
-//https://www.qatarairways.com/app/booking/flight-selection?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=DOH&toStation=CGK&departing=2026-02-14&returning=2026-02-21&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N&boundType=I&oBoundId=BC1-2-OFR-5738588490506538-4-1-1
-//https://www.qatarairways.com/app/booking/passenger?widget=QR&searchType=F&addTaxToFare=Y&minPurTime=0&selLang=fr&tripType=R&fromStation=DOH&toStation=CGK&departing=2026-02-14&returning=2026-02-21&bookingClass=E&adults=1&children=0&infants=0&ofw=0&teenager=0&flexibleDate=off&allowRedemption=N&boundType=I&oBoundId=BC1-2-OFR-5738588490506538-4-1-1&airOfferItemId=03c93993-4589-4356-8576-7f1ad3a17e11&iBoundId=BU2-2-1I0QRZ_181WPQ5Q6PPXQP72DQR7W01X3C6N&dataId=5JaGCbDaXKW4

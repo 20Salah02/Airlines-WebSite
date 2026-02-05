@@ -5,18 +5,22 @@ import { useBooking } from "@/app/contexts/bookingContext"
 //
 import { useState , useEffect } from "react"
 //
-import { useSearchParams } from "next/navigation"
+import { useSearchParams , useRouter } from "next/navigation"
 //
-import EcoClass from "./class/economieClass"
-import BusinessClass from "./class/businessClass"
+import EcoClass from "./BookingClass/economieClass"
+import BusinessClass from "./BookingClass/businessClass"
 import FlightDetails from "./flightDetails"
+
+//
+import { FareType } from "@/app/contexts/bookingContext"
+
 
 export default function FlightResults(){
 
     const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
     const [openResult , setOpenResult] = useState<boolean>(false)
     
-    const { booking, } = useBooking();
+    const { booking, setBooking} = useBooking();
     
     const search = useSearchParams()
     const step = search.get("step"); 
@@ -25,6 +29,8 @@ export default function FlightResults(){
 
     const from = isOutbound ? booking.from : booking.to;
     const to = isOutbound ? booking.to : booking.from;
+
+    const router = useRouter()
 
     function handleOpenEco(){
         setopenClass(prev => (prev === "eco" ? null : "eco"))
@@ -46,6 +52,23 @@ export default function FlightResults(){
             document.body.style.overflow = "";
         };
     }, [openResult]);
+
+    function handleSelectFare(fare: FareType, price: number) {
+        setBooking(prev => ({
+            ...prev,
+            [isOutbound ? "outboundFlight" : "returnFlight"]: {
+            flightId: "FLIGHT_123",
+            fare,
+            price,
+            },
+        }));
+
+        if (isOutbound && booking.tripType === "round-trip") {
+            router.push("?step=return");
+        } else {
+            router.push("/confirm");
+        }
+    }
 
 
     return(
@@ -109,7 +132,7 @@ export default function FlightResults(){
                             ${openClass === "eco" ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
                         `}
                         >
-                        <EcoClass />
+                        <EcoClass onSelect={handleSelectFare} />
                     </div>
                    <div
                         className={`

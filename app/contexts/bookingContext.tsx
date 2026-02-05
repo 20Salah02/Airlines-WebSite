@@ -10,6 +10,19 @@ type Airport = {
   iata: string;
 };
 
+export type FareType =
+  | "Economy Classic"
+  | "Economy Convenienc"
+  | "Economy Comfort"
+  | "Business Comfort"
+  | "Business Elite"
+
+type SelectedFlight = {
+  flightId: string;
+  fare: FareType;
+  price: number;
+};
+
 type Booking = {
   from: Airport | null;
   to: Airport | null;
@@ -19,8 +32,8 @@ type Booking = {
   } | null;
   passengers: string;  
   tripType: "one-way" | "round-trip";
-  outboundFlight: string | null;
-  returnFlight: string | null;
+  outboundFlight: SelectedFlight | null;
+  returnFlight: SelectedFlight | null;
 };
 
 type BookingContextType = {
@@ -54,13 +67,13 @@ export default function BookingProvider({ children }: BookingProviderProps) {
     }
     // Default initial state
     return {
-      from: null,
-      to: null,
-      dates: null,
-      passengers: "",
-      tripType: "round-trip",
-      outboundFlight: null,
-      returnFlight: null,
+    from: null,
+    to: null,
+    dates: null,
+    passengers: "",
+    tripType: "round-trip",
+    outboundFlight: null,
+    returnFlight: null,
     };
   });
 

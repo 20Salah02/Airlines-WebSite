@@ -61,15 +61,15 @@ export default function Form(){
     if (!destinationFrom || !destinationTo) return;
 
     setBooking(prev => ({
-    ...prev,
-    from: destinationFrom,
-    to: destinationTo,
-    dates: {
-        departure: selectDate?.from,
-        return: selectDate?.to,
-    },
-    passengers: passengersText,
-    tripType : "round-trip",
+        ...prev,
+        from: destinationFrom,
+        to: destinationTo,
+        dates: {
+            departure: selectDate?.from,
+            return: selectDate?.to,
+        },
+        passengers: passengersText,
+        tripType : "round-trip",
     }));
 
 
