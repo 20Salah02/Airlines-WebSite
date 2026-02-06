@@ -41,6 +41,8 @@ export default function Form(){
     const [destinationFrom, setDestinationFrom] = useState<Airport | null>(null);
     const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
     
+    const [tripType , setTripType] = useState<string>("")
+    
     function formatDate(date?: Date) {
     if (!date || isNaN(date.getTime())) return ""
     
