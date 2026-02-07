@@ -29,7 +29,9 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     country : string
     iata : string
     }
+
     //
+
     function formatDate(date?: Date | null) {
     if (!date) return "";
     return date.toLocaleDateString("en-GB", {
@@ -57,10 +59,12 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
     const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
 
+    const [tripType , setTripType] = useState<"one-way" | "round-trip">("round-trip")
+    
     const [openCalendar , setopenCalendare] = useState<boolean>(false)
     const [selectDate, setSelectDate] = useState<DateRange | undefined>({
-    from: firstDay ? new Date(firstDay) : undefined,
-    to: lastDay ? new Date(lastDay) : undefined,
+    from: firstDay ,
+    to: tripType === "round-trip" ? lastDay : undefined,
     })
 
 
@@ -70,23 +74,35 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     if (!destinationFrom || !destinationTo) return;
 
     setBooking(prev => ({
-    ...prev,
-    from: destinationFrom,
-    to: destinationTo,
-    dates: {
-        departure: selectDate?.from,
-        return: selectDate?.to,
-    },
-    passengers: passengersText,
-    tripType : "round-trip",
+        ...prev,
+        from: destinationFrom,
+        to: destinationTo,
+        dates: {
+            departure: selectDate?.from,
+            return: tripType === "round-trip" ? selectDate?.to : undefined,
+        },
+        passengers: passengersText,
+        tripType,
+
+        
     }));
 
 
 
-    router.push("/flies?step=outbound");
 
-    setOpenFormEdit(false)
+    if (tripType === "one-way") {
+            router.push("/flies?step=outbound");
+        } else {
+            router.push("/flies?step=outbound");
+        }
+
+        //
+        setOpenFormEdit(false)
+
     };
+    
+    
+ 
 
 
     return(
@@ -94,14 +110,25 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
             <h1 className="flex justify-center text-xl">Modify Search</h1>
             <div className="space-y-6">
                 <div className="flex space-x-5">
-                    <div className="space-x-2">
-                        <input type="radio" name="class" value="Return"/>
-                        <label>Return</label>
-                    </div>
-                    <div className="space-x-2">
-                        <input type="radio" name="class" value="One way"/>
-                        <label>One way</label>
-                    </div>
+                    <label>
+                        <input
+                            type="radio"
+                            name="tripType"
+                            checked={tripType === "round-trip"}
+                            onChange={() => setTripType("round-trip")}
+                        />
+                        <span className="ml-1">Return</span>
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="tripType"
+                            checked={tripType === "one-way"}
+                            onChange={() => setTripType("one-way")}
+                        />
+                        <span className="ml-1">One way</span>
+                    </label>
                 </div>
                 <div className="flex flex-col border rounded-md border-gray-300 " >
                     <div className="py-2 px-2 w-full">
@@ -123,15 +150,22 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                         <p className="text-gray-600 text-xs">Departure</p>
                         <p>{formatDate(selectDate?.from)}</p>
                     </div>
-                    <div className="w-1/2 space-y-1.5">
-                        <p className="text-gray-600 text-xs">Return</p>
-                        <p>{formatDate(selectDate?.to)}</p>
-                    </div>
+                    {tripType === "round-trip" && (
+                        <div className="w-1/2 space-y-1.5">
+                            <p className="text-gray-600 text-xs">Return</p>
+                            <p>{formatDate(selectDate?.to)}</p>
+                        </div>
+                    )}
                 </div>
                 <div className=" w-full border rounded-md border-gray-300 p-2">
                     {openCalendar && (
                         <div className="absolute h-1/2  top-1/5 left-4 w-full  z-50">
-                            <HandleDate selected={selectDate} onSelectDate={setSelectDate} setIsOpen={setopenCalendare}/>
+                            <HandleDate
+                                selected={selectDate}
+                                onSelectDate={setSelectDate}
+                                setIsOpen={setopenCalendare}
+                                mode={tripType === "round-trip" ? "range" : "single"}
+                            />                        
                         </div>
                     )}
                     

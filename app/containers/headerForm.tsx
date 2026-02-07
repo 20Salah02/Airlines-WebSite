@@ -30,10 +30,14 @@ export default function Form(){
 
     const [openPassengers , setOpenPassengers] = useState<boolean>(false)
     const [passengersText , setpassengersText] = useState<string>("1 Passenger Economy")
+
     const [openCalendar , setopenCalendare] = useState<boolean>(false)
+
+    const [tripType, setTripType] = useState<"one-way" | "round-trip">("round-trip");
+
     const [selectDate , setSelectDate] = useState<DateRange | undefined>({
         from : firstDayDefault ,
-        to : lastDayDefault
+        to: tripType === "round-trip" ? lastDayDefault : undefined,
     })
     const firstDay = formatDate(selectDate?.from)
     const lastDay = formatDate(selectDate?.to)
@@ -41,7 +45,6 @@ export default function Form(){
     const [destinationFrom, setDestinationFrom] = useState<Airport | null>(null);
     const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
     
-    const [tripType , setTripType] = useState<string>("")
     
     function formatDate(date?: Date) {
     if (!date || isNaN(date.getTime())) return ""
@@ -68,15 +71,20 @@ export default function Form(){
         to: destinationTo,
         dates: {
             departure: selectDate?.from,
-            return: selectDate?.to,
+            return: tripType === "round-trip" ? selectDate?.to : undefined,
         },
         passengers: passengersText,
-        tripType : "round-trip",
+        tripType,
     }));
 
 
 
-    router.push("/flies?step=outbound");
+
+    if (tripType === "one-way") {
+            router.push("/flies?step=outbound");
+        } else {
+            router.push("/flies?step=outbound");
+        }
     };
 
 
@@ -86,14 +94,25 @@ export default function Form(){
             <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className=" container border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-[white]">
 
                 <div className="w-1/4 py-4 flex justify-between text-[17px] ">
-                    <div>
-                        <input type="radio" name="class" value="return"></input>
-                        <label className="p-1">Return</label>
-                    </div>
-                    <div>
-                        <input type="radio" name="class" value="oneway"></input>
-                        <label className="p-1">One way</label>
-                    </div>
+                    <label>
+                        <input
+                            type="radio"
+                            name="tripType"
+                            checked={tripType === "round-trip"}
+                            onChange={() => setTripType("round-trip")}
+                        />
+                        <span className="ml-1">Return</span>
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="tripType"
+                            checked={tripType === "one-way"}
+                            onChange={() => setTripType("one-way")}
+                        />
+                        <span className="ml-1">One way</span>
+                    </label>
                 </div>
                 <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-center">
                     <div className="flex items-center">
@@ -118,14 +137,21 @@ export default function Form(){
                                 <h6 className="text-xs text-gray-600">Departure</h6>
                                 <h4>{firstDay}</h4>
                             </div>
+                            {tripType === "round-trip" && (
                             <div>
                                 <h6 className="text-xs text-gray-600">Return</h6>
                                 <h4>{lastDay}</h4>
                             </div>
+                            )}
                         </div>
                         {openCalendar && (
                             <div className="absolute mt-1 w-full">
-                                <HandleDate selected={selectDate} onSelectDate={setSelectDate} setIsOpen={setopenCalendare}/>
+                                <HandleDate
+                                selected={selectDate}
+                                onSelectDate={setSelectDate}
+                                setIsOpen={setopenCalendare}
+                                mode={tripType === "round-trip" ? "range" : "single"}
+                                />
                             </div>
                         )}
                     </div>
@@ -158,7 +184,7 @@ export default function Form(){
                     <div className="flex justify-end w-full mt-7 items-center">
                         <p className="text-gray-600 mr-5">+Add promo code</p>
 
-                        <button onClick={handleSearch} className="bg-blue-500 border-2 border-blue-500 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                        <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
                     </div>
             </form>
 
