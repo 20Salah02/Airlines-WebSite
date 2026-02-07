@@ -2,12 +2,13 @@
 
 // context
 import { useBooking } from "@/app/contexts/bookingContext";
+//
+import { useState } from "react";
 // 
 import { useSearchParams } from "next/navigation";
 
 
 export default function TripDetails(){
-
 
     function formatDate(date?: Date | null) {
     if (!date) return "";
@@ -35,7 +36,7 @@ export default function TripDetails(){
     const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
     
 
-    const totalPrice = goingPrice  + returnPrice 
+    const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
     const formatTotalPrice = totalPrice.toLocaleString()
 
 
@@ -53,13 +54,15 @@ export default function TripDetails(){
                     </div>
                     <p>{">"}</p>
                 </div>
-                <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
-                    <div className="space-y-1">
-                        <h2 className="text-[18px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
-                        <h3 className="text-[15px] text-gray-700">{formatDate(lastDay)}</h3>
+                {tripType === "round-trip" && (
+                    <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
+                        <div className="space-y-1">
+                            <h2 className="text-[18px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
+                            <h3 className="text-[15px] text-gray-700">{formatDate(lastDay)}</h3>
+                        </div>
+                        <p>{">"}</p>
                     </div>
-                    <p>{">"}</p>
-                </div>
+                )}
             </div>
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">

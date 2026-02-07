@@ -83,8 +83,6 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
         },
         passengers: passengersText,
         tripType,
-
-        
     }));
 
 
@@ -107,6 +105,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
 
     return(
         <div className=" bg-white w-full p-9 border-l border-l-gray-300 h-screen space-y-10">
+            <form onSubmit={(e) => e.preventDefault()}></form>
             <h1 className="flex justify-center text-xl">Modify Search</h1>
             <div className="space-y-6">
                 <div className="flex space-x-5">
