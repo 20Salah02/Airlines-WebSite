@@ -6,9 +6,13 @@ import { useBooking } from "@/app/contexts/bookingContext";
 import { useState } from "react";
 // 
 import { useSearchParams } from "next/navigation";
+//
+import FlightDetails from "@/app/flies/Booking/Containers/flightDetails";
 
 
 export default function TripDetails(){
+
+    const [openResult, setOpenResult] = useState<boolean>(false)
 
     function formatDate(date?: Date | null) {
     if (!date) return "";
@@ -39,14 +43,15 @@ export default function TripDetails(){
     const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
     const formatTotalPrice = totalPrice.toLocaleString()
 
-
     return(
         <div className="flex flex-col bg-white w-2/5 p-6 rounded-3xl space-y-2.5">
             <div className="space-y-2">
                 <h1 className="font-medium text-[19px] text-red-900">Trip details</h1>
                 <p>{tripType}</p>
             </div>
-            <div>
+
+            
+            <div onClick={() => setOpenResult(prev => !prev)}>
                 <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                     <div className="space-y-1">
                         <h2 className="text-[18px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
@@ -71,6 +76,24 @@ export default function TripDetails(){
                 </div>
                 <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
             </div>
+
+            {openResult && (
+            <div
+                className="fixed inset-0 z-40 bg-black/40"
+                onClick={() => setOpenResult(false)} 
+            >
+                <div
+                className={`
+                    absolute top-0 right-0 h-screen w-1/2 bg-white
+                    transition-transform duration-300
+                    translate-x-0
+                `}
+                onClick={(e) => e.stopPropagation()} 
+                >
+                <FlightDetails />
+                </div>
+            </div>
+            )}
         </div>
     )
 }
