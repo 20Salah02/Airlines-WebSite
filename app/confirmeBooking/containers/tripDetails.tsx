@@ -43,6 +43,8 @@ export default function TripDetails(){
     const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
     const formatTotalPrice = totalPrice.toLocaleString()
 
+
+
     return(
         <div className="flex flex-col bg-white w-2/5 p-6 rounded-3xl space-y-2.5">
             <div className="space-y-2">
