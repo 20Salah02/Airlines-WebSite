@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 //
 import FlightDetails from "@/app/flies/Booking/Containers/flightDetails";
-
+//
 
 export default function TripDetails(){
 
