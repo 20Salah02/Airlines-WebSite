@@ -29,7 +29,7 @@ export default function PassengerForm(){
                             </div>
                             {openTitleForm && (
                                 <div onClick={() => setOpenTitleForm(false)}>
-                                    <FormTitle onSelectTitle={setTitleResults}/>
+                                    <FormTitle onSelectTitle={setTitleResults} selectedTitle={titleResult}/>
                                 </div>
                             )}
                         </div>
