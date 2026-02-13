@@ -1,21 +1,39 @@
 "use client"
 
+//
+import { useState } from "react"
+//
+import FormTitle from "../tripDetailsFom/title"
+
+
 
 export default function PassengerForm(){
 
+    const [titleResult , setTitleResults] = useState<string>("Mr")
+    const [openTitleForm, setOpenTitleForm] = useState<boolean>(false)
+
+    const handleOpenTitle = (() => setOpenTitleForm(e => !e))
+    
     return(
         <div className="bg-white p-9 border-l border-l-gray-300 h-screen w-full">
             <form className="w-full" onSubmit={(e)=> e.preventDefault()}>
                 <div className="space-y-15">
                     <h1 className="flex justify-center text-xl">Adult Passenger</h1>
                     <div className="space-y-5">
+
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">Title</h2>
-                            <div className="flex justify-between items-center border border-gray-300 rounded-xl p-4">
-                                <h3>Mr</h3>
+                            <div onClick={handleOpenTitle} className="flex justify-between items-center border border-gray-300 rounded-xl p-4">
+                                <h3>{titleResult}</h3>
                                 <h4 className="cursor-pointer">*</h4>
                             </div>
+                            {openTitleForm && (
+                                <div onClick={() => setOpenTitleForm(false)}>
+                                    <FormTitle onSelectTitle={setTitleResults}/>
+                                </div>
+                            )}
                         </div>
+                        
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">Gender</h2>
                             <div className="flex  space-x-2.5">
@@ -29,6 +47,7 @@ export default function PassengerForm(){
                                 </div>
                             </div>
                         </div>
+
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">First name/middle name on passport</h2>
                             <input className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-full" type="text"/>
@@ -69,6 +88,7 @@ export default function PassengerForm(){
                     </div>
                 </div>
             </form>
+
         </div>
     )
 }
