@@ -5,11 +5,28 @@ import { useState } from "react"
 //
 import FormTitle from "../tripDetailsFom/title"
 
-
+//
+type FormData = {
+  title: string
+  gender: "male" | "female" | ""
+  firstName: string
+  lastName: string
+  birthday: string
+  nationality: string
+}
 
 export default function PassengerForm(){
 
-    const [titleResult , setTitleResults] = useState<string>("Mr")
+    const [formData, setFormData] = useState<FormData>({
+        title: "Mr",
+        gender: "",
+        firstName: "",
+        lastName: "",
+        birthday: "",
+        nationality: "",
+    })
+
+
     const [openTitleForm, setOpenTitleForm] = useState<boolean>(false)
 
     const handleOpenTitle = (() => setOpenTitleForm(e => !e))
@@ -24,12 +41,12 @@ export default function PassengerForm(){
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">Title</h2>
                             <div onClick={handleOpenTitle} className="flex justify-between items-center border border-gray-300 rounded-xl p-4">
-                                <h3>{titleResult}</h3>
+                                <h3>{formData.title}</h3>
                                 <h4 className="cursor-pointer">*</h4>
                             </div>
                             {openTitleForm && (
                                 <div onClick={() => setOpenTitleForm(false)}>
-                                    <FormTitle onSelectTitle={setTitleResults} selectedTitle={titleResult}/>
+                                    <FormTitle onSelectTitle={(e) => setFormData(prev => ({...prev, title: e }))} selectedTitle={formData.title}/>
                                 </div>
                             )}
                         </div>
@@ -39,22 +56,30 @@ export default function PassengerForm(){
                             <div className="flex  space-x-2.5">
                                 <div className="flex items-center border border-gray-300 rounded-xl py-4 px-5 space-x-2.5">
                                     <label htmlFor="male">Male</label>
-                                        <input className="accent-red-900"  type="radio" id="male" value="male" name="class"/>                    
+                                    <input 
+                                        className="accent-red-900"  type="radio" id="male" value="male" name="class"
+                                        checked={formData.gender === "male"}
+                                        onChange={(e) => setFormData(prev => ({...prev , gender: e.target.value as "male" | "female"}))}
+                                    />                    
                                 </div>
                                 <div className="flex items-center border border-gray-300 rounded-xl py-4 px-5 space-x-2.5">
                                     <label htmlFor="female">Female</label>
-                                    <input className="accent-red-900" type="radio" id="female" value="female" name="class"/>
+                                    <input 
+                                        className="accent-red-900" type="radio" id="female" value="female" name="class"
+                                        checked={formData.gender === "female"}
+                                        onChange={(e) => setFormData(prev => ({...prev , gender: e.target.value as "male" | "female"}))}
+                                    />
                                 </div>
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">First name/middle name on passport</h2>
-                            <input className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-full" type="text"/>
+                            <input value={formData.firstName} onChange={(e) => setFormData(prev => ({...prev , firstName : e.target.value}))} className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-full" type="text"/>
                         </div>
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">Last Name</h2>
-                            <input className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-full" type="text"/>
+                            <input value={formData.lastName} onChange={(e) => setFormData(prev => ({...prev , lastName : e.target.value}))} className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-full" type="text"/>
                         </div>
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">Date of birth</h2>
