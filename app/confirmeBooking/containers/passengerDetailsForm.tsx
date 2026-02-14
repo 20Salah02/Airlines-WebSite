@@ -59,7 +59,6 @@ export default function PassengerForm(){
             [field]: value,
             }
 
-            // إذا تغيّر الشهر أو السنة، نتأكد أن اليوم مازال صالحًا
             if (field === "month" || field === "year") {
             const daysInMonth = getDaysInMonth(
                 Number(updatedBirthday.month),
@@ -148,7 +147,6 @@ export default function PassengerForm(){
                                         />
                                 </div>
                                 <div className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-1/3 space-x-2.5">
-
                                         <BirthdayMonth
                                             month={formData.birthday.month}
                                             onSelectMonth={(month) => handleBirthdayChange("month", month)}
