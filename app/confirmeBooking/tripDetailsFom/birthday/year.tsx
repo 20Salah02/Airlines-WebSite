@@ -26,7 +26,7 @@ export default function BirthdayYear({
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
 
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear()-18
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i)
 
   return (
