@@ -7,6 +7,7 @@ import FormTitle from "../tripDetailsFom/title"
 import BirthdayDay from "../tripDetailsFom/birthday/day"
 import BirthdayMonth from "../tripDetailsFom/birthday/month"
 import BirthdayYear from "../tripDetailsFom/birthday/year"
+import Nationality from "../tripDetailsFom/nationalitie"
 //
 type FormData = {
   title: string
@@ -164,8 +165,13 @@ export default function PassengerForm(){
                         <div className="space-y-2">
                             <h2 className="text-lg font-medium">Nationality</h2>
                             <div className="flex justify-between items-center border border-gray-300 rounded-xl py-4 px-5 space-x-2.5">
-                                <h3>Morocco</h3>
-                                <h4>*</h4>
+
+                                <Nationality
+                                    value={formData.nationality}
+                                    onSelectNationality={(e) =>
+                                    setFormData(prev => ({ ...prev, nationality: e }))
+                                    }
+                                />
                             </div>
                         </div>
                         <div></div>
