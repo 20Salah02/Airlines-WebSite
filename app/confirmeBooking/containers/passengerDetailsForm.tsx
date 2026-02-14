@@ -4,14 +4,20 @@
 import { useState } from "react"
 //
 import FormTitle from "../tripDetailsFom/title"
-
+import BirthdayDay from "../tripDetailsFom/birthday/day"
+import BirthdayMonth from "../tripDetailsFom/birthday/month"
+import BirthdayYear from "../tripDetailsFom/birthday/year"
 //
 type FormData = {
   title: string
   gender: "male" | "female" | ""
   firstName: string
   lastName: string
-  birthday: string
+  birthday: {
+    day : string ,
+    month : string ,
+    year : string ,
+  }
   nationality: string
 }
 
@@ -22,7 +28,11 @@ export default function PassengerForm(){
         gender: "",
         firstName: "",
         lastName: "",
-        birthday: "",
+        birthday: {
+            day : "",
+            month : "",
+            year : ""
+        },
         nationality: "",
     })
 
@@ -31,6 +41,43 @@ export default function PassengerForm(){
 
     const handleOpenTitle = (() => setOpenTitleForm(e => !e))
     
+
+    //
+    const getDaysInMonth = (month: number, year: number) => {
+        if (!month || !year) return 31
+        return new Date(year, month, 0).getDate()
+    }
+
+
+    const handleBirthdayChange = (
+        field: "day" | "month" | "year",
+        value: string
+    ) => {
+        setFormData(prev => {
+            const updatedBirthday = {
+            ...prev.birthday,
+            [field]: value,
+            }
+
+            // إذا تغيّر الشهر أو السنة، نتأكد أن اليوم مازال صالحًا
+            if (field === "month" || field === "year") {
+            const daysInMonth = getDaysInMonth(
+                Number(updatedBirthday.month),
+                Number(updatedBirthday.year)
+            )
+
+            if (Number(updatedBirthday.day) > daysInMonth) {
+                updatedBirthday.day = ""
+            }
+            }
+
+            return {
+            ...prev,
+            birthday: updatedBirthday,
+            }
+        })
+    }
+
     return(
         <div className="bg-white p-9 border-l border-l-gray-300 h-screen w-full">
             <form className="w-full" onSubmit={(e)=> e.preventDefault()}>
@@ -85,16 +132,34 @@ export default function PassengerForm(){
                             <h2 className="text-lg font-medium">Date of birth</h2>
                             <div className="flex w-full space-x-4">
                                 <div className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-1/3 space-x-2.5">
-                                    <h4>11</h4>
-                                    <h5>*</h5>
+                                        <BirthdayDay
+                                            day={formData.birthday.day}
+                                            month={formData.birthday.month}
+                                            year={formData.birthday.year}
+                                            onSelectDay={(day) =>
+                                            setFormData(prev => ({
+                                                ...prev,
+                                                birthday: {
+                                                    ...prev.birthday,
+                                                    day,
+                                                },
+                                                }))
+                                            }
+                                        />
                                 </div>
                                 <div className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-1/3 space-x-2.5">
-                                    <h4>Feb</h4>
-                                    <h5>*</h5>
+
+                                        <BirthdayMonth
+                                            month={formData.birthday.month}
+                                            onSelectMonth={(month) => handleBirthdayChange("month", month)}
+                                        />
                                 </div>
                                 <div className="flex justify-between items-center border border-gray-300 rounded-xl p-4 w-1/3 space-x-2.5">
-                                    <h4>2002</h4>
-                                    <h5>*</h5>
+                                    
+                                    <BirthdayYear
+                                        year={formData.birthday.year}
+                                        onSelectYear={(year) => handleBirthdayChange("year", year)}
+                                    />
                                 </div>
                             </div>
                         </div>
