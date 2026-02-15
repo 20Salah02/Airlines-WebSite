@@ -8,23 +8,35 @@ import { faCalendarCheck , faCheck, faSuitcase, faSuitcaseRolling, faTicket } fr
 
 //
 import { FareType } from "@/app/contexts/bookingContext"
+//
+import { useFlightResultContext } from "@/app/contexts/priceContext"
+
 
 type BusClassProps = {
   onSelect: (fare: FareType, price: number) => void;
 };
 export default function BusinessClass({onSelect} : BusClassProps){
 
+    
+  const { flightResult } = useFlightResultContext();
+
+  if (!flightResult) return null;
+
+  const basePrice = flightResult.price;
+
+  const comfortPrice = Math.round(basePrice * 2.5);
+  const elitePrice = Math.round(basePrice * 2.7);
     return(
         <div className="grid grid-cols-3 gap-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
                     <h1 className="text-3xl font-light text-gray-600">Business Comfort</h1>
                     <div className="mt-7">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 7,825</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4
-                        onClick={() => onSelect("Business Comfort" , 7825)} 
+                        onClick={() => onSelect("Business Comfort" , comfortPrice)} 
                         className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>
@@ -64,11 +76,11 @@ export default function BusinessClass({onSelect} : BusClassProps){
                 <div>
                     <h1 className="text-3xl font-light text-gray-600">Business Elite</h1>
                     <div className="mt-7">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 9,125</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{elitePrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
-                        onClick={() => onSelect("Business Elite" , 9125)}
+                        onClick={() => onSelect("Business Elite" , elitePrice)}
                         className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>

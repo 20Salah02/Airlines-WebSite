@@ -1,9 +1,11 @@
 
 "use client";
 import React from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 //
 import { useBooking } from "@/app/contexts/bookingContext";
+import { useFlightResultContext } from "@/app/contexts/priceContext";
 //
 type Airport = {
   lat: number; 
@@ -65,32 +67,30 @@ function calculateFlight(
 
 
 export default function FlightCalculator() {
-  
-    const search = useSearchParams()
-    const {booking} = useBooking()  
-    if (!booking.from || !booking.to) {
-        return null; 
-    }
-    const step = search.get("step"); 
+  const search = useSearchParams();
+  const { booking } = useBooking();
+  const { setFlightResult } = useFlightResultContext();
 
-    const isOutbound = step !== "return";
+  const isOutbound = search.get("step") !== "return";
 
-    const fromLat = isOutbound ? booking.from?.latitude : booking.to?.latitude;
-    const fromLon = isOutbound ? booking.from?.longitude : booking.to?.longitude;
+  useEffect(() => {
+    if (!booking.from || !booking.to) return;
 
-    const toLat = isOutbound ? booking.to?.latitude : booking.from?.latitude;
-    const toLon = isOutbound ? booking.to?.longitude : booking.from?.longitude;
+    const from = isOutbound ? booking.from : booking.to;
+    const to = isOutbound ? booking.to : booking.from;
 
-    const fromAirport: Airport = {
-        lat: fromLat,
-        lon: fromLon,
-    };
+    const result = calculateFlight(
+      { lat: from.latitude, lon: from.longitude },
+      { lat: to.latitude, lon: to.longitude }
+    );
 
-    const toAirport: Airport = {
-        lat: toLat,
-        lon: toLon
-    };
+    setFlightResult(result);
+  }, [
+    booking.from,
+    booking.to,
+    isOutbound,
+    setFlightResult
+  ]);
 
-    const result = calculateFlight(fromAirport, toAirport);
-
+  return null; // logic-only component
 }
