@@ -9,6 +9,7 @@ import { faCalendarCheck , faCheck, faSuitcase, faSuitcaseRolling, faTicket } fr
 
 //
 import { FareType } from "@/app/contexts/bookingContext"
+import { useFlightResultContext } from "@/app/contexts/priceContext"
 
 
 type EcoClassProps = {
@@ -16,7 +17,15 @@ type EcoClassProps = {
 };
 
 export default function EcoClass({onSelect} : EcoClassProps){
+    
+    const {flightResult} = useFlightResultContext()
 
+    if (!flightResult )return null
+
+    const basePrice = flightResult.price
+    const classicPrice = Math.round(basePrice)
+    const conveniencPrice = Math.round(basePrice * 1.3)
+    const comfortPrice = Math.round(basePrice * 1.6)
 
     return(
         <div className="grid grid-cols-4 gap-4">
@@ -24,11 +33,11 @@ export default function EcoClass({onSelect} : EcoClassProps){
                 <div>
                     <h1 className="text-3xl font-light text-gray-600">Economy Classic</h1>
                     <div className="mt-7">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,000</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{classicPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
-                        onClick={() => onSelect("Economy Classic" , 2000)}
+                        onClick={() => onSelect("Economy Classic" , classicPrice)}
                         className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>
@@ -64,11 +73,11 @@ export default function EcoClass({onSelect} : EcoClassProps){
                 <div>
                     <h1 className="text-3xl font-light text-gray-600">Economy Convenienc</h1>
                     <div className="mt-7">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,125</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{conveniencPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
-                        onClick={() => onSelect("Economy Convenienc" , 2125)}
+                        onClick={() => onSelect("Economy Convenienc" , conveniencPrice)}
                         className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>                </div>
@@ -107,11 +116,11 @@ export default function EcoClass({onSelect} : EcoClassProps){
                 <div>
                     <h1 className="text-3xl font-light text-gray-600">Economy Comfort</h1>
                     <div className="mt-7">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 2,825</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
-                        onClick={() => onSelect("Economy Comfort" , 2825)}
+                        onClick={() => onSelect("Economy Comfort" , comfortPrice)}
                         className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>               

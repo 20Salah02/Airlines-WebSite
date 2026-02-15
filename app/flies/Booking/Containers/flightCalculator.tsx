@@ -1,6 +1,6 @@
 
 "use client";
-import React from "react";
+
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 //
@@ -92,5 +92,5 @@ export default function FlightCalculator() {
     setFlightResult
   ]);
 
-  return null; // logic-only component
+  return null; 
 }
