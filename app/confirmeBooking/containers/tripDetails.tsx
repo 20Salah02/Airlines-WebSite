@@ -76,7 +76,7 @@ export default function TripDetails(){
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
                     <h2 className="text-[18px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[18px] text-red-900">MAD {formatTotalPrice}</h3>
+                    <h3 className="font-medium text-[18px] text-red-900">{formatTotalPrice} USD</h3>
                 </div>
                 <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
             </div>

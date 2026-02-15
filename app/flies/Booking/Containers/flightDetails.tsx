@@ -2,6 +2,7 @@
 
 // context
 import { useBooking } from "@/app/contexts/bookingContext";
+import { useFlightResultContext } from "@/app/contexts/priceContext";
 //
 import { useSearchParams } from "next/navigation"
 
@@ -27,6 +28,12 @@ export default function FlightDetails(){
     });
     }
 
+    const {flightResult} = useFlightResultContext()
+    if (!flightResult) return null
+
+    const flightDurationHour = flightResult.durationHours
+    const flightDurationMin  = flightResult.durationMinutes
+
     return(
         
         <div className="bg-white p-9 border-l border-l-gray-300 h-screen space-y-20">
@@ -38,7 +45,7 @@ export default function FlightDetails(){
             <div className="flex space-x-8">
                 <div className="space-y-14">
                     <p>10:00</p>
-                    <p>2h 10m</p>
+                    <p>{flightDurationHour}h {flightDurationMin}min</p>
                     <p>12:10</p>
                 </div>
                 <p className="flex items-center">L</p>
@@ -49,7 +56,7 @@ export default function FlightDetails(){
                     </div>
                     <div>
                         <h2>QR6381 - Boeing 777-300</h2>
-                        <h3 className="text-gray-600">Operated by Garuda Indonesia</h3>
+                        <h3 className="text-gray-600">Operated by Garuda Salah</h3>
                     </div>
                     <div>
                         <h2 className="font-medium">{to?.city}</h2>
