@@ -8,6 +8,8 @@ type Airport = {
   city: string; 
   country: string; 
   iata: string;
+  latitude : number;
+  longitude : number
 };
 
 export type FareType =

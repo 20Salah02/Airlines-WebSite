@@ -38,6 +38,8 @@ export default function TripDetails(){
     const tripType = isOutbound ? booking.tripType : ""
     const goingPrice = isOutbound ? booking.outboundFlight?.price ?? 0 : booking.returnFlight?.price ?? 0;
     const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
+
+    
     
 
     const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice

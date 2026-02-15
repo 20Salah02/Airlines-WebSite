@@ -10,6 +10,7 @@ import { useSearchParams , useRouter } from "next/navigation"
 import EcoClass from "./BookingClass/economieClass"
 import BusinessClass from "./BookingClass/businessClass"
 import FlightDetails from "./flightDetails"
+import FlightCalculator from "./flightCalculator"
 
 //
 import { FareType } from "@/app/contexts/bookingContext"
@@ -29,6 +30,8 @@ export default function FlightResults(){
 
     const from = isOutbound ? booking.from : booking.to;
     const to = isOutbound ? booking.to : booking.from;
+
+
 
     const router = useRouter()
 
@@ -164,7 +167,7 @@ export default function FlightResults(){
                 </div>
             </div>
             )}
-
+            <FlightCalculator />
 
         </div>
     )

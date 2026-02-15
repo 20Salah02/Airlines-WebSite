@@ -1,0 +1,96 @@
+
+"use client";
+import React from "react";
+import { useSearchParams } from "next/navigation";
+//
+import { useBooking } from "@/app/contexts/bookingContext";
+//
+type Airport = {
+  lat: number; 
+  lon: number; 
+};
+
+type FlightResult = {
+  distanceKm: number;
+  durationHours: number;
+  durationMinutes: number;
+  price: number;
+};
+
+
+function toRadians(deg: number): number {
+  return deg * (Math.PI / 180);
+}
+
+function calculateDistance(a1: Airport, a2: Airport): number {
+  const R = 6371; // Earth radius in km
+
+  const φ1 = toRadians(a1.lat);
+  const φ2 = toRadians(a2.lat);
+
+  const Δφ = toRadians(a2.lat - a1.lat);
+  const Δλ = toRadians(a2.lon - a1.lon);
+
+  const h =
+    Math.sin(Δφ / 2) ** 2 +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) ** 2;
+
+  const c = 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+
+  return R * c;
+}
+
+function calculateFlight(
+  from: Airport,
+  to: Airport,
+  pricePerKm = 0.11,
+  baseFee = 50,
+  speed = 900 
+): FlightResult {
+  const distanceKm = calculateDistance(from, to);
+
+  const duration = distanceKm / speed;
+  const durationHours = Math.floor(duration);
+  const durationMinutes = Math.round((duration - durationHours) * 60);
+
+  const price = distanceKm * pricePerKm + baseFee;
+
+  return {
+    distanceKm: Number(distanceKm.toFixed(2)),
+    durationHours,
+    durationMinutes,
+    price: Number(price.toFixed(2)),
+  };
+}
+
+
+export default function FlightCalculator() {
+  
+    const search = useSearchParams()
+    const {booking} = useBooking()  
+    if (!booking.from || !booking.to) {
+        return null; 
+    }
+    const step = search.get("step"); 
+
+    const isOutbound = step !== "return";
+
+    const fromLat = isOutbound ? booking.from?.latitude : booking.to?.latitude;
+    const fromLon = isOutbound ? booking.from?.longitude : booking.to?.longitude;
+
+    const toLat = isOutbound ? booking.to?.latitude : booking.from?.latitude;
+    const toLon = isOutbound ? booking.to?.longitude : booking.from?.longitude;
+
+    const fromAirport: Airport = {
+        lat: fromLat,
+        lon: fromLon,
+    };
+
+    const toAirport: Airport = {
+        lat: toLat,
+        lon: toLon
+    };
+
+    const result = calculateFlight(fromAirport, toAirport);
+
+}

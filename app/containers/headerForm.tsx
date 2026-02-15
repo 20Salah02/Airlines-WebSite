@@ -78,8 +78,6 @@ export default function Form(){
     }));
 
 
-
-
     if (tripType === "one-way") {
             router.push("/flies?step=outbound");
         } else {
