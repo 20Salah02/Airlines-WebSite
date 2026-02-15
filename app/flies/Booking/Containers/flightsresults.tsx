@@ -14,6 +14,7 @@ import FlightCalculator from "./flightCalculator"
 
 //
 import { FareType } from "@/app/contexts/bookingContext"
+import { useFlightResultContext } from "@/app/contexts/priceContext"
 
 
 export default function FlightResults(){
@@ -30,7 +31,6 @@ export default function FlightResults(){
 
     const from = isOutbound ? booking.from : booking.to;
     const to = isOutbound ? booking.to : booking.from;
-
 
 
     const router = useRouter()
@@ -56,6 +56,9 @@ export default function FlightResults(){
         };
     }, [openResult]);
 
+    
+
+
     function handleSelectFare(fare: FareType, price: number) {
         setBooking(prev => ({
             ...prev,
@@ -73,6 +76,15 @@ export default function FlightResults(){
         }
     }
 
+            //
+    const {flightResult} = useFlightResultContext()
+
+    const basePrice = flightResult?.price ?? 0
+    const flightDurationHour = flightResult?.durationHours
+    const flightDurationMin = flightResult?.durationMinutes
+
+    const ecoPrice = Math.round(basePrice)
+    const businessPrice = Math.round(basePrice * 2.5)
 
     return(
         <div>
@@ -99,7 +111,7 @@ export default function FlightResults(){
                                 <p>10:00</p>
                                 <div className="text-lg font-normal text-gray-600">
                                     <p className="flex justify-center items-center">L</p>
-                                    <p className="pt-4">Non-Stop 2h 10m</p>
+                                    <p className="pt-4"> {flightDurationHour}h {flightDurationMin}min</p>
                                 </div>
                                 <p>12:10</p>
                             </div>
@@ -115,14 +127,14 @@ export default function FlightResults(){
                         <div   className="flex flex-col relative">
                             <div onClick={handleOpenEco} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                                 <p className="text-gray-600">Economy</p>
-                                <h2 className="text-4xl font-light flex pt-5">MAD 2,000</h2>
+                                <h2 className="text-4xl font-light flex pt-5">{ecoPrice} USD</h2>
                                 <h6 className="font-extralight text-green-800">special offer</h6>
                             </div>
 
                         </div>
                         <div onClick={handleOpenBusiness} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                             <p className="text-gray-600">Business</p>
-                            <h2 className="text-4xl font-light flex pt-5">MAD 6,000</h2>
+                            <h2 className="text-4xl font-light flex pt-5">{businessPrice} USD</h2>
                             <h6 className="font-extralight text-green-800">special offer</h6>
                         </div>
                     </div> 

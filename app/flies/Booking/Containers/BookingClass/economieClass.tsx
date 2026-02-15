@@ -26,6 +26,7 @@ export default function EcoClass({onSelect} : EcoClassProps){
     const classicPrice = Math.round(basePrice)
     const conveniencPrice = Math.round(basePrice * 1.3)
     const comfortPrice = Math.round(basePrice * 1.6)
+    const comfortBusinesPrice = Math.round(basePrice * 2.5)
 
     return(
         <div className="grid grid-cols-4 gap-4">
@@ -168,10 +169,10 @@ export default function EcoClass({onSelect} : EcoClassProps){
                     <div className="flex flex-col h-full p-4 z-10 relative text-white">
                         <h1 className="text-3xl font-light">Business Comfort</h1>
                         <div className="mt-7">
-                            <h2 className="flex justify-end text-3xl font-[350] py-2">MAD 7,825</h2>
+                            <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortBusinesPrice.toLocaleString()} USD</h2>
                         </div>
                         <h4
-                            onClick={()=> onSelect("Business Comfort" , 7825)}
+                            onClick={()=> onSelect("Business Comfort" , comfortBusinesPrice)}
                             className="flex justify-center mt-auto py-4 my-5 w-full border border-red-900 bg-red-900 rounded-4xl text-xl font-medium cursor-pointer hover:bg-red-950 duration-300">
                                 Select fare
                         </h4>
