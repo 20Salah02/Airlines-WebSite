@@ -18,11 +18,13 @@ import { DateRange } from "react-day-picker"
 
 export default function Form(){
     type Airport ={
-    id : number
-    name : string
-    city : string
-    country : string
-    iata : string
+    id: number;
+    name: string; 
+    city: string; 
+    country: string; 
+    iata: string;
+    latitude : number;
+    longitude : number
     }
     const firstDayDefault = new Date();
     const lastDayDefault = new Date();
@@ -31,7 +33,7 @@ export default function Form(){
     const [openPassengers , setOpenPassengers] = useState<boolean>(false)
     const [passengersText , setpassengersText] = useState<string>("1 Passenger Economy")
 
-    const [openCalendar , setopenCalendare] = useState<boolean>(false)
+    const [openCalendar , setopenCalendare] = useState<boolean>(false) 
 
     const [tripType, setTripType] = useState<"one-way" | "round-trip">("round-trip");
 

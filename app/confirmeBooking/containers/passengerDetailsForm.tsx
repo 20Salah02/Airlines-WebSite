@@ -1,7 +1,7 @@
 "use client"
 
 //
-import { useState } from "react"
+import { useState ,useEffect } from "react"
 //
 import FormTitle from "../tripDetailsFom/title"
 import BirthdayDay from "../tripDetailsFom/birthday/day"
@@ -24,7 +24,10 @@ type FormData = {
   nationality: string
 }
 
-export default function PassengerForm(){
+type setCloseForm = {
+    closePassengerForm : (range : boolean) => void
+}
+export default function PassengerForm({closePassengerForm} : setCloseForm){
 
     const [formData, setFormData] = useState<FormData>({
         title: "Mr",
@@ -43,8 +46,10 @@ export default function PassengerForm(){
     const [submitted , setSubmitted] = useState<boolean>(false)
 
     const {setPassenger} = usePassenger()
+
     
     const handleOpenTitle = (() => setOpenTitleForm(e => !e))
+    const handleCloseForm = (() => closePassengerForm(false))
     
 
     //
@@ -243,7 +248,7 @@ export default function PassengerForm(){
                     </div>
 
                     <div>
-                        <button className="mb-5 bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Save and Continue</button>
+                        <button onClick={handleCloseForm} className="mb-5 bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Save and Continue</button>
                     </div>
                 </div>
             </form>

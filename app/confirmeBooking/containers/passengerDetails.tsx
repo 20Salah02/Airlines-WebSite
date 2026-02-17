@@ -78,7 +78,7 @@ export default function PassengerDetails(){
                         `}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <PassengerForm/>
+                        <PassengerForm closePassengerForm={setPassengerForm}/>
                     </div>
                 </div>
             )}

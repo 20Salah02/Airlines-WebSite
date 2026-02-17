@@ -1,66 +1,60 @@
 "use client"
 
-import { useState , useContext , createContext } from "react"
+import { createContext, useContext, useState, ReactNode, useEffect } from "react"
 
-type PassengerData = {
-    title : string
-    gender : string
-    firstName : string
-    lastName : string
-    birthday : {
-        day : string
-        month : string
-        year : string
+export type PassengerData = {
+  title: string
+  gender: "male" | "female" | ""
+  firstName: string
+  lastName: string
+  birthday: {
+    day: string
+    month: string
+    year: string
+  }
+  nationality: string
+}
+
+type PassengerContextType = {
+  passenger: PassengerData
+  setPassenger: React.Dispatch<React.SetStateAction<PassengerData>>
+}
+
+const defaultPassenger: PassengerData = {
+  title: "Mr",
+  gender: "",
+  firstName: "",
+  lastName: "",
+  birthday: { day: "", month: "", year: "" },
+  nationality: "",
+}
+
+const PassengerContext = createContext<PassengerContextType | undefined>(
+  undefined
+)
+
+export function PassengerProvider({ children }: { children: ReactNode }) {
+  const [passenger, setPassenger] = useState<PassengerData>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("passenger")
+      return saved ? JSON.parse(saved) : defaultPassenger
     }
-    nationality : string
+    return defaultPassenger
+  })
+
+  useEffect(() => {
+    localStorage.setItem("passenger", JSON.stringify(passenger))
+  }, [passenger])
+
+  return (
+    <PassengerContext.Provider value={{ passenger, setPassenger }}>
+      {children}
+    </PassengerContext.Provider>
+  )
 }
 
-type passengerContextType = {
-    passenger : PassengerData
-    setPassenger : (data : PassengerData) => void
-}
-
-const PassengerContext = createContext<passengerContextType | null>(null)
-
-
-export default function PassengerProvider({children} : {children : React.ReactNode}){
-
-    const [passenger , setPassengerState] = useState<PassengerData>(() => {
-        if (typeof window !== "undefined"){
-            const saved = localStorage.getItem("passenger")
-            if (saved) {
-                return (JSON.parse(saved))
-            }
-        }
-        return {
-        title: "Mr",
-        gender: "",
-        firstName: "",
-        lastName: "",
-        birthday: {
-            day : "",
-            month : "",
-            year : ""
-        },
-        nationality: "",
-        }
-    })
-
-    const setPassenger = (data : PassengerData) => {
-        setPassengerState(data)
-        localStorage.setItem("passenger" , JSON.stringify(data))
-    }
-
-    return(
-        <PassengerContext.Provider value={{passenger , setPassenger}}>
-            {children}
-        </PassengerContext.Provider>
-    )
-
-}
-
-export const usePassenger = () => {
-  const ctx = useContext(PassengerContext)
-  if (!ctx) throw new Error("usePassenger must be used inside PassengerProvider")
-  return ctx
+export function usePassenger() {
+  const context = useContext(PassengerContext)
+  if (!context) throw new Error("usePassenger must be inside PassengerProvider")
+  return context
 }
