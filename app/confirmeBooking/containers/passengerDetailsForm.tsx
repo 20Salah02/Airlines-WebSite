@@ -9,6 +9,8 @@ import BirthdayMonth from "../tripDetailsFom/birthday/month"
 import BirthdayYear from "../tripDetailsFom/birthday/year"
 import Nationality from "../tripDetailsFom/nationalitie"
 //
+import { usePassenger } from "@/app/contexts/passengerContext"
+//
 type FormData = {
   title: string
   gender: "male" | "female" | ""
@@ -39,6 +41,8 @@ export default function PassengerForm(){
     const [openTitleForm, setOpenTitleForm] = useState<boolean>(false)
     const [errors , setErrors] = useState<Record<string , boolean>>({})
     const [submitted , setSubmitted] = useState<boolean>(false)
+
+    const {setPassenger} = usePassenger()
     
     const handleOpenTitle = (() => setOpenTitleForm(e => !e))
     
@@ -105,7 +109,18 @@ export default function PassengerForm(){
                     setSubmitted(true)
 
                     if (validateForm()) {
-                    // تابع للخطوة الموالية
+                        setPassenger({
+                            title : formData.title,
+                            gender : formData.gender,
+                            firstName : formData.firstName,
+                            lastName : formData.lastName,
+                            birthday : {
+                                day : formData.birthday.day,
+                                month : formData.birthday.month,
+                                year : formData.birthday.year,
+                            },
+                            nationality : formData.nationality
+                        })
                     }
                 }}
             >

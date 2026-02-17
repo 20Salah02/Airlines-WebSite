@@ -4,11 +4,21 @@
 import { useState , useEffect } from "react"
 
 import PassengerForm from "./passengerDetailsForm"
+//
+import { usePassenger } from "@/app/contexts/passengerContext"
 
 
 export default function PassengerDetails(){
     
     const [passengerForm , setPassengerForm] = useState<boolean>(false)
+    const {passenger} = usePassenger()
+
+    const title = passenger.title
+    const firstName = passenger.firstName
+    const lastName  = passenger.lastName
+
+    const firstNameLetter = passenger.firstName.charAt(0) 
+    const lastNameLetter = passenger.lastName.charAt(0)
 
     const openForm = () =>{
         setPassengerForm(prev => !prev)
@@ -34,9 +44,9 @@ export default function PassengerDetails(){
 
             <div onClick={openForm} className="flex justify-between items-center bg-white rounded-2xl p-4 cursor-pointer">
                 <div className="flex items-center space-x-2.5">
-                    <h3 className="bg-purple-700 rounded-full text-white p-2">SM</h3>
+                    <h3 className={`${firstName && lastName ? "bg-purple-700" : ""} rounded-full text-white p-2 uppercase`}>{firstNameLetter}{lastNameLetter}</h3>
                     <div>
-                        <h2>Salaheddine Mourid</h2>
+                        <h2 className="capitalize">{title} {firstName} {lastName}</h2>
                         <h3 className="text-[15px]">Add Passenger Details</h3>
                     </div>
                 </div>

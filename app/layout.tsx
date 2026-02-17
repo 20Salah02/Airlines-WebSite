@@ -4,6 +4,7 @@ import "./globals.css";
 //
 import BookingProvider from "./contexts/bookingContext";
 import { FlightResultProvider } from "./contexts/priceContext";
+import PassengerProvider from "./contexts/passengerContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,9 @@ export default function RootLayout({
       >
         <BookingProvider>
           <FlightResultProvider>
-            {children}
+            <PassengerProvider>
+              {children}
+            </PassengerProvider>
           </FlightResultProvider>
         </BookingProvider>
       </body>
