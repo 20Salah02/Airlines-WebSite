@@ -46,7 +46,7 @@ export default function FlightDetails(){
                 <div className="space-y-14">
                     <p>10:00</p>
                     <p>{flightDurationHour}h {flightDurationMin}min</p>
-                    <p>12:10</p>
+                    <p>20:00</p>
                 </div>
                 <p className="flex items-center">L</p>
                 <div className="space-y-7">
