@@ -4,9 +4,12 @@
 import { useState , useEffect } from "react"
 
 import PassengerForm from "./passengerDetailsForm"
+import PassengerMoreDetails from "./passengerMoreDetailsForm"
 //
 import { usePassenger } from "@/app/contexts/passengerContext"
-
+//
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheck , faPen } from "@fortawesome/free-solid-svg-icons"
 
 export default function PassengerDetails(){
     
@@ -20,6 +23,22 @@ export default function PassengerDetails(){
     const firstNameLetter = passenger.firstName.charAt(0) 
     const lastNameLetter = passenger.lastName.charAt(0)
 
+    //
+    const requiredFields = [
+    passenger.gender,
+    passenger.firstName,
+    passenger.lastName,
+    passenger.birthday.day,
+    passenger.birthday.month,
+    passenger.birthday.year,
+    passenger.nationality,
+]
+
+    const emptyFieldsCount = requiredFields.filter(field => !field).length
+
+    const isCompleted = emptyFieldsCount === 0
+
+    //
     const openForm = () =>{
         setPassengerForm(prev => !prev)
     }
@@ -47,13 +66,28 @@ export default function PassengerDetails(){
                     <h3 className={`${firstName && lastName ? "bg-purple-700" : ""} rounded-full text-white p-2 uppercase`}>{firstNameLetter}{lastNameLetter}</h3>
                     <div>
                         <h2 className="capitalize">{title} {firstName} {lastName}</h2>
-                        <h3 className="text-[15px]">Add Passenger Details</h3>
+                        {isCompleted ? (
+                            <h3 className="text-[15px] text-gray-600">Passenger details completed</h3>
+                        ) : emptyFieldsCount > 0 ? (
+                            <h3 className="text-red-600 text-sm">
+                                Still {emptyFieldsCount} field{emptyFieldsCount > 1 ? "s" : ""} required
+                            </h3>
+                        ) : (
+                            <h3 className="text-[15px]">Add Passenger Details</h3>
+                        )}
                     </div>
                 </div>
 
-                <div className="bg-green-700 rounded-full text-white p-2">
-                    <h3>D</h3>
+                <div className={`rounded-full text-white p-2 ${
+                    isCompleted ? "bg-green-700" : "bg-gray-400"
+                }`}>
+                    {isCompleted ? (
+                        <FontAwesomeIcon icon={faCheck}/>
+                    ) : (
+                        <FontAwesomeIcon icon={faPen}/>
+                    )}
                 </div>
+
             </div>
 
             <div className="space-y-2">
@@ -82,6 +116,10 @@ export default function PassengerDetails(){
                     </div>
                 </div>
             )}
+
+            <div>
+                <PassengerMoreDetails/>
+            </div>
         </div>
     )
 }

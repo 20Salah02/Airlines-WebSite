@@ -48,7 +48,7 @@ export default function TripDetails(){
 
 
     return(
-        <div className="flex flex-col bg-white w-2/5 p-6 rounded-3xl space-y-2.5">
+        <div className="flex flex-col h-fit bg-white w-2/5 p-6 rounded-3xl space-y-2.5">
             <div className="space-y-2">
                 <h1 className="font-medium text-[19px] text-red-900">Trip details</h1>
                 <p>{tripType}</p>
