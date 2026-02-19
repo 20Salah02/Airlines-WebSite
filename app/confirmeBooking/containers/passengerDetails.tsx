@@ -14,6 +14,14 @@ import { faCheck , faPen } from "@fortawesome/free-solid-svg-icons"
 export default function PassengerDetails(){
     
     const [passengerForm , setPassengerForm] = useState<boolean>(false)
+    const [showMoreDetails , setShowMoreDetails] = useState<boolean>(false)
+
+    const handleShowMoreDetails = (() => {
+        if(isCompleted){
+            setShowMoreDetails(true)
+        }
+    })
+
     const {passenger} = usePassenger()
 
     const title = passenger.title
@@ -58,7 +66,7 @@ export default function PassengerDetails(){
 
 
     return(
-        <div className="relative w-1/2 space-y-9 bg-zinc-100">
+        <div className="relative w-1/2 space-y-9 bg-zinc-100 h-screen">
             <h2 className="text-4xl text-gray-600 font-light ">{`Who's travelling?`}</h2>
 
             <div onClick={openForm} className="flex justify-between items-center bg-white rounded-2xl p-4 cursor-pointer">
@@ -89,13 +97,21 @@ export default function PassengerDetails(){
                 </div>
 
             </div>
+            
+            {!showMoreDetails ? (
+            <div className="space-y-9">
+                <div className="space-y-2">
+                        <h3 className="text-xl">Check your passenger details</h3>
+                        <h4>If you need to change any passenger details, you will have to enter your passenger details again.</h4>
+                </div>
 
-            <div className="space-y-2">
-                <h3 className="text-xl">Check your passenger details</h3>
-                <h4>If you need to change any passenger details, you will have to enter your passenger details again.</h4>
+                <button 
+                    onClick={handleShowMoreDetails}
+                    className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">
+                            Continue to contact details
+                </button>
             </div>
-
-            <button className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Continue to contact details</button>
+            ) : <PassengerMoreDetails/>}
 
             
             {passengerForm && (
@@ -117,9 +133,6 @@ export default function PassengerDetails(){
                 </div>
             )}
 
-            <div>
-                <PassengerMoreDetails/>
-            </div>
         </div>
     )
 }
