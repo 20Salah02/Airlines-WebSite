@@ -45,11 +45,15 @@ export default function PassengerForm({closePassengerForm} : setCloseForm){
     const [errors , setErrors] = useState<Record<string , boolean>>({})
     const [submitted , setSubmitted] = useState<boolean>(false)
 
-    const {setPassenger} = usePassenger()
+    //
+    const {passenger , setPassenger} = usePassenger()
 
-    
+    useEffect(() => {
+        setFormData(passenger)
+    },[passenger])
+
+    //
     const handleOpenTitle = (() => setOpenTitleForm(e => !e))
-    const handleCloseForm = (() => closePassengerForm(false))
     
 
     //
@@ -126,6 +130,7 @@ export default function PassengerForm({closePassengerForm} : setCloseForm){
                             },
                             nationality : formData.nationality
                         })
+                        closePassengerForm(false)
                     }
                 }}
             >
@@ -248,7 +253,7 @@ export default function PassengerForm({closePassengerForm} : setCloseForm){
                     </div>
 
                     <div>
-                        <button onClick={handleCloseForm} className="mb-5 bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Save and Continue</button>
+                        <button type="submit" className="mb-5 bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Save and Continue</button>
                     </div>
                 </div>
             </form>
