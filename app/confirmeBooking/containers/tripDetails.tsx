@@ -12,7 +12,7 @@ import FlightDetails from "@/app/flies/Booking/Containers/flightDetails";
 
 export default function TripDetails(){
 
-    const [openResult, setOpenResult] = useState<boolean>(false)
+    const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)
 
     function formatDate(date?: Date | null) {
     if (!date) return "";
@@ -55,8 +55,8 @@ export default function TripDetails(){
             </div>
 
             
-            <div onClick={() => setOpenResult(prev => !prev)}>
-                <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
+            <div >
+                <div onClick={() => setOpenResult("outbound")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                     <div className="space-y-1">
                         <h2 className="text-[18px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
                         <h3 className="text-[15px] text-gray-700">{formatDate(firstDay)}</h3>
@@ -64,7 +64,7 @@ export default function TripDetails(){
                     <p>{">"}</p>
                 </div>
                 {tripType === "round-trip" && (
-                    <div className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
+                    <div onClick={() => setOpenResult("return")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                         <div className="space-y-1">
                             <h2 className="text-[18px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
                             <h3 className="text-[15px] text-gray-700">{formatDate(lastDay)}</h3>
@@ -84,7 +84,7 @@ export default function TripDetails(){
             {openResult && (
             <div
                 className="fixed inset-0 z-40 bg-black/40"
-                onClick={() => setOpenResult(false)} 
+                onClick={() => setOpenResult(null)} 
             >
                 <div
                 className={`
@@ -94,7 +94,7 @@ export default function TripDetails(){
                 `}
                 onClick={(e) => e.stopPropagation()} 
                 >
-                <FlightDetails />
+                <FlightDetails type={openResult}/>
                 </div>
             </div>
             )}
