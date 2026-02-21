@@ -4,11 +4,11 @@ import { useState, useRef, useEffect } from "react"
 import { nationalities } from "@/app/data/nationalities"
 
 type FormNatProps = {
-  value: string
+  label: string
   onSelectNationality: (n: string) => void
 }
 
-export default function Nationality({ value, onSelectNationality }: FormNatProps) {
+export default function Nationality({ label, onSelectNationality }: FormNatProps) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -31,20 +31,20 @@ export default function Nationality({ value, onSelectNationality }: FormNatProps
         onClick={() => setOpen(o => !o)}
         className="w-full flex justify-between items-center cursor-pointer bg-white"
       >
-        <span>{nationalities.find(n => n.value === value)?.label || "Select Nationality"}</span>
+        <span>{nationalities.find(n => n.label === label)?.label || "Select Nationality"}</span>
         <span>⌄</span>
       </button>
 
       {open && (
         <ul className="absolute z-20 w-full bg-white border border-zinc-300 mt-2 max-h-48 overflow-y-auto">
           {nationalities.map(n => {
-            const isSelected = value === n.value
+            const isSelected = label === n.label
 
             return (
               <li
-                key={n.value}
+                key={n.label}
                 onClick={() => {
-                  onSelectNationality(n.value)
+                  onSelectNationality(n.label)
                   setOpen(false)
                 }}
                 className={`p-3 cursor-pointer ${

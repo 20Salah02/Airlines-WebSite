@@ -240,7 +240,7 @@ export default function PassengerForm({closePassengerForm} : setCloseForm){
                             <div className={`flex justify-between items-center border border-gray-300 rounded-xl py-4 px-5 space-x-2.5 ${errors.nationality ? "border-red-600" : "border-gray-300"}`}>
 
                                 <Nationality
-                                    value={formData.nationality}
+                                    label={formData.nationality}
                                     onSelectNationality={(e) =>
                                     setFormData(prev => ({ ...prev, nationality: e }))
                                     }

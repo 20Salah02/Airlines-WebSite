@@ -31,10 +31,10 @@ const getFlagEmoji = (countryCode: string) =>
     .replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)))
 
 export default function PassengerMoreDetails() {
-  const { passenger } = usePassenger()
+  const { passenger , setPassenger } = usePassenger()
 
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState(passenger.email || "")
+  const [phone, setPhone] = useState(passenger.phone || "")
   const [countries, setCountries] = useState<Country[]>([])
   const [errors, setErrors] = useState<{ email?: boolean; phone?: boolean }>({})
 
@@ -78,11 +78,13 @@ export default function PassengerMoreDetails() {
   const { flightResult } = useFlightResultContext()
 
   const handleContinue = () => {
+    if (!validate()) return
 
-    const finalData = {
+    setPassenger(prev => ({
+      ...prev,
       email,
       phone: countryCode + phone,
-    }
+    }))
 
     router.push("confirmeBooking/tripReview")
   }

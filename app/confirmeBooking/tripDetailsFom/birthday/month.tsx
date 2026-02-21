@@ -64,7 +64,7 @@ export default function BirthdayMonth({
               <li
                 key={m.value}
                 onClick={() => {
-                  onSelectMonth(m.value)
+                  onSelectMonth(m.label)
                   setOpen(false)
                 }}
                 className={`

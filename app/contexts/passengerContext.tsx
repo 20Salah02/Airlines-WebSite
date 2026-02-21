@@ -13,6 +13,8 @@ export type PassengerData = {
     year: string
   }
   nationality: string
+  email?: string
+  phone?: string
 }
 
 type PassengerContextType = {
@@ -27,6 +29,8 @@ const defaultPassenger: PassengerData = {
   lastName: "",
   birthday: { day: "", month: "", year: "" },
   nationality: "",
+  email: "",
+  phone: "",
 }
 
 const PassengerContext = createContext<PassengerContextType | undefined>(
@@ -37,7 +41,12 @@ export function PassengerProvider({ children }: { children: ReactNode }) {
   const [passenger, setPassenger] = useState<PassengerData>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("passenger")
-      return saved ? JSON.parse(saved) : defaultPassenger
+      if (saved) {
+        return {
+          ...defaultPassenger,
+          ...JSON.parse(saved),
+        }
+      }
     }
     return defaultPassenger
   })

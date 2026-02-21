@@ -20,7 +20,7 @@ export default function TripReviewDetails(){
 
 
     return(
-        <div className="bg-white p-4 rounded-3xl w-1/2 space-y-5 h-fit">
+        <div className="bg-white p-4 rounded-3xl w-full space-y-5 h-fit sticky top-10">
             <h2 className="font-medium text-[19px] text-red-900">Trip details</h2>
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
