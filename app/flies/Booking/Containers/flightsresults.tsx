@@ -20,8 +20,7 @@ import { useFlightResultContext } from "@/app/contexts/priceContext"
 export default function FlightResults(){
 
     const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
-    const [openResult , setOpenResult] = useState<boolean>(false)
-    
+    const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)    
     const { booking, setBooking} = useBooking();
     
     const search = useSearchParams()
@@ -119,7 +118,7 @@ export default function FlightResults(){
                                 <p>{to?.iata}</p>
                             </div>
                         </div>
-                        <div onClick={() => setOpenResult(prev => !prev)} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
+                        <div onClick={() => setOpenResult(isOutbound ? "outbound" : "return")} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
                     </div>
 
                     <div className="flex justify-between  ">
@@ -164,7 +163,7 @@ export default function FlightResults(){
             {openResult && (
             <div
                 className="fixed inset-0 z-40 bg-black/40"
-                onClick={() => setOpenResult(false)} 
+                onClick={() => setOpenResult(null)} 
             >
                 <div
                 className={`
@@ -174,7 +173,7 @@ export default function FlightResults(){
                 `}
                 onClick={(e) => e.stopPropagation()} 
                 >
-                <FlightDetails />
+                <FlightDetails type={openResult}/>
                 </div>
             </div>
             )}
