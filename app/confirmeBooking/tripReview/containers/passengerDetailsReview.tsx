@@ -18,6 +18,9 @@ export default function PassengerDetailsReview(){
     const firstNameLetter = passenger.firstName.charAt(0) 
     const lastNameLetter = passenger.lastName.charAt(0)
 
+    const email = passenger.email
+    const phone = passenger.phone
+
     return(
         <div className="mt-13 space-y-10">
             <h1 className="text-4xl font-light text-gray-600">Passengers</h1>
@@ -34,11 +37,11 @@ export default function PassengerDetailsReview(){
                     </div>
                 </div>
 
-                <div>
+                <div className="space-y-4">
                     <h2 className="text-[18px] font-medium mt-7">Contact details</h2>
-                    <div>
-                        <h3></h3>
-                        <h3></h3>
+                    <div className="text-gray-600">
+                        <h3>Email : {email}</h3>
+                        <h3>Phone : {phone}</h3>
                     </div>
                 </div>
             </div>
