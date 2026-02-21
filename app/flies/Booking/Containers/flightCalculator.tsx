@@ -25,7 +25,7 @@ function toRadians(deg: number): number {
 }
 
 function calculateDistance(a1: Airport, a2: Airport): number {
-  const R = 6371; // Earth radius in km
+  const R = 6371; 
 
   const φ1 = toRadians(a1.lat);
   const φ2 = toRadians(a2.lat);

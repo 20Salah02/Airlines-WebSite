@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 //
 import { usePassenger } from "@/app/contexts/passengerContext"
-
+//
+import { useRouter } from "next/navigation";
+import { useFlightResultContext } from "@/app/contexts/priceContext";
 
 //
 type CountryAPI = {
@@ -70,13 +72,19 @@ export default function PassengerMoreDetails() {
     return Object.keys(newErrors).length === 0
   }
 
+  //
+
+  const router = useRouter()
+  const { flightResult } = useFlightResultContext()
+
   const handleContinue = () => {
-    if (validate()) {
-      const finalData = {
-        email,
-        phone: countryCode + phone,
-      }
+
+    const finalData = {
+      email,
+      phone: countryCode + phone,
     }
+
+    router.push("confirmeBooking/tripReview")
   }
 
   return (

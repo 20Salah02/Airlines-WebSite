@@ -1,6 +1,7 @@
 
 import FlightsNav from "@/app/flies/Booking/Containers/nav"
-import TripReviewDetails from "./tripDetails"
+import TripReviewDetails from "./containers/tripDetails"
+import ReviewTheTrips from "./containers/reviewTrips"
 export default function TripReview(){
 
     return(
@@ -8,8 +9,14 @@ export default function TripReview(){
             <div>
                 <FlightsNav/>
             </div>
-            <div>
-                <TripReviewDetails/>
+            <div className="flex space-x-7">
+                <div>
+                    <ReviewTheTrips/>
+                </div>
+
+                <div>
+                    <TripReviewDetails/>
+                </div>
             </div>
         </div>
     )

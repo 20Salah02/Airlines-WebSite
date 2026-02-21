@@ -2,6 +2,8 @@
 
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation";
+import { useFlightResultContext } from "@/app/contexts/priceContext";
 
 export default function TripReviewDetails(){
 
