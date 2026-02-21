@@ -126,7 +126,21 @@ export default function ReviewTheTrips(){
             )}  
 
             {flightDetails && (
-            <FlightDetails type={flightDetails} />
+                <div
+                    className="fixed inset-0 z-40 bg-black/40"
+                    onClick={() => setFlightDetails(null)}
+                >
+                    <div
+                        className={`
+                            absolute top-0 right-0 h-screen w-1/2 bg-white
+                            transition-transform duration-300
+                            translate-x-0
+                        `}
+                        onClick={(e) => e.stopPropagation()} 
+                    >
+                        <FlightDetails type={flightDetails}/>
+                    </div>
+                </div>
             )}
         </div>
     )

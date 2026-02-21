@@ -15,9 +15,6 @@ export default function FlightDetails({type}:Props){
 
     const from = isOutbound ? booking.from : booking.to
     const to = isOutbound ? booking.to : booking.from
-    const price = isOutbound
-        ? booking.outboundFlight?.price ?? 0
-        : booking.returnFlight?.price ?? 0
     const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return
     
 
