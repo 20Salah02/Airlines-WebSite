@@ -2,8 +2,7 @@
 
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useSearchParams } from "next/navigation"
-import { useRouter } from "next/navigation";
-import { useFlightResultContext } from "@/app/contexts/priceContext";
+
 
 export default function TripReviewDetails(){
 
@@ -21,7 +20,7 @@ export default function TripReviewDetails(){
 
 
     return(
-        <div className="bg-white p-4 rounded-3xl w-1/3 space-y-5">
+        <div className="bg-white p-4 rounded-3xl w-1/2 space-y-5 h-fit">
             <h2 className="font-medium text-[19px] text-red-900">Trip details</h2>
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">

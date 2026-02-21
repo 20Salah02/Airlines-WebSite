@@ -43,7 +43,6 @@ export default function FlightResults(){
         setopenClass(prev => (prev === "business" ? null : "business"))
     }
 
-    // stop scroll
     useEffect(() => {
         if (openResult) {
             document.body.style.overflow = "hidden";

@@ -5,18 +5,14 @@ import ReviewTheTrips from "./containers/reviewTrips"
 export default function TripReview(){
 
     return(
-        <div className="flex flex-col bg-zinc-100 space-y-20  h-screen ">
+        <div className="flex flex-col bg-zinc-100 space-y-20 w-full  ">
             <div>
                 <FlightsNav/>
             </div>
-            <div className="flex space-x-7">
-                <div>
+            <div className="flex space-x-7 justify-center px-14">
                     <ReviewTheTrips/>
-                </div>
 
-                <div>
                     <TripReviewDetails/>
-                </div>
             </div>
         </div>
     )

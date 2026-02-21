@@ -5,6 +5,7 @@ import "./globals.css";
 import BookingProvider from "./contexts/bookingContext";
 import { FlightResultProvider } from "./contexts/priceContext";
 import { PassengerProvider } from "./contexts/passengerContext";
+
 import FlightCalculator from "./flies/Booking/Containers/flightCalculator";
 
 const geistSans = Geist({

@@ -4,18 +4,20 @@
 import { useBooking } from "@/app/contexts/bookingContext";
 import { useFlightResultContext } from "@/app/contexts/priceContext";
 //
-import { useSearchParams } from "next/navigation"
+type Props = {
+  type: "outbound" | "return"
+}
 
-export default function FlightDetails(){
+export default function FlightDetails({type}:Props){
 
     const {booking} = useBooking()
-    const search = useSearchParams()
-
-    const step = search.get("step")
-    const isOutbound = step !== "return"
+    const isOutbound = type === "outbound"
 
     const from = isOutbound ? booking.from : booking.to
-    const to = isOutbound ? booking.to : booking.to
+    const to = isOutbound ? booking.to : booking.from
+    const price = isOutbound
+        ? booking.outboundFlight?.price ?? 0
+        : booking.returnFlight?.price ?? 0
     const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return
     
 
