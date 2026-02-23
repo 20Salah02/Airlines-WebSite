@@ -4,6 +4,7 @@ import Image from "next/image"
 // icons 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+//
 
 export default function Nav(){
 
