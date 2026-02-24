@@ -90,8 +90,8 @@ export default function Form(){
 
     return(
 
-        <div className="absolute top-110 flex justify-center w-full bg-slat-100 ">
-            <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className=" container border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-[white]">
+        <div className="absolute lg:top-90 flex justify-center w-full bg-slat-100">
+            <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className="mx-10 border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-[white]">
 
                 <div className="w-1/4 py-4 flex justify-between text-[17px] ">
                     <label>

@@ -10,7 +10,7 @@ export default function Nav(){
 
     return(
         <div>
-            <ul className="flex justify-around items-center pt-4 font-medium text-lg">
+            <ul className="flex justify-around items-center pt-2 font-medium text-lg">
                 <Link href="/"><li >
                     <Image 
                         src="/Logo.png"
