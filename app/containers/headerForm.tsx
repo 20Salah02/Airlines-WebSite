@@ -13,7 +13,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import HandlePassengers from "../hooks/mainFormPassengers"
 import HandleDate from "../hooks/mainFormDate"
 import HandleDestination from "../hooks/mainFormDestination"
-//
+////
 import { DateRange } from "react-day-picker"
 
 export default function Form(){
@@ -87,11 +87,10 @@ export default function Form(){
         }
     };
 
-
     return(
 
-        <div className="absolute lg:top-90 flex justify-center w-full bg-slat-100">
-            <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className="mx-10 border w-full mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-[white]">
+        <div className="w-full flex justify-center px-4 lg:absolute lg:top-90">
+            <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className="mx-10 border w-full max-w-6xl mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start gap- bg-[white]">
 
                 <div className="w-full py-4 space-x-7 text-[17px] ">
                     <label>
