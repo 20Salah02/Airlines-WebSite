@@ -92,7 +92,7 @@ export default function Form(){
 
     return(
 
-        <div className="w-full flex justify-center px-4 lg:absolute lg:top-90">
+        <div className="w-full flex justify-center px-4 lg:absolute lg:top-95">
             <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className="mx-10 border w-full max-w-6xl mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start gap- bg-[white]">
 
                 <div className="w-full py-4 space-x-7 text-[17px] ">
