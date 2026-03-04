@@ -9,13 +9,13 @@ export default function VoyageSuggetions(){
                 <h2 className="text-4xl font-light text-gray-600">Find great fears</h2>
             </div>
             <div className="flex justify-between mt-7 items-start">
-                <div className="flex">
+                <div className="flex space-x-2">
                     <label htmlFor="">From</label>
-                    <input type="text" />
+                    <input className="border-b " type="text" />
                     <h4>i</h4>
                 </div>
-                <div className="flex">
-                    <button>Return</button>
+                <div className="flex space-x-4">
+                    <button className="bg-red-500 px-5">Return</button>
                     <button>One way</button>
                     <div>
                         <h4>class</h4>
