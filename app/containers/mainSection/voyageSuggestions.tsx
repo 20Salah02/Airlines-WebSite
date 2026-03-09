@@ -36,7 +36,7 @@ export default function VoyageSuggetions(){
                         alt="FIFA World Cup 2026"
                         fill
                         priority
-                        className="object-cover"
+                        className="object-cover w-10 h-10"
                     />
                     <div>
                         <div>
