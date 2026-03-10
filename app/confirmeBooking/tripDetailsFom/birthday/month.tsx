@@ -50,7 +50,7 @@ export default function BirthdayMonth({
         className="w-full flex justify-between items-center cursor-pointer"
       >
         <span>
-          {MONTHS.find(m => m.value === month)?.label || "Month"}
+          {MONTHS.find(m => m.label === month)?.label || "Month"}
         </span>
         <span>⌄</span>
       </button>
@@ -69,7 +69,7 @@ export default function BirthdayMonth({
                 }}
                 className={`
                   p-3 cursor-pointer
-                  ${isSelected
+                  ${isSelected 
                     ? "bg-zinc-100 font-medium"
                     : "hover:bg-gray-100"
                   }
