@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState , useEffect } from "react"
 //
 import Image from "next/image"
 //
@@ -21,6 +21,9 @@ export default function VoyageSuggetions(){
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
     const [destinationTo , setDestinationTo] = useState<Airport | null>(null)
 
+    const [data , setData] = useState<Airport[]>([])
+    const suggestionsIata = ["DPS","DXB","HND","CDG","JFK","IST"]
+
     const [openBooking , setOpenBooking] = useState<boolean>(false)
 
     const handleOpenBooking = ()=>{
@@ -29,6 +32,18 @@ export default function VoyageSuggetions(){
     const handleCloseBooking = ()=>{
         setOpenBooking(false)
     }
+
+    //
+    useEffect(() => {
+        fetch("/Data/airports.json")
+        .then(res => res.json())
+        .then(json => setData(json));
+    }, []);
+
+    const suggestionAirpots = data.filter((airport)=>{
+        return suggestionsIata.includes(airport.iata)
+    })
+     
 
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
@@ -60,39 +75,41 @@ export default function VoyageSuggetions(){
                 </div>
             </div>
 
-            <div className="relative py-5 mt-4 w-2/4  h-70 flex items-end justify-between b">
-                <div 
-                    onMouseEnter={handleOpenBooking}
-                    onMouseLeave={handleCloseBooking}
-                    className="w-full"
-                >
-                    <Image
-                        src="/bali.jpg"
-                        alt="bali"
-                        fill
-                        priority
-                        className="object-cover rounded-2xl"
-                    />
-                    <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
-                    <div className="relative space-y-4 px-6 w-full  text-white z-80">
-                        <div   className="flex items-end justify-between">
-                            <div className="space-y-3">
-                                <h2 className="text-2xl">Bali</h2>
-                                <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
+            {suggestionAirpots.map((airport) =>(
+                <div key={airport.id} className="relative py-5 mt-4 w-2/4  h-70 flex items-end justify-between b">
+                    <div 
+                        onMouseEnter={handleOpenBooking}
+                        onMouseLeave={handleCloseBooking}
+                        className="w-full gap-6"
+                    >
+                        <Image
+                            src={`/${airport.city}.jpg`}
+                            alt={airport.city}
+                            fill
+                            priority
+                            className="object-cover rounded-2xl"
+                        />
+                        <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+                        <div className="relative space-y-4 px-6 w-full  text-white z-80">
+                            <div   className="flex items-end justify-between">
+                                <div className="space-y-3">
+                                    <h2 className="text-2xl">{airport.city}</h2>
+                                    <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
+                                </div>
+                                <h4 className="text-sm">Economy from <span className="font-medium">USD 1433</span> </h4>  
                             </div>
-                            <h4 className="text-sm">Economy from <span className="font-medium">USD 1433</span> </h4>  
-                        </div>
-                        <div
-                            className={`overflow-hidden transition-all duration-500 w-full flex justify-center
-                            ${openBooking ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
-                        >
-                            <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
-                                Book now
-                            </button>
+                            <div
+                                className={`overflow-hidden transition-all duration-500 w-full flex justify-center
+                                ${openBooking ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
+                            >
+                                <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
+                                    Book now
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            ))}
         </div>
     )
 }

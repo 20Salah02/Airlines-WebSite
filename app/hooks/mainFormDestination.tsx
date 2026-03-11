@@ -50,7 +50,7 @@ export default function HandleDestination({value , onSelect , placeholder , clas
       if (!data) return <p>Loading...</p>;
         console.log("data is" + data)
     return (
-    <div style={{ position: "relative" }}>
+    <div className="relative">
         <input
             type="text"
             placeholder={placeholder}

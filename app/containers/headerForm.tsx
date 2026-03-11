@@ -114,11 +114,12 @@ export default function Form(){
                     </label>
                 </div>
                 <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-center">
-                    <div className="flex items-center">
+                    <div className="flex items-center h-full">
                     <HandleDestination
                         placeholder="From"
                         value={destinationFrom?.name || ""}
                         onSelect={(airport) => setDestinationFrom(airport)}
+                        className="w-70"
                     />
 
                     <span className="mx-2">|</span>
@@ -127,6 +128,8 @@ export default function Form(){
                         placeholder="To"
                         value={destinationTo?.name || ""}
                         onSelect={(airport) => setDestinationTo(airport)}
+                        className="w-70 h-full"
+
                     />
                     </div>
 
