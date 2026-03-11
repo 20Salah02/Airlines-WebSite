@@ -1,9 +1,20 @@
 "use client"
 
+import { useState } from "react"
+
 //
 import Image from "next/image"
 
 export default function VoyageSuggetions(){
+
+    const [openBooking , setOpenBooking] = useState<boolean>(false)
+
+    const handleOpenBooking = ()=>{
+        setOpenBooking(true)
+    }
+    const handleCloseBooking = ()=>{
+        setOpenBooking(false)
+    }
 
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
@@ -29,21 +40,36 @@ export default function VoyageSuggetions(){
                 </div>
             </div>
 
-            <div className="relative mx-17">
-                <div className="w-2/4 ">
+            <div className="relative py-5 mt-4 w-2/4  h-70 flex items-end justify-between b">
+                <div 
+                    onMouseEnter={handleOpenBooking}
+                    onMouseLeave={handleCloseBooking}
+                    className="w-full"
+                >
                     <Image
-                        src="/hn-fifa-world-cup-2026.jpg"
-                        alt="FIFA World Cup 2026"
+                        src="/bali.jpg"
+                        alt="bali"
                         fill
                         priority
-                        className="object-cover w-10 h-10"
+                        className="object-cover rounded-2xl"
                     />
-                    <div>
-                        <div>
-                            <h2>Bali</h2>
-                            <h3>11 Mar 2026 - 13 Mar 2026</h3>
+                    <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+                    <div className="relative space-y-4 px-6 w-full  text-white z-80">
+                        <div   className="flex items-end justify-between">
+                            <div className="space-y-3">
+                                <h2 className="text-2xl">Bali</h2>
+                                <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
+                            </div>
+                            <h4 className="text-sm">Economy from <span className="font-medium">USD 1433</span> </h4>  
                         </div>
-                        <h4>Economy from USD 1425</h4>
+                        <div
+                            className={`overflow-hidden transition-all duration-500 w-full flex justify-center
+                            ${openBooking ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
+                        >
+                            <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
+                                Book now
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
