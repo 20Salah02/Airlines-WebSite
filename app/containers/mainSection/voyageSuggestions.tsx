@@ -1,10 +1,15 @@
 "use client"
 
-import { useState , useEffect } from "react"
+import { useBooking } from "@/app/contexts/bookingContext"
+import { useFlightResultContext } from "@/app/contexts/priceContext"
+//
+import { useState , useEffect, useMemo } from "react"
 //
 import Image from "next/image"
 //
 import HandleDestination from "@/app/hooks/mainFormDestination"
+import FlightResults from "@/app/flies/Booking/Containers/flightsresults"
+import { calculateFlight } from "@/app/flies/Booking/Containers/flightCalculator"
 
 
 type Airport ={
@@ -22,7 +27,7 @@ export default function VoyageSuggetions(){
     const [destinationTo , setDestinationTo] = useState<Airport | null>(null)
 
     const [data , setData] = useState<Airport[]>([])
-    const suggestionsIata = ["DPS","DXB","HND","CDG","JFK","IST"]
+    const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST"]
 
     const [openBooking , setOpenBooking] = useState<boolean>(false)
 
@@ -40,11 +45,30 @@ export default function VoyageSuggetions(){
         .then(json => setData(json));
     }, []);
 
-    const suggestionAirpots = data.filter((airport)=>{
-        return suggestionsIata.includes(airport.iata)
-    })
-     
+    const suggestionAirpots = useMemo(() => {
+        return data.filter(airport=>
+            suggestionsIata.includes(airport.iata)
+        )
+    },[data]) 
 
+     
+    //
+    const { booking, setBooking } = useBooking();
+    const { flightResult } = useFlightResultContext();
+
+    const airportPrices = useMemo(() => {
+    if (!destinationFrom) return {};
+
+    const prices: Record<number, number> = {};
+    suggestionAirpots.forEach((airport) => {
+        const result = calculateFlight(
+        { lat: destinationFrom.latitude, lon: destinationFrom.longitude },
+        { lat: airport.latitude, lon: airport.longitude }
+        );
+        prices[airport.id] = Math.round(result.price);
+    });
+    return prices;
+    }, [destinationFrom, suggestionAirpots]);
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
             <div>
@@ -56,7 +80,10 @@ export default function VoyageSuggetions(){
                     <HandleDestination
                         placeholder=""
                         value={destinationFrom?.name || ""}
-                        onSelect={(airport) => setDestinationFrom(airport)}
+                        onSelect={(airport) => {
+                            setDestinationFrom(airport);
+                            setBooking(prev => ({ ...prev, from: airport })); 
+                        }}                        
                         className="px-1 border-b w-fit border-b-zinc-600"
                         id="from"
                     />
@@ -75,41 +102,53 @@ export default function VoyageSuggetions(){
                 </div>
             </div>
 
-            {suggestionAirpots.map((airport) =>(
-                <div key={airport.id} className="relative py-5 mt-4 w-2/4  h-70 flex items-end justify-between b">
-                    <div 
-                        onMouseEnter={handleOpenBooking}
-                        onMouseLeave={handleCloseBooking}
-                        className="w-full gap-6"
+            <div className="grid grid-cols-4 grid-rows-2 gap-6 mt-6 h-[600px]">
+                {suggestionAirpots.map((airport , index) =>{
+                    let span = ""
+
+                    if (index === 0) span = "col-span-2 row-span-1"
+                    if (index === 1 || index === 2) span = "col-span-1"
+                    if (index === 3 || index === 4) span = "col-span-1"
+                    if (index === 5) span = "col-span-2"
+                    
+                    return (<div 
+                        key={airport.id} 
+                        className={`relative py-5 mt-4  h-70 flex items-end justify-between ${span} `}
                     >
-                        <Image
-                            src={`/${airport.city}.jpg`}
-                            alt={airport.city}
-                            fill
-                            priority
-                            className="object-cover rounded-2xl"
-                        />
-                        <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
-                        <div className="relative space-y-4 px-6 w-full  text-white z-80">
-                            <div   className="flex items-end justify-between">
-                                <div className="space-y-3">
-                                    <h2 className="text-2xl">{airport.city}</h2>
-                                    <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
+                        <div 
+                            onMouseEnter={handleOpenBooking}
+                            onMouseLeave={handleCloseBooking}
+                            className="w-full gap-6 "
+                        >
+                            <Image
+                                src={`/${airport.city}.jpg`}
+                                alt={airport.city}
+                                fill
+                                priority={index === 0}
+                                className="object-cover rounded-2xl" 
+                            />
+                            <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+                            <div className="relative space-y-4 px-6 w-full  text-white z-80">
+                                <div   className="flex items-end justify-between">
+                                    <div className="space-y-3">
+                                        <h2 className="text-2xl">{airport.city}</h2>
+                                        <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
+                                    </div>
+                                    <h4 className="text-sm">Economy from <span className="font-medium">    {airportPrices[airport.id] ? `USD ${airportPrices[airport.id]}` : "—"}</span> </h4>  
                                 </div>
-                                <h4 className="text-sm">Economy from <span className="font-medium">USD 1433</span> </h4>  
-                            </div>
-                            <div
-                                className={`overflow-hidden transition-all duration-500 w-full flex justify-center
-                                ${openBooking ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
-                            >
-                                <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
-                                    Book now
-                                </button>
+                                <div
+                                    className={`overflow-hidden transition-all duration-500 w-full flex justify-center
+                                    ${openBooking ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
+                                >
+                                    <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
+                                        Book now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                )})}
+            </div>
         </div>
     )
 }

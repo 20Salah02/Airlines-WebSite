@@ -20,11 +20,11 @@ type FlightResult = {
 };
 
 
-function toRadians(deg: number): number {
+export function toRadians(deg: number): number {
   return deg * (Math.PI / 180);
 }
 
-function calculateDistance(a1: Airport, a2: Airport): number {
+export function calculateDistance(a1: Airport, a2: Airport): number {
   const R = 6371; 
 
   const φ1 = toRadians(a1.lat);
@@ -42,7 +42,7 @@ function calculateDistance(a1: Airport, a2: Airport): number {
   return R * c;
 }
 
-function calculateFlight(
+export function calculateFlight(
   from: Airport,
   to: Airport,
   pricePerKm = 0.11,
