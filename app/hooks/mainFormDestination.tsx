@@ -13,14 +13,18 @@ type airportApi ={
     city : string
     country : string
     iata : string
+    latitude : number;
+    longitude : number
 }
 
 type props ={
     value : string
     onSelect : (airport : airportApi) => void
     placeholder : string
+    className?: string
+    id?: string
 }
-export default function HandleDestination({value , onSelect , placeholder} : props){
+export default function HandleDestination({value , onSelect , placeholder , className, id} : props){
     const [data, setData] = useState<airportApi[]>([]);
     const [query, setQuery] = useState("");
 
@@ -46,16 +50,16 @@ export default function HandleDestination({value , onSelect , placeholder} : pro
       if (!data) return <p>Loading...</p>;
         console.log("data is" + data)
     return (
-    <div style={{ position: "relative", width: "300px" }}>
+    <div style={{ position: "relative" }}>
         <input
-        type="text"
-        placeholder={placeholder}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{ width: "100%", padding: "10px" }}
+            type="text"
+            placeholder={placeholder}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className={className}
+            id={id}
         />
 
-        {/* Autocomplete */}
         {result.length > 0 && (
         <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll w-130 z-40 "
             style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}

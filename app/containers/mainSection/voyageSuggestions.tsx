@@ -1,11 +1,25 @@
 "use client"
 
 import { useState } from "react"
-
 //
 import Image from "next/image"
+//
+import HandleDestination from "@/app/hooks/mainFormDestination"
 
+
+type Airport ={
+    id: number;
+    name: string; 
+    city: string; 
+    country: string; 
+    iata: string;
+    latitude : number;
+    longitude : number
+}
 export default function VoyageSuggetions(){
+
+    const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
+    const [destinationTo , setDestinationTo] = useState<Airport | null>(null)
 
     const [openBooking , setOpenBooking] = useState<boolean>(false)
 
@@ -24,7 +38,13 @@ export default function VoyageSuggetions(){
             <div className="flex justify-between mt-7 items-start">
                 <div className="flex space-x-2">
                     <label htmlFor="from">From</label>
-                    <input id="from" className="border-b " type="text" />
+                    <HandleDestination
+                        placeholder=""
+                        value={destinationFrom?.name || ""}
+                        onSelect={(airport) => setDestinationFrom(airport)}
+                        className="px-1 border-b w-fit border-b-zinc-600"
+                        id="from"
+                    />
                     <h4>i</h4>
                 </div>
                 <div className="flex space-x-4">
