@@ -24,19 +24,11 @@ type Airport ={
 export default function VoyageSuggetions(){
 
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
-    const [destinationTo , setDestinationTo] = useState<Airport | null>(null)
 
     const [data , setData] = useState<Airport[]>([])
     const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST"]
 
-    const [openBooking , setOpenBooking] = useState<boolean>(false)
-
-    const handleOpenBooking = ()=>{
-        setOpenBooking(true)
-    }
-    const handleCloseBooking = ()=>{
-        setOpenBooking(false)
-    }
+    const [openBooking , setOpenBooking] = useState<Record<number ,boolean>>({})
 
     //
     useEffect(() => {
@@ -54,7 +46,6 @@ export default function VoyageSuggetions(){
      
     //
     const { booking, setBooking } = useBooking();
-    const { flightResult } = useFlightResultContext();
 
     const airportPrices = useMemo(() => {
     if (!destinationFrom) return {};
@@ -116,8 +107,8 @@ export default function VoyageSuggetions(){
                         className={`relative py-5 mt-4  h-70 flex items-end justify-between ${span} `}
                     >
                         <div 
-                            onMouseEnter={handleOpenBooking}
-                            onMouseLeave={handleCloseBooking}
+                            onMouseEnter={() => setOpenBooking(prev => ({ ...prev, [airport.id]: true }))}
+                            onMouseLeave={() => setOpenBooking(prev => ({ ...prev, [airport.id]: false }))}
                             className="w-full gap-6 "
                         >
                             <Image
@@ -138,7 +129,7 @@ export default function VoyageSuggetions(){
                                 </div>
                                 <div
                                     className={`overflow-hidden transition-all duration-500 w-full flex justify-center
-                                    ${openBooking ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
+                                    ${openBooking[airport.id] ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
                                 >
                                     <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
                                         Book now
