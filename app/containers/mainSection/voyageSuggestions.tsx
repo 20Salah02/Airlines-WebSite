@@ -28,7 +28,7 @@ export default function VoyageSuggetions(){
     const [openClassType , setOpenClassType] = useState<boolean>(false)
 
     const [data , setData] = useState<Airport[]>([])
-    const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST"]
+    const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST","RAK","PKX","MED"]
 
     const [openBooking , setOpenBooking] = useState<Record<number ,boolean>>({})
 
@@ -160,7 +160,7 @@ export default function VoyageSuggetions(){
                 </div>
             </div>
 
-            <div className="grid grid-cols-4 grid-rows-2 gap-6 mt-6 h-150">
+            <div className="grid grid-cols-4 grid-rows-2 gap-6 mt-6 h-auto">
                 {suggestionAirpots.map((airport , index) =>{
                     let span = ""
 
@@ -168,6 +168,8 @@ export default function VoyageSuggetions(){
                     if (index === 1 || index === 2) span = "col-span-1"
                     if (index === 3 || index === 4) span = "col-span-1"
                     if (index === 5) span = "col-span-2"
+                    if (index === 6) span = "col-span-2 row-span-1"
+                    if (index === 7 || index === 8) span = "col-span-1"
                     
                     return (<div 
                         key={airport.id} 
@@ -185,7 +187,8 @@ export default function VoyageSuggetions(){
                                 priority={index === 0}
                                 className="object-cover rounded-2xl" 
                             />
-                            <div className="absolute inset-0 bg-black/20 rounded-2xl"></div>
+                            <div className={`absolute inset-0 bg-black/20 rounded-2xl`}></div>
+
                             <div className="relative space-y-4 px-6 w-full  text-white z-80">
                                 <div   className="flex items-end justify-between">
                                     <div className="space-y-3">
@@ -193,7 +196,7 @@ export default function VoyageSuggetions(){
                                         <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
                                     </div>
                                     <h4 
-                                        className="text-sm">Economy from <span className="font-medium"
+                                        className="text-sm"><span className="capitalize">{classType}</span> from <span className="font-medium"
                                     >    
                                         {(tripType === "round-trip" 
                                             ? airportReturnPrices[airport.id] 
