@@ -1,14 +1,12 @@
 "use client"
 
 import { useBooking } from "@/app/contexts/bookingContext"
-import { useFlightResultContext } from "@/app/contexts/priceContext"
 //
 import { useState , useEffect, useMemo } from "react"
 //
 import Image from "next/image"
 //
 import HandleDestination from "@/app/hooks/mainFormDestination"
-import FlightResults from "@/app/flies/Booking/Containers/flightsresults"
 import { calculateFlight } from "@/app/flies/Booking/Containers/flightCalculator"
 
 
@@ -24,6 +22,8 @@ type Airport ={
 export default function VoyageSuggetions(){
 
     const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
+    const [tripType, setTripType] = useState<"one-way" | "round-trip">("round-trip");
+    
 
     const [data , setData] = useState<Airport[]>([])
     const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST"]
@@ -45,9 +45,10 @@ export default function VoyageSuggetions(){
 
      
     //
-    const { booking, setBooking } = useBooking();
+    const { setBooking } = useBooking();
 
-    const airportPrices = useMemo(() => {
+    // one way
+    const airportOneWayPrices = useMemo(() => {
     if (!destinationFrom) return {};
 
     const prices: Record<number, number> = {};
@@ -60,6 +61,23 @@ export default function VoyageSuggetions(){
     });
     return prices;
     }, [destinationFrom, suggestionAirpots]);
+
+    // return
+    const airportReturnPrices = useMemo(() => {
+    if (!destinationFrom) return {};
+
+    const prices: Record<number, number> = {};
+    suggestionAirpots.forEach((airport) => {
+        const result = calculateFlight(
+        { lat: destinationFrom.latitude, lon: destinationFrom.longitude },
+        { lat: airport.latitude, lon: airport.longitude }
+        );
+        prices[airport.id] = Math.round(result.price) *2;
+    });
+    return prices;
+    }, [destinationFrom, suggestionAirpots]);
+
+
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
             <div>
@@ -81,8 +99,20 @@ export default function VoyageSuggetions(){
                     <h4>i</h4>
                 </div>
                 <div className="flex space-x-4">
-                    <button className="bg-white px-8 rounded-3xl border border-gray-300 cursor-pointer">Return</button>
-                    <button className="bg-white px-6 rounded-3xl border border-gray-300 cursor-pointer">One way</button>
+                    <button 
+                        className={`bg-white px-8 rounded-3xl ${tripType === "round-trip" ? "border-black" : "border-gray-300"} border   cursor-pointer`}
+                        value={tripType === "round-trip"}
+                        onClick={() => setTripType("round-trip")}
+                    >
+                            Return
+                    </button>
+                    <button 
+                        className={`bg-white px-6 rounded-3xl border ${tripType === "one-way" ? "border-black" : "border-gray-300"} cursor-pointer`}
+                        value={tripType === "one-way"}
+                        onClick={() => setTripType("one-way")}
+                    >
+                            One way
+                    </button>
                     <div className="bg-white rounded-md border border-gray-300 px-4 flex justify-between items-center w-50 cursor-pointer">
                         <div>
                             <h4 className="text-gray-600 text-sm">class</h4>
@@ -93,7 +123,7 @@ export default function VoyageSuggetions(){
                 </div>
             </div>
 
-            <div className="grid grid-cols-4 grid-rows-2 gap-6 mt-6 h-[600px]">
+            <div className="grid grid-cols-4 grid-rows-2 gap-6 mt-6 h-150">
                 {suggestionAirpots.map((airport , index) =>{
                     let span = ""
 
@@ -125,7 +155,11 @@ export default function VoyageSuggetions(){
                                         <h2 className="text-2xl">{airport.city}</h2>
                                         <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
                                     </div>
-                                    <h4 className="text-sm">Economy from <span className="font-medium">    {airportPrices[airport.id] ? `USD ${airportPrices[airport.id]}` : "—"}</span> </h4>  
+                                    <h4 
+                                        className="text-sm">Economy from <span className="font-medium"
+                                    >    
+                                        {tripType === "round-trip" ? airportReturnPrices[airport.id] : airportOneWayPrices[airport.id]}</span> 
+                                    </h4>  
                                 </div>
                                 <div
                                     className={`overflow-hidden transition-all duration-500 w-full flex justify-center
