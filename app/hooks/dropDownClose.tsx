@@ -1,7 +1,7 @@
 import { useEffect, RefObject } from "react";
 
 export function useOutsideClick<T extends HTMLElement>(
-  ref: RefObject<T>,
+  ref: RefObject<T | null>, // allow null here
   callback: () => void
 ) {
   useEffect(() => {
@@ -12,7 +12,6 @@ export function useOutsideClick<T extends HTMLElement>(
     }
 
     document.addEventListener("mousedown", handleClick);
-
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };

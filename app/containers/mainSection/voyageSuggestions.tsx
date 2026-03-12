@@ -2,7 +2,9 @@
 
 import { useBooking } from "@/app/contexts/bookingContext"
 //
-import { useState , useEffect, useMemo } from "react"
+import { useState , useEffect, useMemo ,useRef } from "react"
+//
+import { useOutsideClick } from "@/app/hooks/dropDownClose"
 //
 import Image from "next/image"
 //
@@ -89,6 +91,10 @@ export default function VoyageSuggetions(){
     return prices;
     }, [destinationFrom, suggestionAirpots]);
 
+
+    // close dropdown
+    const dropdownRef = useRef<HTMLDivElement>(null);    
+    useOutsideClick(dropdownRef, () => setOpenClassType(false));    
     
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
@@ -136,12 +142,15 @@ export default function VoyageSuggetions(){
                             <h4>i</h4>
                         </div>
                         {openClassType && (
-                            <div className="absolute top-12 w-full bg-white rounded-md border border-gray-300  z-40 transition-all ">
+                            <div   
+                                ref={dropdownRef} 
+                                className="absolute top-12 w-full bg-white rounded-md border border-gray-300  z-40 transition-all "
+                            >
                                 <h3 
                                     className={`${classType === "economy" ? "bg-zinc-100" : "bg-white"} hover:bg-zinc-200 p-2 duration-600 ease-in-out`}
                                     onClick={() => {
                                         setClassType("economy")
-                                        setOpenClassType(prev => !prev)
+                                        setOpenClassType(false)
                                     }}
                                 >   Economy
                                 </h3>
@@ -149,7 +158,7 @@ export default function VoyageSuggetions(){
                                     className={`${classType === "premium" ? "bg-zinc-100" : "bg-white"} hover:bg-zinc-200 p-2 duration-600 ease-in-out`}
                                     onClick={() => {
                                         setClassType("premium")
-                                        setOpenClassType(prev => !prev)
+                                        setOpenClassType(false)
                                     }}
                                 >
                                         Premium
