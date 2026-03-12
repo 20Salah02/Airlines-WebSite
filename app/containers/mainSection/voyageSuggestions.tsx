@@ -21,9 +21,11 @@ type Airport ={
 }
 export default function VoyageSuggetions(){
 
-    const [destinationFrom , setDestinationFrom] = useState<Airport | null>(null)
-    const [tripType, setTripType] = useState<"one-way" | "round-trip">("round-trip");
-    
+    const [destinationFrom , setDestinationFrom] = useState<Airport | null >(null)
+    const [tripType, setTripType] = useState<"one-way" | "round-trip">("round-trip")
+    const [classType , setClassType] = useState<"economy" | "premium">("economy")
+
+    const [openClassType , setOpenClassType] = useState<boolean>(false)
 
     const [data , setData] = useState<Airport[]>([])
     const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST"]
@@ -113,12 +115,38 @@ export default function VoyageSuggetions(){
                     >
                             One way
                     </button>
-                    <div className="bg-white rounded-md border border-gray-300 px-4 flex justify-between items-center w-50 cursor-pointer">
-                        <div>
-                            <h4 className="text-gray-600 text-sm">class</h4>
-                            <h3 className="text-[17px]">Economy</h3>
+                    <div className="relative bg-white rounded-md border border-gray-300 w-50 cursor-pointer">
+                        <div 
+                            className="flex justify-between  items-center px-4"
+                            onClick={() => setOpenClassType(prev => !prev)}
+                        >
+                            <div className="">
+                                <h4 className="text-gray-600 text-sm">class</h4>
+                                <h3 className="text-[17px] capitalize">{classType}</h3>
+                            </div>
+                            <h4>i</h4>
                         </div>
-                        <h4>i</h4>
+                        {openClassType && (
+                            <div className="absolute top-12 w-full bg-white rounded-md border border-gray-300 space-y-2.5 z-40 transition-all ">
+                                <h3 
+                                    className="hover:bg-zinc-200 p-2 duration-600 ease-in-out"
+                                    onClick={() => {
+                                        setClassType("economy")
+                                        setOpenClassType(prev => !prev)
+                                    }}
+                                >   Economy
+                                </h3>
+                                <h3 
+                                    className="hover:bg-zinc-200 p-2 duration-600 ease-in-out"
+                                    onClick={() => {
+                                        setClassType("premium")
+                                        setOpenClassType(prev => !prev)
+                                    }}
+                                >
+                                        Premium
+                                </h3>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
