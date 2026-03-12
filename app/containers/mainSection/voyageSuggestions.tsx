@@ -33,10 +33,23 @@ export default function VoyageSuggetions(){
     const [openBooking , setOpenBooking] = useState<Record<number ,boolean>>({})
 
     //
+        const { setBooking } = useBooking();
+    //
     useEffect(() => {
-        fetch("/Data/airports.json")
+    fetch("/Data/airports.json")
         .then(res => res.json())
-        .then(json => setData(json));
+        .then(json => {
+        setData(json);
+
+        const casablancaAirport = json.find(
+            (airport: Airport) => airport.iata === "CMN"
+        );
+
+        if (casablancaAirport) {
+            setDestinationFrom(casablancaAirport);
+            setBooking(prev => ({ ...prev, from: casablancaAirport }));
+        }
+        });
     }, []);
 
     const suggestionAirpots = useMemo(() => {
@@ -45,9 +58,6 @@ export default function VoyageSuggetions(){
         )
     },[data]) 
 
-     
-    //
-    const { setBooking } = useBooking();
 
     // one way
     const airportOneWayPrices = useMemo(() => {
@@ -79,7 +89,7 @@ export default function VoyageSuggetions(){
     return prices;
     }, [destinationFrom, suggestionAirpots]);
 
-
+    
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
             <div>
@@ -89,8 +99,9 @@ export default function VoyageSuggetions(){
                 <div className="flex space-x-2">
                     <label htmlFor="from">From</label>
                     <HandleDestination
-                        placeholder=""
-                        value={destinationFrom?.name || ""}
+                        key={destinationFrom?.id || "empty"} 
+                        placeholder="From"
+                        selectedAirport={destinationFrom} 
                         onSelect={(airport) => {
                             setDestinationFrom(airport);
                             setBooking(prev => ({ ...prev, from: airport })); 
@@ -103,14 +114,12 @@ export default function VoyageSuggetions(){
                 <div className="flex space-x-4">
                     <button 
                         className={`bg-white px-8 rounded-3xl ${tripType === "round-trip" ? "border-black" : "border-gray-300"} border   cursor-pointer`}
-                        value={tripType === "round-trip"}
                         onClick={() => setTripType("round-trip")}
                     >
                             Return
                     </button>
                     <button 
                         className={`bg-white px-6 rounded-3xl border ${tripType === "one-way" ? "border-black" : "border-gray-300"} cursor-pointer`}
-                        value={tripType === "one-way"}
                         onClick={() => setTripType("one-way")}
                     >
                             One way
@@ -127,9 +136,9 @@ export default function VoyageSuggetions(){
                             <h4>i</h4>
                         </div>
                         {openClassType && (
-                            <div className="absolute top-12 w-full bg-white rounded-md border border-gray-300 space-y-2.5 z-40 transition-all ">
+                            <div className="absolute top-12 w-full bg-white rounded-md border border-gray-300  z-40 transition-all ">
                                 <h3 
-                                    className="hover:bg-zinc-200 p-2 duration-600 ease-in-out"
+                                    className={`${classType === "economy" ? "bg-zinc-100" : "bg-white"} hover:bg-zinc-200 p-2 duration-600 ease-in-out`}
                                     onClick={() => {
                                         setClassType("economy")
                                         setOpenClassType(prev => !prev)
@@ -137,7 +146,7 @@ export default function VoyageSuggetions(){
                                 >   Economy
                                 </h3>
                                 <h3 
-                                    className="hover:bg-zinc-200 p-2 duration-600 ease-in-out"
+                                    className={`${classType === "premium" ? "bg-zinc-100" : "bg-white"} hover:bg-zinc-200 p-2 duration-600 ease-in-out`}
                                     onClick={() => {
                                         setClassType("premium")
                                         setOpenClassType(prev => !prev)
@@ -186,7 +195,11 @@ export default function VoyageSuggetions(){
                                     <h4 
                                         className="text-sm">Economy from <span className="font-medium"
                                     >    
-                                        {tripType === "round-trip" ? airportReturnPrices[airport.id] : airportOneWayPrices[airport.id]}</span> 
+                                        {(tripType === "round-trip" 
+                                            ? airportReturnPrices[airport.id] 
+                                            : airportOneWayPrices[airport.id]
+                                        )   * (classType === "premium" ? 2.5 : 1)
+                                        }</span> 
                                     </h4>  
                                 </div>
                                 <div

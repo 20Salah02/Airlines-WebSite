@@ -17,34 +17,41 @@ type airportApi ={
     longitude : number
 }
 
-type props ={
-    value : string
-    onSelect : (airport : airportApi) => void
-    placeholder : string
-    className?: string
-    id?: string
+type props = {
+    onSelect: (airport: airportApi) => void;
+    selectedAirport: airportApi | null;
+    placeholder: string;
+    value?: string;    
+    className?: string;
+    id?: string;
 }
-export default function HandleDestination({value , onSelect , placeholder , className, id} : props){
+
+
+export default function HandleDestination({value , onSelect , selectedAirport , placeholder , className, id} : props){
     const [data, setData] = useState<airportApi[]>([]);
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState(selectedAirport ? `${selectedAirport.city} (${selectedAirport.iata})` : "");    const [isTyping, setIsTyping] = useState(false);
+
 
     useEffect(() => {
         fetch("/Data/airports.json")
         .then(res => res.json())
         .then(json => setData(json));
     }, []);
+    
 
     const result = useMemo(() => {
-        const q = query.trim().toLowerCase();
-        if (!q) return [];
+            const q = query.trim().toLowerCase();
 
-        return data.filter(item =>
-        item.name.toLowerCase().includes(q) ||
-        item.city.toLowerCase().includes(q) ||
-        item.iata.toLowerCase().includes(q)
-        ).slice(0 ,15);
-    }, [query, data]);
+            if (!q || (selectedAirport && q === `${selectedAirport.city} (${selectedAirport.iata})`.toLowerCase())) {
+                return [];
+            }
 
+            return data.filter(item =>
+                item.name.toLowerCase().includes(q) ||
+                item.city.toLowerCase().includes(q) ||
+                item.iata.toLowerCase().includes(q)
+            ).slice(0, 15);
+    }, [query, data, selectedAirport]);
 
     
       if (!data) return <p>Loading...</p>;
@@ -54,10 +61,16 @@ export default function HandleDestination({value , onSelect , placeholder , clas
         <input
             type="text"
             placeholder={placeholder}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={query} 
+            onChange={(e) => {
+                setQuery(e.target.value);
+            }}
             className={className}
             id={id}
+            onBlur={() => {
+                if (query === "") {
+                }
+            }}
         />
 
         {result.length > 0 && (
