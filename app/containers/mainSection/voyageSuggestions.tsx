@@ -1,15 +1,17 @@
 "use client"
 
-import { useBooking } from "@/app/contexts/bookingContext"
 //
 import { useState , useEffect, useMemo ,useRef } from "react"
 //
+import { useBooking } from "@/app/contexts/bookingContext"
 import { useOutsideClick } from "@/app/hooks/dropDownClose"
 //
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 //
 import HandleDestination from "@/app/hooks/mainFormDestination"
 import { calculateFlight } from "@/app/flies/Booking/Containers/flightCalculator"
+
 
 
 type Airport ={
@@ -35,7 +37,7 @@ export default function VoyageSuggetions(){
     const [openBooking , setOpenBooking] = useState<Record<number ,boolean>>({})
 
     //
-        const { setBooking } = useBooking();
+    const { setBooking } = useBooking();
     //
     useEffect(() => {
     fetch("/Data/airports.json")
@@ -110,8 +112,35 @@ export default function VoyageSuggetions(){
 
     const firstDayDefault = new Date();
     const lastDayDefault = new Date();
-    lastDayDefault.setDate(firstDayDefault.getDate() + 40)
+    firstDayDefault.setDate(firstDayDefault.getDate() + 15)
+    lastDayDefault.setDate(firstDayDefault.getDate() + 45)
     
+
+    // Handle Search
+    const router = useRouter()
+
+    const handleSearch = (airport: Airport) => {
+        if (!destinationFrom) return;
+
+        setBooking(prev => ({
+            ...prev,
+            from: destinationFrom,
+            to: airport,
+            dates: {
+                departure: firstDayDefault,
+                return: tripType === "round-trip" ? lastDayDefault : undefined,
+            },
+            tripType,
+            classType
+        }));
+
+        if (tripType === "one-way") {
+            router.push("/flies?step=outbound");
+        } else {
+            router.push("/flies?step=outbound");
+        }
+    };
+
 
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
@@ -239,7 +268,10 @@ export default function VoyageSuggetions(){
                                     className={`overflow-hidden transition-all duration-500 w-full flex justify-center
                                     ${openBooking[airport.id] ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
                                 >
-                                    <button className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op">
+                                    <button 
+                                        onClick={() => handleSearch(airport)}
+                                        className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op"
+                                    >
                                         Book now
                                     </button>
                                 </div>

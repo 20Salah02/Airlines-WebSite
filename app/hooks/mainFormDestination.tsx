@@ -19,7 +19,7 @@ type airportApi ={
 
 type props = {
     onSelect: (airport: airportApi) => void;
-    selectedAirport: airportApi | null;
+    selectedAirport?: airportApi | null;
     placeholder: string;
     value?: string;    
     className?: string;
