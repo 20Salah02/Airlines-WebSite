@@ -94,8 +94,25 @@ export default function VoyageSuggetions(){
 
     // close dropdown
     const dropdownRef = useRef<HTMLDivElement>(null);    
-    useOutsideClick(dropdownRef, () => setOpenClassType(false));    
+    useOutsideClick(dropdownRef, () => setOpenClassType(false));   
     
+
+    // Date
+    function formatDate(date?: Date) {
+    if (!date || isNaN(date.getTime())) return ""
+    
+    return new Intl.DateTimeFormat("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+    }).format(date)
+    }
+
+    const firstDayDefault = new Date();
+    const lastDayDefault = new Date();
+    lastDayDefault.setDate(firstDayDefault.getDate() + 40)
+    
+
     return(
         <div className="relative mt-67 px-15 bg-zinc-100">
             <div>
@@ -112,7 +129,7 @@ export default function VoyageSuggetions(){
                             setDestinationFrom(airport);
                             setBooking(prev => ({ ...prev, from: airport })); 
                         }}                        
-                        className="px-1 border-b w-fit border-b-zinc-600"
+                        className="px-1 border-b w-fit border-b-zinc-600 font-medium"
                         id="from"
                     />
                     <h4>i</h4>
@@ -196,22 +213,26 @@ export default function VoyageSuggetions(){
                                 priority={index === 0}
                                 className="object-cover rounded-2xl" 
                             />
-                            <div className={`absolute inset-0 bg-black/20 rounded-2xl`}></div>
+                            <div className={`absolute inset-0 bg-black/15 rounded-2xl`}></div>
 
                             <div className="relative space-y-4 px-6 w-full  text-white z-80">
                                 <div   className="flex items-end justify-between">
                                     <div className="space-y-3">
                                         <h2 className="text-2xl">{airport.city}</h2>
-                                        <h3 className="text-sm">11 Mar 2026 - 13 Mar 2026</h3>
+                                        <h3 className="text-sm">
+                                            {formatDate(firstDayDefault)} - {formatDate(lastDayDefault)}</h3>
                                     </div>
                                     <h4 
-                                        className="text-sm"><span className="capitalize">{classType}</span> from <span className="font-medium"
-                                    >    
-                                        {(tripType === "round-trip" 
-                                            ? airportReturnPrices[airport.id] 
-                                            : airportOneWayPrices[airport.id]
-                                        )   * (classType === "premium" ? 2.5 : 1)
-                                        }</span> 
+                                        className="text-sm" 
+                                    >
+                                        <span className="capitalize">{classType}
+                                        </span> from <span className="font-medium">    
+                                            USD {(tripType === "round-trip" 
+                                                ? airportReturnPrices[airport.id] 
+                                                : airportOneWayPrices[airport.id]
+                                            )   * (classType === "premium" ? 2.5 : 1)
+                                            }
+                                        </span> 
                                     </h4>  
                                 </div>
                                 <div
