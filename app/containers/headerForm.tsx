@@ -89,29 +89,38 @@ export default function Form(){
 
     return(
 
-        <div className="w-full flex justify-center">
-            <form onSubmit={(e) => {e.preventDefault()}} style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} className="lg:absolute lg:top-95 border w-full max-w-6xl mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white">
+        <div className=" w-full flex justify-center">
+            <form 
+                onSubmit={(e) => {e.preventDefault()}} 
+                style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} 
+                className="lg:absolute lg:top-95 border w-full max-w-6xl space-y-6 mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white"
+            >
+                <div className="flex items-center gap-6 text-[16px] font-medium">
 
-                <div className="w-full py-4 space-x-7 text-[17px] ">
-                    <label>
-                        <input
-                            type="radio"
-                            name="tripType"
-                            checked={tripType === "round-trip"}
-                            onChange={() => setTripType("round-trip")}
-                        />
-                        <span className="ml-1">Return</span>
-                    </label>
+                    <button
+                        type="button"
+                        onClick={() => setTripType("round-trip")}
+                        className={`pb-2 border-b-2 transition ${
+                        tripType === "round-trip"
+                        ? "border-red-900 text-red-900"
+                        : "border-transparent text-gray-500"
+                        }`}
+                    >
+                        Return
+                    </button>
 
-                    <label>
-                        <input
-                            type="radio"
-                            name="tripType"
-                            checked={tripType === "one-way"}
-                            onChange={() => setTripType("one-way")}
-                        />
-                        <span className="ml-1">One way</span>
-                    </label>
+                    <button
+                        type="button"
+                        onClick={() => setTripType("one-way")}
+                        className={`pb-2 border-b-2 transition ${
+                        tripType === "one-way"
+                        ? "border-red-900 text-red-900"
+                        : "border-transparent text-gray-500"
+                        }`}
+                    >
+                        One way
+                    </button>
+
                 </div>
                 <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-center">
                     <div className="flex items-center h-full">
