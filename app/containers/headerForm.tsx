@@ -100,7 +100,7 @@ export default function Form(){
                     <button
                         type="button"
                         onClick={() => setTripType("round-trip")}
-                        className={`pb-2 border-b-2 transition ${
+                        className={`pb-2 border-b-2 transition cursor-pointer ${
                         tripType === "round-trip"
                         ? "border-red-900 text-red-900"
                         : "border-transparent text-gray-500"
@@ -112,7 +112,7 @@ export default function Form(){
                     <button
                         type="button"
                         onClick={() => setTripType("one-way")}
-                        className={`pb-2 border-b-2 transition ${
+                        className={`pb-2 border-b-2 transition cursor-pointer ${
                         tripType === "one-way"
                         ? "border-red-900 text-red-900"
                         : "border-transparent text-gray-500"
