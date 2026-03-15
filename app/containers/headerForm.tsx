@@ -88,7 +88,8 @@ export default function Form(){
     };
 
     //style
-    const borderStyle = "focus:outline-none focus:ring focus:ring-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
+    const ringStyle = "focus:outline-none focus:ring focus:ring-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
+    const borderStyle = "focus:outline-none focus:border focus:border-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
 
     return(
 
@@ -131,7 +132,7 @@ export default function Form(){
                         placeholder="From"
                         value={destinationFrom?.name || ""}
                         onSelect={(airport) => setDestinationFrom(airport)}
-                        className={`w-70 h-full flex-1 ${borderStyle}`}
+                        className={`w-70 h-full flex-1 ${ringStyle}`}
                     />
 
                     <span className="mx-2">|</span>
@@ -140,15 +141,15 @@ export default function Form(){
                         placeholder="To"
                         value={destinationTo?.name || ""}
                         onSelect={(airport) => setDestinationTo(airport)}
-                        className={`w-70 h-full flex-1 ${borderStyle}`}
+                        className={`w-70 h-full flex-1 ${ringStyle}`}
 
                     />
                     </div>
 
                     <div>
                         <div className="flex pl-4 h-10 w-70 border-r border-l "  onClick={() => setopenCalendare(prev => !prev)}>
-                            <div className={`pr-12 ${borderStyle}`}>
-                                <h6 className="text-xs text-gray-600">Departure</h6>
+                            <div tabIndex={0} className={`pr-12 ${borderStyle}`}>
+                                <h6 className={`text-xs text-gray-600`}>Departure</h6>
                                 <h4>{firstDay}</h4>
                             </div>
                             {tripType === "round-trip" && (
