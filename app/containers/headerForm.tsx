@@ -87,15 +87,18 @@ export default function Form(){
         }
     };
 
+    //style
+    const borderStyle = "focus:outline-none focus:ring focus:ring-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
+
     return(
 
-        <div className=" w-full flex justify-center">
+        <div className=" flex justify-center">
             <form 
                 onSubmit={(e) => {e.preventDefault()}} 
                 style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} 
                 className="lg:absolute lg:top-95 border w-full max-w-6xl space-y-6 mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white"
             >
-                <div className="flex items-center gap-6 text-[16px] font-medium">
+                <div className="flex items-stretch gap-6 text-[16px] font-medium">
 
                     <button
                         type="button"
@@ -122,13 +125,13 @@ export default function Form(){
                     </button>
 
                 </div>
-                <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-center">
-                    <div className="flex items-center h-full">
+                <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-stretch ">
+                    <div className="flex items-center flex-1">
                     <HandleDestination
                         placeholder="From"
                         value={destinationFrom?.name || ""}
                         onSelect={(airport) => setDestinationFrom(airport)}
-                        className="w-70"
+                        className={`w-70 h-full flex-1 ${borderStyle}`}
                     />
 
                     <span className="mx-2">|</span>
@@ -137,14 +140,14 @@ export default function Form(){
                         placeholder="To"
                         value={destinationTo?.name || ""}
                         onSelect={(airport) => setDestinationTo(airport)}
-                        className="w-70 h-full"
+                        className={`w-70 h-full flex-1 ${borderStyle}`}
 
                     />
                     </div>
 
                     <div>
                         <div className="flex pl-4 h-10 w-70 border-r border-l "  onClick={() => setopenCalendare(prev => !prev)}>
-                            <div className="pr-12">
+                            <div className={`pr-12 ${borderStyle}`}>
                                 <h6 className="text-xs text-gray-600">Departure</h6>
                                 <h4>{firstDay}</h4>
                             </div>

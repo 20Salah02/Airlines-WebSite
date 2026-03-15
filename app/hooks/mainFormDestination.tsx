@@ -57,7 +57,7 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
       if (!data) return <p>Loading...</p>;
         console.log("data is" + data)
     return (
-    <div className="relative">
+    <div className="relative h-full">
         <input
             type="text"
             placeholder={placeholder}
