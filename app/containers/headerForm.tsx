@@ -179,7 +179,7 @@ export default function Form(){
                         )}
                     </div>
 
-                    <div tabIndex={1} className={`relative w-1/3 px-2 ${borderStyle}`}>
+                    <div tabIndex={1} className={`relative w-full  px-2 ${borderStyle}`}>
                         <div className="flex justify-between cursor-pointer" 
                             onClick={() => setOpenPassengers(prev => !prev)}
                         >
@@ -196,7 +196,7 @@ export default function Form(){
                         </div>
 
                         {openPassengers && (
-                            <div className="absolute top-full left-0 mt-2 bg-white w-full z-50 shadow-lg">
+                            <div className="absolute mt-1 right-0   w-80 z-90 shadow-lg">
                             <HandlePassengers setPassengersText={setpassengersText} isOpen={setOpenPassengers}/>
                             </div>
                         )}

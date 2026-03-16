@@ -50,15 +50,15 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
     })
 
     return(
-        <div className="text-black border-2 rounded-md">
+        <div className="text-black border-2 border-gray-300 rounded-md bg-white">
             <div className="mx-4 ">
-                <div className="flex justify-start text-[17px] font-bold py-5 border-b-2 border-zinc-300 ">
+                <div className="flex justify-start text-[17px] font-bold py-5 border-b-2 border-zinc-300 text-red-900">
                     <h2>Passengers</h2>
                 </div>
                 <div>
                     <div className="flex justify-between pt-5 ">
                         <div>
-                            <h3 className="text-lg font-medium">Adults</h3>
+                            <h3 className="text-lg">Adults</h3>
                             <h6 className="text-sm text-gray-500">12+ years</h6>
                         </div>
                         <div className="flex items-center justify-around w-1/3">
@@ -69,7 +69,7 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
                     </div>
                     <div className="flex justify-between pt-5">
                         <div>
-                            <h3 className="text-lg font-medium">Child</h3>
+                            <h3 className="text-lg ">Child</h3>
                             <h6 className="text-sm text-gray-500">2-11 years</h6>
                         </div>
                         <div className="flex items-center justify-around w-1/3">
@@ -80,7 +80,7 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
                     </div>
                     <div className="flex justify-between pt-5">
                         <div>
-                            <h3 className="text-lg font-medium">Infant</h3>
+                            <h3 className="text-lg ">Infant</h3>
                             <h6 className="text-sm text-gray-500">Under 2 years</h6>
                         </div>
                         <div className="flex items-center justify-around w-1/3">
@@ -92,21 +92,21 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
                 </div>
 
                 <div>
-                    <div className="flex justify-start text-[17px] font-bold py-5 border-b-2 border-zinc-300">
+                    <div className="flex justify-start text-[17px] font-bold py-5 border-b-2 border-zinc-300 text-red-900">
                         <h2>Class</h2>
                     </div>
-                    <div  className="text-lg font-medium flex-col my-7">
+                    <div  className="text-lg  flex-col my-7">
                         <div className="flex justify-between mb-4">
-                            <label>{classOptions.eco}</label>
-                            <input type="radio" name="class" value={classOptions.eco} checked={classOptions.eco === selectedClass} onChange={(e) => {setSelectedClass(e.target.value)}}></input>
+                            <label htmlFor="eco">{classOptions.eco}</label>
+                            <input id="eco" className="accent-red-900" type="radio" name="class" value={classOptions.eco} checked={classOptions.eco === selectedClass} onChange={(e) => {setSelectedClass(e.target.value)}}></input>
                         </div>
                         <div className="flex justify-between">
-                            <label>{`${classOptions.premium} (Business/First)`}</label>
-                            <input type="radio" name="class" value={classOptions.premium} checked={classOptions.premium === selectedClass} onChange={(e) => {setSelectedClass(e.target.value)}}></input>
+                            <label htmlFor="bus">{`${classOptions.premium} (Business/First)`}</label>
+                            <input id="bus" className="accent-red-900" type="radio" name="class" value={classOptions.premium} checked={classOptions.premium === selectedClass} onChange={(e) => {setSelectedClass(e.target.value)}}></input>
                         </div>
                     </div>
                     <div>
-                        <button   onClick={handleconfirm} className="w-full bg-blue-500 text-gray-50 rounded-4xl py-4 mb-5 font-bold text-[20px] flex justify-center items-center cursor-pointer" type="button">Confirm</button>
+                        <button   onClick={handleconfirm} className="w-full bg-red-900 text-gray-50 rounded-4xl py-4 mb-5 font-bold text-[20px] flex justify-center items-center cursor-pointer" type="button">Confirm</button>
                     </div>
                 </div>
             </div>

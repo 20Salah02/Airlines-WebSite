@@ -39,7 +39,7 @@ export default function HandleDate({
       range_end: "rounded-r-md text-white",
       button_previous: "!text-red-900",
       button_next: "!text-red-900",
-      nav_button: "!text-red-900",
+      nav_button: "!text-red-900"
     },
   }
 
