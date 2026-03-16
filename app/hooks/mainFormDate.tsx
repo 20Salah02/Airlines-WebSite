@@ -31,18 +31,21 @@ export default function HandleDate({
       weekdays: "text-black border-b border-b-zinc-200",
       month_caption:
         "text-red-900 text-[18px] py-5 flex justify-center items-center font-medium",
-      day: "text-black font-[600] hover:bg-blue-600 hover:text-white",
-      today: "text-blue-600",
-      selected: "bg-blue-600 text-white",
+      day: "text-black font-[600] hover:bg-red-900 hover:text-white",
+      today: "text-red-900",
+      selected: "bg-red-900 text-red-900",
       range_start: "rounded-l-md text-white",
       range_middle: "text-black bg-zinc-200",
       range_end: "rounded-r-md text-white",
+      button_previous: "!text-red-900",
+      button_next: "!text-red-900",
+      nav_button: "!text-red-900",
     },
   }
 
   return (
-    <div className="bg-white flex justify-center flex-col w-fit border-2 border-zinc-300 rounded-md p-6">
-      <div className="pb-10 border-b border-b-zinc-200">
+    <div className="bg-white border-2 border-zinc-300 rounded-md p-6 ">
+      <div className="pb-10 border-b border-b-zinc-200 ">
 
         {mode === "single" ? (
           <DayPicker

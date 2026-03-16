@@ -1,3 +1,6 @@
 @import "tailwindcss";
 
-
+ .calendar .rdp-button_previous svg,
+.calendar .rdp-button_next svg {
+  stroke: #7f1d1d;
+}
