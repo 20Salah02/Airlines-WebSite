@@ -88,13 +88,13 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
             >
                 <div className="flex items-center border-b py-2 mx-4 pb-2   border-b-gray-500 cursor-pointer">
                     <div className="mr-3">
-                        <FontAwesomeIcon icon={faPlane}/>
+                        <FontAwesomeIcon icon={faPlane} className="text-zinc-600"/>
                     </div>
                     <div className="w-full">
-                        <h3 className="font-bold">{item.city}, {item.country}</h3>
-                        <h5 className="mt-2">{item.name}</h5>
+                        <h3 className="font-bold text-red-900">{item.city}, {item.country}</h3>
+                        <h5 className="mt-2 text-zinc-600">{item.name}</h5>
                     </div>
-                    <div className="flex justify-end items-end font-bold mr-4 ">
+                    <div className="flex justify-end items-end font-bold mr-4 text-red-900">
                         <h4>{item.iata}</h4>
                     </div>
                 </div>

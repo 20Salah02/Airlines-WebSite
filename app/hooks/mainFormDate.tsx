@@ -33,7 +33,7 @@ export default function HandleDate({
         "text-red-900 text-[18px] py-5 flex justify-center items-center font-medium",
       day: "text-black font-[600] hover:bg-red-900 hover:text-white",
       today: "text-red-900",
-      selected: "bg-red-900 text-red-900",
+      selected: "bg-red-900 text-red-950",
       range_start: "rounded-l-md text-white",
       range_middle: "text-black bg-zinc-200",
       range_end: "rounded-r-md text-white",

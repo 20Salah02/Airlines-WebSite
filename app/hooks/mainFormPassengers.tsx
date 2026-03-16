@@ -62,9 +62,9 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
                             <h6 className="text-sm text-gray-500">12+ years</h6>
                         </div>
                         <div className="flex items-center justify-around w-1/3">
-                            <button type="button" className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer" onClick={handleMinClick} disabled={adultPass === 1} >-</button>
+                            <button type="button" className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer active:border-red-900" onClick={handleMinClick} disabled={adultPass === 1} >-</button>
                             <p>{adultPass}</p>
-                            <button type="button" className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer" onClick={handleAddClick} disabled={adultPass === 10}>+</button>
+                            <button type="button" className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer active:border-red-900" onClick={handleAddClick} disabled={adultPass === 10}>+</button>
                         </div>
                     </div>
                     <div className="flex justify-between pt-5">
@@ -73,9 +73,9 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
                             <h6 className="text-sm text-gray-500">2-11 years</h6>
                         </div>
                         <div className="flex items-center justify-around w-1/3">
-                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer" onClick={handleMinClickChild} disabled={childPass === 0} >-</button>
+                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer active:border-red-900" onClick={handleMinClickChild} disabled={childPass === 0} >-</button>
                             <p>{childPass}</p>
-                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer" onClick={handleAddClickChild} disabled={childPass === 4}>+</button>
+                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer active:border-red-900" onClick={handleAddClickChild} disabled={childPass === 4}>+</button>
                         </div>
                     </div>
                     <div className="flex justify-between pt-5">
@@ -84,9 +84,9 @@ export default function HandlePassengers({setPassengersText , isOpen} : setPasse
                             <h6 className="text-sm text-gray-500">Under 2 years</h6>
                         </div>
                         <div className="flex items-center justify-around w-1/3">
-                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer" onClick={handleMinClickInfant} disabled={infantPass === 0} >-</button>
+                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer active:border-red-900" onClick={handleMinClickInfant} disabled={infantPass === 0} >-</button>
                             <p>{infantPass}</p>
-                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer" onClick={handleAddClickInfant} disabled={infantPass === 2}>+</button>
+                            <button className="border-2 border-gray-500 rounded-md w-6 h-6 flex items-center justify-center cursor-pointer active:border-red-900" onClick={handleAddClickInfant} disabled={infantPass === 2}>+</button>
                         </div>
                     </div>
                 </div>
