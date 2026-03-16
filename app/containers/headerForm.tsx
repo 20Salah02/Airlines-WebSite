@@ -2,8 +2,9 @@
 
 // context
 import { useBooking } from "../contexts/bookingContext"
+import { useOutsideClick } from "../hooks/dropDownClose"
 //
-import { useState } from "react"
+import { useState , useRef } from "react"
 //
 import { useRouter } from "next/navigation"
 //
@@ -46,6 +47,8 @@ export default function Form(){
 
     const [destinationFrom, setDestinationFrom] = useState<Airport | null>(null);
     const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
+
+    const [openClassType , setOpenClassType] = useState<boolean>(false)
     
     
     function formatDate(date?: Date) {
@@ -87,9 +90,14 @@ export default function Form(){
         }
     };
 
+
+    // close dropdown
+    const dropdownRef = useRef<HTMLDivElement>(null);    
+    useOutsideClick(dropdownRef, () => setOpenClassType(false));  
+
     //style
     const ringStyle = "focus:outline-none focus:ring focus:ring-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
-    const borderStyle = "focus:outline-none focus:border focus:border-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
+    const borderStyle = "focus-within:outline-none focus-within:border focus-within:border-red-900 focus-within:shadow-[0_0_15px_rgba(127,29,29,0.6)] focus-within:rounded-lg "
 
     return(
 
@@ -146,9 +154,9 @@ export default function Form(){
                     />
                     </div>
 
-                    <div>
-                        <div className="flex pl-4 h-10 w-70 border-r border-l "  onClick={() => setopenCalendare(prev => !prev)}>
-                            <div tabIndex={0} className={`pr-12 ${borderStyle}`}>
+                    <div tabIndex={0} className={`${borderStyle}`}>
+                        <div  className={`flex pl-4 h-10 w-70 border-r border-l ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
+                            <div className={`pr-12`}>
                                 <h6 className={`text-xs text-gray-600`}>Departure</h6>
                                 <h4>{firstDay}</h4>
                             </div>
@@ -171,7 +179,7 @@ export default function Form(){
                         )}
                     </div>
 
-                    <div className="relative w-1/3 px-2 ">
+                    <div tabIndex={1} className={`relative w-1/3 px-2 ${borderStyle}`}>
                         <div className="flex justify-between cursor-pointer" 
                             onClick={() => setOpenPassengers(prev => !prev)}
                         >
