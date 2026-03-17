@@ -196,7 +196,7 @@ export default function Form(){
                         </div>
 
                         {openPassengers && (
-                            <div className="absolute mt-1 right-0   w-80 z-90 shadow-lg">
+                            <div className="absolute mt-1 right-0 w-80 z-90 shadow-lg">
                             <HandlePassengers setPassengersText={setpassengersText} isOpen={setOpenPassengers}/>
                             </div>
                         )}
