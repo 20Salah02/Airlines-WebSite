@@ -135,28 +135,40 @@ export default function Form(){
 
                 </div>
                 <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-stretch ">
-                    <div className="flex items-center flex-1">
-                    <HandleDestination
-                        placeholder="From"
-                        value={destinationFrom?.name || ""}
-                        onSelect={(airport) => setDestinationFrom(airport)}
-                        className={`w-70 h-full flex-1 ${ringStyle}`}
-                    />
+                    <div className="flex items-center justify-center flex-1">
+                        <div tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
+                            <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
+                            </svg>
 
-                    <span className="mx-2">|</span>
+                            <HandleDestination
+                            placeholder="From"
+                            value={destinationFrom?.name || ""}
+                            onSelect={(airport) => setDestinationFrom(airport)}
+                            className="flex-1 w-58 h-full focus:outline-none"
+                            />
+                        </div>
 
-                    <HandleDestination
-                        placeholder="To"
-                        value={destinationTo?.name || ""}
-                        onSelect={(airport) => setDestinationTo(airport)}
-                        className={`w-70 h-full flex-1 ${ringStyle}`}
+                        <svg className="w-10 text-zinc-600" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M18 10a1 1 0 0 0-1-1H5.41l2.3-2.29a1 1 0 0 0-1.42-1.42l-4 4a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 11h14a1 1 0 0 0 1-1m3.92 3.62A1 1 0 0 0 21 13H7a1 1 0 0 0 0 2h11.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-1.09"></path></svg>
 
-                    />
+                        <div tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
+                            <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
+                            <HandleDestination
+                                placeholder="To"
+                                value={destinationTo?.name || ""}
+                                onSelect={(airport) => setDestinationTo(airport)}
+                                className={`flex-1 w-58 h-full focus:outline-none`}
+
+                            />
+                        </div>
                     </div>
 
+                    <svg className="flex justify-center items-center h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
+
                     <div tabIndex={0} className={`${borderStyle}`}>
-                        <div  className={`flex pl-4 h-10 w-70 border-r border-l ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
-                            <div className={`pr-12`}>
+                        <div  className={`flex items-center h-full w-65  space-x-5 cursor-pointer ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
+                            <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
+                            <div className={``}>
                                 <h6 className={`text-xs text-gray-600`}>Departure</h6>
                                 <h4>{firstDay}</h4>
                             </div>
@@ -179,29 +191,38 @@ export default function Form(){
                         )}
                     </div>
 
+                    <svg className="flex justify-center items-center h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
+
+
                     <div tabIndex={1} className={`relative w-full  px-2 ${borderStyle}`}>
-                        <div className="flex justify-between cursor-pointer" 
+                        <div className="flex justify-between items-center cursor-pointer h-full" 
                             onClick={() => setOpenPassengers(prev => !prev)}
                         >
-                            <div>
-                                <h6 className="text-xs text-gray-600">Passengers / Class</h6>
-                                <h4>{passengersText}</h4>
+                            <div className="flex items-center gap-3 h-full">
+                                <svg className="flex items-center text-red-900" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}><path d="M15.5 11a3.5 3.5 0 1 0-7 0a3.5 3.5 0 0 0 7 0"></path><path d="M15.483 11.35q.484.149 1.017.15a3.5 3.5 0 1 0-3.483-3.85m-2.034 0a3.5 3.5 0 1 0-2.466 3.7M22 16.5c0-2.761-2.462-5-5.5-5m1 8c0-2.761-2.462-5-5.5-5s-5.5 2.239-5.5 5"></path><path d="M7.5 11.5c-3.038 0-5.5 2.239-5.5 5"></path></g></svg>
+                                <div >
+                                    <h6 className="text-xs text-gray-600">Passengers / Class</h6>
+                                    <h4>{passengersText}</h4>
+                                </div>
+                                
                             </div>
 
                             <div className="flex items-end">
-                                <h6 className="w-5 font-extralight">
+                                <h6 className="w-5 font-extralight text-zinc-500">
                                 <FontAwesomeIcon icon={faAngleDown} />
                                 </h6>
                             </div>
                         </div>
 
-                        {openPassengers && (
-                            <div className="absolute mt-1 right-0 w-80 z-90 shadow-lg">
-                            <HandlePassengers setPassengersText={setpassengersText} isOpen={setOpenPassengers}/>
-                            </div>
-                        )}
-
+                        <div>
+                            {openPassengers && (
+                                <div className="absolute mt-1 right-0 w-80 z-90 shadow-lg">
+                                <HandlePassengers setPassengersText={setpassengersText} isOpen={setOpenPassengers}/>
+                                </div>
+                            )}
+                        </div>
                     </div>
+                    
 
                 </div>
                     <div className="flex justify-end w-full mt-7 items-center">
