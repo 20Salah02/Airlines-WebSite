@@ -96,7 +96,6 @@ export default function Form(){
     useOutsideClick(dropdownRef, () => setOpenClassType(false));  
 
     //style
-    const ringStyle = "focus:outline-none focus:ring focus:ring-red-900 focus:shadow-[0_0_15px_rgba(127,29,29,0.6)] rounded-lg "
     const borderStyle = "focus-within:outline-none focus-within:border focus-within:border-red-900 focus-within:shadow-[0_0_15px_rgba(127,29,29,0.6)] focus-within:rounded-lg "
 
     return(
@@ -107,30 +106,37 @@ export default function Form(){
                 style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} 
                 className="lg:absolute lg:top-95 border w-full max-w-6xl space-y-6 mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white"
             >
-                <div className="flex items-stretch gap-6 text-[16px] font-medium">
-
+                <div className="flex items-stretch gap-6 text-[16px] font-medium w-full">
                     <button
                         type="button"
                         onClick={() => setTripType("round-trip")}
-                        className={`pb-2 border-b-2 transition cursor-pointer ${
+                        className={`flex pb-2 border-b-2 transition cursor-pointer ${
                         tripType === "round-trip"
                         ? "border-red-900 text-red-900"
                         : "border-transparent text-gray-500"
                         }`}
                     >
+                            <svg
+                                className="h-5 mr-1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 56 56"
+                                fill="currentColor"
+                            >
+                                <path d="M6.672 37.434c-1.664 0-2.11 1.148-1.195 2.437l5.25 7.453c.773 1.102 1.898 1.078 2.648 0l5.25-7.476c.89-1.266.469-2.414-1.195-2.414h-3.282V19.809c0-4.055 2.461-6.61 5.836-6.61c3.399 0 5.93 2.508 5.93 6.61v16.054c0 6.797 4.242 11.11 10.102 11.11c5.836 0 10.03-4.313 10.03-11.11V18.566h3.282c1.664 0 2.11-1.148 1.195-2.437l-5.226-7.477c-.75-1.054-1.875-1.078-2.649 0l-5.25 7.454c-.937 1.312-.492 2.46 1.196 2.46h3.258v17.625c0 4.032-2.438 6.586-5.836 6.586s-5.93-2.508-5.93-6.586V20.137c0-6.797-4.242-11.11-10.102-11.11c-5.836 0-10.03 4.313-10.03 11.11v17.297Z" />
+                            </svg>
                         Return
                     </button>
 
                     <button
                         type="button"
                         onClick={() => setTripType("one-way")}
-                        className={`pb-2 border-b-2 transition cursor-pointer ${
+                        className={`flex pb-2 border-b-2 transition cursor-pointer ${
                         tripType === "one-way"
                         ? "border-red-900 text-red-900"
                         : "border-transparent text-gray-500"
                         }`}
                     >
-                        One way
+                        <svg className="mr-1 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="m245.66 74.34l-32-32a8 8 0 0 0-11.32 11.32L220.69 72H208c-49.33 0-61.05 28.12-71.38 52.92c-9.38 22.51-16.92 40.59-49.48 42.84a40 40 0 1 0 .1 16c43.26-2.65 54.34-29.15 64.14-52.69C161.41 107 169.33 88 208 88h12.69l-18.35 18.34a8 8 0 0 0 11.32 11.32l32-32a8 8 0 0 0 0-11.32M48 200a24 24 0 1 1 24-24a24 24 0 0 1-24 24"></path></svg>                        One way
                     </button>
 
                 </div>
