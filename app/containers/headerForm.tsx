@@ -151,7 +151,8 @@ export default function Form(){
                             placeholder="From"
                             value={destinationFrom?.name || ""}
                             onSelect={(airport) => setDestinationFrom(airport)}
-                            className="flex-1 w-58 h-full focus:outline-none"
+                            className="flex-1 pt-3 w-58 h-full focus:outline-none"
+                            floatingLabel={true}
                             />
                         </div>
 
@@ -163,8 +164,8 @@ export default function Form(){
                                 placeholder="To"
                                 value={destinationTo?.name || ""}
                                 onSelect={(airport) => setDestinationTo(airport)}
-                                className={`flex-1 w-58 h-full focus:outline-none`}
-
+                                className={`flex-1 pt-3 w-58 h-full focus:outline-none`}
+                                floatingLabel={true}
                             />
                         </div>
                     </div>
