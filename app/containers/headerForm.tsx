@@ -104,7 +104,7 @@ export default function Form(){
             <form 
                 onSubmit={(e) => {e.preventDefault()}} 
                 style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} 
-                className="lg:absolute lg:top-95 border w-full max-w-6xl space-y-6 mb-20 py-10 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white"
+                className="lg:absolute lg:top-95 border w-full max-w-6xl space-y-6 mb-20 py-5 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white"
             >
                 <div className="flex items-stretch gap-6 text-[16px] font-medium w-full">
                     <button
@@ -159,7 +159,7 @@ export default function Form(){
                         <svg className="w-10 text-zinc-600" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M18 10a1 1 0 0 0-1-1H5.41l2.3-2.29a1 1 0 0 0-1.42-1.42l-4 4a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 11h14a1 1 0 0 0 1-1m3.92 3.62A1 1 0 0 0 21 13H7a1 1 0 0 0 0 2h11.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-1.09"></path></svg>
 
                         <div tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
-                            <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
+                            <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
                             <HandleDestination
                                 placeholder="To"
                                 value={destinationTo?.name || ""}
@@ -232,10 +232,10 @@ export default function Form(){
                     
 
                 </div>
-                    <div className="flex justify-end w-full mt-7 items-center">
-                        <p className="text-gray-600 mr-5">+Add promo code</p>
+                    <div className="flex justify-end w-full items-center space-x-6">
+                        <p className="text-gray-600 ">+Add promo code</p>
 
-                        <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                        <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full px-8 py-3 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
                     </div>
             </form>
 
