@@ -143,7 +143,7 @@ export default function VoyageSuggetions(){
 
 
     return(
-        <div className="relative mt-67 px-15 bg-zinc-100">
+        <div className=" bg-zinc-100">
             <div>
                 <h2 className="text-4xl font-light text-gray-600">Find great fears</h2>
             </div>

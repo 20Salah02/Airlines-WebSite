@@ -1,12 +1,12 @@
 
 import VoyageSuggetions from "./voyageSuggestions"
-import travelExp from "./travelExperience"
+import TravelExp from "./travelExperience"
 
 export default function MainSection(){
 
     return(
-        <div>
-            <travelExp/>
+        <div className="relative mt-60 px-15">
+            <TravelExp/>
             <VoyageSuggetions/>
         </div>
     )
