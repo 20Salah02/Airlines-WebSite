@@ -11,11 +11,11 @@ export default function TravelExp(){
             </div>
 
             <div className="grid gap-10 grid-cols-3 w-full">
-                <div>
-                    <div className="relative py-5 mt-4  h-40">
+                <div className="cursor-default">
+                    <div className="relative py-5 mt-4  h-50">
                         <Image
-                            src="/h1-a350-hero.jpg"
-                            alt=""
+                            src="/LuxuryCabine.avif"
+                            alt="LuxuryCabine"
                             fill
                             className="object-cover rounded-t-2xl"
                         />
@@ -26,11 +26,11 @@ export default function TravelExp(){
                             <h4 className="text-zinc-600 py-4">Ultimate privacy and comfort.</h4>
                         </div>
                 </div>
-                <div>
-                    <div className="relative py-5 mt-4  h-40">
+                <div className="cursor-default">
+                    <div className="relative py-5 mt-4  h-50">
                         <Image
-                            src="/h1-a350-hero.jpg"
-                            alt=""
+                            src="/GourmetDining.avif"
+                            alt="GourmetDining"
                             fill
                             className="object-cover rounded-t-2xl"
                         />
@@ -41,11 +41,11 @@ export default function TravelExp(){
                             <h4 className="text-zinc-600 py-4">Exquisite menus by top chefs.</h4>
                         </div>
                 </div>
-                <div>
-                    <div className="relative py-5 mt-4  h-40">
+                <div className="cursor-default">
+                    <div className="relative py-5 mt-4  h-50">
                         <Image
-                            src="/h1-a350-hero.jpg"
-                            alt=""
+                            src="/seatScreen.avif"
+                            alt="seatScreen"
                             fill
                             className="object-cover rounded-t-2xl"
                         />
