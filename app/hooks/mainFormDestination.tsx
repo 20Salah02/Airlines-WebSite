@@ -24,12 +24,13 @@ type props = {
     id?: string;
     floatingLabel? : boolean;
     label?: string
+    dropdownPosition?: "left" | "right"
 }
 
 
-export default function HandleDestination({value , onSelect , selectedAirport , placeholder , className , id , label ,floatingLabel = false} : props){
+export default function HandleDestination({value , onSelect , selectedAirport , placeholder , className , id , label ,floatingLabel = false ,dropdownPosition} : props){
     const [data, setData] = useState<airportApi[]>([]);
-    const [query, setQuery] = useState(selectedAirport ? `${selectedAirport.city} (${selectedAirport.iata})` : "");    const [isTyping, setIsTyping] = useState(false);
+    const [query, setQuery] = useState(selectedAirport ? `${selectedAirport.city} (${selectedAirport.iata})` : "");    
 
 
     useEffect(() => {
@@ -55,7 +56,10 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
 
     
       if (!data) return <p>Loading...</p>;
-        console.log("data is" + data)
+
+      const isRightSide = true
+
+
     return (
     <div className="relative h-full flex ">
         <input
@@ -86,7 +90,7 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
         )}
 
         {result.length > 0 && (
-        <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll left-0 right-0 w-full z-90 "
+        <ul className={`h-70 top-14 absolute rounded-md bg-white overflow-y-scroll  ${dropdownPosition === "right" ? "right-0" : "left-0"} w-130 z-90 `}
             style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}
         >
             {result.map((item, index) => (

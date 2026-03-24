@@ -41,14 +41,14 @@ export default function NewsLetter(){
 
 
     return(
-        <div className="relative h-100">
+        <div className="relative h-110">
             <Image
                 src="/NL_Background_Desktop.avif"
                 alt="NL_Background_Desktop"
                 fill
                 className="object-cover rounded-2xl"
             />
-            <div className="absolute right-0 z-10 h-full w-1/2 space-y-8 pr-5 text-white flex flex-col justify-end ">
+            <div className="absolute  right-0 z-10 h-full w-1/2 space-y-8 pr-5 text-white flex flex-col justify-end ">
                 <div className="space-y-5">
                     <h2 className="text-4xl font-light" >Never miss an offer</h2>
                     <h3>Subscribe and be the first to receive our exclusive offers.</h3>
@@ -74,13 +74,14 @@ export default function NewsLetter(){
                                     Email
                             </label>
                         </div>
-                        <div className="relative flex-1 ">
+                        <div className="relative flex-1 text-black">
                             <HandleDestination
                                 className="h-13 w-full bg-white rounded-r-md border  pl-3 text-black border-zinc-300"
-                                placeholder="from"
+                                placeholder="From"
                                 value={departure?.name || ""}
                                 onSelect={(airport) => setDeparture(airport)}
                                 floatingLabel={true}
+                                dropdownPosition="right"
                             />
                         </div>
                     </div>
@@ -101,6 +102,7 @@ export default function NewsLetter(){
                             type="checkbox"
                             checked={check}
                             onChange={(e) => setCheck(e.target.checked)}
+                            className="w-18"
                         />                        
                         <h4>I’d like to receive offers and news. I understand the Privacy Notice and acknowledge that I can unsubscribe anytime using the link at the bottom of each message.</h4>
                     </div>
