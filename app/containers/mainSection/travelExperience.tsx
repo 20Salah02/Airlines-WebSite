@@ -4,7 +4,7 @@ import Image from "next/image"
 export default function TravelExp(){
 
     return(
-        <div className="my-15">
+        <div className="mt-15">
             <div className="space-y-6">
                 <h2 className="text-4xl font-light text-gray-600">Elevate Your Journey</h2>
                 <h3 className="text-gray-600">Experience world-class service and unparalleled comfort on every flight.</h3>

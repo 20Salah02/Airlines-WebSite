@@ -6,7 +6,7 @@ import NewsLetter from "./newsLetter"
 export default function MainSection(){
 
     return(
-        <div className="relative mt-60 px-15">
+        <div className="relative mt-60 px-15 space-y-20">
             <TravelExp/>
             <VoyageSuggetions/>
             <NewsLetter/>
