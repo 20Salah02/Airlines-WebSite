@@ -55,17 +55,28 @@ export default function NewsLetter(){
                 </div>
 
                 <div className="w-full">
-                    <div className="flex w-full">
-                        <input
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="flex-1 text-black h-10 w-full bg-white rounded-l-md border border-zinc-600 border-r-0 pl-3"
-                            type="email"
-                            placeholder="Email"
-                        />
-                        <div className="flex-1">
+                    <div className="flex w-full relative">
+                        <div className="relative flex-1">
+                            <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className=" text-black h-13 w-full bg-white rounded-l-md border border-zinc-300  pl-3"
+                                type="email"
+                            />
+                            <label
+                                className={`absolute left-3 transition-all duration-200 pointer-events-none
+                                    ${
+                                        email
+                                            ? "top-1 text-xs text-gray-500"
+                                            : "top-1/2 -translate-y-1/2 text-gray-400"
+                                    }`}
+                                >
+                                    Email
+                            </label>
+                        </div>
+                        <div className="relative flex-1 ">
                             <HandleDestination
-                                className="h-10 w-full bg-white rounded-r-md border border-zinc-600 pl-3 text-black"
+                                className="h-13 w-full bg-white rounded-r-md border  pl-3 text-black border-zinc-300"
                                 placeholder="from"
                                 value={departure?.name || ""}
                                 onSelect={(airport) => setDeparture(airport)}

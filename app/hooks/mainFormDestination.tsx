@@ -86,7 +86,7 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
         )}
 
         {result.length > 0 && (
-        <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll w-130 z-90 "
+        <ul className="h-70 absolute top-12 rounded-md bg-white overflow-y-scroll left-0 right-0 w-full z-90 "
             style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}
         >
             {result.map((item, index) => (
