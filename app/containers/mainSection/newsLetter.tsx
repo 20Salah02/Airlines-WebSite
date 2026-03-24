@@ -1,7 +1,44 @@
+"use client"
 
+import HandleDestination from "@/app/hooks/mainFormDestination"
 import Image from "next/image"
+//
+import { useState } from "react"
+
+type Airport ={
+    id: number;
+    name: string; 
+    city: string; 
+    country: string; 
+    iata: string;
+    latitude : number;
+    longitude : number
+}
 
 export default function NewsLetter(){
+
+    const [departure , setDeparture] = useState<Airport | null>(null)
+    const [email , setEmail] = useState<string>("")
+    const [check , setCheck] = useState<boolean>(false)
+    const [error , setEroror] = useState()
+    const [submitted, setSubmitted] = useState<boolean>(false)
+    const [showPopup, setShowPopup] = useState(false)
+
+    const isValidEmail = (email: string) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
+
+    //
+    const handleSubmit = () => {
+        setSubmitted(true)
+
+        if (!isValidEmail(email) || !departure || !check) {
+            return
+        }
+
+        setShowPopup(true)
+    }
+
 
     return(
         <div className="relative h-100">
@@ -20,32 +57,75 @@ export default function NewsLetter(){
                 <div className="w-full">
                     <div className="flex w-full">
                         <input
-                            className="flex-1 h-10 bg-white rounded-l-md border border-zinc-600 border-r-0 px-3"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="flex-1 text-black h-10 w-full bg-white rounded-l-md border border-zinc-600 border-r-0 pl-3"
                             type="email"
                             placeholder="Email"
                         />
-                        <input
-                            className="flex-1 h-10 bg-white rounded-r-md border border-zinc-600 px-3"
-                            type="text"
-                            placeholder="Airport"
-                        />
+                        <div className="flex-1">
+                            <HandleDestination
+                                className="h-10 w-full bg-white rounded-r-md border border-zinc-600 pl-3 text-black"
+                                placeholder="from"
+                                value={departure?.name || ""}
+                                onSelect={(airport) => setDeparture(airport)}
+                                floatingLabel={true}
+                            />
+                        </div>
                     </div>
 
                     <div className="flex w-full mt-1 text-sm text-red-500">
-                        <h5 className="flex-1">Please provide a valid email address.</h5>
-                        <h5 className="flex-1">Please select the preferred departure airport.</h5>
+                        <h5 className="flex-1">
+                            {submitted && !isValidEmail(email) && "Please enter a valid email address."}
+                        </h5>
+                        <h5 className="flex-1">
+                            {submitted && !departure && "Please select the preferred departure airport."}
+                        </h5>
                     </div>
                 </div>
 
-                <div className="flex items-start">
-                    <input className="w-15" type="checkbox" name="" id="" />
-                    <h4>I’d like to receive offers and news. I understand the Privacy Notice and acknowledge that I can unsubscribe anytime using the link at the bottom of each message.</h4>
+                <div className="">
+                    <div className="flex items-start">
+                        <input
+                            type="checkbox"
+                            checked={check}
+                            onChange={(e) => setCheck(e.target.checked)}
+                        />                        
+                        <h4>I’d like to receive offers and news. I understand the Privacy Notice and acknowledge that I can unsubscribe anytime using the link at the bottom of each message.</h4>
+                    </div>
+                    <div>
+                        {submitted && !check && (
+                            <p className="text-red-500 text-sm">
+                                You must accept to receive offers.
+                            </p>
+                        )}
+                    </div>
                 </div>
 
                 <div>
-                    <button className="border border-white rounded-4xl px-12 py-4 cursor-pointer">Subscribe</button>
+                    <button
+                        onClick={handleSubmit}
+                        className="border border-white rounded-4xl px-12 py-4 cursor-pointer"
+                    >
+                        Subscribe
+                    </button>                
                 </div>
             </div>
+            {showPopup && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-white rounded-2xl p-6 text-center w-80">
+                        <p className="text-gray-600 mb-4">
+                            You have successfully subscribed!
+                        </p>
+                        <button
+                            onClick={() => setShowPopup(false)}
+                            className="bg-black text-white px-4 py-2 rounded-lg cursor-pointer"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
