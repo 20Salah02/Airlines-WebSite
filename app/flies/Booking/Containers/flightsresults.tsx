@@ -20,7 +20,18 @@ import { useFlightResultContext } from "@/app/contexts/priceContext"
 export default function FlightResults(){
 
     const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
-    const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)    
+    const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)  
+    
+    const outboundDepartureTimes = [
+        "06:00", "07:30", "08:00", "09:30", "11:00",
+        "13:00", "14:30", "16:00", "18:30"
+    ]
+
+    const returnDepartureTimes = [
+        "05:00", "06:30", "08:00", "09:00", "10:30",
+        "12:00", "13:30", "15:00", "16:30", "18:00", "20:00"
+    ]
+    
     const { booking, setBooking} = useBooking();
     
     const search = useSearchParams()

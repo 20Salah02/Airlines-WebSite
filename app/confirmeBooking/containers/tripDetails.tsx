@@ -78,7 +78,7 @@ export default function TripDetails(){
                     <h2 className="text-[18px] text-gray-700">Grand Total</h2>
                     <h3 className="font-medium text-[18px] text-red-900">{formatTotalPrice} USD</h3>
                 </div>
-                <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
+                <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payment Summary</p>
             </div>
 
             {openResult && (
