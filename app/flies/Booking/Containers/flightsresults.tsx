@@ -19,18 +19,17 @@ import { useFlightResultContext } from "@/app/contexts/priceContext"
 
 export default function FlightResults(){
 
-    const [openClass , setopenClass] = useState<"eco" | "business" | null>(null)
+    const [openClass, setOpenClass] = useState<{ index: number; type: "eco" | "business" } | null>(null)
     const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)  
     
-    const outboundDepartureTimes = [
-        "06:00", "07:30", "08:00", "09:30", "11:00",
-        "13:00", "14:30", "16:00", "18:30"
+    const FlightsSchedules = [
+        { departureHour: 8,  departureMin: 0  },
+        { departureHour: 9,  departureMin: 30 },
+        { departureHour: 11, departureMin: 15 },
+        { departureHour: 13, departureMin: 45 },
+        { departureHour: 15, departureMin: 0  },
     ]
 
-    const returnDepartureTimes = [
-        "05:00", "06:30", "08:00", "09:00", "10:30",
-        "12:00", "13:30", "15:00", "16:30", "18:00", "20:00"
-    ]
     
     const { booking, setBooking} = useBooking();
     
@@ -45,13 +44,13 @@ export default function FlightResults(){
 
     const router = useRouter()
 
-    function handleOpenEco(){
-        setopenClass(prev => (prev === "eco" ? null : "eco"))
-    }
+    // function handleOpenEco(){
+    //     setOpenClass(prev => (prev === "eco" ? null : "eco"))
+    // }
 
-    function handleOpenBusiness(){
-        setopenClass(prev => (prev === "business" ? null : "business"))
-    }
+    // function handleOpenBusiness(){
+    //     setOpenClass(prev => (prev === "business" ? null : "business"))
+    // }
 
     useEffect(() => {
         if (openResult) {
@@ -66,8 +65,38 @@ export default function FlightResults(){
     }, [openResult]);
 
     
+    // flight times
+
+    function calcArrival(
+            depHour: number,
+            depMin: number,
+            durationHours: number,
+            durationMins: number
+        ): string {
+            const totalMins = depHour * 60 + depMin + durationHours * 60 + durationMins
+            const arrHour = Math.floor(totalMins / 60) % 24
+            const arrMin = totalMins % 60
+    return `${String(arrHour).padStart(2, "0")}:${String(arrMin).padStart(2, "0")}`
+    }
+
+    function formatTime(hour: number, min: number): string {
+        return `${String(hour).padStart(2, "0")}:${String(min).padStart(2, "0")}`
+    }
 
 
+    useEffect(() => {
+        document.body.style.overflow = openResult ? "hidden" : ""
+        return () => { document.body.style.overflow = "" }
+    }, [openResult])
+
+  function handleToggleClass(index: number, type: "eco" | "business") {
+        setOpenClass(prev =>
+        prev?.index === index && prev?.type === type ? null : { index, type }
+        )
+  }
+
+
+    //
     function handleSelectFare(fare: FareType, price: number) {
         setBooking(prev => ({
             ...prev,
@@ -95,12 +124,17 @@ export default function FlightResults(){
     const ecoPrice = Math.round(basePrice)
     const businessPrice = Math.round(basePrice * 2.5)
 
+
+    // ✅ الصح - خد المدة من الـ context مباشرة
+    const durationHours = isOutbound ? (flightResult?.durationHours ?? 9)  : 11
+    const durationMins  = isOutbound ? (flightResult?.durationMinutes ?? 0) : 45
+    
     return(
         <div>
 
             <div className="flex justify-between items-center"> 
                 <div>
-                    <h2 className="font-bold pb-3 text-[18px]">15 results</h2>
+                    <h2 className="font-bold pb-3 text-[18px]">{FlightsSchedules.length} results</h2>
                     <p className="text-gray-700">Fares displayed are for all passengers.</p>
                 </div>
                 <div>
@@ -110,65 +144,74 @@ export default function FlightResults(){
             </div>
             {/*  */}
 
+            {FlightsSchedules.map((flight , index) => {
+                const depTime = formatTime(flight.departureHour, flight.departureMin)
+                const arrTime = calcArrival(flight.departureHour, flight.departureMin, durationHours, durationMins)
+                const isEcoOpen     = openClass?.index === index && openClass?.type === "eco"
+                const isBusinessOpen = openClass?.index === index && openClass?.type === "business"
 
-            <div className="bg-white rounded-4xl p-5 my-4">
-                <div className="flex items-center justify-between ">
-                    <div className="w-1/3">
-                        <div>StarLink Wi-Fi</div>
-                        <div className="my-7">
-                            <div  className="flex text-4xl font-light justify-between">
-                                <p>10:00</p>
-                                <div className="text-lg font-normal text-gray-600">
-                                    <p className="flex justify-center items-center">L</p>
-                                    <p className="pt-4"> {flightDurationHour}h {flightDurationMin}min</p>
+                return(
+            
+                    <div key={index} className="bg-white rounded-4xl p-5 my-4">
+                        <div className="flex items-center justify-between ">
+                            <div className="w-1/3">
+                                <div>StarLink Wi-Fi</div>
+                                <div className="my-7">
+                                    <div  className="flex text-4xl font-light justify-between">
+                                        <p>{depTime}</p>
+                                        <div className="text-lg font-normal text-gray-600">
+                                            <p className="flex justify-center items-center">L</p>
+                                            <p className="pt-4"> {flightDurationHour}h  {flightDurationMin}min</p>
+                                        </div>
+                                        <p>{arrTime}</p>
+                                    </div>
+                                    <div className="flex justify-between text-gray-600 text-[20px]">
+                                        <p>{from?.iata}</p>
+                                        <p>{to?.iata}</p>
+                                    </div>
                                 </div>
-                                <p>12:10</p>
-                            </div>
-                            <div className="flex justify-between text-gray-600 text-[20px]">
-                                <p>{from?.iata}</p>
-                                <p>{to?.iata}</p>
-                            </div>
-                        </div>
-                        <div onClick={() => setOpenResult(isOutbound ? "outbound" : "return")} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
-                    </div>
-
-                    <div className="flex justify-between  ">
-                        <div   className="flex flex-col relative">
-                            <div onClick={handleOpenEco} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
-                                <p className="text-gray-600">Economy</p>
-                                <h2 className="text-4xl font-light flex pt-5">{ecoPrice} USD</h2>
-                                <h6 className="font-extralight text-green-800">special offer</h6>
+                                <div onClick={() => setOpenResult(isOutbound ? "outbound" : "return")} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
                             </div>
 
-                        </div>
-                        <div onClick={handleOpenBusiness} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
-                            <p className="text-gray-600">Business</p>
-                            <h2 className="text-4xl font-light flex pt-5">{businessPrice} USD</h2>
-                            <h6 className="font-extralight text-green-800">special offer</h6>
-                        </div>
-                    </div> 
-                </div>
+                            <div className="flex justify-between  ">
+                                <div   className="flex flex-col relative">
+                                    <div onClick={() => handleToggleClass(index, "eco")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                                        <p className="text-gray-600">Economy</p>
+                                        <h2 className="text-4xl font-light flex pt-5">{ecoPrice} USD</h2>
+                                        <h6 className="font-extralight text-green-800">special offer</h6>
+                                    </div>
 
-                <div>
-                   <div
-                        className={`
-                            overflow-hidden transition-all duration-500 ease-in-out
-                            ${openClass === "eco" ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
-                        `}
-                        >
-                        <EcoClass onSelect={handleSelectFare} />
-                    </div>
-                   <div
-                        className={`
-                            overflow-hidden transition-all duration-500 ease-in-out
-                            ${openClass === "business" ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
-                        `}
-                        >
-                        <BusinessClass onSelect={handleSelectFare} />
-                    </div>
+                                </div>
+                                <div onClick={() => handleToggleClass(index, "business")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                                    <p className="text-gray-600">Business</p>
+                                    <h2 className="text-4xl font-light flex pt-5">{businessPrice} USD</h2>
+                                    <h6 className="font-extralight text-green-800">special offer</h6>
+                                </div>
+                            </div> 
+                        </div>
 
-                </div>
-            </div>
+                        <div>
+                        <div
+                                className={`
+                                    overflow-hidden transition-all duration-500 ease-in-out
+                                    ${isEcoOpen ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
+                                `}
+                                >
+                                <EcoClass onSelect={handleSelectFare} />
+                            </div>
+                        <div
+                                className={`
+                                    overflow-hidden transition-all duration-500 ease-in-out
+                                    ${isBusinessOpen ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
+                                `}
+                                >
+                                <BusinessClass onSelect={handleSelectFare} />
+                            </div>
+
+                        </div>
+                    </div>
+                )
+            })}
 
 
             {openResult && (
