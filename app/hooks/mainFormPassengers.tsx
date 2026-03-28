@@ -6,10 +6,9 @@ import { useState } from "react"
 type setPassengersText = {
   setPassengersText: (range: string) => void
   isOpen : (range : boolean) => void
-  className? : string
 }
 
-export default function HandlePassengers({setPassengersText , isOpen , className} : setPassengersText){
+export default function HandlePassengers({setPassengersText , isOpen } : setPassengersText){
     const [adultPass , setAdultPass] = useState<number>(1)
     const [childPass , setChildPass] = useState<number>(0)
     const [infantPass , setInfantPass] = useState<number>(0)

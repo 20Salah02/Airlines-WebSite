@@ -50,17 +50,34 @@ export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
                 <h2 className="font-medium text-lg">{from?.city} to {to?.city}</h2>
                 <h3 className="text-gray-600">{formatDate(firstDay)}</h3>
             </div>
+
             <div className="flex space-x-8">
-                <div className="space-y-14">
+                <div className="flex flex-col justify-between py-1 text-left space-y-14">
                     <p>{depTime}</p>
                     <p>{flightDurationHour}h {flightDurationMin}min</p>
                     <p>{arrTime}</p>
                 </div>
-                <p className="flex items-center">L</p>
+                
+                    <div className="relative flex flex-col items-center py-3">
+                        <div className="w-4 h-4 rounded-full border border-gray-400 bg-white z-10"></div>
+                        
+                        <div className="flex-1 w-px bg-gray-300"></div>
+                        
+                        <div className="my-4 z-10">
+                            <div className="w-6 h-6 bg-red-900 rotate-45 flex items-center justify-center overflow-hidden">
+                            <span className="text-[10px] text-white -rotate-45 font-bold">SL</span>
+                            </div>
+                        </div>
+
+                        <div className="flex-1 w-px bg-gray-300"></div>
+
+                        <div className="w-4 h-4 rounded-full border border-gray-400 bg-white z-10"></div>
+                    </div>
+
                 <div className="space-y-7">
                     <div>
                         <h2 className="font-medium">{from?.city}</h2>
-                        <h3 className="text-gray-600">{from?.name}</h3>
+                        <h3 className="text-gray-600">{from?.name} ({from?.iata})</h3>
                     </div>
                     <div>
                         <h2>QR6381 - Boeing 777-300</h2>
@@ -68,7 +85,7 @@ export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
                     </div>
                     <div>
                         <h2 className="font-medium">{to?.city}</h2>
-                        <h3 className="text-gray-600">{to?.name}</h3>
+                        <h3 className="text-gray-600">{to?.name} ({to?.iata})</h3>
                     </div>
                 </div>
             </div>
