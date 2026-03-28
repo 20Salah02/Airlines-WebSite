@@ -37,6 +37,10 @@ export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
     const flightDurationMin  = flightResult.durationMinutes
 
     //
+    const selectedFlight = isOutbound ? booking.outboundFlight : booking.returnFlight
+    const depTime = departureTime || selectedFlight?.departureTime
+    const arrTime = arrivalTime || selectedFlight?.arrivalTime
+
 
     return(
         
@@ -48,9 +52,9 @@ export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
             </div>
             <div className="flex space-x-8">
                 <div className="space-y-14">
-                    <p>{departureTime}</p>
+                    <p>{depTime}</p>
                     <p>{flightDurationHour}h {flightDurationMin}min</p>
-                    <p>{arrivalTime}</p>
+                    <p>{arrTime}</p>
                 </div>
                 <p className="flex items-center">L</p>
                 <div className="space-y-7">

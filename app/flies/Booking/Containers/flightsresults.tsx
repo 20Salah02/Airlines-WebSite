@@ -114,7 +114,7 @@ export default function FlightResults(){
         }
     }
 
-            //
+    //
     const {flightResult} = useFlightResultContext()
 
     const basePrice = flightResult?.price ?? 0
@@ -125,8 +125,8 @@ export default function FlightResults(){
     const businessPrice = Math.round(basePrice * 2.5)
 
 
-    const durationHours = isOutbound ? (flightResult?.durationHours ?? 9)  : 11
-    const durationMins  = isOutbound ? (flightResult?.durationMinutes ?? 0) : 45
+    const durationHours = flightResult?.durationHours ?? 9
+    const durationMins  = flightResult?.durationMinutes ?? 0
     
     return(
         <div>

@@ -24,7 +24,7 @@ type SelectedFlight = {
   fare: FareType;
   price: number;
   departureTime : string;
-  arriveTime : string;
+  arrivalTime : string;
 };
 
 type Booking = {
@@ -69,7 +69,7 @@ export default function BookingProvider({ children }: BookingProviderProps) {
         }
       }
     }
-    // Default initial state
+
     return {
       from: null,
       to: null,

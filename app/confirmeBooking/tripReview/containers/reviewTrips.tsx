@@ -28,7 +28,8 @@ export default function ReviewTheTrips(){
     const to = booking.to 
     const firstDay =  booking.dates?.departure 
     const lastDay =  booking.dates?.return 
-    const flightDepartureTime = booking.outboundFlight?.departureTime
+    const outboundTime = booking.outboundFlight
+    const returnTime = booking.returnFlight
     
 
     function formatDate(date?: Date | null) {
@@ -65,7 +66,7 @@ export default function ReviewTheTrips(){
                     <div className="flex justify-between items-start ">
                         <div className="flex-1 space-y-3 ">
                             <h2 className="text-4xl font-light">{from?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">{flightDepartureTime}</h3>
+                            <h3 className="text-[19px] text-gray-600">{outboundTime?.departureTime}</h3>
                             <h4 className="text-gray-600">{from?.city}</h4>
                             <h5>{from?.name}</h5>
                         </div>
@@ -75,7 +76,7 @@ export default function ReviewTheTrips(){
                         </div>
                         <div className="flex-1 space-y-3 text-right "> 
                             <h2 className="text-4xl font-light ">{to?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">12:00</h3>
+                            <h3 className="text-[19px] text-gray-600">{outboundTime?.arrivalTime}</h3>
                             <h4 className="text-gray-600">{to?.city}</h4>
                             <h5>{to?.name}</h5>
                         </div>
@@ -104,7 +105,7 @@ export default function ReviewTheTrips(){
                     <div className="flex justify-between items-start ">
                         <div className="flex-1 space-y-3 ">
                             <h2 className="text-4xl font-light">{to?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">10:00</h3>
+                            <h3 className="text-[19px] text-gray-600">{returnTime?.departureTime}</h3>
                             <h4 className="text-gray-600">{to?.city}</h4>
                             <h5>{to?.name}</h5>
                         </div>
@@ -114,7 +115,7 @@ export default function ReviewTheTrips(){
                         </div>
                         <div className="flex-1 space-y-3 text-right "> 
                             <h2 className="text-4xl font-light ">{from?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">12:00</h3>
+                            <h3 className="text-[19px] text-gray-600">{returnTime?.arrivalTime}</h3>
                             <h4 className="text-gray-600">{from?.city}</h4>
                             <h5>{from?.name}</h5>
                         </div>
