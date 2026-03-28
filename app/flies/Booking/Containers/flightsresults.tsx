@@ -155,17 +155,37 @@ export default function FlightResults(){
                             <div className="w-1/3">
                                 <div>StarLink Wi-Fi</div>
                                 <div className="my-7">
-                                    <div  className="flex text-4xl font-light justify-between">
-                                        <p>{depTime}</p>
-                                        <div className="text-lg font-normal text-gray-600">
-                                            <p className="flex justify-center items-center">L</p>
-                                            <p className="pt-4"> {flightDurationHour}h  {flightDurationMin}min</p>
+                                    <div  className="flex justify-between">
+                                        <div>
+                                            <p className="text-3xl font-light">{depTime}</p>
+                                            <p className="text-gray-600 text-[18px]">{from?.iata}</p>
                                         </div>
-                                        <p>{arrTime}</p>
-                                    </div>
-                                    <div className="flex justify-between text-gray-600 text-[20px]">
-                                        <p>{from?.iata}</p>
-                                        <p>{to?.iata}</p>
+
+                                       <div className="flex-1 flex flex-col items-center px-4 relative">
+      
+                                        <div className="relative w-full flex items-center h-10">
+                                            <div className="absolute w-full h-px bg-gray-300 top-1/2 transform -translate-y-1/2"></div>
+                                            
+                                            <div className="absolute left-0 w-3 h-3 rounded-full border border-gray-400 bg-white z-10"></div>
+                                            
+                                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 z-10">
+                                            <div className="w-8 h-8 bg-[#8A1538] rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
+                                                <span className="text-[10px] text-white -rotate-45 font-bold uppercase">SL</span>
+                                            </div>
+                                            </div>
+
+                                            <div className="absolute right-0 w-3 h-3 rounded-full border border-gray-400 bg-white z-10"></div>
+                                        </div>
+
+                                        <div className="text-center mt-2">
+                                            <p className="text-gray-600 text-[18px] font-normal tracking-wide">{flightDurationHour}h {flightDurationMin}min</p>
+                                        </div>
+                                        </div>
+                                        
+                                        <div className="">
+                                            <p className="text-3xl font-light">{arrTime}</p>
+                                            <p className="text-gray-600 text-[18px]">{to?.iata}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div onClick={() => setOpenResult({type : isOutbound ? "outbound" : "return" , departureTime :depTime , arrivalTime: arrTime})} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
@@ -173,16 +193,16 @@ export default function FlightResults(){
 
                             <div className="flex justify-between  ">
                                 <div   className="flex flex-col relative">
-                                    <div onClick={() => handleToggleClass(index, "eco")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                                    <div onClick={() => handleToggleClass(index, "eco")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                                         <p className="text-gray-600">Economy</p>
-                                        <h2 className="text-4xl font-light flex pt-5">{ecoPrice} USD</h2>
+                                        <h2 className="text-3xl font-light flex pt-5">{ecoPrice} USD</h2>
                                         <h6 className="font-extralight text-green-800">special offer</h6>
                                     </div>
 
                                 </div>
-                                <div onClick={() => handleToggleClass(index, "business")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-70 h-47 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                                <div onClick={() => handleToggleClass(index, "business")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300">
                                     <p className="text-gray-600">Business</p>
-                                    <h2 className="text-4xl font-light flex pt-5">{businessPrice} USD</h2>
+                                    <h2 className="text-3xl font-light flex pt-5">{businessPrice} USD</h2>
                                     <h6 className="font-extralight text-green-800">special offer</h6>
                                 </div>
                             </div> 

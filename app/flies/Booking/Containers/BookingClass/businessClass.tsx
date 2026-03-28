@@ -30,8 +30,8 @@ export default function BusinessClass({onSelect} : BusClassProps){
         <div className="grid grid-cols-3 gap-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">Business Comfort</h1>
-                    <div className="mt-7">
+                    <h1 className="text-[25px] font-light text-gray-600">Business Comfort</h1>
+                    <div className="mt-5">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
@@ -74,8 +74,8 @@ export default function BusinessClass({onSelect} : BusClassProps){
             
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">Business Elite</h1>
-                    <div className="mt-7">
+                    <h1 className="text-[25px] font-light text-gray-600">Business Elite</h1>
+                    <div className="mt-5">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">{elitePrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>

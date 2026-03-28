@@ -33,7 +33,7 @@ export default function FliesHeader(){
 
 
     return(
-        <div className="my-20 font-light">
+        <div className="my-17 font-light">
             <h6>{formatDate(firstDay)}</h6>
             <div className="text-5xl text-gray-600">
                 <h2 className="py-4">Select Your Departure Flight</h2>

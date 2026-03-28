@@ -32,8 +32,8 @@ export default function EcoClass({onSelect} : EcoClassProps){
         <div className="grid grid-cols-4 gap-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">Economy Classic</h1>
-                    <div className="mt-7">
+                    <h1 className="text-[25px] font-light text-gray-600">Economy Classic</h1>
+                    <div className="mt-5">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">{classicPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
@@ -72,14 +72,14 @@ export default function EcoClass({onSelect} : EcoClassProps){
             
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">Economy Convenienc</h1>
-                    <div className="mt-7">
+                    <h1 className="text-[25px] font-light text-gray-600">Economy Convenienc</h1>
+                    <div className="mt-5">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">{conveniencPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
                         onClick={() => onSelect("Economy Convenienc" , conveniencPrice)}
-                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-l font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>                </div>
                 <div className="text-gray-600">
@@ -115,8 +115,8 @@ export default function EcoClass({onSelect} : EcoClassProps){
             
             <div className=" border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
-                    <h1 className="text-3xl font-light text-gray-600">Economy Comfort</h1>
-                    <div className="mt-7">
+                    <h1 className="text-[25px] font-light text-gray-600">Economy Comfort</h1>
+                    <div className="mt-5">
                         <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortPrice.toLocaleString()} USD</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
@@ -167,8 +167,8 @@ export default function EcoClass({onSelect} : EcoClassProps){
                         className="object-cover  rounded-3xl"
                     />
                     <div className="flex flex-col h-full p-4 z-10 relative text-white">
-                        <h1 className="text-3xl font-light">Business Comfort</h1>
-                        <div className="mt-7">
+                        <h1 className="text-[25px] font-light">Business Comfort</h1>
+                        <div className="mt-5">
                             <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortBusinesPrice.toLocaleString()} USD</h2>
                         </div>
                         <h4
