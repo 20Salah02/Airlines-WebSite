@@ -22,12 +22,14 @@ type FlightEditProps = {
 
 export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
 
-    type Airport ={
-    id : number
-    name : string
-    city : string
-    country : string
-    iata : string
+    type Airport = {
+        id : number
+        name : string
+        city : string
+        country : string
+        iata : string
+        latitude : number;
+        longitude : number
     }
 
     //
@@ -108,26 +110,39 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
             <form onSubmit={(e) => e.preventDefault()}></form>
             <h1 className="flex justify-center text-xl">Modify Search</h1>
             <div className="space-y-6">
-                <div className="flex space-x-5">
-                    <label>
-                        <input
-                            type="radio"
-                            name="tripType"
-                            checked={tripType === "round-trip"}
-                            onChange={() => setTripType("round-trip")}
-                        />
-                        <span className="ml-1">Return</span>
-                    </label>
+                <div className="flex items-stretch gap-6 text-[16px] font-medium w-full">
+                    <button
+                        type="button"
+                        onClick={() => setTripType("round-trip")}
+                        className={`flex pb-2 border-b-2 transition cursor-pointer ${
+                        tripType === "round-trip"
+                        ? "border-red-900 text-red-900"
+                        : "border-transparent text-gray-500"
+                        }`}
+                    >
+                            <svg
+                                className="h-5 mr-1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 56 56"
+                                fill="currentColor"
+                            >
+                                <path d="M6.672 37.434c-1.664 0-2.11 1.148-1.195 2.437l5.25 7.453c.773 1.102 1.898 1.078 2.648 0l5.25-7.476c.89-1.266.469-2.414-1.195-2.414h-3.282V19.809c0-4.055 2.461-6.61 5.836-6.61c3.399 0 5.93 2.508 5.93 6.61v16.054c0 6.797 4.242 11.11 10.102 11.11c5.836 0 10.03-4.313 10.03-11.11V18.566h3.282c1.664 0 2.11-1.148 1.195-2.437l-5.226-7.477c-.75-1.054-1.875-1.078-2.649 0l-5.25 7.454c-.937 1.312-.492 2.46 1.196 2.46h3.258v17.625c0 4.032-2.438 6.586-5.836 6.586s-5.93-2.508-5.93-6.586V20.137c0-6.797-4.242-11.11-10.102-11.11c-5.836 0-10.03 4.313-10.03 11.11v17.297Z" />
+                            </svg>
+                        Return
+                    </button>
 
-                    <label>
-                        <input
-                            type="radio"
-                            name="tripType"
-                            checked={tripType === "one-way"}
-                            onChange={() => setTripType("one-way")}
-                        />
-                        <span className="ml-1">One way</span>
-                    </label>
+                    <button
+                        type="button"
+                        onClick={() => setTripType("one-way")}
+                        className={`flex pb-2 border-b-2 transition cursor-pointer ${
+                        tripType === "one-way"
+                        ? "border-red-900 text-red-900"
+                        : "border-transparent text-gray-500"
+                        }`}
+                    >
+                        <svg className="mr-1 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><path fill="currentColor" d="m245.66 74.34l-32-32a8 8 0 0 0-11.32 11.32L220.69 72H208c-49.33 0-61.05 28.12-71.38 52.92c-9.38 22.51-16.92 40.59-49.48 42.84a40 40 0 1 0 .1 16c43.26-2.65 54.34-29.15 64.14-52.69C161.41 107 169.33 88 208 88h12.69l-18.35 18.34a8 8 0 0 0 11.32 11.32l32-32a8 8 0 0 0 0-11.32M48 200a24 24 0 1 1 24-24a24 24 0 0 1-24 24"></path></svg>                        One way
+                    </button>
+
                 </div>
                 <div className="flex flex-col border rounded-md border-gray-300 " >
                     <div className="py-2 px-2 w-full">

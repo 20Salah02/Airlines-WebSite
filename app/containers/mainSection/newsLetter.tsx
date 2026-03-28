@@ -20,7 +20,6 @@ export default function NewsLetter(){
     const [departure , setDeparture] = useState<Airport | null>(null)
     const [email , setEmail] = useState<string>("")
     const [check , setCheck] = useState<boolean>(false)
-    const [error , setEroror] = useState()
     const [submitted, setSubmitted] = useState<boolean>(false)
     const [showPopup, setShowPopup] = useState(false)
 
