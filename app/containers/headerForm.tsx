@@ -189,10 +189,11 @@ export default function Form(){
                         {openCalendar && (
                             <div className="absolute right-0 mt-1  z-90">
                                 <HandleDate
-                                selected={selectDate}
-                                onSelectDate={setSelectDate}
-                                setIsOpen={setopenCalendare}
-                                mode={tripType === "round-trip" ? "range" : "single"}
+                                    selected={selectDate}
+                                    onSelectDate={setSelectDate}
+                                    setIsOpen={setopenCalendare}
+                                    mode={tripType === "round-trip" ? "range" : "single"}
+                                    className="p-6"
                                 />
                             </div>
                         )}

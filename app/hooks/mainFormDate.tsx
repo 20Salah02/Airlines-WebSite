@@ -9,6 +9,7 @@ type HandleDateProps = {
   onSelectDate: (range: DateRange | undefined) => void
   setIsOpen: (open: boolean) => void
   mode: "single" | "range"
+  className? : string
 }
 
 export default function HandleDate({
@@ -16,6 +17,7 @@ export default function HandleDate({
   onSelectDate,
   setIsOpen,
   mode,
+  className
 }: HandleDateProps) {
 
   const handleContinue = () => {
@@ -44,7 +46,7 @@ export default function HandleDate({
   }
 
   return (
-    <div className="bg-white border-2 border-zinc-300 rounded-md p-6 ">
+    <div className={`bg-white border-2 border-zinc-300 rounded-md ${className}`}>
       <div className="pb-10 border-b border-b-zinc-200 ">
 
         {mode === "single" ? (

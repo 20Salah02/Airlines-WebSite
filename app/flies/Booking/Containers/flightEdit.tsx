@@ -108,7 +108,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
 
 
     return(
-        <div className=" bg-white w-full p-9 border-l border-l-gray-300 h-screen space-y-10">
+        <div className=" bg-white w-full p-9 border-l border-l-gray-300 h-screen space-y-6">
             <form onSubmit={(e) => e.preventDefault()}></form>
             <h1 className="flex justify-center text-xl">Modify Search</h1>
             <div className="space-y-6">
@@ -174,33 +174,37 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                         </div>      
                     </div>            
                 </div>
-                <div onClick={() => setopenCalendare(prev => !prev)} className="flex w-full border rounded-md border-gray-300 p-2  ">
-                    <div className="w-1/2 space-y-1.5">
-                        <p className="text-gray-600 text-xs">Departure</p>
-                        <p>{formatDate(selectDate?.from)}</p>
-                    </div>
-                    {tripType === "round-trip" && (
-                        <div className="w-1/2 space-y-1.5">
-                            <p className="text-gray-600 text-xs">Return</p>
-                            <p>{formatDate(selectDate?.to)}</p>
+                <div>
+                    <div onClick={() => setopenCalendare(prev => !prev)} className={`flex items-center w-full border rounded-md border-gray-300 p-2 cursor-pointer ${borderStyle} `}>
+                        <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
+                       <div className="w-1/2 space-y-1.5">
+                            <p className="text-gray-600 text-xs">Departure</p>
+                            <p>{formatDate(selectDate?.from)}</p>
                         </div>
-                    )}
-                </div>
-                <div className=" w-full border rounded-md border-gray-300 p-2">
+                        {tripType === "round-trip" && (
+                            <div className="w-1/2 space-y-1.5">
+                                <p className="text-gray-600 text-xs">Return</p>
+                                <p>{formatDate(selectDate?.to)}</p>
+                            </div>
+                        )}
+                    </div>
                     {openCalendar && (
-                        <div className="absolute h-1/2  top-1/5 left-4 w-full  z-50">
+                        <div className="absolute top-1/6 left-1 w-fit  z-50">
                             <HandleDate
                                 selected={selectDate}
                                 onSelectDate={setSelectDate}
                                 setIsOpen={setopenCalendare}
                                 mode={tripType === "round-trip" ? "range" : "single"}
+                                className="pb-5"
                             />                        
                         </div>
                     )}
-                    
+                </div>    
+                <div className=" w-full border rounded-md border-gray-300 p-2">
                     <div className="relative z-10">
                         <p className="text-gray-600 text-xs">Passenger / Class</p>
                         <div onClick={() => setOpenPassengers(prev => !prev)} >
+                            
                             <p>{passengersText}</p>
                         </div>
                         <div>
