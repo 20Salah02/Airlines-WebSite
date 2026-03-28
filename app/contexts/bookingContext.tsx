@@ -23,6 +23,8 @@ type SelectedFlight = {
   flightId: string;
   fare: FareType;
   price: number;
+  departureTime : string;
+  arriveTime : string;
 };
 
 type Booking = {
@@ -69,13 +71,13 @@ export default function BookingProvider({ children }: BookingProviderProps) {
     }
     // Default initial state
     return {
-    from: null,
-    to: null,
-    dates: null,
-    passengers: "",
-    tripType: "round-trip",
-    outboundFlight: null,
-    returnFlight: null,
+      from: null,
+      to: null,
+      dates: null,
+      passengers: "",
+      tripType: "round-trip",
+      outboundFlight: null,
+      returnFlight: null,
     };
   });
 

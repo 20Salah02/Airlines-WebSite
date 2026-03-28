@@ -6,10 +6,12 @@ import { useBooking } from "@/app/contexts/bookingContext";
 import { useFlightResultContext } from "@/app/contexts/priceContext";
 
 type Props = {
-  type: "outbound" | "return"
+    type: "outbound" | "return"
+    departureTime?: string,
+    arrivalTime?: string
 }
 
-export default function FlightDetails({type}:Props){
+export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
 
     const {booking} = useBooking()
     const isOutbound = type === "outbound"
@@ -34,6 +36,8 @@ export default function FlightDetails({type}:Props){
     const flightDurationHour = flightResult.durationHours
     const flightDurationMin  = flightResult.durationMinutes
 
+    //
+
     return(
         
         <div className="bg-white p-9 border-l border-l-gray-300 h-screen space-y-20">
@@ -44,9 +48,9 @@ export default function FlightDetails({type}:Props){
             </div>
             <div className="flex space-x-8">
                 <div className="space-y-14">
-                    <p>10:00</p>
+                    <p>{departureTime}</p>
                     <p>{flightDurationHour}h {flightDurationMin}min</p>
-                    <p>20:00</p>
+                    <p>{arrivalTime}</p>
                 </div>
                 <p className="flex items-center">L</p>
                 <div className="space-y-7">

@@ -16,11 +16,16 @@ import FlightCalculator from "./flightCalculator"
 import { FareType } from "@/app/contexts/bookingContext"
 import { useFlightResultContext } from "@/app/contexts/priceContext"
 
-
+//
+type OpenResultType = {
+    type: "outbound" | "return",
+    departureTime: string,
+    arrivalTime: string
+}
 export default function FlightResults(){
 
     const [openClass, setOpenClass] = useState<{ index: number; type: "eco" | "business" } | null>(null)
-    const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)  
+    const [openResult, setOpenResult] = useState<OpenResultType | null>(null)  
     
     const FlightsSchedules = [
         { departureHour: 8,  departureMin: 0  },
@@ -44,13 +49,6 @@ export default function FlightResults(){
 
     const router = useRouter()
 
-    // function handleOpenEco(){
-    //     setOpenClass(prev => (prev === "eco" ? null : "eco"))
-    // }
-
-    // function handleOpenBusiness(){
-    //     setOpenClass(prev => (prev === "business" ? null : "business"))
-    // }
 
     useEffect(() => {
         if (openResult) {
@@ -89,21 +87,23 @@ export default function FlightResults(){
         return () => { document.body.style.overflow = "" }
     }, [openResult])
 
-  function handleToggleClass(index: number, type: "eco" | "business") {
-        setOpenClass(prev =>
-        prev?.index === index && prev?.type === type ? null : { index, type }
-        )
-  }
+    function handleToggleClass(index: number, type: "eco" | "business") {
+            setOpenClass(prev =>
+            prev?.index === index && prev?.type === type ? null : { index, type }
+            )
+    }
 
 
     //
-    function handleSelectFare(fare: FareType, price: number) {
+    function handleSelectFare(fare: FareType, price: number ,departureTime: string, arrivalTime: string) {
         setBooking(prev => ({
             ...prev,
             [isOutbound ? "outboundFlight" : "returnFlight"]: {
-            flightId: "FLIGHT_123",
-            fare,
-            price,
+                flightId: "FLIGHT_123",
+                fare,
+                price,
+                departureTime,
+                arrivalTime
             },
         }));
 
@@ -125,7 +125,6 @@ export default function FlightResults(){
     const businessPrice = Math.round(basePrice * 2.5)
 
 
-    // ✅ الصح - خد المدة من الـ context مباشرة
     const durationHours = isOutbound ? (flightResult?.durationHours ?? 9)  : 11
     const durationMins  = isOutbound ? (flightResult?.durationMinutes ?? 0) : 45
     
@@ -170,7 +169,7 @@ export default function FlightResults(){
                                         <p>{to?.iata}</p>
                                     </div>
                                 </div>
-                                <div onClick={() => setOpenResult(isOutbound ? "outbound" : "return")} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
+                                <div onClick={() => setOpenResult({type : isOutbound ? "outbound" : "return" , departureTime :depTime , arrivalTime: arrTime})} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
                             </div>
 
                             <div className="flex justify-between  ">
@@ -197,7 +196,7 @@ export default function FlightResults(){
                                     ${isEcoOpen ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
                                 `}
                                 >
-                                <EcoClass onSelect={handleSelectFare} />
+                                <EcoClass onSelect={(fare, price) => handleSelectFare(fare, price, depTime, arrTime)} />
                             </div>
                         <div
                                 className={`
@@ -205,7 +204,7 @@ export default function FlightResults(){
                                     ${isBusinessOpen ? " opacity-100 mt-6" : "max-h-0 opacity-0"}
                                 `}
                                 >
-                                <BusinessClass onSelect={handleSelectFare} />
+                                <BusinessClass onSelect={(fare, price) => handleSelectFare(fare, price, depTime, arrTime)} />
                             </div>
 
                         </div>
@@ -227,7 +226,7 @@ export default function FlightResults(){
                 `}
                 onClick={(e) => e.stopPropagation()} 
                 >
-                <FlightDetails type={openResult}/>
+                <FlightDetails type={openResult.type} departureTime={openResult.departureTime} arrivalTime={openResult.arrivalTime}/>
                 </div>
             </div>
             )}

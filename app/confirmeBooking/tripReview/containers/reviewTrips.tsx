@@ -28,7 +28,8 @@ export default function ReviewTheTrips(){
     const to = booking.to 
     const firstDay =  booking.dates?.departure 
     const lastDay =  booking.dates?.return 
-
+    const flightDepartureTime = booking.outboundFlight?.departureTime
+    
 
     function formatDate(date?: Date | null) {
         if (!date) return "";
@@ -64,7 +65,7 @@ export default function ReviewTheTrips(){
                     <div className="flex justify-between items-start ">
                         <div className="flex-1 space-y-3 ">
                             <h2 className="text-4xl font-light">{from?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">10:00</h3>
+                            <h3 className="text-[19px] text-gray-600">{flightDepartureTime}</h3>
                             <h4 className="text-gray-600">{from?.city}</h4>
                             <h5>{from?.name}</h5>
                         </div>
