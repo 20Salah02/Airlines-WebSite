@@ -88,23 +88,29 @@ export default function FlightsNav(){
                     </li>
                 </Link>
             </ul>
-            {openFormEdit && (
+
             <div
-                className="fixed inset-0 z-20 bg-black/40"
-                onClick={() => setOpenFormEdit(false)} 
+                className={`
+                    fixed inset-0 z-20 bg-black/40
+                    transition-opacity duration-300
+                    ${openFormEdit ? "opacity-100" : "opacity-0 pointer-events-none"}
+                `}
+                onClick={() => setOpenFormEdit(false)}
             >
                 <div
-                className={`
-                    absolute top-0 right-0 h-screen w-1/2 bg-white
-                    transition-transform duration-300
-                    translate-x-0
-                `}
-                onClick={(e) => e.stopPropagation()} 
+                    className={`
+                        absolute top-0 right-0 h-screen w-1/2 bg-white
+                        transition-transform duration-300
+                        ${openFormEdit ? "translate-x-0" : "translate-x-full"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
                 >
-                <FlightEdit setOpenFormEdit={setOpenFormEdit} />
+                    {openFormEdit && (
+                        <FlightEdit setOpenFormEdit={setOpenFormEdit} />
+                    )}
                 </div>
             </div>
-            )}
+
         </div>
     )
 }

@@ -127,23 +127,30 @@ export default function ReviewTheTrips(){
             </div>
             )}  
 
-            {flightDetails && (
+            <div
+                className={`
+                    fixed inset-0 z-40 bg-black/40
+                    transition-opacity duration-300
+                    ${flightDetails ? "opacity-100 " : "opacity-0 pointer-events-none"}
+                `}
+                onClick={() => setFlightDetails(null)}
+            >
                 <div
-                    className="fixed inset-0 z-40 bg-black/40"
-                    onClick={() => setFlightDetails(null)}
+                    className={`
+                        absolute top-0 right-0 h-screen w-1/2 bg-white
+                        transition-transform duration-300
+                        ${flightDetails ? "translate-x-0" : "translate-x-full"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    <div
-                        className={`
-                            absolute top-0 right-0 h-screen w-1/2 bg-white
-                            transition-transform duration-300
-                            translate-x-0
-                        `}
-                        onClick={(e) => e.stopPropagation()} 
-                    >
-                        <FlightDetails type={flightDetails}/>
-                    </div>
+                    {flightDetails  && (
+                        <FlightDetails
+                            type={flightDetails}
+
+                        />
+                    )}
                 </div>
-            )}
+            </div>
         </div>
     )
 }

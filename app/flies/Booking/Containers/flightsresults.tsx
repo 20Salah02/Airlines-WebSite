@@ -10,7 +10,6 @@ import { useSearchParams , useRouter } from "next/navigation"
 import EcoClass from "./BookingClass/economieClass"
 import BusinessClass from "./BookingClass/businessClass"
 import FlightDetails from "./flightDetails"
-import FlightCalculator from "./flightCalculator"
 
 //
 import { FareType } from "@/app/contexts/bookingContext"
@@ -213,24 +212,31 @@ export default function FlightResults(){
             })}
 
 
-            {openResult && (
             <div
-                className="fixed inset-0 z-40 bg-black/40"
-                onClick={() => setOpenResult(null)} 
+                className={`
+                    fixed inset-0 z-40 bg-black/40
+                    transition-opacity duration-300
+                    ${openResult ? "opacity-100 " : "opacity-0 pointer-events-none"}
+                `}
+                onClick={() => setOpenResult(null)}
             >
                 <div
-                className={`
-                    absolute top-0 right-0 h-screen w-1/2 bg-white
-                    transition-transform duration-300
-                    translate-x-0
-                `}
-                onClick={(e) => e.stopPropagation()} 
+                    className={`
+                        absolute top-0 right-0 h-screen w-1/2 bg-white
+                        transition-transform duration-300
+                        ${openResult ? "translate-x-0" : "translate-x-full"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
                 >
-                <FlightDetails type={openResult.type} departureTime={openResult.departureTime} arrivalTime={openResult.arrivalTime}/>
+                    {openResult && (
+                        <FlightDetails
+                            type={openResult.type}
+                            departureTime={openResult.departureTime}
+                            arrivalTime={openResult.arrivalTime}
+                        />
+                    )}
                 </div>
             </div>
-            )}
-            <FlightCalculator />
 
         </div>
     )

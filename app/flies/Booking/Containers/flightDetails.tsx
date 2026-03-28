@@ -47,7 +47,7 @@ export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
         <div className="bg-white p-9 border-l border-l-gray-300 h-screen space-y-20">
             <h1 className="flex justify-center text-xl">Flight details</h1>
             <div className="space-y-3 mb-15">
-                <h2 className="font-medium text-lg">{from?.city} to {to?.city}</h2>
+                <h2 className="font-medium text-lg text-red-900">{from?.city} <span className="font-normal text-gray-600">to</span> {to?.city}</h2>
                 <h3 className="text-gray-600">{formatDate(firstDay)}</h3>
             </div>
 
@@ -76,15 +76,15 @@ export default function FlightDetails({type ,departureTime ,arrivalTime}:Props){
 
                 <div className="space-y-7">
                     <div>
-                        <h2 className="font-medium">{from?.city}</h2>
+                        <h2 className="font-medium text-red-900">{from?.city}</h2>
                         <h3 className="text-gray-600">{from?.name} ({from?.iata})</h3>
                     </div>
                     <div>
-                        <h2>QR6381 - Boeing 777-300</h2>
-                        <h3 className="text-gray-600">Operated by Garuda Salah</h3>
+                        <h2 className="text-red-900">style of flighBoeing 777-300</h2>
+                        <h3 className="text-gray-600 ">Operated by Garuda Salah</h3>
                     </div>
                     <div>
-                        <h2 className="font-medium">{to?.city}</h2>
+                        <h2 className="font-medium text-red-900">{to?.city}</h2>
                         <h3 className="text-gray-600">{to?.name} ({to?.iata})</h3>
                     </div>
                 </div>
