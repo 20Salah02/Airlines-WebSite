@@ -20,25 +20,25 @@ export default function TripReviewDetails(){
 
 
     return(
-        <div className="bg-white p-4 rounded-3xl w-full space-y-5 h-fit sticky top-10">
-            <h2 className="font-medium text-[19px] text-red-900">Trip details</h2>
+        <div className="bg-white p-4 rounded-3xl w-full space-y-4 h-fit sticky top-10">
+            <h2 className="font-medium text-[18px] text-red-900">Trip details</h2>
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
-                    <h2 className="text-[18px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[18px] text-red-900">{formatTotalPrice} USD</h3>
+                    <h2 className="text-[17px] text-gray-700">Grand Total</h2>
+                    <h3 className="font-medium text-[17px] text-red-900">{formatTotalPrice} USD</h3>
                 </div>
-                <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
+                <p className="text-[15px] underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
             </div>
             <div className="flex items-start space-x-3">
                 <input className="w-7 h-7 cursor-pointer accent-red-900" type="checkbox" id="terms"/>
-                <label htmlFor="terms">
+                <label className="text-[15px]" htmlFor="terms">
                     I have read and accept the purchase conditions and fare rules, 
                     as well as all the terms and conditions and general conditions
                     of carriage applicable to my flight.
                 </label>
             </div>
             <button
-                className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4 font-bold text-md text-amber-50 cursor-pointer hover:bg-red-800 transition"
+                className="bg-red-900 border-2 border-red-900 rounded-full w-full py-3 font-bold text-md text-amber-50 cursor-pointer hover:bg-red-800 transition"
             >
                 Continue the payment
             </button>
