@@ -10,7 +10,6 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { usePassenger } from "@/app/contexts/passengerContext"
 //
 import { useRouter } from "next/navigation";
-import { useFlightResultContext } from "@/app/contexts/priceContext";
 
 //
 type CountryAPI = {
@@ -75,7 +74,6 @@ export default function PassengerMoreDetails() {
   //
 
   const router = useRouter()
-  const { flightResult } = useFlightResultContext()
 
   const handleContinue = () => {
     if (!validate()) return
@@ -90,9 +88,9 @@ export default function PassengerMoreDetails() {
   }
 
   return (
-    <div className="space-y-9 my-6">
+    <div className="space-y-7 my-6">
       <div className="text-gray-600 space-y-2">
-        <h3 className="text-4xl font-light">Just a few More Details</h3>
+        <h3 className="text-3xl font-light">Just a few More Details</h3>
         <h4>Tell us where we should send your booking confirmation to.</h4>
       </div>
 

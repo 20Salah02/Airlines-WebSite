@@ -113,25 +113,6 @@ export default function PassengerDetails(){
             </div>
             ) : <PassengerMoreDetails/>}
 
-            
-            {passengerForm && (
-                <div
-                    className="fixed inset-0 z-40 bg-black/40"
-                    onClick={() => setPassengerForm(false)}
-                >
-                    <div
-                        className={`
-                            absolute top-0 right-0 h-screen w-1/2 bg-white
-                            transition-transform duration-300
-                            translate-x-0
-                            overflow-y-scroll
-                        `}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <PassengerForm closePassengerForm={setPassengerForm}/>
-                    </div>
-                </div>
-            )}
             <div
                 className={`
                     fixed inset-0 z-20 bg-black/40
@@ -148,12 +129,9 @@ export default function PassengerDetails(){
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    {passengerForm && (
-                        <PassengerForm closePassengerForm={setPassengerForm}/>
-                    )}
+                    <PassengerForm closePassengerForm={setPassengerForm} />
                 </div>
             </div>
-
         </div>
     )
 }
