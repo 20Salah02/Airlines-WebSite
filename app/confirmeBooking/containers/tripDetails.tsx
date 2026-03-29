@@ -48,26 +48,26 @@ export default function TripDetails(){
 
 
     return(
-        <div className="flex flex-col h-fit bg-white w-2/5 p-6 rounded-3xl space-y-2.5">
+        <div className="flex flex-col h-fit bg-white w-2/5 p-5 rounded-3xl space-y-2">
             <div className="space-y-2">
-                <h1 className="font-medium text-[19px] text-red-900">Trip details</h1>
-                <p>{tripType}</p>
+                <h1 className="font-medium text-[17px] text-red-900">Trip details</h1>
+                <p>{tripType === "round-trip" ? "Round trip" : "One way"}</p>
             </div>
 
             
             <div >
                 <div onClick={() => setOpenResult("outbound")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                     <div className="space-y-1">
-                        <h2 className="text-[18px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
-                        <h3 className="text-[15px] text-gray-700">{formatDate(firstDay)}</h3>
+                        <h2 className="text-[17px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
+                        <h3 className="text-[14px] text-gray-700">{formatDate(firstDay)}</h3>
                     </div>
                     <p>{">"}</p>
                 </div>
                 {tripType === "round-trip" && (
                     <div onClick={() => setOpenResult("return")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                         <div className="space-y-1">
-                            <h2 className="text-[18px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
-                            <h3 className="text-[15px] text-gray-700">{formatDate(lastDay)}</h3>
+                            <h2 className="text-[17px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
+                            <h3 className="text-[14px] text-gray-700">{formatDate(lastDay)}</h3>
                         </div>
                         <p>{">"}</p>
                     </div>
@@ -75,8 +75,8 @@ export default function TripDetails(){
             </div>
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
-                    <h2 className="text-[18px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[18px] text-red-900">{formatTotalPrice} USD</h3>
+                    <h2 className="text-[17px] text-gray-700">Grand Total</h2>
+                    <h3 className="font-medium text-[17px] text-red-900">{formatTotalPrice} USD</h3>
                 </div>
                 <p className="underline decoration-solid font-medium cursor-pointer w-fit">Payment Summary</p>
             </div>

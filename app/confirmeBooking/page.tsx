@@ -10,7 +10,7 @@ export default function BookingConfirmation(){
     return(
         <div className="flex flex-col bg-zinc-100  space-y-20   ">
             <FlightsNav/>
-            <div className="flex justify-around  ">
+            <div className="flex justify-around mb-18 ">
                 <PassengerDetails/>
                 <TripDetails/>
             </div>

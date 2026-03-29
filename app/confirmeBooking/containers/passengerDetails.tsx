@@ -66,22 +66,22 @@ export default function PassengerDetails(){
 
 
     return(
-        <div className="relative w-1/2 space-y-9 bg-zinc-100 h-screen">
-            <h2 className="text-4xl text-gray-600 font-light ">{`Who's travelling?`}</h2>
+        <div className="relative w-1/2 space-y-9 bg-zinc-100 h-full mb-10">
+            <h2 className="text-3xl text-gray-600 font-light ">{`Who's travelling?`}</h2>
 
-            <div onClick={openForm} className="flex justify-between items-center bg-white rounded-2xl p-4 cursor-pointer">
+            <div onClick={openForm} className="flex justify-between items-center bg-white rounded-2xl p-3 cursor-pointer">
                 <div className="flex items-center space-x-2.5">
                     <h3 className={`${firstName && lastName ? "bg-purple-700" : ""} rounded-full text-white p-2 uppercase`}>{firstNameLetter}{lastNameLetter}</h3>
                     <div>
                         <h2 className="capitalize">{title} {firstName} {lastName}</h2>
                         {isCompleted ? (
-                            <h3 className="text-[15px] text-gray-600">Passenger details completed</h3>
+                            <h3 className="text-[14px] text-gray-600">Passenger details completed</h3>
                         ) : emptyFieldsCount > 0 ? (
                             <h3 className="text-red-600 text-sm">
                                 Still {emptyFieldsCount} field{emptyFieldsCount > 1 ? "s" : ""} required
                             </h3>
                         ) : (
-                            <h3 className="text-[15px]">Add Passenger Details</h3>
+                            <h3 className="text-[14px]">Add Passenger Details</h3>
                         )}
                     </div>
                 </div>
@@ -99,7 +99,7 @@ export default function PassengerDetails(){
             </div>
             
             {!showMoreDetails ? (
-            <div className="space-y-9">
+            <div className="space-y-7">
                 <div className="space-y-2">
                         <h3 className="text-xl">Check your passenger details</h3>
                         <h4>If you need to change any passenger details, you will have to enter your passenger details again.</h4>
@@ -107,7 +107,7 @@ export default function PassengerDetails(){
 
                 <button 
                     onClick={handleShowMoreDetails}
-                    className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">
+                    className="bg-red-900 border-2 border-red-900 rounded-full w-full  py-3  font-bold text-md text-amber-50 cursor-pointer">
                             Continue to contact details
                 </button>
             </div>
@@ -132,6 +132,27 @@ export default function PassengerDetails(){
                     </div>
                 </div>
             )}
+            <div
+                className={`
+                    fixed inset-0 z-20 bg-black/40
+                    transition-opacity duration-300
+                    ${passengerForm ? "opacity-100" : "opacity-0 pointer-events-none"}
+                `}
+                onClick={() => setPassengerForm(false)}
+            >
+                <div
+                    className={`
+                        absolute top-0 right-0 h-screen w-1/2 bg-white
+                        transition-transform duration-300 overflow-y-scroll
+                        ${passengerForm ? "translate-x-0" : "translate-x-full"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {passengerForm && (
+                        <PassengerForm closePassengerForm={setPassengerForm}/>
+                    )}
+                </div>
+            </div>
 
         </div>
     )
