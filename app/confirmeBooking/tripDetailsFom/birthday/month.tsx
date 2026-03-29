@@ -50,9 +50,9 @@ export default function BirthdayMonth({
         className="w-full flex justify-between items-center cursor-pointer"
       >
         <span>
-          {MONTHS.find(m => m.label === month)?.label || "Month"}
+          {MONTHS.find(m => m.value === month)?.label || "Month"}
         </span>
-        <span>⌄</span>
+        <span>⌄</span> 
       </button>
 
       {open && (
@@ -64,7 +64,7 @@ export default function BirthdayMonth({
               <li
                 key={m.value}
                 onClick={() => {
-                  onSelectMonth(m.label)
+                  onSelectMonth(m.value)
                   setOpen(false)
                 }}
                 className={`

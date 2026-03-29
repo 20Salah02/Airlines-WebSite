@@ -57,7 +57,7 @@ export default function BirthdayDay({
       </button>
 
       {open && (
-        <ul className={`absolute z-20 w-full bg-white border border-zinc-300 mt-2 max-h-48 overflow-y-auto `}>
+      <ul className="absolute z-20 w-full  bg-white border border-zinc-300 mt-2 max-h-48 overflow-y-auto">
         {days.map(d => {
           const isSelected = day === d.toString()
 
