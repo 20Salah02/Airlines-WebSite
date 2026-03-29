@@ -79,7 +79,7 @@ export default function EcoClass({onSelect} : EcoClassProps){
                     </div>
                     <h4 
                         onClick={() => onSelect("Economy Convenienc" , conveniencPrice)}
-                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-l font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
+                        className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-lg font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>                </div>
                 <div className="text-gray-600">

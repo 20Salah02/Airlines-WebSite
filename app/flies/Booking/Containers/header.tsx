@@ -27,7 +27,6 @@ export default function FliesHeader(){
     const from = isOutbound ? booking.from : booking.to
     const to = isOutbound ? booking.to : booking.from
     const firstDay = isOutbound ? booking.dates?.departure : booking.dates?.return;
-    // const lastDay = isOutbound ? booking.dates?.return : booking.dates?.departure;
     
 
 
