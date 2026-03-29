@@ -47,8 +47,8 @@ export default function ReviewTheTrips(){
     const flightDurationMin  = flightResult?.durationMinutes
 
     return(
-        <div className="space-y-10 w-full">
-            <h1 className="text-4xl font-light text-gray-600">Review your Trip</h1>
+        <div className="space-y-8 w-full">
+            <h1 className="text-3xl font-light text-gray-600">Review your Trip</h1>
 
             <div className="flex bg-white rounded-3xl ">
                 <div className="w-1/3 relative">
@@ -60,28 +60,32 @@ export default function ReviewTheTrips(){
                         />
                 </div>
 
-                <div className=" w-2/3 space-y-7 p-4">
+                <div className=" w-2/3 space-y-5 p-4">
                     <div className="text-gray-600">{formatDate(firstDay)}</div>
 
                     <div className="flex justify-between items-start ">
-                        <div className="flex-1 space-y-3 ">
-                            <h2 className="text-4xl font-light">{from?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">{outboundTime?.departureTime}</h3>
+                        <div className="flex-1 space-y-2 ">
+                            <h2 className="text-3xl font-light">{from?.iata}</h2>
+                            <h3 className="text-[17px] text-gray-600">{outboundTime?.departureTime}</h3>
                             <h4 className="text-gray-600">{from?.city}</h4>
                             <h5>{from?.name}</h5>
                         </div>
-                        <div className="flex-1 space-y-3 flex justify-center flex-col">
-                            <h2 className="flex justify-center">L</h2>
-                            <h3 className="text-[19px] text-gray-600  flex justify-center">{`${flightDurationHour}h ${flightDurationMin}min`}</h3>
+                        <div className="flex-1 space-y-3 flex flex-col items-center justify-center">
+                            <div className="w-6 h-6 bg-red-900 rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
+                                <span className="text-[9px] text-white -rotate-45 font-bold uppercase">SL</span>
+                            </div>
+                            <h3 className="text-[17px] text-gray-600 font-normal">
+                                {`${flightDurationHour}h ${flightDurationMin}min`}
+                            </h3>
                         </div>
-                        <div className="flex-1 space-y-3 text-right "> 
-                            <h2 className="text-4xl font-light ">{to?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">{outboundTime?.arrivalTime}</h3>
+                        <div className="flex-1 space-y-2 text-right "> 
+                            <h2 className="text-3xl font-light ">{to?.iata}</h2>
+                            <h3 className="text-[17px] text-gray-600">{outboundTime?.arrivalTime}</h3>
                             <h4 className="text-gray-600">{to?.city}</h4>
                             <h5>{to?.name}</h5>
                         </div>
                     </div>
-                    <div className="mt-10">
+                    <div className="mt-8">
                         <h6 onClick={() => openFlightDetails("outbound")} className="underline decoration-solid font-medium cursor-pointer w-fit">View flight details</h6>
                     </div>
                 </div>
@@ -99,28 +103,32 @@ export default function ReviewTheTrips(){
                         />
                 </div>
 
-                <div className=" w-2/3 space-y-7 p-4">
+                <div className=" w-2/3 space-y-5 p-4">
                     <div className="text-gray-600">{formatDate(lastDay)}</div>
 
                     <div className="flex justify-between items-start ">
                         <div className="flex-1 space-y-3 ">
-                            <h2 className="text-4xl font-light">{to?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">{returnTime?.departureTime}</h3>
+                            <h2 className="text-3xl font-light">{to?.iata}</h2>
+                            <h3 className="text-[17px] text-gray-600">{returnTime?.departureTime}</h3>
                             <h4 className="text-gray-600">{to?.city}</h4>
                             <h5>{to?.name}</h5>
                         </div>
-                        <div className="flex-1 space-y-3 flex justify-center flex-col">
-                            <h2 className="flex justify-center">L</h2>
-                            <h3 className="text-[19px] text-gray-600  flex justify-center">{`${flightDurationHour}h ${flightDurationMin}min`}</h3>
+                        <div className="flex-1 space-y-3 flex flex-col items-center justify-center">
+                            <div className="w-6 h-6 bg-red-900 rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
+                                <span className="text-[9px] text-white -rotate-45 font-bold uppercase">SL</span>
+                            </div>
+                            <h3 className="text-[17px] text-gray-600 font-normal">
+                                {`${flightDurationHour}h ${flightDurationMin}min`}
+                            </h3>
                         </div>
                         <div className="flex-1 space-y-3 text-right "> 
-                            <h2 className="text-4xl font-light ">{from?.iata}</h2>
-                            <h3 className="text-[19px] text-gray-600">{returnTime?.arrivalTime}</h3>
+                            <h2 className="text-3xl font-light ">{from?.iata}</h2>
+                            <h3 className="text-[17px] text-gray-600">{returnTime?.arrivalTime}</h3>
                             <h4 className="text-gray-600">{from?.city}</h4>
                             <h5>{from?.name}</h5>
                         </div>
                     </div>
-                    <div className="mt-10">
+                    <div className="mt-8">
                         <h6 onClick={() => openFlightDetails("return")} className="underline decoration-solid font-medium cursor-pointer w-fit">View flight details</h6>
                     </div>
                 </div>
