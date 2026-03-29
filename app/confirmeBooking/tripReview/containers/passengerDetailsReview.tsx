@@ -22,9 +22,9 @@ export default function PassengerDetailsReview(){
     const phone = passenger.phone
 
     return(
-        <div className="mt-13 space-y-10">
-            <h1 className="text-4xl font-light text-gray-600">Passengers</h1>
-            <div className="bg-white rounded-3xl px-10 py-13">
+        <div className="mt-5 space-y-10">
+            <h1 className="text-3xl font-light text-gray-600">Passengers</h1>
+            <div className="bg-white rounded-3xl p-8">
                 <div className="flex border-b border-b-zinc-200 pb-8">
                     <div className="flex flex-1 ">
                         <h3 className={`${firstName && lastName ? "bg-purple-700" : ""} rounded-full text-white p-2 uppercase w-fit h-fit`}>{firstNameLetter}{lastNameLetter}</h3>
@@ -38,7 +38,7 @@ export default function PassengerDetailsReview(){
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-[18px] font-medium mt-7">Contact details</h2>
+                    <h2 className="text-[17px] font-medium mt-7">Contact details</h2>
                     <div className="text-gray-600">
                         <h3>Email : {email}</h3>
                         <h3>Phone : {phone}</h3>
