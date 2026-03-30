@@ -138,11 +138,13 @@ export default function PassengerForm({closePassengerForm} : setCloseForm){
                     <h1 className="flex justify-center text-xl">Adult Passenger</h1>
                     <div className="space-y-5">
 
-                        <div className="space-y-2">
+                        <div className="space-y-2 cursor-pointer">
                             <h2 className="text-lg font-medium">Title</h2>
                             <div onClick={handleOpenTitle} className="flex justify-between items-center border border-gray-300 rounded-xl p-4">
                                 <h3>{formData.title}</h3>
-                                <h4 className="cursor-pointer">*</h4>
+                            <h6 className={`${openTitleForm ? "rotate-180" : ""} transition-all duration-300 ease-in-out`} >
+                                <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M831.9 340.9L512 652.7L192.1 340.9a30.6 30.6 0 0 0-42.7 0a29 29 0 0 0 0 41.6l340.3 331.7a32 32 0 0 0 44.6 0l340.3-331.7a29 29 0 0 0 0-41.7a30.6 30.6 0 0 0-42.7 0z"></path></svg>
+                            </h6>
                             </div>
                             {openTitleForm && (
                                 <div onClick={() => setOpenTitleForm(false)}>
@@ -155,17 +157,17 @@ export default function PassengerForm({closePassengerForm} : setCloseForm){
                             <h2 className="text-lg font-medium">Gender</h2>
                             <div className="flex  space-x-2.5">
                                 <div className={`flex items-center border border-gray-300 rounded-xl py-4 px-5 space-x-2.5 ${errors.gender ? "border-red-600" : "border-gray-300"} `}>
-                                    <label htmlFor="male">Male</label>
+                                    <label htmlFor="male" className="cursor-pointer">Male</label>
                                     <input 
-                                        className="accent-red-900"  type="radio" id="male" value="male" name="class"
+                                        className="accent-red-900 cursor-pointer"  type="radio" id="male" value="male" name="class"
                                         checked={formData.gender === "male"}
                                         onChange={(e) => setFormData(prev => ({...prev , gender: e.target.value as "male" | "female"}))}
                                     />                    
                                 </div>
                                 <div className={`flex items-center border border-gray-300 rounded-xl py-4 px-5 space-x-2.5 ${errors.gender ? "border-red-600" : "border-gray-300"}`}>
-                                    <label htmlFor="female">Female</label>
+                                    <label htmlFor="female" className="cursor-pointer">Female</label>
                                     <input 
-                                        className="accent-red-900" type="radio" id="female" value="female" name="class"
+                                        className="accent-red-900 cursor-pointer" type="radio" id="female" value="female" name="class"
                                         checked={formData.gender === "female"}
                                         onChange={(e) => setFormData(prev => ({...prev , gender: e.target.value as "male" | "female"}))}
                                     />

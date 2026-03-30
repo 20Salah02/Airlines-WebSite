@@ -8,9 +8,6 @@ import { useState , useRef } from "react"
 //
 import { useRouter } from "next/navigation"
 //
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
-//
 import HandlePassengers from "../hooks/mainFormPassengers"
 import HandleDate from "../hooks/mainFormDate"
 import HandleDestination from "../hooks/mainFormDestination"
@@ -19,13 +16,13 @@ import { DateRange } from "react-day-picker"
 
 export default function Form(){
     type Airport ={
-    id: number;
-    name: string; 
-    city: string; 
-    country: string; 
-    iata: string;
-    latitude : number;
-    longitude : number
+        id: number;
+        name: string; 
+        city: string; 
+        country: string; 
+        iata: string;
+        latitude : number;
+        longitude : number
     }
     const firstDayDefault = new Date();
     const lastDayDefault = new Date();
@@ -216,8 +213,8 @@ export default function Form(){
                             </div>
 
                             <div className="flex items-end">
-                                <h6 className="w-5 font-extralight text-zinc-500">
-                                <FontAwesomeIcon icon={faAngleDown} />
+                                <h6 className={`text-zinc-600 ${openPassengers ? "rotate-180" : ""} transition-all duration-300 ease-in-out`} >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M831.9 340.9L512 652.7L192.1 340.9a30.6 30.6 0 0 0-42.7 0a29 29 0 0 0 0 41.6l340.3 331.7a32 32 0 0 0 44.6 0l340.3-331.7a29 29 0 0 0 0-41.7a30.6 30.6 0 0 0-42.7 0z"></path></svg>
                                 </h6>
                             </div>
                         </div>

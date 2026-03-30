@@ -61,7 +61,9 @@ export default function TripDetails(){
                         <h2 className="text-[17px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
                         <h3 className="text-[14px] text-gray-700">{formatDate(firstDay)}</h3>
                     </div>
-                    <p>{">"}</p>
+                    <h4>
+                        <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"></path></svg>
+                    </h4>
                 </div>
                 {tripType === "round-trip" && (
                     <div onClick={() => setOpenResult("return")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
@@ -69,7 +71,9 @@ export default function TripDetails(){
                             <h2 className="text-[17px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
                             <h3 className="text-[14px] text-gray-700">{formatDate(lastDay)}</h3>
                         </div>
-                        <p>{">"}</p>
+                        <h4>
+                            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"></path></svg>
+                        </h4>
                     </div>
                 )}
             </div>
