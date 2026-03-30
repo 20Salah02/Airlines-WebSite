@@ -193,14 +193,19 @@ export default function FlightResults(){
 
                             <div className="flex justify-between  ">
                                 <div   className="flex flex-col relative">
-                                    <div onClick={() => handleToggleClass(index, "eco")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                                    <div onClick={() => handleToggleClass(index, "eco")} 
+                                        className={`flex flex-col justify-start border ${openClass?.type === "eco" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300`}
+                                    >
                                         <p className="text-gray-600">Economy</p>
                                         <h2 className="text-3xl font-light flex pt-5">{ecoPrice} USD</h2>
                                         <h6 className="font-extralight text-green-800">special offer</h6>
                                     </div>
 
                                 </div>
-                                <div onClick={() => handleToggleClass(index, "business")} className="flex flex-col justify-start border border-gray-300 rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300">
+                                <div 
+                                    onClick={() => handleToggleClass(index, "business")} 
+                                    className={`flex flex-col justify-start border ${openClass?.type === "business" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300`}
+                                >
                                     <p className="text-gray-600">Business</p>
                                     <h2 className="text-3xl font-light flex pt-5">{businessPrice} USD</h2>
                                     <h6 className="font-extralight text-green-800">special offer</h6>
