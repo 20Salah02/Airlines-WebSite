@@ -174,7 +174,7 @@ export default function Form(){
 
                         <svg className="w-10 text-zinc-600" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M18 10a1 1 0 0 0-1-1H5.41l2.3-2.29a1 1 0 0 0-1.42-1.42l-4 4a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 11h14a1 1 0 0 0 1-1m3.92 3.62A1 1 0 0 0 21 13H7a1 1 0 0 0 0 2h11.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-1.09"></path></svg>
 
-                        <div tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
+                        <div ref={toRef} tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
                             <HandleDestination
                                 placeholder="To"
@@ -182,8 +182,8 @@ export default function Form(){
                                 onSelect={(airport) => setDestinationTo(airport)}
                                 className={`flex-1 pt-3 w-58 h-full focus:outline-none`}
                                 floatingLabel={true}
-                                isOpen={openFrom}
-                                setIsOpen={setOpenFrom}
+                                isOpen={openTo}
+                                setIsOpen={setOpenTo}
                             />
                         </div>
                     </div>
