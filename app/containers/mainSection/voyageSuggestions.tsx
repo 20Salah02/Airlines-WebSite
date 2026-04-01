@@ -178,7 +178,7 @@ export default function VoyageSuggetions(){
                     >
                             One way
                     </button>
-                    <div className="relative bg-white rounded-md border border-gray-300 w-50 cursor-pointer">
+                    <div ref={dropdownRef}  className="relative bg-white rounded-md border border-gray-300 w-50 cursor-pointer">
                         <div 
                             className="flex justify-between  items-center px-4"
                             onClick={() => setOpenClassType(prev => !prev)}
@@ -193,7 +193,6 @@ export default function VoyageSuggetions(){
                         </div>
                         {openClassType && (
                             <div   
-                                ref={dropdownRef} 
                                 className="absolute top-12 w-full bg-white rounded-md border border-gray-300  z-40 transition-all "
                             >
                                 <h3 
