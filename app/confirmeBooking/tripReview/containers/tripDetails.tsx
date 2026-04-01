@@ -2,9 +2,16 @@
 
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useSearchParams } from "next/navigation"
+//
+import { useState } from "react"
+//
+import PaymentDetails from "../../containers/paymentDetails"
 
 
 export default function TripReviewDetails(){
+
+    const [openPayment , setOpenPayment] = useState<boolean | null>(false)
+
 
     const {booking} = useBooking()
     const search = useSearchParams()
@@ -27,7 +34,12 @@ export default function TripReviewDetails(){
                     <h2 className="text-[17px] text-gray-700">Grand Total</h2>
                     <h3 className="font-medium text-[17px] text-red-900">{formatTotalPrice} USD</h3>
                 </div>
-                <p className="text-[15px] underline decoration-solid font-medium cursor-pointer w-fit">Payement Summary</p>
+                <p 
+                    className="text-[15px] underline decoration-solid font-medium cursor-pointer w-fit"
+                    onClick={() => setOpenPayment(prev => !prev)}
+                >
+                    Payement Summary
+                </p>
             </div>
             <div className="flex items-start space-x-3">
                 <input className="w-7 h-7 cursor-pointer accent-red-900" type="checkbox" id="terms"/>
@@ -42,6 +54,28 @@ export default function TripReviewDetails(){
             >
                 Continue the payment
             </button>
+
+            <div
+                className={`
+                    fixed inset-0 z-40 bg-black/40
+                    transition-opacity duration-300
+                    ${openPayment ? "opacity-100 " : "opacity-0 pointer-events-none"}
+                `}
+                onClick={() => setOpenPayment(null)}
+            >
+                <div
+                    className={`
+                        absolute top-0 right-0 h-screen w-1/2 bg-white
+                        transition-transform duration-300
+                        ${openPayment ? "translate-x-0" : "translate-x-full"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {openPayment && (
+                        <PaymentDetails/>
+                    )}
+                </div>
+            </div>
         </div>
     )
 }
