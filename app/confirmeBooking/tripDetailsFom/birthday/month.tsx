@@ -59,7 +59,7 @@ export default function BirthdayMonth({
       {open && (
         <ul className="absolute z-20 w-full bg-white border border-zinc-300 mt-2 max-h-48 overflow-y-auto">
           {MONTHS.map(m => {
-            const isSelected = month === m.value
+            const isSelected = month === m.label
 
             return (
               <li

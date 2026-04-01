@@ -46,7 +46,7 @@ export function calculateFlight(
   from: Airport,
   to: Airport,
   pricePerKm = 0.11,
-  baseFee = 50,
+  baseFee = 122,
   speed = 900 
 ): FlightResult {
   const distanceKm = calculateDistance(from, to);
