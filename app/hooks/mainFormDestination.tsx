@@ -25,10 +25,12 @@ type props = {
     floatingLabel? : boolean;
     label?: string
     dropdownPosition?: "left" | "right"
+    isOpen?:boolean
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
-export default function HandleDestination({value , onSelect , selectedAirport , placeholder , className , id , label ,floatingLabel = false ,dropdownPosition} : props){
+export default function HandleDestination({value , onSelect , selectedAirport , placeholder , className , id , label ,floatingLabel = false ,dropdownPosition, isOpen , setIsOpen} : props){
     const [data, setData] = useState<airportApi[]>([]);
     const [query, setQuery] = useState(selectedAirport ? `${selectedAirport.city} (${selectedAirport.iata})` : "");    
 
@@ -57,16 +59,16 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
     
       if (!data) return <p>Loading...</p>;
 
-      const isRightSide = true
-
 
     return (
     <div className="relative h-full flex ">
         <input
             type="text"
             value={query} 
+            onFocus={() => setIsOpen(true)}
             onChange={(e) => {
                 setQuery(e.target.value);
+                setIsOpen(true);
             }}
             className={className}
             placeholder={floatingLabel ? "" : placeholder}
@@ -89,7 +91,7 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
         </label>
         )}
 
-        {result.length > 0 && (
+        {isOpen && result.length > 0 && (
         <ul className={`h-70 top-14 absolute rounded-md bg-white overflow-y-scroll  ${dropdownPosition === "right" ? "right-0" : "left-0"} w-130 z-90 `}
             style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}
         >
@@ -98,8 +100,9 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
                 className=" rounded-md  hover:bg-gray-200"
                 key={`${item.iata}-${index}`}
                 onClick={() => {
-                setQuery(`${item.city}  ${item.iata}`); 
-                onSelect(item)
+                    setQuery(`${item.city}  ${item.iata}`); 
+                    onSelect(item)
+                    setIsOpen(false);
                 }}
             >
                 <div className="flex items-center border-b py-2 mx-4 pb-2   border-b-gray-500 cursor-pointer">

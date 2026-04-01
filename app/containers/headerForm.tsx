@@ -28,6 +28,9 @@ export default function Form(){
     const lastDayDefault = new Date();
     lastDayDefault.setDate(firstDayDefault.getDate() + 5)
 
+    const [openFrom, setOpenFrom] = useState(false);
+    const [openTo, setOpenTo] = useState(false);
+
     const [openPassengers , setOpenPassengers] = useState<boolean>(false)
     const [passengersText , setpassengersText] = useState<string>("1 Passenger Economy")
 
@@ -44,8 +47,6 @@ export default function Form(){
 
     const [destinationFrom, setDestinationFrom] = useState<Airport | null>(null);
     const [destinationTo, setDestinationTo] = useState<Airport | null>(null);
-
-    const [openClassType , setOpenClassType] = useState<boolean>(false)
     
     
     function formatDate(date?: Date) {
@@ -89,9 +90,25 @@ export default function Form(){
 
 
     // close dropdown
-    const dropdownRef = useRef<HTMLDivElement>(null);    
-    useOutsideClick(dropdownRef, () => setOpenClassType(false));  
+    const fromRef = useRef<HTMLDivElement>(null);
+    const toRef = useRef<HTMLDivElement>(null);
 
+    useOutsideClick(fromRef, () => {
+        setOpenFrom(false); 
+    });
+
+    useOutsideClick(toRef, () => {
+        setOpenTo(false); 
+    });
+
+    const calendarRef = useRef<HTMLDivElement>(null);
+    useOutsideClick(calendarRef, () => setopenCalendare(false));  
+
+    const passengersRef = useRef<HTMLDivElement>(null);
+    useOutsideClick(passengersRef, () => setOpenPassengers(false));
+
+
+    
     //style
     const borderStyle = "focus-within:outline-none focus-within:border focus-within:border-red-900 focus-within:shadow-[0_0_15px_rgba(127,29,29,0.6)] focus-within:rounded-lg "
 
@@ -139,17 +156,19 @@ export default function Form(){
                 </div>
                 <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-stretch ">
                     <div className="flex items-center justify-center flex-1">
-                        <div tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
+                        <div ref={fromRef} tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
 
                             <HandleDestination
-                            placeholder="From"
-                            value={destinationFrom?.name || ""}
-                            onSelect={(airport) => setDestinationFrom(airport)}
-                            className="flex-1 pt-3 w-58 h-full focus:outline-none"
-                            floatingLabel={true}
+                                placeholder="From"
+                                value={destinationFrom?.name || ""}
+                                onSelect={(airport) => setDestinationFrom(airport)}
+                                className="flex-1 pt-3 w-58 h-full focus:outline-none"
+                                floatingLabel={true}
+                                isOpen={openFrom}
+                                setIsOpen={setOpenFrom}
                             />
                         </div>
 
@@ -163,13 +182,15 @@ export default function Form(){
                                 onSelect={(airport) => setDestinationTo(airport)}
                                 className={`flex-1 pt-3 w-58 h-full focus:outline-none`}
                                 floatingLabel={true}
+                                isOpen={openFrom}
+                                setIsOpen={setOpenFrom}
                             />
                         </div>
                     </div>
 
                     <svg className="flex justify-center items-center h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
 
-                    <div tabIndex={0} className={`${borderStyle}`}>
+                    <div ref={calendarRef} tabIndex={0} className={`${borderStyle}`}>
                         <div  className={`flex items-center h-full w-65  space-x-5 cursor-pointer ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
                             <div className={``}>
@@ -199,7 +220,7 @@ export default function Form(){
                     <svg className="flex justify-center items-center h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
 
 
-                    <div tabIndex={1} className={`relative w-full  px-2 ${borderStyle}`}>
+                    <div ref={passengersRef} tabIndex={1} className={`relative w-full  px-2 ${borderStyle}`}>
                         <div className="flex justify-between items-center cursor-pointer h-full" 
                             onClick={() => setOpenPassengers(prev => !prev)}
                         >
