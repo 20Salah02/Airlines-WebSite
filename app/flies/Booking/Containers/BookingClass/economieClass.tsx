@@ -1,6 +1,7 @@
 "use client"
 
-//
+//context
+import { useCurrency } from "@/app/contexts/currencyContext"
 //
 import Image from "next/image"
 //
@@ -17,6 +18,12 @@ type EcoClassProps = {
 };
 
 export default function EcoClass({onSelect} : EcoClassProps){
+
+    //currency
+
+    const {format} = useCurrency()
+
+    //
     
     const {flightResult} = useFlightResultContext()
 
@@ -34,7 +41,7 @@ export default function EcoClass({onSelect} : EcoClassProps){
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Economy Classic</h1>
                     <div className="mt-5">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">{classicPrice.toLocaleString()} USD</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{format(classicPrice)}</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
@@ -74,7 +81,7 @@ export default function EcoClass({onSelect} : EcoClassProps){
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Economy Convenienc</h1>
                     <div className="mt-5">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">{conveniencPrice.toLocaleString()} USD</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{format(conveniencPrice)}</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
@@ -117,7 +124,7 @@ export default function EcoClass({onSelect} : EcoClassProps){
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Economy Comfort</h1>
                     <div className="mt-5">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortPrice.toLocaleString()} USD</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{format(comfortPrice)}</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 
@@ -169,7 +176,7 @@ export default function EcoClass({onSelect} : EcoClassProps){
                     <div className="flex flex-col h-full p-4 z-10 relative text-white">
                         <h1 className="text-[25px] font-light">Business Comfort</h1>
                         <div className="mt-5">
-                            <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortBusinesPrice.toLocaleString()} USD</h2>
+                            <h2 className="flex justify-end text-3xl font-[350] py-2">{format(comfortBusinesPrice)}</h2>
                         </div>
                         <h4
                             onClick={()=> onSelect("Business Comfort" , comfortBusinesPrice)}
