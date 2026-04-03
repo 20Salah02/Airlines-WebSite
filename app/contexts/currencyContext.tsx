@@ -26,6 +26,7 @@ export function CurrecyProvider({children} : {children : ReactNode}){
     return "USD"
     })    
 
+    // save rates for let the api request less and let the web open faster
     const [rates, setRates] = useState<{ [key: string]: number }>(() => {
         if (typeof window !== "undefined") {
             const cached = localStorage.getItem("rates")
@@ -34,6 +35,7 @@ export function CurrecyProvider({children} : {children : ReactNode}){
         return {}
     })
 
+
     useEffect(() => {
         if (Object.keys(rates).length > 0) return
 
@@ -41,8 +43,8 @@ export function CurrecyProvider({children} : {children : ReactNode}){
             .then(res => res.json())
             .then(data => {
             setRates(data.rates)
-            localStorage.setItem("rates", JSON.stringify(data.rates))
-            localStorage.setItem("rates_time", Date.now().toString())
+                localStorage.setItem("rates", JSON.stringify(data.rates))
+                localStorage.setItem("rates_time", Date.now().toString())
             })
     }, [])
 
