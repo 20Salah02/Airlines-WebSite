@@ -1,5 +1,7 @@
 "use client"
 
+//context
+import { useCurrency } from "@/app/contexts/currencyContext"
 //
 import Image from "next/image"
 //
@@ -17,22 +19,24 @@ type BusClassProps = {
 };
 export default function BusinessClass({onSelect} : BusClassProps){
 
+    // currency
+    const {format} = useCurrency()
     
-  const { flightResult } = useFlightResultContext();
+    const { flightResult } = useFlightResultContext();
 
-  if (!flightResult) return null;
+    if (!flightResult) return null;
 
-  const basePrice = flightResult.price;
+    const basePrice = flightResult.price;
 
-  const comfortPrice = Math.round(basePrice * 2.5);
-  const elitePrice = Math.round(basePrice * 2.7);
+    const comfortPrice = Math.round(basePrice * 2.5);
+    const elitePrice = Math.round(basePrice * 2.7);
     return(
         <div className="grid grid-cols-3 gap-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Business Comfort</h1>
                     <div className="mt-5">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">{comfortPrice.toLocaleString()} USD</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{format(comfortPrice)}</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4
@@ -76,7 +80,7 @@ export default function BusinessClass({onSelect} : BusClassProps){
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Business Elite</h1>
                     <div className="mt-5">
-                        <h2 className="flex justify-end text-3xl font-[350] py-2">{elitePrice.toLocaleString()} USD</h2>
+                        <h2 className="flex justify-end text-3xl font-[350] py-2">{format(elitePrice)}</h2>
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4 

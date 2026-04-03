@@ -2,6 +2,7 @@
 
 //context
 import { useBooking } from "@/app/contexts/bookingContext"
+import { useCurrency } from "@/app/contexts/currencyContext"
 //
 import { useState , useEffect } from "react"
 //
@@ -36,7 +37,11 @@ export default function FlightResults(){
         { departureHour: 15, departureMin: 0  },
     ]
 
-    
+    //currncy
+
+    const {format} = useCurrency()
+
+    //
     const { booking, setBooking} = useBooking();
     
     const search = useSearchParams()
@@ -204,7 +209,7 @@ export default function FlightResults(){
                                         className={`flex flex-col justify-start border ${openClass?.type === "eco" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300`}
                                     >
                                         <p className="text-gray-600">Economy</p>
-                                        <h2 className="text-3xl font-light flex pt-5">{ecoPrice} USD</h2>
+                                        <h2 className="text-3xl font-light flex pt-5">{format(ecoPrice)}</h2>
                                         <h6 className="font-extralight text-green-800">special offer</h6>
                                     </div>
 
@@ -214,7 +219,7 @@ export default function FlightResults(){
                                     className={`flex flex-col justify-start border ${openClass?.type === "business" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300`}
                                 >
                                     <p className="text-gray-600">Business</p>
-                                    <h2 className="text-3xl font-light flex pt-5">{businessPrice} USD</h2>
+                                    <h2 className="text-3xl font-light flex pt-5">{format(businessPrice)}</h2>
                                     <h6 className="font-extralight text-green-800">special offer</h6>
                                 </div>
                             </div> 
