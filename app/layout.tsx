@@ -5,6 +5,7 @@ import "./globals.css";
 import BookingProvider from "./contexts/bookingContext";
 import { FlightResultProvider } from "./contexts/priceContext";
 import { PassengerProvider } from "./contexts/passengerContext";
+import { CurrecyProvider } from "./contexts/currencyContext";
 
 import FlightCalculator from "./flies/Booking/Containers/flightCalculator";
 
@@ -33,14 +34,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <BookingProvider>
-          <FlightResultProvider>
-            <PassengerProvider>
-              <FlightCalculator />
-              {children}
-            </PassengerProvider>
-          </FlightResultProvider>
-        </BookingProvider>
+        <CurrecyProvider>
+          <BookingProvider>
+            <FlightResultProvider>
+              <PassengerProvider>
+                <FlightCalculator />
+                {children}
+              </PassengerProvider>
+            </FlightResultProvider>
+          </BookingProvider>
+        </CurrecyProvider>
       </body>
     </html>
   );
