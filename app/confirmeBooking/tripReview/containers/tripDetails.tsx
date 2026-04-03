@@ -1,6 +1,7 @@
 "use client"
 
 import { useBooking } from "@/app/contexts/bookingContext"
+import { useCurrency } from "@/app/contexts/currencyContext"
 import { useSearchParams } from "next/navigation"
 //
 import { useState } from "react"
@@ -12,6 +13,7 @@ export default function TripReviewDetails(){
 
     const [openPayment , setOpenPayment] = useState<boolean | null>(false)
 
+    const {format} = useCurrency()
 
     const {booking} = useBooking()
     const search = useSearchParams()
@@ -23,8 +25,6 @@ export default function TripReviewDetails(){
     const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
 
     const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
-    const formatTotalPrice = totalPrice.toLocaleString()
-
 
     return(
         <div className="bg-white p-4 rounded-3xl w-full space-y-4 h-fit sticky top-10">
@@ -32,7 +32,7 @@ export default function TripReviewDetails(){
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
                     <h2 className="text-[17px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[17px] text-red-900">{formatTotalPrice} USD</h3>
+                    <h3 className="font-medium text-[17px] text-red-900">{format(totalPrice)}</h3>
                 </div>
                 <p 
                     className="text-[15px] underline decoration-solid font-medium cursor-pointer w-fit"

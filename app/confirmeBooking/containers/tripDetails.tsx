@@ -2,6 +2,7 @@
 
 // context
 import { useBooking } from "@/app/contexts/bookingContext";
+import { useCurrency } from "@/app/contexts/currencyContext";
 //
 import { useState } from "react";
 // 
@@ -24,7 +25,9 @@ export default function TripDetails(){
         year : "numeric"
     });
     }
+    //
 
+    const {format} = useCurrency()
 
     //
     const {booking} = useBooking()
@@ -41,11 +44,7 @@ export default function TripDetails(){
     const goingPrice = isOutbound ? booking.outboundFlight?.price ?? 0 : booking.returnFlight?.price ?? 0;
     const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
 
-    
-    
-
     const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
-    const formatTotalPrice = totalPrice.toLocaleString()
 
 
 
@@ -82,7 +81,7 @@ export default function TripDetails(){
             <div className="flex flex-col py-2">
                 <div className="flex justify-between  space-y-1">
                     <h2 className="text-[17px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[17px] text-red-900">{formatTotalPrice} USD</h3>
+                    <h3 className="font-medium text-[17px] text-red-900">{format(totalPrice)}</h3>
                 </div>
                 <p
                     className="underline decoration-solid font-medium cursor-pointer w-fit"

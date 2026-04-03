@@ -22,7 +22,7 @@ export default function ChangeCurrency() {
 
     return (
         <div className="bg-white p-9 border-l h-screen space-y-10">
-        <h1 className="text-xl text-center font-semibold">Change currency</h1>
+        <h1 className="text-xl text-center ">Change currency</h1>
 
         <div>
             {currencies.map((c) => (
