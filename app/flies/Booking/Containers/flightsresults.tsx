@@ -293,7 +293,7 @@ export default function FlightResults(){
                     onClick={(e) => e.stopPropagation()}
                 >
                     {openCurrency && (
-                        <ChangeCurrency/>
+                        <ChangeCurrency setOpen={() => setOpenCurrency(false)}/>
                     )}
                 </div>
             </div>
