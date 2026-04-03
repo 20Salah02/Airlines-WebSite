@@ -10,6 +10,7 @@ import { useSearchParams , useRouter } from "next/navigation"
 import EcoClass from "./BookingClass/economieClass"
 import BusinessClass from "./BookingClass/businessClass"
 import FlightDetails from "./flightDetails"
+import ChangeCurrency from "./changeCurrency"
 
 //
 import { FareType } from "@/app/contexts/bookingContext"
@@ -25,6 +26,7 @@ export default function FlightResults(){
 
     const [openClass, setOpenClass] = useState<{ index: number; type: "eco" | "business" } | null>(null)
     const [openResult, setOpenResult] = useState<OpenResultType | null>(null)  
+    const [openCurrency , setOpenCurrency] = useState<boolean | null>(false)
     
     const FlightsSchedules = [
         { departureHour: 8,  departureMin: 0  },
@@ -136,7 +138,12 @@ export default function FlightResults(){
                     <p className="text-gray-700">Fares displayed are for all passengers.</p>
                 </div>
                 <div>
-                    <button className="bg-white py-3 px-5 rounded-4xl mx-6 font-normal cursor-pointer">Change Currency</button>
+                    <button
+                        onClick={() => setOpenCurrency(prev => !prev)}
+                        className="bg-white py-3 px-5 rounded-4xl mx-6 font-normal cursor-pointer"
+                    >
+                            Change Currency
+                    </button>
                     <button  className="bg-white py-3 px-5 rounded-4xl font-normal cursor-pointer">Sort And Filter</button>
                 </div>
             </div>
@@ -259,6 +266,29 @@ export default function FlightResults(){
                             departureTime={openResult.departureTime}
                             arrivalTime={openResult.arrivalTime}
                         />
+                    )}
+                </div>
+            </div>
+
+
+            <div
+                className={`
+                    fixed inset-0 z-40 bg-black/40
+                    transition-opacity duration-300
+                    ${openCurrency ? "opacity-100 " : "opacity-0 pointer-events-none"}
+                `}
+                onClick={() => setOpenCurrency(null)}
+            >
+                <div
+                    className={`
+                        absolute top-0 right-0 h-screen w-1/2 bg-white
+                        transition-transform duration-300
+                        ${openCurrency ? "translate-x-0" : "translate-x-full"}
+                    `}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {openCurrency && (
+                        <ChangeCurrency/>
                     )}
                 </div>
             </div>
