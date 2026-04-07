@@ -19,11 +19,11 @@ const CurrencyContext = createContext<CurrencyContextType | null>(null)
 export function CurrecyProvider({children} : {children : ReactNode}){
 
     const [currency, setCurrency] = useState<Currency>(() => {
-    if (typeof window !== "undefined") {
-        const saved = localStorage.getItem("currency") as Currency
-        if (saved) return saved
-    }
-    return "USD"
+        if (typeof window !== "undefined") {
+            const saved = localStorage.getItem("currency") as Currency
+            if (saved) return saved
+        }
+        return "USD"
     })    
 
     // save rates for let the api request less and let the web open faster
@@ -77,7 +77,7 @@ export function CurrecyProvider({children} : {children : ReactNode}){
 
 
 export const useCurrency = () => {
-  const ctx = useContext(CurrencyContext)
-  if (!ctx) throw new Error("useCurrency must be used inside CurrencyProvider")
-  return ctx
+    const ctx = useContext(CurrencyContext)
+    if (!ctx) throw new Error("useCurrency must be used inside CurrencyProvider")
+    return ctx
 }

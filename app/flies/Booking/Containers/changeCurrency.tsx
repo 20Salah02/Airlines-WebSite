@@ -36,7 +36,7 @@ export default function ChangeCurrency({setOpen} : currenciesAp) {
                         setCurrency(c.code)
                         setOpen(false)
                     }}
-                    className={`flex items-center justify-between py-5 border-b cursor-pointer transition  ${
+                    className={`flex items-center justify-between py-5 border-b border-b-gray-300 cursor-pointer transition  ${
                     currency === c.code ? "bg-gray-100" : ""
                     }`}
                 >

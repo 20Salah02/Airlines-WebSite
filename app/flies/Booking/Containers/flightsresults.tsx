@@ -56,17 +56,17 @@ export default function FlightResults(){
     const router = useRouter()
 
 
-    useEffect(() => {
-        if (openResult) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
+    // useEffect(() => {
+    //     if (openResult) {
+    //         document.body.style.overflow = "hidden";
+    //     } else {
+    //         document.body.style.overflow = "";
+    //     }
 
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [openResult]);
+    //     return () => {
+    //         document.body.style.overflow = "";
+    //     };
+    // }, [openResult]);
 
     
     // flight times

@@ -30,7 +30,7 @@ export default function FliesHeader(){
     
 
 
-
+    
     return(
         <div className="my-17 font-light">
             <h6>{formatDate(firstDay)}</h6>
