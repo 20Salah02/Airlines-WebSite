@@ -83,7 +83,7 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
             className={`absolute left-0 transition-all duration-200 pointer-events-none
             ${
             query || selectedAirport
-                ? "top-1 text-xs text-gray-500"
+                ? "top-0.5 text-xs text-gray-500"
                 : "top-1/2 -translate-y-1/2 text-gray-400"
             }`}
         >

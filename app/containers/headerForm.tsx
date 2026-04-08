@@ -114,11 +114,11 @@ export default function Form(){
 
     return(
 
-        <div className=" flex justify-center">
+        <div className=" flex justify-center flex-col lg:flex-row">
             <form 
                 onSubmit={(e) => {e.preventDefault()}} 
                 style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}} 
-                className="lg:absolute lg:top-95 border w-full max-w-6xl space-y-6 mb-20 py-5 px-5 border-zinc-400 rounded-2xl text-black flex lg:flex-col md:flex-row justify-center items-start bg-white"
+                className="absolute left-1/2 top-full -translate-x-1/2 -mt-10 w-[95%] border space-y-6 mb-20 lg:p-5 px-3 py-5 border-zinc-400 rounded-2xl text-black flex flex-col justify-center items-start bg-white"
             >
                 <div className="flex items-stretch gap-6 text-[16px] font-medium w-full">
                     <button
@@ -154,9 +154,9 @@ export default function Form(){
                     </button>
 
                 </div>
-                <div className="border w-full border-zinc-400 rounded-lg flex justify-start items-stretch ">
-                    <div className="flex items-center justify-center flex-1">
-                        <div ref={fromRef} tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
+                <div className="lg:border w-full border-zinc-400 rounded-lg flex justify-start items-stretch flex-col lg:flex-row space-y-4 lg:space-y-0">
+                    <div className="flex lg:items-center lg:justify-center flex-1 flex-col lg:flex-row border border-zinc-300 rounded-md lg:border-0">
+                        <div ref={fromRef} tabIndex={0} className={`flex items-center lg:justify-center w-full h-full lg:border-0 border-b border-b-zinc-300  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
@@ -165,22 +165,22 @@ export default function Form(){
                                 placeholder="From"
                                 value={destinationFrom?.name || ""}
                                 onSelect={(airport) => setDestinationFrom(airport)}
-                                className="flex-1 pt-3 w-58 h-full focus:outline-none"
+                                className="flex-1 lg:pt-3 py-3 lg:w-58 w-full h-full focus:outline-none "
                                 floatingLabel={true}
                                 isOpen={openFrom}
                                 setIsOpen={setOpenFrom}
                             />
                         </div>
 
-                        <svg className="w-10 text-zinc-600" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M18 10a1 1 0 0 0-1-1H5.41l2.3-2.29a1 1 0 0 0-1.42-1.42l-4 4a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 11h14a1 1 0 0 0 1-1m3.92 3.62A1 1 0 0 0 21 13H7a1 1 0 0 0 0 2h11.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-1.09"></path></svg>
+                        <svg className="lg:flex w-10 text-zinc-600 hidden" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M18 10a1 1 0 0 0-1-1H5.41l2.3-2.29a1 1 0 0 0-1.42-1.42l-4 4a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 11h14a1 1 0 0 0 1-1m3.92 3.62A1 1 0 0 0 21 13H7a1 1 0 0 0 0 2h11.59l-2.3 2.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l4-4a1 1 0 0 0 .21-1.09"></path></svg>
 
-                        <div ref={toRef} tabIndex={0} className={`flex items-center justify-center w-full h-full  ${borderStyle}`}>
+                        <div ref={toRef} tabIndex={0} className={`flex items-center lg:justify-center w-full h-full  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
                             <HandleDestination
                                 placeholder="To"
                                 value={destinationTo?.name || ""}
                                 onSelect={(airport) => setDestinationTo(airport)}
-                                className={`flex-1 pt-3 w-58 h-full focus:outline-none`}
+                                className={`flex-1 lg:pt-3 py-3 lg:w-58 h-full focus:outline-none`}
                                 floatingLabel={true}
                                 isOpen={openTo}
                                 setIsOpen={setOpenTo}
@@ -188,10 +188,10 @@ export default function Form(){
                         </div>
                     </div>
 
-                    <svg className="flex justify-center items-center h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
+                    <svg className="lg:flex justify-center items-center hidden  h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
 
                     <div ref={calendarRef} tabIndex={0} className={`${borderStyle}`}>
-                        <div  className={`flex items-center h-full w-65  space-x-5 cursor-pointer ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
+                        <div  className={`flex items-center h-full lg:w-65 w-full  space-x-5 cursor-pointer border border-zinc-300 rounded-md lg:border-0 ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
                             <div className={``}>
                                 <h6 className={`text-xs text-gray-600`}>Departure</h6>
@@ -217,10 +217,10 @@ export default function Form(){
                         )}
                     </div>
 
-                    <svg className="flex justify-center items-center h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
+                    <svg className="lg:flex justify-center items-center hidden h-full lg:w-20 w-full text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
 
 
-                    <div ref={passengersRef} tabIndex={1} className={`relative w-full  px-2 ${borderStyle}`}>
+                    <div ref={passengersRef} tabIndex={1} className={`relative w-full  px-2 ${borderStyle} border border-zinc-300 rounded-md lg:border-0`}>
                         <div className="flex justify-between items-center cursor-pointer h-full" 
                             onClick={() => setOpenPassengers(prev => !prev)}
                         >
@@ -251,11 +251,11 @@ export default function Form(){
                     
 
                 </div>
-                    <div className="flex justify-end w-full items-center space-x-6">
-                        <p className="text-gray-600 ">+Add promo code</p>
+                <div className="flex justify-end w-full lg:items-center space-x-6 space-y-3 flex-col lg:flex-row">
+                    <p className=" text-gray-600 ">+ Add promo code</p>
 
-                        <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full px-8 py-3 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
-                    </div>
+                    <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full px-8 py-3 w-full lg:w-50 font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                </div>
             </form>
 
             
