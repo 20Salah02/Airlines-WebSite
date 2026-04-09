@@ -116,8 +116,8 @@ export default function PassengerMoreDetails() {
           )}
         </div>
 
-        <div className="flex space-x-5">
-          <div className="flex flex-col w-1/3 space-y-2">
+        <div className="flex lg:flex-row flex-col lg:space-x-5 space-y-6">
+          <div className="flex flex-col lg:w-1/3 w-full space-y-2">
             <label>Country/Region code</label>
             <select
               value={countryCode}
@@ -132,7 +132,7 @@ export default function PassengerMoreDetails() {
             </select>
           </div>
 
-          <div className="flex flex-col w-2/3 space-y-2">
+          <div className="flex flex-col lg:w-2/3 w-full space-y-2">
             <label>Mobile Number</label>
             <input
               type="tel"

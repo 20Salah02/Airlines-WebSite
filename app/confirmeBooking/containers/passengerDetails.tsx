@@ -66,7 +66,7 @@ export default function PassengerDetails(){
 
 
     return(
-        <div className="relative w-1/2 space-y-9 bg-zinc-100 h-full mb-10">
+        <div className="relative lg:w-1/2 w-full space-y-9 bg-zinc-100 h-full mb-10">
             <h2 className="text-3xl text-gray-600 font-light ">{`Who's travelling?`}</h2>
 
             <div onClick={openForm} className="flex justify-between items-center bg-white rounded-2xl p-3 cursor-pointer">

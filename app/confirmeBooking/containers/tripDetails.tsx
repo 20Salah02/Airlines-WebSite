@@ -49,7 +49,7 @@ export default function TripDetails(){
 
 
     return(
-        <div className="flex flex-col h-fit bg-white w-2/5 p-5 rounded-3xl space-y-2">
+        <div className="flex flex-col lg:h-fit bg-white lg:w-2/5 w-full p-5 rounded-3xl space-y-2">
             <div className="space-y-2">
                 <h1 className="font-medium text-[17px] text-red-900">Trip details</h1>
                 <p>{tripType === "round-trip" ? "Round trip" : "One way"}</p>

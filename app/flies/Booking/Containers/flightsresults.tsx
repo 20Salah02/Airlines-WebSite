@@ -88,6 +88,8 @@ export default function FlightResults(){
 
     //
     function handleSelectFare(fare: FareType, price: number ,departureTime: string, arrivalTime: string) {
+        setOpenClass(null)
+        setOpenPhoneIndex(null) 
         setBooking(prev => ({
             ...prev,
             [isOutbound ? "outboundFlight" : "returnFlight"]: {
@@ -136,7 +138,9 @@ export default function FlightResults(){
                 </div>
                 <div>
                     <button
-                        onClick={() => setOpenCurrency(prev => !prev)}
+                        onClick={() => {
+                            setOpenCurrency(prev => !prev)
+                        }}
                         className="bg-white py-3 px-5 rounded-4xl  font-normal cursor-pointer"
                     >
                             Change Currency

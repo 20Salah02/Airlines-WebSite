@@ -31,7 +31,7 @@ export default function BusinessClass({onSelect} : BusClassProps){
     const comfortPrice = Math.round(basePrice * 2.5);
     const elitePrice = Math.round(basePrice * 2.7);
     return(
-        <div className="lg:grid grid-cols-4 gap-4 space-y-4">
+        <div className="lg:grid grid-cols-3 gap-4 space-y-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Business Comfort</h1>
@@ -40,7 +40,9 @@ export default function BusinessClass({onSelect} : BusClassProps){
                         <h3 className="flex justify-end text-gray-600">Total for All Passengers</h3>
                     </div>
                     <h4
-                        onClick={() => onSelect("Business Comfort" , comfortPrice)} 
+                        onClick={() => {
+                            onSelect("Business Comfort" , comfortPrice)
+                        }} 
                         className="flex justify-center py-4 my-5 w-full border border-red-900 rounded-4xl text-xl font-medium text-red-900 cursor-pointer hover:text-white hover:bg-red-900 duration-300">
                             Select fare
                     </h4>
