@@ -36,8 +36,8 @@ export default function EcoClass({onSelect} : EcoClassProps){
     const comfortBusinesPrice = Math.round(basePrice * 2.5)
 
     return(
-        <div className="grid grid-cols-4 gap-4">
-            <div className="border border-gray-200 rounded-3xl p-4 h-170">
+        <div className="lg:grid grid-cols-4 gap-4 space-y-4">
+            <div className="border border-gray-200 rounded-3xl p-4 h-170 ">
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Economy Classic</h1>
                     <div className="mt-5">

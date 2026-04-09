@@ -204,9 +204,12 @@ export default function FlightResults(){
                                 </div>
                             </div>
 
-                            <div className={`flex justify-between lg:w-fit w-full lg:mt-0 mt-4 space-x-2 overflow-hidden transition-all duration-500 ease-in-out ${openPhoneIndex === index ? "max-h-40 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
+                            <div className={`flex justify-between lg:w-fit w-full lg:mt-0 mt-4 space-x-2 lg:flex lg:opacity-100 lg:max-h-none overflow-hidden transition-all duration-500 ease-in-out ${openPhoneIndex === index ? "max-h-40 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
                                 <div   className="flex flex-col relative w-1/2">
-                                    <div onClick={() => handleToggleClass(index, "eco")} 
+                                    <div onClick={(e) => {
+                                        e.stopPropagation()
+                                        handleToggleClass(index, "eco")
+                                    }} 
                                         className={`flex flex-col justify-start border ${openClass?.type === "eco" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl lg:w-60 lg:h-45 lg:mr-4 lg:p-5 py-3 px-4 cursor-pointer hover:border-black duration-300`}
                                     >
                                         <p className="text-gray-600 lg:text-[18px] text-[14px]">Economy</p>
@@ -216,7 +219,10 @@ export default function FlightResults(){
 
                                 </div>
                                 <div 
-                                    onClick={() => handleToggleClass(index, "business")} 
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        handleToggleClass(index, "business")
+                                    }} 
                                     className={`flex flex-col justify-start border ${openClass?.type === "business" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl lg:w-60 w-1/2 lg:h-45 lg:mr-4 lg:p-5 py-3 px-4 cursor-pointer hover:border-black duration-300`}
                                 >
                                     <p className="text-gray-600 lg:text-[18px] text-[14px]">Business</p>

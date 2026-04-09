@@ -31,7 +31,7 @@ export default function BusinessClass({onSelect} : BusClassProps){
     const comfortPrice = Math.round(basePrice * 2.5);
     const elitePrice = Math.round(basePrice * 2.7);
     return(
-        <div className="grid grid-cols-3 gap-4">
+        <div className="lg:grid grid-cols-4 gap-4 space-y-4">
             <div className="border border-gray-200 rounded-3xl p-4 h-170">
                 <div>
                     <h1 className="text-[25px] font-light text-gray-600">Business Comfort</h1>
