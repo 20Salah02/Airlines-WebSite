@@ -18,6 +18,7 @@ type Airport ={
 export default function NewsLetter(){
 
     const [departure , setDeparture] = useState<Airport | null>(null)
+    const [openFrom, setOpenFrom] = useState(false);
     const [email , setEmail] = useState<string>("")
     const [check , setCheck] = useState<boolean>(false)
     const [submitted, setSubmitted] = useState<boolean>(false)
@@ -40,26 +41,26 @@ export default function NewsLetter(){
 
 
     return(
-        <div className="relative h-110">
+        <div className="relative lg:h-120 h-135">
             <Image
                 src="/NL_Background_Desktop.avif"
                 alt="NL_Background_Desktop"
                 fill
                 className="object-cover rounded-2xl"
             />
-            <div className="absolute  right-0 z-10 h-full w-1/2 space-y-8 pr-5 text-white flex flex-col justify-end ">
+            <div className="absolute  z-10 lg:w-1/2 lg:right-0 lg:space-y-10 space-y-5 p-4 lg:pr-5  text-white flex flex-col ">
                 <div className="space-y-5">
                     <h2 className="text-4xl font-light" >Never miss an offer</h2>
                     <h3>Subscribe and be the first to receive our exclusive offers.</h3>
                 </div>
 
                 <div className="w-full">
-                    <div className="flex w-full relative">
+                    <div className="flex lg:flex-row flex-col w-full relative">
                         <div className="relative flex-1">
                             <input
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className=" text-black h-13 w-full bg-white rounded-l-md border border-zinc-300  pl-3"
+                                className=" text-black h-13 w-full bg-white lg:rounded-l-md rounded-t-md lg:rounded-t-none border border-zinc-300  p-3"
                                 type="email"
                             />
                             <label
@@ -75,13 +76,14 @@ export default function NewsLetter(){
                         </div>
                         <div className="relative flex-1 text-black">
                             <HandleDestination
-                                className="h-13 w-full bg-white rounded-r-md border  pl-3 text-black border-zinc-300"
+                                className="h-13 w-full bg-white lg:rounded-r-md rounded-b-md lg:rounded-b-none border  pl-3 text-black border-zinc-300"
                                 placeholder="From"
                                 value={departure?.name || ""}
                                 onSelect={(airport) => setDeparture(airport)}
                                 floatingLabel={true}
                                 dropdownPosition="right"
-                            />
+                                isOpen={openFrom}
+                                setIsOpen={setOpenFrom}                            />
                         </div>
                     </div>
 

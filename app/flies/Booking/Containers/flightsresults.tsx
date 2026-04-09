@@ -3,8 +3,9 @@
 //context
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useCurrency } from "@/app/contexts/currencyContext"
+import { useOutsideClick } from "@/app/hooks/dropDownClose"
 //
-import { useState , useEffect } from "react"
+import { useState , useEffect , useRef } from "react"
 //
 import { useSearchParams , useRouter } from "next/navigation"
 //
@@ -26,6 +27,7 @@ type OpenResultType = {
 export default function FlightResults(){
 
     const [openClass, setOpenClass] = useState<{ index: number; type: "eco" | "business" } | null>(null)
+    const [openPhoneIndex, setOpenPhoneIndex] = useState<number | null>(null)       
     const [openResult, setOpenResult] = useState<OpenResultType | null>(null)  
     const [openCurrency , setOpenCurrency] = useState<boolean | null>(false)
     
@@ -54,22 +56,6 @@ export default function FlightResults(){
 
 
     const router = useRouter()
-
-
-    // useEffect(() => {
-    //     if (openResult) {
-    //         document.body.style.overflow = "hidden";
-    //     } else {
-    //         document.body.style.overflow = "";
-    //     }
-
-    //     return () => {
-    //         document.body.style.overflow = "";
-    //     };
-    // }, [openResult]);
-
-    
-    // flight times
 
     function calcArrival(
             depHour: number,
@@ -133,11 +119,17 @@ export default function FlightResults(){
 
     const durationHours = flightResult?.durationHours ?? 9
     const durationMins  = flightResult?.durationMinutes ?? 0
+
+    //
+    const classRef =useRef<HTMLDivElement>(null)
+    useOutsideClick(classRef ,() => {
+        setOpenPhoneIndex(null)
+    })
     
     return(
-        <div>
+        <div ref={classRef}>
 
-            <div className="flex justify-between items-center"> 
+            <div className="flex lg:flex-row flex-col lg:justify-between lg:items-center space-y-3"> 
                 <div>
                     <h2 className="font-bold pb-3 text-[18px]">{FlightsSchedules.length} results</h2>
                     <p className="text-gray-700">Fares displayed are for all passengers.</p>
@@ -145,11 +137,11 @@ export default function FlightResults(){
                 <div>
                     <button
                         onClick={() => setOpenCurrency(prev => !prev)}
-                        className="bg-white py-3 px-5 rounded-4xl mx-6 font-normal cursor-pointer"
+                        className="bg-white py-3 px-5 rounded-4xl  font-normal cursor-pointer"
                     >
                             Change Currency
                     </button>
-                    <button  className="bg-white py-3 px-5 rounded-4xl font-normal cursor-pointer">Sort And Filter</button>
+                    {/* <button  className="bg-white py-3 px-5 rounded-4xl font-normal cursor-pointer">Sort And Filter</button> */}
                 </div>
             </div>
             {/*  */}
@@ -162,15 +154,21 @@ export default function FlightResults(){
 
                 return(
             
-                    <div key={index} className="bg-white rounded-4xl p-5 my-4">
-                        <div className="flex items-center justify-between ">
-                            <div className="w-1/3">
-                                <div>StarLink Wi-Fi</div>
-                                <div className="my-7">
+                    <div onClick={(e) => {
+                            e.stopPropagation()
+                            setOpenPhoneIndex(prev => prev === index ? null : index)
+                        }} 
+                        key={index} 
+                        className="bg-white rounded-4xl lg:p-5 p-4 my-4"
+                    >
+                        <div className="flex lg:flex-row flex-col items-center justify-between ">
+                            <div className="lg:w-1/3 w-full">
+                                <div className="lg:text-[16px] text-[14px]">StarLink Wi-Fi</div>
+                                <div className="lg:my-7 my-4">
                                     <div  className="flex justify-between">
                                         <div>
-                                            <p className="text-3xl font-light">{depTime}</p>
-                                            <p className="text-gray-600 text-[18px]">{from?.iata}</p>
+                                            <p className="lg:text-3xl text-xl lg:font-light font-normal">{depTime}</p>
+                                            <p className="text-gray-600 lg:text-[18px] text-[14px]">{from?.iata}</p>
                                         </div>
 
                                        <div className="flex-1 flex flex-col items-center px-4 relative">
@@ -181,45 +179,48 @@ export default function FlightResults(){
                                             <div className="absolute left-0 w-3 h-3 rounded-full border border-gray-400 bg-white z-10"></div>
                                             
                                             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 z-10">
-                                            <div className="w-8 h-8 bg-[#8A1538] rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
-                                                <span className="text-[10px] text-white -rotate-45 font-bold uppercase">SL</span>
+                                            <div className="lg:w-8 lg:h-8 w-5 h-5 bg-[#8A1538] rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
+                                                <span className="lg:text-[10px] text-[9px] text-white -rotate-45 font-bold uppercase">SL</span>
                                             </div>
                                             </div>
 
                                             <div className="absolute right-0 w-3 h-3 rounded-full border border-gray-400 bg-white z-10"></div>
                                         </div>
 
-                                        <div className="text-center mt-2">
-                                            <p className="text-gray-600 text-[18px] font-normal tracking-wide">{flightDurationHour}h {flightDurationMin}min</p>
+                                        <div className="text-center lg:mt-2">
+                                            <p className="text-gray-600 lg:text-[18px] text-[14px] font-normal tracking-wide">{flightDurationHour}h {flightDurationMin}min</p>
                                         </div>
                                         </div>
                                         
                                         <div className="">
-                                            <p className="text-3xl font-light">{arrTime}</p>
-                                            <p className="text-gray-600 text-[18px]">{to?.iata}</p>
+                                            <p className="lg:text-3xl text-xl lg:font-light font-normal">{arrTime}</p>
+                                            <p className="text-gray-600 lg:text-[18px] text-[14px]">{to?.iata}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div onClick={() => setOpenResult({type : isOutbound ? "outbound" : "return" , departureTime :depTime , arrivalTime: arrTime})} className="cursor-pointer font-medium underline decoration-solid w-fit">Flight Details</div>
+                                <div className="lg:w-fit w-full flex justify-between items-end">
+                                    <div onClick={() => setOpenResult({type : isOutbound ? "outbound" : "return" , departureTime :depTime , arrivalTime: arrTime})} className="cursor-pointer lg:text-[16px] text-[14px] font-medium underline decoration-solid w-fit">Flight Details</div>
+                                    <div className="lg:hidden font-medium text-red-900">{format(ecoPrice)}</div>
+                                </div>
                             </div>
 
-                            <div className="flex justify-between  ">
-                                <div   className="flex flex-col relative">
+                            <div className={`flex justify-between lg:w-fit w-full lg:mt-0 mt-4 space-x-2 overflow-hidden transition-all duration-500 ease-in-out ${openPhoneIndex === index ? "max-h-40 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
+                                <div   className="flex flex-col relative w-1/2">
                                     <div onClick={() => handleToggleClass(index, "eco")} 
-                                        className={`flex flex-col justify-start border ${openClass?.type === "eco" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300`}
+                                        className={`flex flex-col justify-start border ${openClass?.type === "eco" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl lg:w-60 lg:h-45 lg:mr-4 lg:p-5 py-3 px-4 cursor-pointer hover:border-black duration-300`}
                                     >
-                                        <p className="text-gray-600">Economy</p>
-                                        <h2 className="text-3xl font-light flex pt-5">{format(ecoPrice)}</h2>
+                                        <p className="text-gray-600 lg:text-[18px] text-[14px]">Economy</p>
+                                        <h2 className="lg:text-3xl text-xl font-light flex lg:pt-5">{format(ecoPrice)}</h2>
                                         <h6 className="font-extralight text-green-800">special offer</h6>
                                     </div>
 
                                 </div>
                                 <div 
                                     onClick={() => handleToggleClass(index, "business")} 
-                                    className={`flex flex-col justify-start border ${openClass?.type === "business" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl w-60 h-45 mr-4 p-5 cursor-pointer hover:border-black duration-300`}
+                                    className={`flex flex-col justify-start border ${openClass?.type === "business" && openClass.index === index ? "border-black" : "border-gray-300"}  rounded-2xl lg:w-60 w-1/2 lg:h-45 lg:mr-4 lg:p-5 py-3 px-4 cursor-pointer hover:border-black duration-300`}
                                 >
-                                    <p className="text-gray-600">Business</p>
-                                    <h2 className="text-3xl font-light flex pt-5">{format(businessPrice)}</h2>
+                                    <p className="text-gray-600 lg:text-[18px] text-[14px]">Business</p>
+                                    <h2 className="lg:text-3xl text-xl font-light flex lg:pt-5">{format(businessPrice)}</h2>
                                     <h6 className="font-extralight text-green-800">special offer</h6>
                                 </div>
                             </div> 
