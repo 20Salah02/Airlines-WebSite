@@ -50,39 +50,39 @@ export default function ReviewTheTrips(){
         <div className="space-y-8 w-full">
             <h1 className="text-3xl font-light text-gray-600">Review your Trip</h1>
 
-            <div className="flex bg-white rounded-3xl ">
-                <div className="w-1/3 relative">
+            <div className="flex lg:flex-row flex-col bg-white rounded-3xl w-full">
+                <div className="lg:w-1/3 lg:h-auto h-50 w-full relative">
                       <Image
                             src="/h1-a350-hero.jpg"
                             alt=""
                             fill
-                            className="object-cover rounded-l-3xl"
+                            className="object-cover lg:rounded-l-3xl lg:rounded-t-none rounded-t-3xl"
                         />
                 </div>
 
-                <div className=" w-2/3 space-y-5 p-4">
+                <div className=" lg:w-2/3 w-full space-y-5 p-4">
                     <div className="text-gray-600">{formatDate(firstDay)}</div>
 
                     <div className="flex justify-between items-start ">
-                        <div className="flex-1 space-y-2 ">
-                            <h2 className="text-3xl font-light">{from?.iata}</h2>
-                            <h3 className="text-[17px] text-gray-600">{outboundTime?.departureTime}</h3>
-                            <h4 className="text-gray-600">{from?.city}</h4>
-                            <h5>{from?.name}</h5>
+                        <div className="flex-1 space-y-2">
+                            <h2 className="text-2xl font-light">{from?.iata}</h2>
+                            <h3 className="text-[15px] text-gray-600">{outboundTime?.departureTime}</h3>
+                            <h4 className="text-gray-600 lg:text-[16px] text-[15px]">{from?.city}</h4>
+                            <h5 className="lg:text-[16px] text-[15px]">{from?.name}</h5>
                         </div>
                         <div className="flex-1 space-y-3 flex flex-col items-center justify-center">
                             <div className="w-6 h-6 bg-red-900 rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
                                 <span className="text-[9px] text-white -rotate-45 font-bold uppercase">SL</span>
                             </div>
-                            <h3 className="text-[17px] text-gray-600 font-normal">
+                            <h3 className="text-[15px] text-gray-600 font-normal">
                                 {`${flightDurationHour}h ${flightDurationMin}min`}
                             </h3>
                         </div>
                         <div className="flex-1 space-y-2 text-right "> 
-                            <h2 className="text-3xl font-light ">{to?.iata}</h2>
-                            <h3 className="text-[17px] text-gray-600">{outboundTime?.arrivalTime}</h3>
-                            <h4 className="text-gray-600">{to?.city}</h4>
-                            <h5>{to?.name}</h5>
+                            <h2 className="text-2xl font-light ">{to?.iata}</h2>
+                            <h3 className="text-[15px] text-gray-600">{outboundTime?.arrivalTime}</h3>
+                            <h4 className="text-gray-600 lg:text-[16px] text-[15px]">{to?.city}</h4>
+                            <h5 className="lg:text-[16px] text-[15px]">{to?.name}</h5>
                         </div>
                     </div>
                     <div className="mt-8">
@@ -93,25 +93,25 @@ export default function ReviewTheTrips(){
 
 
             {tripType === "round-trip" &&(
-            <div className="flex bg-white rounded-3xl ">
-                <div className="w-1/3 relative">
+            <div className="flex lg:flex-row flex-col bg-white rounded-3xl w-full">
+                <div className="lg:w-1/3 lg:h-auto h-50 w-full relative">
                       <Image
                             src="/h1-mia-qntc-hn.jpg"
                             alt=""
                             fill
-                            className="object-cover rounded-l-3xl"
+                            className="object-cover lg:rounded-l-3xl lg:rounded-t-none rounded-t-3xl"
                         />
                 </div>
 
-                <div className=" w-2/3 space-y-5 p-4">
+                <div className=" lg:w-2/3 w-full space-y-5 p-4">
                     <div className="text-gray-600">{formatDate(lastDay)}</div>
 
                     <div className="flex justify-between items-start ">
                         <div className="flex-1 space-y-3 ">
-                            <h2 className="text-3xl font-light">{to?.iata}</h2>
-                            <h3 className="text-[17px] text-gray-600">{returnTime?.departureTime}</h3>
-                            <h4 className="text-gray-600">{to?.city}</h4>
-                            <h5>{to?.name}</h5>
+                            <h2 className="text-2xl font-light">{to?.iata}</h2>
+                            <h3 className="text-[15px] text-gray-600 ">{returnTime?.departureTime}</h3>
+                            <h4 className="text-gray-600 lg:text-[16px] text-[15px]">{to?.city}</h4>
+                            <h5 className="lg:text-[16px] text-[15px]">{to?.name}</h5>
                         </div>
                         <div className="flex-1 space-y-3 flex flex-col items-center justify-center">
                             <div className="w-6 h-6 bg-red-900 rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
@@ -122,10 +122,10 @@ export default function ReviewTheTrips(){
                             </h3>
                         </div>
                         <div className="flex-1 space-y-3 text-right "> 
-                            <h2 className="text-3xl font-light ">{from?.iata}</h2>
-                            <h3 className="text-[17px] text-gray-600">{returnTime?.arrivalTime}</h3>
-                            <h4 className="text-gray-600">{from?.city}</h4>
-                            <h5>{from?.name}</h5>
+                            <h2 className="text-2xl font-light ">{from?.iata}</h2>
+                            <h3 className="text-[15px] text-gray-600">{returnTime?.arrivalTime}</h3>
+                            <h4 className="text-gray-600 lg:text-[16px] text-[15px]">{from?.city}</h4>
+                            <h5 className="lg:text-[16px] text-[15px]">{from?.name}</h5>
                         </div>
                     </div>
                     <div className="mt-8">
