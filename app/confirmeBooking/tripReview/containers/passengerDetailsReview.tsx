@@ -22,15 +22,15 @@ export default function PassengerDetailsReview(){
     const phone = passenger.phone
 
     return(
-        <div className="mt-5 space-y-10">
+        <div className="mt-5 lg:space-y-10 space-y-5">
             <h1 className="text-3xl font-light text-gray-600">Passengers</h1>
             <div className="bg-white rounded-3xl p-8">
-                <div className="flex border-b border-b-zinc-200 pb-8">
-                    <div className="flex flex-1 ">
+                <div className="flex lg:flex-row flex-col lg:space-y-0 sapce-y-20 border-b border-b-zinc-200 lg:pb-8 pb-4">
+                    <div className="flex lg:flex-1 ">
                         <h3 className={`${firstName && lastName ? "bg-purple-700" : ""} rounded-full text-white p-2 uppercase w-fit h-fit`}>{firstNameLetter}{lastNameLetter}</h3>
                         <h4 className="capitalize text-[15px] w-fit ml-3">{title}. {firstName} {lastName}</h4>
                     </div>
-                    <div className="flex-1 text-gray-600">
+                    <div className="lg:flex-1 text-gray-600">
                         <h3>Gender : <span className="text-black capitalize font-medium">{gender}</span></h3>
                         <h3>Date of birth : <span className="text-black capitalize font-medium">{birthD} {birthM} {birthY}</span></h3>
                         <h3>Nationality : <span className="text-black capitalize font-medium">{nation}</span></h3>
@@ -38,7 +38,7 @@ export default function PassengerDetailsReview(){
                 </div>
 
                 <div className="space-y-4">
-                    <h2 className="text-[17px] font-medium mt-7">Contact details</h2>
+                    <h2 className="text-[17px] font-medium lg:mt-7 mt-4">Contact details</h2>
                     <div className="text-gray-600">
                         <h3>Email : {email}</h3>
                         <h3>Phone : {phone}</h3>

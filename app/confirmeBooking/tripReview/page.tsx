@@ -10,7 +10,7 @@ export default function TripReview(){
             <div>
                 <FlightsNav/>
             </div>
-            <div className="flex lg:flex-row flex-col lg:space-x-7 justify-center lg:px-14 px-4 mb-15 w-full">
+            <div className="flex lg:flex-row flex-col lg:space-x-7 space-y-7 lg:space-y-0 justify-center lg:px-14 px-4 mb-15 w-full">
                     <div className="flex flex-col lg:flex-2">
                         <ReviewTheTrips/>
                         <PassengerDetailsReview/>
