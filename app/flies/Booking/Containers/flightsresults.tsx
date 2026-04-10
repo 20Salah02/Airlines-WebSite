@@ -75,9 +75,9 @@ export default function FlightResults(){
 
 
     useEffect(() => {
-        document.body.style.overflow = openResult ? "hidden" : ""
+        document.body.style.overflow = openResult || openCurrency ? "hidden" : ""
         return () => { document.body.style.overflow = "" }
-    }, [openResult])
+    }, [openResult , openCurrency])
 
     function handleToggleClass(index: number, type: "eco" | "business") {
             setOpenClass(prev =>
@@ -297,14 +297,22 @@ export default function FlightResults(){
             >
                 <div
                     className={`
-                        absolute top-0 right-0 h-screen w-1/2 bg-white
-                        transition-transform duration-300
-                        ${openCurrency ? "translate-x-0" : "translate-x-full"}
+                        fixed bg-white transition-all duration-300 ease-in-out
+                        
+                        bottom-0 left-0 w-full h-[80vh] rounded-t-2xl
+                        ${openCurrency ? "translate-y-0" : "translate-y-full"}
+
+                        lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none 
+                        lg:bottom-auto
+                        ${openCurrency ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {openCurrency && (
-                        <ChangeCurrency setOpen={() => setOpenCurrency(false)}/>
+                        <ChangeCurrency
+                            open={openCurrency}
+                            setOpen={() => setOpenCurrency(false)}     
+                        />
                     )}
                 </div>
             </div>
