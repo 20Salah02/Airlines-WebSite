@@ -17,7 +17,7 @@ export default function FormTitle({onSelectTitle , selectedTitle} : FormTitlePro
                 const isSelected = selectedTitle === title
 
                 return(
-                    <li className={`flex items-center p-4 space-y-3 cursor-pointer hover:bg-zinc-100 ${isSelected ? "bg-zinc-100 font-medium" : "bg-white"}`} 
+                    <li className={`flex items-center lg:p-4 p-3 lg:space-y-3 space-y-1 cursor-pointer hover:bg-zinc-100 ${isSelected ? "bg-zinc-100 font-medium" : "bg-white"}`} 
                         key={title}
                         onClick={() => onSelectTitle(title)}
                     >

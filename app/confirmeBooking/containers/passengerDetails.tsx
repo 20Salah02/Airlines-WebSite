@@ -115,23 +115,29 @@ export default function PassengerDetails(){
 
             <div
                 className={`
-                    fixed inset-0 z-20 bg-black/40
+                    fixed inset-0 z-40 bg-black/40
                     transition-opacity duration-300
-                    ${passengerForm ? "opacity-100" : "opacity-0 pointer-events-none"}
+                    ${passengerForm ? "opacity-100 " : "opacity-0 pointer-events-none"}
                 `}
                 onClick={() => setPassengerForm(false)}
             >
                 <div
                     className={`
-                        absolute top-0 right-0 h-screen w-1/2 bg-white
-                        transition-transform duration-300 overflow-y-scroll
-                        ${passengerForm ? "translate-x-0" : "translate-x-full"}
+                        fixed bg-white transition-all duration-300 ease-in-out overflow-y-scroll
+                        
+                        bottom-0 left-0 w-full h-[80vh] rounded-t-2xl
+                        ${passengerForm ? "translate-y-0" : "translate-y-full"}
+
+                        lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none 
+                        lg:bottom-auto
+                        ${passengerForm ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <PassengerForm closePassengerForm={setPassengerForm} />
+                    <PassengerForm closePassengerForm={setPassengerForm} />                  
                 </div>
             </div>
+
         </div>
     )
 }

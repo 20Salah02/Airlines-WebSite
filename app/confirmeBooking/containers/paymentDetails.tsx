@@ -29,7 +29,7 @@ export default function PaymentDetails({setOpen} : payment){
 
 
     return(
-        <div className="bg-white lg:p-9 py-6 px-3 border-l border-l-gray-300 h-screen lg:space-y-15 space-y-8">
+        <div className="bg-white lg:p-9 py-6 px-3 lg:border-l lg:rounded-t-none rounded-t-full border-l-gray-300 h-screen lg:space-y-15 space-y-8">
             <button 
                 onClick={() => setOpen()}
                 className=" absolute right-4 top-5 p-2 text-zinc-400 hover:text-zinc-600 cursor-pointer"
