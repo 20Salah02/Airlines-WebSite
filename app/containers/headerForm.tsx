@@ -157,7 +157,7 @@ export default function Form(){
                 <div className="lg:border w-full border-zinc-400 rounded-lg flex justify-start items-stretch flex-col lg:flex-row space-y-4 lg:space-y-0">
                     <div className="flex lg:items-center lg:justify-center flex-1 flex-col lg:flex-row border border-zinc-300 rounded-md lg:border-0">
                         <div ref={fromRef} tabIndex={0} className={`flex items-center lg:justify-center w-full h-full lg:border-0 border-b border-b-zinc-300  ${borderStyle}`}>
-                            <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <svg className="text-red-900 mx-2 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
 

@@ -36,6 +36,9 @@ export default function VoyageSuggetions(){
     const [data , setData] = useState<Airport[]>([])
     const suggestionsIata = ["CDG","DPS","HND","DXB","JFK","IST","RAK","PKX","MED"]
 
+    const [active, setActive] = useState(0)
+    const scrollRef = useRef<HTMLDivElement>(null)
+
     const [openBooking , setOpenBooking] = useState<Record<number ,boolean>>({})
 
     //
@@ -149,6 +152,23 @@ export default function VoyageSuggetions(){
         }
     };
 
+    // handleScroll
+    useEffect(() => {
+        const container = scrollRef.current
+        if (!container) return
+
+        const handleScroll = () => {
+            const scrollLeft = container.scrollLeft
+            const width = container.clientWidth
+
+            const index = Math.round(scrollLeft / (width * 0.85))
+            setActive(index)
+        }
+
+        container.addEventListener("scroll", handleScroll)
+
+        return () => container.removeEventListener("scroll", handleScroll)
+    }, [])
 
     return(
         <div className="relative bg-zinc-100">
@@ -230,70 +250,149 @@ export default function VoyageSuggetions(){
                 </div>
             </div>
 
-            <div className="lg:grid grid-cols-4 grid-rows-2 gap-6 mt-6 h-auto">
-                {suggestionAirpots.map((airport , index) =>{
-                    let span = ""
+            <div>
+                <div 
+                    ref={scrollRef}
+                    className="flex lg:hidden overflow-x-auto gap-4 snap-x snap-mandatory pb-4"
+                >
+                    {suggestionAirpots.map((airport , index) => (
+                        <div
+                            key={airport.id}
+                            className="min-w-[85%] snap-start relative h-70 flex items-end mt-4"
+                        >                         
+                            <div 
+                                onMouseEnter={() => setOpenBooking(prev => ({ ...prev, [airport.id]: true }))}
+                                onMouseLeave={() => setOpenBooking(prev => ({ ...prev, [airport.id]: false }))}
+                                className="w-full"
+                            >
+                                <Image
+                                    src={`/${airport.city}.jpg`}
+                                    alt={airport.city}
+                                    fill
+                                    className="object-cover rounded-2xl" 
+                                />
 
-                    if (index === 0) span = "col-span-2 row-span-1"
-                    if (index === 1 || index === 2) span = "col-span-1"
-                    if (index === 3 || index === 4) span = "col-span-1"
-                    if (index === 5) span = "col-span-2"
-                    if (index === 6) span = "col-span-2 row-span-1"
-                    if (index === 7 || index === 8) span = "col-span-1"
-                    
-                    return (<div 
-                        key={airport.id} 
-                        className={`relative py-5 mt-4  h-70 flex items-end justify-between ${span} `}
-                    >
-                        <div 
-                            onMouseEnter={() => setOpenBooking(prev => ({ ...prev, [airport.id]: true }))}
-                            onMouseLeave={() => setOpenBooking(prev => ({ ...prev, [airport.id]: false }))}
-                            className="w-full gap-6 "
-                        >
-                            <Image
-                                src={`/${airport.city}.jpg`}
-                                alt={airport.city}
-                                fill
-                                priority={index === 0}
-                                className="object-cover rounded-2xl" 
-                            />
-                            <div className={`absolute inset-0 bg-black/15 rounded-2xl`}></div>
-
-                            <div className="relative space-y-4 px-6 w-full  text-white z-80">
-                                <div   className="flex lg:flex-row flex-col lg:items-end items-start justify-between">
-                                    <div className="space-y-3">
-                                        <h2 className="text-2xl">{airport.city}</h2>
-                                        <h3 className="text-sm">
-                                            {formatDate(firstDayDefault)} - {formatDate(lastDayDefault)}</h3>
+                                <div className="absolute inset-0 bg-black/15 rounded-2xl"></div>
+                               
+                                <div className="relative space-y-4 px-6 w-full  text-white z-80">
+                                    <div   className="flex lg:flex-row flex-col lg:items-end items-start justify-between">
+                                        <div className="space-y-3">
+                                            <h2 className="text-2xl">{airport.city}</h2>
+                                            <h3 className="text-sm">
+                                                {formatDate(firstDayDefault)} - {formatDate(lastDayDefault)}</h3>
+                                        </div>
+                                        <h4 
+                                            className="text-sm" 
+                                        >
+                                            <span className="capitalize">{classType}
+                                            </span> from <span className="font-medium">    
+                                                USD {(tripType === "round-trip" 
+                                                    ? airportReturnPrices[airport.id] 
+                                                    : airportOneWayPrices[airport.id]
+                                                )   * (classType === "premium" ? 2.5 : 1)
+                                                }
+                                            </span> 
+                                        </h4>  
                                     </div>
-                                    <h4 
-                                        className="text-sm" 
+                                    <div
+                                        className={` w-full flex justify-center mb-3`}
                                     >
-                                        <span className="capitalize">{classType}
-                                        </span> from <span className="font-medium">    
-                                            USD {(tripType === "round-trip" 
-                                                ? airportReturnPrices[airport.id] 
-                                                : airportOneWayPrices[airport.id]
-                                            )   * (classType === "premium" ? 2.5 : 1)
-                                            }
-                                        </span> 
-                                    </h4>  
-                                </div>
-                                <div
-                                    className={`overflow-hidden transition-all duration-500 w-full flex justify-center
-                                    ${openBooking[airport.id] ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
-                                >
-                                    <button 
-                                        onClick={() => handleSearch(airport)}
-                                        className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op"
-                                    >
-                                        Book now
-                                    </button>
+                                        <button 
+                                            onClick={() => handleSearch(airport)}
+                                            className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op"
+                                        >
+                                            Book now
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )})}
+                        
+                    ))}
+                    
+                </div>
+                <div className="flex justify-center mt-4 gap-2 lg:hidden">
+                    {suggestionAirpots.map((_, i) => (
+                        <div
+                            key={i}
+                            className={`h-2 rounded-full transition-all duration-300 ${
+                                active === i  
+                                    ? "bg-red-900 w-5"  
+                                    : "bg-gray-300 w-2" 
+                            }`}
+                        />
+                    ))}
+                </div>
+
+
+
+
+
+                <div className="hidden lg:grid grid-cols-4 grid-rows-2 gap-6 mt-4">
+                    {suggestionAirpots.map((airport , index) =>{
+                        let span = ""
+
+                        if (index === 0) span = "col-span-2 row-span-1"
+                        if (index === 1 || index === 2) span = "col-span-1"
+                        if (index === 3 || index === 4) span = "col-span-1"
+                        if (index === 5) span = "col-span-2"
+                        if (index === 6) span = "col-span-2 row-span-1"
+                        if (index === 7 || index === 8) span = "col-span-1"
+                        
+                        return (<div 
+                            key={airport.id} 
+                            className={`relative py-5 mt-4  h-70 flex items-end justify-between ${span} `}
+                        >
+                            <div 
+                                onMouseEnter={() => setOpenBooking(prev => ({ ...prev, [airport.id]: true }))}
+                                onMouseLeave={() => setOpenBooking(prev => ({ ...prev, [airport.id]: false }))}
+                                className="w-full gap-6 "
+                            >
+                                <Image
+                                    src={`/${airport.city}.jpg`}
+                                    alt={airport.city}
+                                    fill
+                                    priority={index === 0}
+                                    className="object-cover rounded-2xl" 
+                                />
+                                <div className={`absolute inset-0 bg-black/15 rounded-2xl`}></div>
+
+                                <div className="relative space-y-4 px-6 w-full  text-white z-80">
+                                    <div   className="flex lg:flex-row flex-col lg:items-end items-start justify-between">
+                                        <div className="space-y-3">
+                                            <h2 className="text-2xl">{airport.city}</h2>
+                                            <h3 className="text-sm">
+                                                {formatDate(firstDayDefault)} - {formatDate(lastDayDefault)}</h3>
+                                        </div>
+                                        <h4 
+                                            className="text-sm" 
+                                        >
+                                            <span className="capitalize">{classType}
+                                            </span> from <span className="font-medium">    
+                                                USD {(tripType === "round-trip" 
+                                                    ? airportReturnPrices[airport.id] 
+                                                    : airportOneWayPrices[airport.id]
+                                                )   * (classType === "premium" ? 2.5 : 1)
+                                                }
+                                            </span> 
+                                        </h4>  
+                                    </div>
+                                    <div
+                                        className={`overflow-hidden transition-all duration-500 w-full flex justify-center
+                                        ${openBooking[airport.id] ? "max-h-25 mt-2" : "max-h-0 opacity-50"}`}
+                                    >
+                                        <button 
+                                            onClick={() => handleSearch(airport)}
+                                            className="py-2 bg-red-900 w-[90%] rounded-4xl cursor-pointer op"
+                                        >
+                                            Book now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )})}
+                </div>
             </div>
         </div>
     )
