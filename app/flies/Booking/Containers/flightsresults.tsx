@@ -270,9 +270,14 @@ export default function FlightResults(){
             >
                 <div
                     className={`
-                        absolute top-0 right-0 h-screen w-1/2 bg-white
-                        transition-transform duration-300
-                        ${openResult ? "translate-x-0" : "translate-x-full"}
+                        fixed bg-white transition-all duration-300 ease-in-out
+                        
+                        bottom-0 left-0 w-full h-[80vh] rounded-t-2xl
+                        ${openResult ? "translate-y-0" : "translate-y-full"}
+
+                        lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none 
+                        lg:bottom-auto
+                        ${openResult ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
@@ -281,7 +286,8 @@ export default function FlightResults(){
                             type={openResult.type}
                             departureTime={openResult.departureTime}
                             arrivalTime={openResult.arrivalTime}
-                        />
+                            setOpen={() => setOpenResult(null)}                        
+                            />
                     )}
                 </div>
             </div>

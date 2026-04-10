@@ -63,7 +63,7 @@ export default function TripDetails(){
             <div >
                 <div onClick={() => setOpenResult("outbound")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                     <div className="space-y-1">
-                        <h2 className="text-[17px] font-medium text-red-900">{from?.city} to {to?.city}</h2>
+                        <h2 className="text-[17px] font-medium text-red-900">{from?.city} <span className="text-black font-normal">to</span> {to?.city}</h2>
                         <h3 className="text-[14px] text-gray-700">{formatDate(firstDay)}</h3>
                     </div>
                     <h4>
@@ -73,7 +73,7 @@ export default function TripDetails(){
                 {tripType === "round-trip" && (
                     <div onClick={() => setOpenResult("return")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
                         <div className="space-y-1">
-                            <h2 className="text-[17px] font-medium text-red-900">{to?.city} to {from?.city}</h2>
+                            <h2 className="text-[17px] font-medium text-red-900">{to?.city} <span className="text-black font-normal">to</span> {from?.city}</h2>
                             <h3 className="text-[14px] text-gray-700">{formatDate(lastDay)}</h3>
                         </div>
                         <h4>
@@ -105,15 +105,21 @@ export default function TripDetails(){
             >
                 <div
                     className={`
-                        absolute top-0 right-0 h-screen w-1/2 bg-white
-                        transition-transform duration-300
-                        ${openResult ? "translate-x-0" : "translate-x-full"}
+                        fixed bg-white transition-all duration-300 ease-in-out
+                        
+                        bottom-0 left-0 w-full h-[80vh] rounded-t-2xl
+                        ${openResult ? "translate-y-0" : "translate-y-full"}
+
+                        lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none 
+                        lg:bottom-auto
+                        ${openResult ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {openResult && (
                         <FlightDetails
                             type={openResult}
+                            setOpen={() => setOpenResult(null)}                        
                         />
                     )}
                 </div>
