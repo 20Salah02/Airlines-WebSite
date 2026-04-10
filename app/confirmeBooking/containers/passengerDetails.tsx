@@ -101,7 +101,7 @@ export default function PassengerDetails(){
             {!showMoreDetails ? (
             <div className="space-y-7">
                 <div className="space-y-2">
-                        <h3 className="text-xl">Check your passenger details</h3>
+                        <h3 className="lg:text-xl text-[17px] font-medium">Check your passenger details</h3>
                         <h4>If you need to change any passenger details, you will have to enter your passenger details again.</h4>
                 </div>
 

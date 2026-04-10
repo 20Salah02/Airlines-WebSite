@@ -49,7 +49,7 @@ export default function FlightsNav(){
     } , [openFormEdit])
 
     return(
-        <div>
+        <div className="">
             <ul className="flex justify-around items-center pt-4 font-medium text-[16px]">
                 <Link href="/">
                     <li className="lg:flex hidden">
@@ -63,16 +63,16 @@ export default function FlightsNav(){
                     </li>
                 </Link>
                 <li onClick={() => setOpenFormEdit(prev => !prev)}>
-                    <div className="flex lg:flex-row flex-col items-center space-y-2 lg:space-y-0 p-4 lg:border border-gray-300 rounded-4xl cursor-pointer">
+                    <div className="flex lg:flex-row flex-col items-center space-y-2 lg:space-y-0 lg:p-4 p-2 border border-gray-300 rounded-4xl cursor-pointer">
                         <div className="flex border-gray-300">
                             <div className="flex items-center px-3 border-r border-gray-300">
-                                <h3>{from?.iata}</h3>
+                                <h3 className="lg:text-[16px] text-[14px]">{from?.iata}</h3>
                                 <p className="w-5 mx-3 text-red-900"><FontAwesomeIcon icon={faRightLeft}/></p>
-                                <h3>{to?.iata}</h3>
+                                <h3 className="lg:text-[16px] text-[14px]">{to?.iata}</h3>
                             </div>
                             <div className="flex items-center px-3 lg:border-r border-gray-300">
                                 <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>
-                                <h3>{formatNavDate(firstDay)}-{formatNavDate(lastDay)}</h3>
+                                <h3 className="lg:text-[16px] text-[14px]">{formatNavDate(firstDay)}-{formatNavDate(lastDay)}</h3>
                             </div>
                             <div className="lg:flex items-center px-3 lg:border-r border-gray-300 hidden">
                                 <p className="w-6 mr-3  text-red-900"><FontAwesomeIcon icon={faUsers}/></p>
@@ -81,7 +81,7 @@ export default function FlightsNav(){
                         </div>
                         <div className="flex items-center px-3 text-red-900">
                             <p className="w-5 mr-3"><FontAwesomeIcon icon={faMagnifyingGlass}/></p>
-                            <h3>Modify Search</h3>
+                            <h3 className="lg:text-[16px] text-[14px]">Modify Search</h3>
                         </div>
                     </div>
                 </li>

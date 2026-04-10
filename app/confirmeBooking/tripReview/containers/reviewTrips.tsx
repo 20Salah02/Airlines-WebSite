@@ -85,8 +85,8 @@ export default function ReviewTheTrips(){
                             <h5 className="lg:text-[16px] text-[15px]">{to?.name}</h5>
                         </div>
                     </div>
-                    <div className="mt-8">
-                        <h6 onClick={() => openFlightDetails("outbound")} className="underline decoration-solid font-medium cursor-pointer w-fit">View flight details</h6>
+                    <div className="lg:mt-8">
+                        <h6 onClick={() => openFlightDetails("outbound")} className="underline decoration-solid font-medium cursor-pointer w-fit lg:text-[16px] text-[15px]">View flight details</h6>
                     </div>
                 </div>
             </div>  
@@ -128,8 +128,8 @@ export default function ReviewTheTrips(){
                             <h5 className="lg:text-[16px] text-[15px]">{from?.name}</h5>
                         </div>
                     </div>
-                    <div className="mt-8">
-                        <h6 onClick={() => openFlightDetails("return")} className="underline decoration-solid font-medium cursor-pointer w-fit">View flight details</h6>
+                    <div className="lg:mt-8">
+                        <h6 onClick={() => openFlightDetails("return")} className="underline decoration-solid font-medium cursor-pointer w-fit lg:text-[16px] text-[15px]">View flight details</h6>
                     </div>
                 </div>
             </div>

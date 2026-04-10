@@ -27,10 +27,10 @@ export default function TravelExp(){
     ]
 
     return(
-        <div className="mt-15">
+        <div className="lg:mt-15">
             
-            <div className="space-y-6">
-                <h2 className="text-4xl font-light text-gray-600">
+            <div className="lg:space-y-6 space-y-3 w-full">
+                <h2 className="lg:text-4xl text-3xl font-light text-gray-600">
                     Elevate Your Journey
                 </h2>
                 <h3 className="text-gray-600">
@@ -47,7 +47,7 @@ export default function TravelExp(){
                     const index = Math.round(scrollLeft / width)
                     setActive(index)
                 }}
-                className="mt-8 overflow-x-auto lg:overflow-visible"
+                className="lg:mt-5 overflow-x-auto lg:overflow-visible"
             >
                 <div className="flex lg:grid lg:grid-cols-3 gap-6 snap-x snap-mandatory">
 

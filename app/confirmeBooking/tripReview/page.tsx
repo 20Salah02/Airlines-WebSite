@@ -6,7 +6,7 @@ import PassengerDetailsReview from "./containers/passengerDetailsReview"
 export default function TripReview(){
 
     return(
-        <div className="flex flex-col bg-zinc-100 space-y-20 w-full ">
+        <div className="flex flex-col bg-zinc-100 lg:space-y-20 space-y-10 w-full ">
             <div>
                 <FlightsNav/>
             </div>
