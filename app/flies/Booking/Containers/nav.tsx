@@ -95,26 +95,29 @@ export default function FlightsNav(){
 
             <div
                 className={`
-                    fixed inset-0 z-20 bg-black/40
+                    fixed inset-0 z-40 bg-black/40
                     transition-opacity duration-300
-                    ${openFormEdit ? "opacity-100" : "opacity-0 pointer-events-none"}
+                    ${openFormEdit ? "opacity-100 " : "opacity-0 pointer-events-none"}
                 `}
                 onClick={() => setOpenFormEdit(false)}
             >
                 <div
                     className={`
-                        absolute top-0 right-0 h-screen w-1/2 bg-white
-                        transition-transform duration-300
-                        ${openFormEdit ? "translate-x-0" : "translate-x-full"}
+                        fixed bg-white transition-all duration-300 ease-in-out
+                        
+                        bottom-0 left-0 w-full h-[80vh] rounded-t-2xl
+                        ${openFormEdit ? "translate-y-0" : "translate-y-full"}
+
+                        lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none 
+                        lg:bottom-auto
+                        ${openFormEdit ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}
                     `}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {openFormEdit && (
-                        <FlightEdit setOpenFormEdit={setOpenFormEdit} />
-                    )}
+                        <FlightEdit setOpenFormEdit={setOpenFormEdit} />                  )}
                 </div>
             </div>
-
         </div>
     )
 }

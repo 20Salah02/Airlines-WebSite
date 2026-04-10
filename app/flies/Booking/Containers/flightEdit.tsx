@@ -131,7 +131,13 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
 
 
     return(
-        <div className=" bg-white w-full p-9 border-l border-l-gray-300 h-screen space-y-6">
+        <div className=" bg-white w-full lg:p-9 px-4 border-l border-l-gray-300 lg:h-screen space-y-6">
+            <button 
+                onClick={() => setOpenFormEdit(false)}
+                className=" absolute right-4 top-5 p-2 text-zinc-400 hover:text-zinc-600 cursor-pointer"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"></path></svg>
+            </button>
             <form onSubmit={(e) => e.preventDefault()}></form>
             <h1 className="flex justify-center text-xl">Modify Search</h1>
             <div className="space-y-6">
@@ -203,7 +209,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 </div>
                 <div>
                     <div ref={calendarRef} onClick={() => setopenCalendare(prev => !prev)} className={`flex items-center w-full border rounded-md border-gray-300 p-2 cursor-pointer ${borderStyle} `}>
-                        <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
+                        <svg className="text-red-900 lg:mx-2 lg:mr-0 mr-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
                        <div className="w-1/2 space-y-1.5">
                             <p className="text-gray-600 text-xs">Departure</p>
                             <p>{formatDate(selectDate?.from)}</p>
@@ -233,7 +239,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                     tabIndex={1}
                     ref={passengersRef}
                 >
-                    <svg className="mx-2 text-red-900 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}><path d="M15.5 11a3.5 3.5 0 1 0-7 0a3.5 3.5 0 0 0 7 0"></path><path d="M15.483 11.35q.484.149 1.017.15a3.5 3.5 0 1 0-3.483-3.85m-2.034 0a3.5 3.5 0 1 0-2.466 3.7M22 16.5c0-2.761-2.462-5-5.5-5m1 8c0-2.761-2.462-5-5.5-5s-5.5 2.239-5.5 5"></path><path d="M7.5 11.5c-3.038 0-5.5 2.239-5.5 5"></path></g></svg>
+                    <svg className="lg:mx-2 lg:mr-0 mr-2 text-red-900 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}><path d="M15.5 11a3.5 3.5 0 1 0-7 0a3.5 3.5 0 0 0 7 0"></path><path d="M15.483 11.35q.484.149 1.017.15a3.5 3.5 0 1 0-3.483-3.85m-2.034 0a3.5 3.5 0 1 0-2.466 3.7M22 16.5c0-2.761-2.462-5-5.5-5m1 8c0-2.761-2.462-5-5.5-5s-5.5 2.239-5.5 5"></path><path d="M7.5 11.5c-3.038 0-5.5 2.239-5.5 5"></path></g></svg>
                     <div className="relative z-10 w-full">
                         <p className="text-gray-600 text-xs">Passenger / Class</p>
                         <div>
@@ -241,19 +247,19 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                         </div>
                     </div>
                 </div>
-                    <div className=" w-full space-y-4 items-center">
-                        <p className="text-gray-600 mr-5">+Add promo code</p>
+                <div className=" w-full space-y-4 items-center">
+                    <p className="text-gray-600 mr-5">+Add promo code</p>
 
-                        <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
-                    </div>
+                    <button onClick={handleSearch} className="bg-red-900 border-2 border-red-900 rounded-full w-full px-8 py-4  font-bold text-md text-amber-50 cursor-pointer">Search Flights</button>
+                </div>
             </div>
-                        <div>
-                            {openPassengers && (
-                            <div className="absolute h-full bottom-0 left-0 z-90 bg-white w-full shadow-lg">
-                                <HandlePassengers setPassengersText={setPassengersText} isOpen={setOpenPassengers}/>
-                            </div>
-                            )}
-                        </div>
+            <div>
+                {openPassengers && (
+                <div className="absolute h-full bottom-0 left-0 z-90 bg-white w-full shadow-lg">
+                    <HandlePassengers setPassengersText={setPassengersText} isOpen={setOpenPassengers}/>
+                </div>
+                )}
             </div>
+        </div>
     )
-}
+} 
