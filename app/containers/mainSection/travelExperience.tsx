@@ -47,14 +47,14 @@ export default function TravelExp(){
                     const index = Math.round(scrollLeft / width)
                     setActive(index)
                 }}
-                className="lg:mt-5 overflow-x-auto lg:overflow-visible"
+                className="lg:mt-5 overflow-x-auto lg:overflow-visible no-scrollbar"
             >
-                <div className="flex lg:grid lg:grid-cols-3 gap-6 snap-x snap-mandatory">
+                <div className="flex lg:grid lg:grid-cols-3 gap-6 snap-x snap-mandatory ">
 
                     {cards.map((card, i) => (
                         <div 
                             key={i}
-                            className="min-w-[85%] lg:min-w-0 snap-center cursor-default"
+                            className="min-w-[85%] lg:min-w-0 snap-center cursor-default "
                         >
                             <div className="relative py-5 mt-4 h-50">
                                 <Image

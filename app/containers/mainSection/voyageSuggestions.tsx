@@ -253,7 +253,7 @@ export default function VoyageSuggetions(){
             <div>
                 <div 
                     ref={scrollRef}
-                    className="flex lg:hidden overflow-x-auto gap-4 snap-x snap-mandatory pb-4"
+                    className="flex lg:hidden overflow-x-auto gap-4 snap-x snap-mandatory pb-4 no-scrollbar"
                 >
                     {suggestionAirpots.map((airport , index) => (
                         <div
