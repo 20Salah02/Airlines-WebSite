@@ -7,10 +7,12 @@ export default function Flies(){
 
     return(
         <div className="bg-zinc-100 ">
-            <div className="mx-8">
+            <div className="">
                 <div><FlightsNav/></div>
-                <div><FliesHeader/></div>
-                <div><FlightResults/></div>
+                <div className="lg:mx-8 mx-4">
+                    <div><FliesHeader/></div>
+                    <div><FlightResults/></div>
+                </div>
             </div>
         </div>
     )

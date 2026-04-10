@@ -50,30 +50,34 @@ export default function FlightsNav(){
 
     return(
         <div>
-            <ul className="flex justify-around items-center pt-4 font-medium text-[16px] ">
-                <Link href="/"><li >
-                    <Image 
-                        src="/Logo.png"
-                        alt="Logo"
-                        width={60}
-                        height={50}
-                        priority
-                    />
-                </li></Link>
+            <ul className="flex justify-around items-center pt-4 font-medium text-[16px]">
+                <Link href="/">
+                    <li className="lg:flex hidden">
+                        <Image 
+                            src="/Logo.png"
+                            alt="Logo"
+                            width={60}
+                            height={50}
+                            priority
+                        />
+                    </li>
+                </Link>
                 <li onClick={() => setOpenFormEdit(prev => !prev)}>
-                    <div className="flex items-center p-4 border border-gray-300 rounded-4xl cursor-pointer">
-                        <div className="flex items-center px-3 border-r border-gray-300">
-                            <h3>{from?.iata}</h3>
-                            <p className="w-5 mx-3 text-red-900"><FontAwesomeIcon icon={faRightLeft}/></p>
-                            <h3>{to?.iata}</h3>
-                        </div>
-                        <div className="flex items-center px-3 border-r border-gray-300">
-                            <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>
-                            <h3>{formatNavDate(firstDay)}-{formatNavDate(lastDay)}</h3>
-                        </div>
-                        <div className="flex items-center px-3 border-r border-gray-300">
-                            <p className="w-6 mr-3  text-red-900"><FontAwesomeIcon icon={faUsers}/></p>
-                            <h3>{passengers}</h3>
+                    <div className="flex lg:flex-row flex-col items-center space-y-2 lg:space-y-0 p-4 lg:border border-gray-300 rounded-4xl cursor-pointer">
+                        <div className="flex border-gray-300">
+                            <div className="flex items-center px-3 border-r border-gray-300">
+                                <h3>{from?.iata}</h3>
+                                <p className="w-5 mx-3 text-red-900"><FontAwesomeIcon icon={faRightLeft}/></p>
+                                <h3>{to?.iata}</h3>
+                            </div>
+                            <div className="flex items-center px-3 lg:border-r border-gray-300">
+                                <p className="w-5 mr-3  text-red-900"><FontAwesomeIcon icon={faCalendar} /></p>
+                                <h3>{formatNavDate(firstDay)}-{formatNavDate(lastDay)}</h3>
+                            </div>
+                            <div className="lg:flex items-center px-3 lg:border-r border-gray-300 hidden">
+                                <p className="w-6 mr-3  text-red-900"><FontAwesomeIcon icon={faUsers}/></p>
+                                <h3>{passengers}</h3>
+                            </div>
                         </div>
                         <div className="flex items-center px-3 text-red-900">
                             <p className="w-5 mr-3"><FontAwesomeIcon icon={faMagnifyingGlass}/></p>
@@ -82,9 +86,9 @@ export default function FlightsNav(){
                     </div>
                 </li>
                 <Link href="/Login">
-                    <li className="flex border rounded-4xl py-3 px-6 border-red-900 text-red-900">
-                        <p className="w-5 mr-2"><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></p>
-                        <p>Login</p>
+                    <li className="flex border lg:rounded-4xl rounded-full p-3 border-red-900 text-red-900">
+                        <p className="w-5 "><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></p>
+                        <p className="lg:flex hidden">Login</p>
                     </li>
                 </Link>
             </ul>
