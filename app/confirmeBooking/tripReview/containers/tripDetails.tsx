@@ -4,7 +4,7 @@ import { useBooking } from "@/app/contexts/bookingContext"
 import { useCurrency } from "@/app/contexts/currencyContext"
 import { useSearchParams } from "next/navigation"
 //
-import { useState } from "react"
+import { useState , useEffect } from "react"
 //
 import PaymentDetails from "../../containers/paymentDetails"
 
@@ -25,6 +25,12 @@ export default function TripReviewDetails(){
     const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
 
     const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
+
+    //
+    useEffect(() => {
+        document.body.style.overflow = openPayment ? "hidden" : ""
+        return () => { document.body.style.overflow = "" }
+    }, [openPayment])
 
     return(
         <div className="bg-white p-4 rounded-3xl w-full space-y-4 h-fit sticky top-10">

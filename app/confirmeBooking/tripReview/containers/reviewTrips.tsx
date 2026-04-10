@@ -1,7 +1,7 @@
 "use client"
 
 //
-import { useState } from "react"
+import { useState , useEffect } from "react"
 //
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useFlightResultContext } from "@/app/contexts/priceContext"
@@ -45,6 +45,12 @@ export default function ReviewTheTrips(){
 
     const flightDurationHour = flightResult?.durationHours
     const flightDurationMin  = flightResult?.durationMinutes
+
+    //
+    useEffect(() => {
+        document.body.style.overflow = flightDetails ? "hidden" : ""
+        return () => { document.body.style.overflow = "" }
+    }, [flightDetails])
 
     return(
         <div className="space-y-8 w-full">
