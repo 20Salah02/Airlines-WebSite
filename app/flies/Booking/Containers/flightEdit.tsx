@@ -139,7 +139,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"></path></svg>
             </button>
             <form onSubmit={(e) => e.preventDefault()}></form>
-            <h1 className="flex justify-center text-xl">Modify Search</h1>
+            <h1 className="flex justify-center lg:text-xl text-[17px]">Modify Search</h1>
             <div className="space-y-6">
                 <div className="flex items-stretch gap-6 text-[16px] font-medium w-full">
                     <button

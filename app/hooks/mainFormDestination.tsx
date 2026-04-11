@@ -2,6 +2,8 @@
 
 //
 import { useState , useEffect , useMemo } from "react";
+//
+
 
 
 
@@ -61,7 +63,7 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
 
 
     return (
-    <div className="relative h-full flex ">
+    <div className="relative  h-full flex ">
         <input
             type="text"
             value={query} 
@@ -92,9 +94,19 @@ export default function HandleDestination({value , onSelect , selectedAirport , 
         )}
 
         {isOpen && result.length > 0 && (
-        <ul className={`h-70 top-14 absolute rounded-md bg-white overflow-y-scroll  ${dropdownPosition === "right" ? "right-0" : "left-0"} w-130 z-90 `}
-            style={{boxShadow:" 0px 5px 30px -2px rgba(0,0,0,0.62)"}}
-        >
+            <ul
+            className={`
+                ${dropdownPosition === "right" ? "right-0" : "left-0"}
+                
+                lg:absolute lg:top-14 lg:h-70 lg:w-130
+                
+                fixed inset-0 lg:inset-auto
+                w-full h-full
+                
+                bg-white overflow-y-auto z-50
+            `}
+            style={{ boxShadow: "0px 5px 30px -2px rgba(0,0,0,0.62)" }}
+            >
             {result.map((item, index) => (
             <li
                 className=" rounded-md  hover:bg-gray-200"

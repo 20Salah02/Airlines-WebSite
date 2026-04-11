@@ -36,14 +36,14 @@ export default function PaymentDetails({setOpen} : payment){
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"></path></svg>
             </button>
-            <h1 className="flex justify-center text-xl">Payment summary</h1>
+            <h1 className="flex justify-center lg:text-xl text-[17px]">Payment summary</h1>
             <div className="flex flex-col justify-center">
                 <div className="flex items-end justify-between lg:py-6 py-4 border-b border-b-gray-300 text-[17px]">
                     <h2>Total fare</h2>
                     <h3>{format(totalFare)}</h3>
                 </div>
                 <div className="flex items-end justify-between lg:py-6 py-4 border-b border-b-gray-300 text-[17px]">
-                    <h2>Total taxes, fees and chargese</h2>
+                    <h2>Total taxes,<br></br> fees and chargese</h2>
                     <h3>{format(totalTaxes)}</h3>
                 </div>
                 <div className="flex justify-between items-end py-6  ">

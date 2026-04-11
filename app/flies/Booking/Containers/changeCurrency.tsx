@@ -35,7 +35,7 @@ export default function ChangeCurrency({setOpen , open} : currenciesAp) {
             </button>
             
             <div className="p-6">
-                <h1 className="text-center text-xl font-medium">Change currency</h1>
+                <h1 className="text-center lg:text-xl text-[17px]">Change currency</h1>
             </div>
 
             <div className="flex-1 overflow-y-auto p-2 lg:p-9 space-y-2">

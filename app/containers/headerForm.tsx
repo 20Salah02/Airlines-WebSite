@@ -4,7 +4,7 @@
 import { useBooking } from "../contexts/bookingContext"
 import { useOutsideClick } from "../hooks/dropDownClose"
 //
-import { useState , useRef } from "react"
+import { useState , useRef , useEffect} from "react"
 //
 import { useRouter } from "next/navigation"
 //
@@ -93,20 +93,29 @@ export default function Form(){
     const fromRef = useRef<HTMLDivElement>(null);
     const toRef = useRef<HTMLDivElement>(null);
 
-    useOutsideClick(fromRef, () => {
-        setOpenFrom(false); 
-    });
-
-    useOutsideClick(toRef, () => {
-        setOpenTo(false); 
-    });
-
     const calendarRef = useRef<HTMLDivElement>(null);
     useOutsideClick(calendarRef, () => setopenCalendare(false));  
 
     const passengersRef = useRef<HTMLDivElement>(null);
     useOutsideClick(passengersRef, () => setOpenPassengers(false));
 
+    // ✅ وبدلها
+useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+        // نغلق From لو الكليك مش جوه fromRef
+        if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
+            setOpenFrom(false);
+        }
+        // نغلق To لو الكليك مش جوه toRef  
+        if (toRef.current && !toRef.current.contains(e.target as Node)) {
+            setOpenTo(false);
+        }
+    };
+
+    // ✅ mousedown بدل click عشان يشتغل قبل الـ focus
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+}, []);
 
     
     //style
@@ -160,7 +169,6 @@ export default function Form(){
                             <svg className="text-red-900 mx-2 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
-
                             <HandleDestination
                                 placeholder="From"
                                 value={destinationFrom?.name || ""}

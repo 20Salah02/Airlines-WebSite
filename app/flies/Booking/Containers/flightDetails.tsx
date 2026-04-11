@@ -52,7 +52,7 @@ export default function FlightDetails({type ,departureTime ,arrivalTime ,setOpen
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="m12 13.4l-4.9 4.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l4.9-4.9l-4.9-4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.9 4.9l4.9-4.9q.275-.275.7-.275t.7.275t.275.7t-.275.7L13.4 12l4.9 4.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275z"></path></svg>
             </button>
-            <h1 className="flex justify-center text-xl">Flight details</h1>
+            <h1 className="flex justify-center lg:text-xl text-[17px]">Flight details</h1>
             <div className="space-y-3 lg:mb-15">
                 <h2 className="font-medium text-lg text-red-900">{from?.city} <span className="font-normal text-gray-600">to</span> {to?.city}</h2>
                 <h3 className="text-gray-600">{formatDate(firstDay)}</h3>
