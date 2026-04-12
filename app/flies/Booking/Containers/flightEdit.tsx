@@ -5,7 +5,7 @@
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useOutsideClick } from "@/app/hooks/dropDownClose"
 //
-import { useState , useRef} from "react"
+import { useState , useRef , useEffect} from "react"
 //
 import { useRouter } from "next/navigation"
 //
@@ -118,6 +118,20 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
         setOpenTo(false); 
     });
 
+    useEffect(() => {
+        const handleClick = (e: MouseEvent) => {
+            if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
+                setOpenFrom(false);
+            }
+            if (toRef.current && !toRef.current.contains(e.target as Node)) {
+                setOpenTo(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClick);
+        return () => document.removeEventListener("mousedown", handleClick);
+    }, []);
+
     const calendarRef = useRef<HTMLDivElement>(null);
     useOutsideClick(calendarRef, () => setopenCalendare(false));  
 
@@ -177,7 +191,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 </div>
                 <div className="flex flex-col border rounded-md border-gray-300 " >
                     <div className="w-full">
-                        <div ref={fromRef} tabIndex={0} className={`flex items-center h-13 w-full  ${borderStyle}`}>
+                        <div tabIndex={0} className={`flex items-center h-13 w-full  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
@@ -193,7 +207,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                             />
                         </div>
                         <hr className="text-gray-300" />
-                        <div ref={toRef} tabIndex={0} className={`flex items-center w-full h-13  ${borderStyle}`}>
+                        <div  tabIndex={0} className={`flex items-center w-full h-13  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
                             <HandleDestination
                                 placeholder="To"
