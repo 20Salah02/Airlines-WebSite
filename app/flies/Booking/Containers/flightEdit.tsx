@@ -254,6 +254,11 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                         </div>
                     </div>
                 </div>
+                <HandlePassengers
+                    setPassengersText={setPassengersText}
+                    isOpen={setOpenPassengers}
+                    open={openPassengers}
+                />
                 <div className=" w-full space-y-4 items-center">
                     <p className="text-gray-600 mr-5">+Add promo code</p>
 
@@ -261,11 +266,6 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 </div>
             </div>
             <div>
-                {openPassengers && (
-                <div className="absolute h-full bottom-0 left-0 z-90 bg-white w-full shadow-lg">
-                    <HandlePassengers setPassengersText={setPassengersText} isOpen={setOpenPassengers}/>
-                </div>
-                )}
             </div>
         </div>
     )
