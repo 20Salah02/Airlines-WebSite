@@ -94,23 +94,26 @@ export default function Form(){
     const toRef = useRef<HTMLDivElement>(null);
 
     const calendarRef = useRef<HTMLDivElement>(null);
-    useOutsideClick(calendarRef, () => setopenCalendare(false));  
 
     const passengersRef = useRef<HTMLDivElement>(null);
-    useOutsideClick(passengersRef, () => setOpenPassengers(false));
 
     useEffect(() => {
-        const handleClick = (e: MouseEvent) => {
+        const handleMouseDown = (e: MouseEvent) => {
             if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
                 setOpenFrom(false);
             }
             if (toRef.current && !toRef.current.contains(e.target as Node)) {
                 setOpenTo(false);
             }
+            if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+                setopenCalendare(false);
+            }
+            if (passengersRef.current && !passengersRef.current.contains(e.target as Node)) {
+                setOpenPassengers(false);
+            }
         };
-
-        document.addEventListener("mousedown", handleClick);
-        return () => document.removeEventListener("mousedown", handleClick);
+        document.addEventListener("mousedown", handleMouseDown);
+        return () => document.removeEventListener("mousedown", handleMouseDown);
     }, []);
 
     
@@ -161,7 +164,7 @@ export default function Form(){
                 </div>
                 <div className="lg:border w-full border-zinc-400 rounded-lg flex justify-start items-stretch flex-col lg:flex-row space-y-4 lg:space-y-0">
                     <div className="flex lg:items-center lg:justify-center flex-1 flex-col lg:flex-row border border-zinc-300 rounded-md lg:border-0">
-                        <div tabIndex={0} className={`flex items-center lg:justify-center w-full h-full lg:border-0 border-b border-b-zinc-300  ${borderStyle}`}>
+                        <div ref={fromRef} tabIndex={0} className={`flex items-center lg:justify-center w-full h-full lg:border-0 border-b border-b-zinc-300  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
@@ -195,7 +198,7 @@ export default function Form(){
                     <svg className="lg:flex justify-center items-center hidden  h-full w-20 text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
 
                     <div ref={calendarRef} tabIndex={0} className={`${borderStyle}`}>
-                        <div  className={`flex items-center h-13 lg:w-65 w-full  space-x-5 cursor-pointer border border-zinc-300 rounded-md lg:border-0 ${borderStyle} `}  onClick={() => setopenCalendare(prev => !prev)}>
+                        <div onClick={() => setopenCalendare(prev => !prev)} className={`flex items-center h-13 lg:w-65 w-full  space-x-5 cursor-pointer border border-zinc-300 rounded-md lg:border-0 ${borderStyle} `} >
                             <svg className="text-red-900 mx-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
                             <div className={``}>
                                 <h6 className={`text-xs text-gray-600`}>Departure</h6>
@@ -208,17 +211,16 @@ export default function Form(){
                             </div>
                             )}
                         </div>
-                        {openCalendar && (
                             <div className="absolute right-0 mt-1  z-90">
                                 <HandleDate
                                     selected={selectDate}
                                     onSelectDate={setSelectDate}
                                     setIsOpen={setopenCalendare}
+                                    isOpen={openCalendar}
                                     mode={tripType === "round-trip" ? "range" : "single"}
                                     className="p-6"
                                 />
                             </div>
-                        )}
                     </div>
 
                     <svg className="lg:flex justify-center items-center hidden h-full lg:w-20 w-full text-zinc-400" xmlns="http://www.w3.org/2000/svg" width={20} height={60} viewBox="0 0 20 20"><path fill="currentColor" fillRule="evenodd" d="M10 1a1 1 0 0 1 1 1v16a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1" clipRule="evenodd"></path></svg>
