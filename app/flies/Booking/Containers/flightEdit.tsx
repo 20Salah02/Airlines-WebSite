@@ -110,34 +110,28 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     const fromRef = useRef<HTMLDivElement>(null);
     const toRef = useRef<HTMLDivElement>(null);
 
-    useOutsideClick(fromRef, () => {
-        setOpenFrom(false); 
-    });
+    const calendarRef = useRef<HTMLDivElement>(null);
 
-    useOutsideClick(toRef, () => {
-        setOpenTo(false); 
-    });
+    const passengersRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleClick = (e: MouseEvent) => {
+        const handleMouseDown = (e: MouseEvent) => {
             if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
                 setOpenFrom(false);
             }
             if (toRef.current && !toRef.current.contains(e.target as Node)) {
                 setOpenTo(false);
             }
+            if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+                setopenCalendare(false);
+            }
+            if (passengersRef.current && !passengersRef.current.contains(e.target as Node)) {
+                setOpenPassengers(false);
+            }
         };
-
-        document.addEventListener("mousedown", handleClick);
-        return () => document.removeEventListener("mousedown", handleClick);
+        document.addEventListener("mousedown", handleMouseDown);
+        return () => document.removeEventListener("mousedown", handleMouseDown);
     }, []);
-
-    const calendarRef = useRef<HTMLDivElement>(null);
-    useOutsideClick(calendarRef, () => setopenCalendare(false));  
-
-    const passengersRef = useRef<HTMLDivElement>(null);
-    useOutsideClick(passengersRef, () => setOpenPassengers(false));
-    
     
      //style
     const borderStyle = "focus-within:outline-none focus-within:border focus-within:border-red-900 focus-within:shadow-[0_0_15px_rgba(127,29,29,0.6)] focus-within:rounded-md "
@@ -205,7 +199,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                                 isOpen={openFrom}
                                 setIsOpen={setOpenFrom}
                             />
-                        </div>
+                        </div> 
                         <hr className="text-gray-300" />
                         <div  tabIndex={0} className={`flex items-center w-full h-13  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
@@ -235,17 +229,16 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                             </div>
                         )}
                     </div>
-                    {openCalendar && (
-                        <div className="absolute top-1/6 left-1 w-fit  z-50">
+                    <div className="absolute top-1/6 left-1 w-fit  z-50">
                             <HandleDate
                                 selected={selectDate}
                                 onSelectDate={setSelectDate}
                                 setIsOpen={setopenCalendare}
+                                isOpen={openCalendar}
                                 mode={tripType === "round-trip" ? "range" : "single"}
-                                className="pb-5"
-                            />                        
-                        </div>
-                    )}
+                                className="p-6"
+                            />
+                    </div>                     
                 </div>    
                 <div
                     className={`flex items-center w-full border rounded-md border-gray-300 p-2 ${borderStyle}`}

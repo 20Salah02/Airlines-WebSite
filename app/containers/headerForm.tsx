@@ -2,7 +2,6 @@
 
 // context
 import { useBooking } from "../contexts/bookingContext"
-import { useOutsideClick } from "../hooks/dropDownClose"
 //
 import { useState , useRef , useEffect} from "react"
 //
