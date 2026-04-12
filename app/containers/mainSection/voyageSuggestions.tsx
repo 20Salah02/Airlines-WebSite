@@ -176,7 +176,7 @@ export default function VoyageSuggetions(){
                 <h2 className="lg:text-4xl text-3xl font-light text-gray-600">Find great fears</h2>
             </div>
             <div className="flex lg:flex-row flex-col justify-between items-start mt-7 lg:space-y-0 space-y-5">
-                <div ref={fromRef} className="flex space-x-2">
+                <div  className="flex space-x-2">
                     <label htmlFor="from">From</label>
                     <HandleDestination
                         key={destinationFrom?.id || "empty"} 
