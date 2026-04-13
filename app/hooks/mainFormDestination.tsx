@@ -34,23 +34,23 @@ export default function HandleDestination({
     const [data, setData] = useState<airportApi[]>([]);
     const [query, setQuery] = useState(selectedAirport ? `${selectedAirport.city} (${selectedAirport.iata})` : "");
     const [mobileQuery, setMobileQuery] = useState("");
-    const [isMobile, setIsMobile] = useState(false);
-    const [mounted, setMounted] = useState(false);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const [rect, setRect] = useState<DOMRect | null>(null);
 
-    // eslint-disable-next-line 
-    useEffect(() => { 
-        setMounted(true); 
-    }, []);
+    const [isMobile, setIsMobile] = useState(() => {
+        if (typeof window === "undefined") return false
+        return window.innerWidth < 1024
+    })
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => { setMounted(true) }, [])
 
     useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 1024);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
+        const check = () => setIsMobile(window.innerWidth < 1024)
+        window.addEventListener("resize", check)
+        return () => window.removeEventListener("resize", check)
+    }, [])
 
     useLayoutEffect(() => {
         if (isOpen && inputRef.current) {

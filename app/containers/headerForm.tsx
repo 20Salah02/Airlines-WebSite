@@ -88,32 +88,39 @@ export default function Form(){
     };
 
 
-    // close dropdown
-    const fromRef = useRef<HTMLDivElement>(null);
-    const toRef = useRef<HTMLDivElement>(null);
+// close dropdown
+const fromRef = useRef<HTMLDivElement>(null);
+const toRef = useRef<HTMLDivElement>(null);
+const calendarRef = useRef<HTMLDivElement>(null);
+const passengersRef = useRef<HTMLDivElement>(null);
 
-    const calendarRef = useRef<HTMLDivElement>(null);
+useEffect(() => {
+    const handleClose = (e: MouseEvent | TouchEvent) => {
 
-    const passengersRef = useRef<HTMLDivElement>(null);
+        const portalEl = document.getElementById("passengers-portal")
+        if (portalEl && portalEl.contains(e.target as Node)) return
 
-    useEffect(() => {
-        const handleMouseDown = (e: MouseEvent) => {
-            if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
-                setOpenFrom(false);
-            }
-            if (toRef.current && !toRef.current.contains(e.target as Node)) {
-                setOpenTo(false);
-            }
-            if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
-                setopenCalendare(false);
-            }
-            if (passengersRef.current && !passengersRef.current.contains(e.target as Node)) {
-                setOpenPassengers(false);
-            }
-        };
-        document.addEventListener("mousedown", handleMouseDown);
-        return () => document.removeEventListener("mousedown", handleMouseDown);
-    }, []);
+        if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
+            setOpenFrom(false);
+        }
+        if (toRef.current && !toRef.current.contains(e.target as Node)) {
+            setOpenTo(false);
+        }
+        if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+            setopenCalendare(false);
+        }
+        if (passengersRef.current && !passengersRef.current.contains(e.target as Node)) {
+            setOpenPassengers(false);
+        }
+    };
+
+    document.addEventListener("mousedown", handleClose);
+    document.addEventListener("touchstart", handleClose); // ✅ موبايل
+    return () => {
+        document.removeEventListener("mousedown", handleClose);
+        document.removeEventListener("touchstart", handleClose);
+    };
+}, []);
 
     
     //style

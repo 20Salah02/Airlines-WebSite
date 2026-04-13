@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
 
 type setPassengersText = {
@@ -34,14 +34,19 @@ export default function HandlePassengers({ setPassengersText, isOpen, open }: se
     function handleAddClickInfant() { setInfantPass(prev => (prev < 2 ? prev + 1 : 0)) }
     function handleMinClickInfant() { setInfantPass(prev => (prev > 0 ? prev - 1 : 0)) }
 
-    const handleconfirm = () => {
+    const handleConfirm = () => {
         setPassengersText(`${adultPass + childPass + infantPass} Passengers ${selectedClass}`)
         isOpen(false)
     }
 
+    const handleOverlayClose = useCallback((e: React.TouchEvent | React.MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        isOpen(false)
+    }, [isOpen])
+
     const content = (
         <div className="mx-4">
-
             <div className="flex justify-start lg:text-[16px] text-[15px] font-semibold py-5 border-b-2 border-zinc-300 text-red-900">
                 <h2>Passengers</h2>
             </div>
@@ -74,15 +79,15 @@ export default function HandlePassengers({ setPassengersText, isOpen, open }: se
                     <input id="eco" className="accent-red-900" type="radio" name="class" value={classOptions.eco} checked={classOptions.eco === selectedClass} onChange={(e) => setSelectedClass(e.target.value)} />
                 </div>
                 <div className="flex justify-between">
-                    <label htmlFor="bus" className="lg:text-lg text-[15px]">{`${classOptions.premium}`}</label>
+                    <label htmlFor="bus" className="lg:text-lg text-[15px]">{classOptions.premium}</label>
                     <input id="bus" className="accent-red-900" type="radio" name="class" value={classOptions.premium} checked={classOptions.premium === selectedClass} onChange={(e) => setSelectedClass(e.target.value)} />
                 </div>
             </div>
 
             <div className="flex justify-center">
-                <button 
-                    onClick={handleconfirm} 
-                    className="lg:w-full w-[160px] bg-red-900 text-gray-50 rounded-4xl lg:py-4 py-2 mb-5 font-semibold lg:text-[18px] text-[14px] flex justify-center items-center cursor-pointer" 
+                <button
+                    onClick={handleConfirm}
+                    className="lg:w-full w-[160px] bg-red-900 text-gray-50 rounded-4xl lg:py-4 py-2 mb-5 font-semibold lg:text-[18px] text-[14px] flex justify-center items-center cursor-pointer"
                     type="button"
                 >
                     Confirm
@@ -93,25 +98,27 @@ export default function HandlePassengers({ setPassengersText, isOpen, open }: se
 
     if (mounted && isMobile) {
         return createPortal(
-            <>
+            <div id="passengers-portal"> 
                 <div
                     className={`fixed inset-0 z-[9998] bg-black/40 transition-opacity duration-300
                         ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-                    onMouseDown={(e) => { e.preventDefault(); isOpen(false); }}
+                    onTouchStart={handleOverlayClose}
+                    onClick={handleOverlayClose}
                 />
-
                 <div
                     className={`fixed bottom-0 left-0 w-full h-[80vh] z-[9999] bg-white rounded-t-2xl flex flex-col
                         transition-transform duration-300 ease-in-out overflow-y-auto
                         ${open ? "translate-y-0" : "translate-y-full"}`}
-                    onMouseDown={(e) => e.stopPropagation()}
+                    onTouchStart={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
                 >
                     <div className="relative flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-200 shrink-0">
                         <h3 className="absolute left-1/2 -translate-x-1/2 text-gray-600 text-[15px]">
                             Passengers & Class
                         </h3>
                         <button
-                            onMouseDown={(e) => { e.preventDefault(); isOpen(false); }}
+                            onTouchStart={handleOverlayClose}
+                            onClick={handleOverlayClose}
                             className="ml-auto text-gray-500 hover:text-gray-800 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition text-lg font-bold"
                         >
                             ✕
@@ -119,12 +126,11 @@ export default function HandlePassengers({ setPassengersText, isOpen, open }: se
                     </div>
                     {content}
                 </div>
-            </>,
+            </div>,
             document.body
         )
     }
 
-    // DESKTOP 
     return (
         <div className={`text-black border-2 border-gray-300 rounded-md bg-white w-full mt-2 left-0
             ${open ? "absolute" : "hidden"}`}
