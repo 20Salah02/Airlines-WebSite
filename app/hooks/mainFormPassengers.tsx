@@ -1,5 +1,5 @@
 "use client"
-import { useState, useLayoutEffect, useCallback } from "react"
+import { useState, useLayoutEffect, useCallback , useEffect } from "react"
 import { createPortal } from "react-dom"
 
 type HandlePassengersProps = {
@@ -43,6 +43,17 @@ export default function HandlePassengers({ setPassengersText, isOpen,open }: Han
     e.stopPropagation()
     isOpen(false)
   }, [isOpen])
+
+  // stopScroll when portal open
+  useEffect(() => {
+      const shouldLock = isMobile && open;
+
+      document.body.style.overflow = shouldLock ? "hidden" : "";
+
+      return () => {
+          document.body.style.overflow = "";
+      };
+  }, [isMobile, open]);
 
   const content = (
     <div className="mx-4">

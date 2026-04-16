@@ -4,7 +4,7 @@ import { DayPicker } from "react-day-picker"
 import { DateRange } from "react-day-picker"
 import "react-day-picker/style.css"
 import { createPortal } from "react-dom"
-import { useState, useLayoutEffect, memo } from "react"
+import { useState, useLayoutEffect, memo , useEffect } from "react"
 
 type HandleDateProps = {
   selected: DateRange | undefined
@@ -38,6 +38,17 @@ const HandleDate = memo(function HandleDate({
   const handleContinue = () => {
     if (selected?.from) setIsOpen(false)
   }
+
+  // stopScroll when portal open
+  useEffect(() => {
+      const shouldLock = isMobile && isOpen;
+
+      document.body.style.overflow = shouldLock ? "hidden" : "";
+
+      return () => {
+          document.body.style.overflow = "";
+      };
+  }, [isMobile, isOpen]);
 
   const commonProps = {
     disabled: { before: new Date() },

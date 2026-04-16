@@ -86,6 +86,17 @@ export default function HandleDestination({
         setMobileQuery("");
     };
 
+    // stopScroll when portal open
+    useEffect(() => {
+        const shouldLock = isMobile && isOpen;
+
+        document.body.style.overflow = shouldLock ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isMobile, isOpen]);
+
     if (!mounted) return (
         <div className="relative h-full flex">
             <input
