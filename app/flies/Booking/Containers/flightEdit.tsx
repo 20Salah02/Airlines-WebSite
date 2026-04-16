@@ -3,9 +3,8 @@
 // context 
 
 import { useBooking } from "@/app/contexts/bookingContext"
-import { useOutsideClick } from "@/app/hooks/dropDownClose"
 //
-import { useState , useRef , useEffect} from "react"
+import { useState , useRef , useEffect , useCallback} from "react"
 //
 import { useRouter } from "next/navigation"
 //
@@ -20,31 +19,33 @@ import { useSearchParams } from "next/navigation"
 type FlightEditProps = {
   setOpenFormEdit: (v: boolean) => void
 }
+type Airport = {
+    id : number
+    name : string
+    city : string
+    country : string
+    iata : string
+    latitude : number;
+    longitude : number
+}
 
-export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
+//
 
-    type Airport = {
-        id : number
-        name : string
-        city : string
-        country : string
-        iata : string
-        latitude : number;
-        longitude : number
-    }
-
-    //
-
-    function formatDate(date?: Date | null) {
+function formatDate(date?: Date | null) {
     if (!date) return "";
     return date.toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "short",
         year : "numeric"
     });
-    }
+}
 
-   //
+
+
+
+export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
+
+
     const { booking, setBooking} = useBooking()
 
     const search = useSearchParams()
@@ -72,6 +73,19 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     from: firstDay ,
     to: tripType === "round-trip" ? lastDay : undefined,
     })
+
+
+    //
+
+    const handleSelectFrom = useCallback((a: Airport) => setDestinationFrom(a), [])
+    const handleSelectTo = useCallback((a: Airport) => setDestinationTo(a), [])
+    const handleSetPassengers = useCallback((t: string) => setPassengersText(t), [])
+    const handleTogglePassengers = useCallback(() => setOpenPassengers(p => !p), [])
+    const handleToggleCalendar  = useCallback(() => setopenCalendare(p => !p), [])
+    const handleRoundTrip = useCallback(() => setTripType("round-trip"), [])
+    const handleOneWay = useCallback(() => setTripType("one-way"), [])
+    const handleSetOpenPassengers = useCallback((val: boolean) => {setOpenPassengers(val)}, [])
+
 
 
     //
@@ -109,29 +123,40 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     // close dropdown
     const fromRef = useRef<HTMLDivElement>(null);
     const toRef = useRef<HTMLDivElement>(null);
-
     const calendarRef = useRef<HTMLDivElement>(null);
-
     const passengersRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleMouseDown = (e: MouseEvent) => {
+        const handleClose = (e: PointerEvent) => {
+
+            const passengersPortal  = document.getElementById("passengers-portal")
+            const calendarPortal    = document.getElementById("calendar-portal")
+            const destinationFromPortal = document.getElementById("destination-portal-From") 
+            const destinationToPortal   = document.getElementById("destination-portal-To")   
+
+
+            if (passengersPortal?.contains(e.target as Node))  return
+            if (calendarPortal?.contains(e.target as Node))    return
+            if (destinationFromPortal?.contains(e.target as Node))   return  
+            if (destinationToPortal?.contains(e.target as Node))     return  
+
             if (fromRef.current && !fromRef.current.contains(e.target as Node)) {
-                setOpenFrom(false);
+                setOpenFrom(false)
             }
             if (toRef.current && !toRef.current.contains(e.target as Node)) {
-                setOpenTo(false);
+                setOpenTo(false)
             }
             if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
-                setopenCalendare(false);
+                setopenCalendare(false)
             }
             if (passengersRef.current && !passengersRef.current.contains(e.target as Node)) {
-                setOpenPassengers(false);
+                setOpenPassengers(false)
             }
-        };
-        document.addEventListener("mousedown", handleMouseDown);
-        return () => document.removeEventListener("mousedown", handleMouseDown);
-    }, []);
+        }
+
+        document.addEventListener("pointerdown", handleClose)
+        return () => document.removeEventListener("pointerdown", handleClose)
+    }, [])
     
      //style
     const borderStyle = "focus-within:outline-none focus-within:border focus-within:border-red-900 focus-within:shadow-[0_0_15px_rgba(127,29,29,0.6)] focus-within:rounded-md "
@@ -152,7 +177,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 <div className="flex items-stretch gap-6 text-[16px] font-medium w-full">
                     <button
                         type="button"
-                        onClick={() => setTripType("round-trip")}
+                        onClick={handleRoundTrip}
                         className={`flex pb-2 border-b-2 transition cursor-pointer ${
                         tripType === "round-trip"
                         ? "border-red-900 text-red-900"
@@ -172,7 +197,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
 
                     <button
                         type="button"
-                        onClick={() => setTripType("one-way")}
+                        onClick={handleOneWay}
                         className={`flex pb-2 border-b-2 transition cursor-pointer ${
                         tripType === "one-way"
                         ? "border-red-900 text-red-900"
@@ -185,7 +210,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 </div>
                 <div className="flex flex-col border rounded-md border-gray-300 " >
                     <div className="w-full">
-                        <div tabIndex={0} className={`flex items-center h-13 w-full  ${borderStyle}`}>
+                        <div ref={fromRef} tabIndex={0} className={`flex items-center h-13 w-full  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5M18.575 6.299a1.783 1.783 0 0 1 1.783 3.089L11.31 14.61a4 4 0 0 1-1.377.49l-2.604.422a3.04 3.04 0 0 1-2.725-.948L2.91 12.723a.607.607 0 0 1 .145-.936l.391-.226a1.52 1.52 0 0 1 1.56.025l1.816 1.128c.19.118.43.122.624.01l3.6-2.078l-4.404-5.12a.607.607 0 0 1 .156-.922l.378-.218c.326-.188.73-.18 1.047.02l6.506 4.113z"/>
                             </svg>
@@ -193,7 +218,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                             <HandleDestination
                                 placeholder="From"
                                 value={destinationFrom?.name || ""}
-                                onSelect={(airport) => setDestinationFrom(airport)}
+                                onSelect={handleSelectFrom}
                                 className="flex-1 pt-3 w-58 h-full focus:outline-none"
                                 floatingLabel={true}
                                 isOpen={openFrom}
@@ -201,12 +226,12 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                             />
                         </div> 
                         <hr className="text-gray-300" />
-                        <div  tabIndex={0} className={`flex items-center w-full h-13  ${borderStyle}`}>
+                        <div ref={toRef} tabIndex={0} className={`flex items-center w-full h-13  ${borderStyle}`}>
                             <svg className="text-red-900 mx-2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.75 20.75h18.5m-2.05-7.453a1.783 1.783 0 1 1-.923 3.445L8.185 14.04a4 4 0 0 1-1.32-.628l-2.14-1.543A3.04 3.04 0 0 1 3.47 9.271l.11-2.508a.607.607 0 0 1 .765-.56l.436.117a1.52 1.52 0 0 1 1.086 1.121l.486 2.082c.051.218.218.39.434.448l4.015 1.076l.506-6.735a.607.607 0 0 1 .763-.541l.422.113c.363.097.643.388.725.755l1.692 7.509z"/></svg>
                             <HandleDestination
                                 placeholder="To"
                                 value={destinationTo?.name || ""}
-                                onSelect={(airport) => setDestinationTo(airport)}
+                                onSelect={handleSelectTo}
                                 className={`flex-1 pt-3 w-58 h-full focus:outline-none`}
                                 floatingLabel={true}
                                 isOpen={openTo}
@@ -216,7 +241,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                     </div>            
                 </div>
                 <div>
-                    <div ref={calendarRef} onClick={() => setopenCalendare(prev => !prev)} className={`flex items-center w-full border rounded-md border-gray-300 p-2 cursor-pointer ${borderStyle} `}>
+                    <div ref={calendarRef} onClick={handleToggleCalendar} className={`flex items-center w-full border rounded-md border-gray-300 p-2 cursor-pointer ${borderStyle} `}>
                         <svg className="text-red-900 lg:mx-2 mr-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 15 15"><path fill="currentColor" d="M10.5 1a.5.5 0 0 1 .5.5V2h1.5A1.5 1.5 0 0 1 14 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 1 12.5v-9A1.5 1.5 0 0 1 2.5 2H4v-.5a.5.5 0 0 1 1 0V2h5v-.5a.5.5 0 0 1 .5-.5M2 12.5l.01.1c.04.196.194.35.39.39l.1.01h10l.1-.01a.5.5 0 0 0 .39-.39l.01-.1V6H2zM3.5 11a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-6-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m-4-2a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1m2 0a.5.5 0 1 1 0 1a.5.5 0 0 1 0-1M2.4 3.01a.5.5 0 0 0-.4.49V5h11V3.5a.5.5 0 0 0-.4-.49L12.5 3H11v.5a.5.5 0 0 1-1 0V3H5v.5a.5.5 0 0 1-1 0V3H2.5z"></path></svg>
                        <div className="w-1/2 space-y-1.5">
                             <p className="text-gray-600 text-xs">Departure</p>
@@ -242,7 +267,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                 </div>    
                 <div
                     className={`flex items-center w-full border rounded-md border-gray-300 p-2 ${borderStyle}`}
-                    onClick={() => setOpenPassengers(prev => !prev)}
+                    onClick={handleTogglePassengers}
                     tabIndex={1}
                     ref={passengersRef}
                 >
@@ -254,11 +279,13 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
                         </div>
                     </div>
                 </div>
-                <HandlePassengers
-                    setPassengersText={setPassengersText}
-                    isOpen={setOpenPassengers}
-                    open={openPassengers}
-                />
+                <div>
+                    <HandlePassengers
+                        setPassengersText={handleSetPassengers}
+                        isOpen={handleSetOpenPassengers}
+                        open={openPassengers}
+                    />
+                </div>
                 <div className=" w-full space-y-4 items-center">
                     <p className="text-gray-600 mr-5">+Add promo code</p>
 

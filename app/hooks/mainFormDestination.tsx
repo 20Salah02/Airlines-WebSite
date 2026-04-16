@@ -139,11 +139,11 @@ export default function HandleDestination({
 
             {/*MOBILE*/}
             {mounted && isMobile && createPortal(
-                <div>
+                <div id={`destination-portal-${placeholder}`}>
                     <div
                         className={`fixed inset-0 z-9998 bg-black/40 transition-opacity duration-300
                             ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-                        onMouseDown={(e) => {
+                        onPointerDown={(e) => {
                             e.preventDefault();
                             handleClose();
                         }}
@@ -153,7 +153,7 @@ export default function HandleDestination({
                         className={`fixed bottom-0 left-0 w-full h-[90vh] z-9999 bg-white rounded-t-2xl flex flex-col
                             transition-transform duration-300 ease-in-out
                             ${isOpen ? "translate-y-0" : "translate-y-full"}`}
-                        onMouseDown={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
                     >
                         <div className="relative flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-200 shrink-0">
                             
@@ -162,7 +162,7 @@ export default function HandleDestination({
                             </h3>
 
                             <button
-                                onMouseDown={(e) => {
+                                onPointerDown={(e) => {
                                     e.preventDefault();
                                     handleClose();
                                 }}
@@ -191,10 +191,7 @@ export default function HandleDestination({
                                 <li
                                     key={`${item.iata}-${index}`}
                                     className="hover:bg-gray-100 active:bg-gray-200"
-                                    onMouseDown={(e) => {
-                                        e.preventDefault();
-                                        handleSelect(item);
-                                    }}
+                                    onClick={() => handleSelect(item)} 
                                 >
                                     <div className="flex items-center border-b py-2 mx-4 pb-2 border-b-gray-200 cursor-pointer">
                                         <div className="mr-3 text-gray-500">

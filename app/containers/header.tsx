@@ -27,9 +27,7 @@ export default function Myheader(){
                     </Link>
                 </div>
             </div>
-            <div>
-                <Form/>
-            </div>
+            <Form/>
         </div>
     )
 }

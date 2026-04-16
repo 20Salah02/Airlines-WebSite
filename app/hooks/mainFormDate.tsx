@@ -3,8 +3,8 @@
 import { DayPicker } from "react-day-picker"
 import { DateRange } from "react-day-picker"
 import "react-day-picker/style.css"
-import { createPortal } from "react-dom";
-import { useState, useEffect } from "react";
+import { createPortal } from "react-dom"
+import { useState, useLayoutEffect, memo } from "react"
 
 type HandleDateProps = {
   selected: DateRange | undefined
@@ -15,7 +15,7 @@ type HandleDateProps = {
   isOpen?: boolean
 }
 
-export default function HandleDate({
+const HandleDate = memo(function HandleDate({
   selected,
   onSelectDate,
   setIsOpen,
@@ -24,29 +24,26 @@ export default function HandleDate({
   isOpen
 }: HandleDateProps) {
 
-  const [isMobile, setIsMobile] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(() =>
+    typeof window !== "undefined" ? window.innerWidth < 1024 : false
+  )
 
-  useEffect(() => { setMounted(true) }, []);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+  useLayoutEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
+  }, [])
 
   const handleContinue = () => {
-    if (selected?.from) {
-      setIsOpen(false)
-    }
+    if (selected?.from) setIsOpen(false)
   }
 
   const commonProps = {
     disabled: { before: new Date() },
     startMonth: new Date(),
     classNames: {
-      weekdays: "text-black border-b border-b-zinc-200 ",
+      weekdays: "text-black border-b border-b-zinc-200",
       month_caption: "text-red-900 text-[18px] py-5 flex justify-center items-center lg:font-medium",
       day: "text-black lg:font-[600] hover:bg-red-900 hover:text-white",
       today: "text-red-900",
@@ -54,35 +51,57 @@ export default function HandleDate({
       range_start: "rounded-l-md text-white",
       range_middle: "text-black bg-zinc-200",
       range_end: "rounded-r-md text-white",
-      button_next : `${isMobile ? "hidden" : "relative"}`,
-      button_previous : `${isMobile ? "hidden" : "relative"}`,
-      nav_button: `${isMobile ? "hidden" : "relative"}`,
+      button_next: isMobile ? "hidden" : "relative",
+      button_previous: isMobile ? "hidden" : "relative",
+      nav_button: isMobile ? "hidden" : "relative",
       months: isMobile ? "flex flex-col items-center" : "flex flex-row gap-4",
     },
   }
+
+  const [visibleMonths, setVisibleMonths] = useState(3)
 
   const calendarContent = (
     <>
       <div className="pb-10 border-b border-b-zinc-200 overflow-y-auto">
         {mode === "single" ? (
-          <DayPicker
-            {...commonProps}
-            mode="single"
-            selected={selected?.from}
-            onSelect={(date) =>
-              onSelectDate(date ? { from: date, to: undefined } : undefined)
-            }
-            numberOfMonths={1}
-          />
+          <>
+            <DayPicker
+              {...commonProps}
+              mode="single"
+              selected={selected?.from}
+              onSelect={(date) =>
+                onSelectDate(date ? { from: date, to: undefined } : undefined)
+              }
+              numberOfMonths={isMobile ? visibleMonths : 1}
+            />
+            {isMobile && visibleMonths < 12 && (
+              <button
+                onClick={() => setVisibleMonths(v => v + 3)}
+                className="w-full text-red-900 font-medium py-3 border-t border-zinc-200"
+              >
+                Show more months
+              </button>
+            )}
+          </>
         ) : (
-          <DayPicker
-            {...commonProps}
-            mode="range"
-            selected={selected}
-            onSelect={onSelectDate}
-            numberOfMonths={isMobile ? 20 : 2}
-            required={false}
-          />
+          <>
+            <DayPicker
+              {...commonProps}
+              mode="range"
+              selected={selected}
+              onSelect={onSelectDate}
+              numberOfMonths={isMobile ? visibleMonths : 2}
+              required={false}
+            />
+            {isMobile && visibleMonths < 12 && (
+              <button
+                onClick={() => setVisibleMonths(v => v + 3)}
+                className="w-full text-red-900 font-medium py-3 border-t border-zinc-200"
+              >
+                Show more months
+              </button>
+            )}
+          </>
         )}
       </div>
 
@@ -103,43 +122,32 @@ export default function HandleDate({
     </>
   )
 
-  //  MOBILE 
-  if (mounted && isMobile) {
+  // MOBILE
+  if (isMobile) {
     return createPortal(
       <>
         <div
-          className={`fixed inset-0 z-9999 bg-black/40 transition-opacity duration-300
-            ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-          onMouseDown={(e) => {
-            e.preventDefault();
-            setIsOpen(false);
-          }}
+          className={`fixed inset-0 z-99 bg-black/40 transition-opacity duration-300
+            ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+          onPointerDown={(e) => { e.preventDefault(); setIsOpen(false) }}
         />
-
         <div
-          className={`fixed bottom-0 left-0 w-full h-[80vh] z-9999 bg-white rounded-t-2xl flex flex-col
+          className={`fixed bottom-0 left-0 w-full h-[80vh] z-99 bg-white rounded-t-2xl flex flex-col
             transition-transform duration-300 ease-in-out
             ${isOpen ? "translate-y-0" : "translate-y-full"}`}
-          onMouseDown={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
         >
           <div className="relative flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-200 shrink-0">
-              
-              <h3 className="absolute left-1/2 -translate-x-1/2 text-gray-600 text-[15px]">
-                  {mode === "single" ? "Departure" : "Return"}
-              </h3>
-
-              <button
-                  onMouseDown={(e) => {
-                      e.preventDefault();
-                      setIsOpen(false);
-                  }}
-                  className="ml-auto text-gray-500 hover:text-gray-800 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition text-lg font-bold"
-              >
-                  ✕
-              </button>
-
+            <h3 className="absolute left-1/2 -translate-x-1/2 text-gray-600 text-[15px]">
+              {mode === "single" ? "Departure" : "Return"}
+            </h3>
+            <button
+              onPointerDown={(e) => { e.preventDefault(); setIsOpen(false) }}
+              className="ml-auto text-gray-500 hover:text-gray-800 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition text-lg font-bold"
+            >
+              ✕
+            </button>
           </div>
-
           {calendarContent}
         </div>
       </>,
@@ -150,10 +158,11 @@ export default function HandleDate({
   // DESKTOP
   return (
     <div className={`bg-white border-2 border-zinc-300 rounded-md absolute right-0 mt-1 z-50
-        ${isOpen ? "block" : "hidden"} 
-        ${className}`}
+      ${isOpen ? "block" : "hidden"} ${className}`}
     >
       {calendarContent}
     </div>
   )
-}
+})
+
+export default HandleDate
