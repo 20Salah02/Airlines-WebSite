@@ -91,7 +91,7 @@ export default function HandlePassengers({ setPassengersText, isOpen,open }: Han
 
       <div className="flex justify-center">
         <button onClick={handleConfirm} type="button"
-          className="lg:w-full w-[160px] bg-red-900 text-gray-50 rounded-4xl lg:py-4 py-2 mb-5 font-semibold lg:text-[18px] text-[14px] flex justify-center items-center cursor-pointer">
+          className="lg:w-full w-40 bg-red-900 text-gray-50 rounded-4xl lg:py-4 py-2 mb-5 font-semibold lg:text-[18px] text-[14px] flex justify-center items-center cursor-pointer">
           Confirm
         </button>
       </div>
@@ -102,12 +102,12 @@ export default function HandlePassengers({ setPassengersText, isOpen,open }: Han
     return createPortal(
       <div id="passengers-portal">
         <div
-          className={`fixed inset-0 z-99 bg-black/40 transition-opacity duration-200
+          className={`fixed inset-0 z-9999 bg-black/40 transition-opacity duration-200
             ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
           onPointerDown={handleClose}
         />
         <div
-          className={`fixed bottom-0 left-0 w-full h-[80vh] z-99 bg-white rounded-t-2xl 
+          className={`fixed bottom-0 left-0 w-full h-[80vh] z-9999 bg-white rounded-t-2xl 
             flex flex-col overflow-y-auto transition-transform duration-200
             ${open ? "translate-y-0" : "translate-y-full"}`}
           onPointerDown={(e) => e.stopPropagation()}

@@ -150,7 +150,7 @@ export default function HandleDestination({
                     />
 
                     <div
-                        className={`fixed bottom-0 left-0 w-full h-[90vh] z-9999 bg-white rounded-t-2xl flex flex-col
+                        className={`fixed bottom-0 left-0 w-full h-[80vh] z-9999 bg-white rounded-t-2xl flex flex-col
                             transition-transform duration-300 ease-in-out
                             ${isOpen ? "translate-y-0" : "translate-y-full"}`}
                         onPointerDown={(e) => e.stopPropagation()}
