@@ -35,7 +35,7 @@ export default function FliesHeader(){
         <div className="lg:my-17 my-8 font-light">
             <h6>{formatDate(firstDay)}</h6>
             <div className="lg:text-5xl text-3xl text-gray-600">
-                <h2 className="py-4">Select Your Departure Flight</h2>
+                <h2 className="lg:py-4 py-2">Select Your Departure Flight</h2>
                 <h1>From <span className="text-red-900">{from?.city}</span> to <span  className="text-red-900">{to?.city}</span></h1>
             </div>
         </div>

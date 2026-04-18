@@ -159,6 +159,7 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
     }, [])
 
 
+    
      //style
     const borderStyle = "focus-within:outline-none focus-within:border focus-within:border-red-900 focus-within:shadow-[0_0_15px_rgba(127,29,29,0.6)] focus-within:rounded-md "
 

@@ -123,7 +123,7 @@ export default function ReviewTheTrips(){
                             <div className="w-6 h-6 bg-red-900 rotate-45 flex items-center justify-center overflow-hidden shadow-sm">
                                 <span className="text-[9px] text-white -rotate-45 font-bold uppercase">SL</span>
                             </div>
-                            <h3 className="text-[17px] text-gray-600 font-normal">
+                            <h3 className="text-[15px] text-gray-600 font-normal">
                                 {`${flightDurationHour}h ${flightDurationMin}min`}
                             </h3>
                         </div>

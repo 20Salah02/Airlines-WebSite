@@ -11,7 +11,7 @@ type HandleDateProps = {
   onSelectDate: (range: DateRange | undefined) => void
   setIsOpen: (open: boolean) => void
   mode: "single" | "range"
-  className?: string
+  className?: string 
   isOpen?: boolean
 }
 
@@ -150,7 +150,7 @@ const HandleDate = memo(function HandleDate({
         >
           <div className="relative flex items-center justify-between px-4 pt-4 pb-3 border-b border-gray-200 shrink-0">
             <h3 className="absolute left-1/2 -translate-x-1/2 text-gray-600 text-[15px]">
-              {mode === "single" ? "Departure" : "Return"}
+              {mode === "single" ? "One way" : "Return"}
             </h3>
             <button
               onPointerDown={(e) => { e.preventDefault(); setIsOpen(false) }}
