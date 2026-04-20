@@ -24,8 +24,6 @@ export default function Nav(){
                 <Link href="/Explore"><li>Explore</li></Link>
                 <Link href="/Book"><li>Book</li></Link>
                 <Link href="/Experience"><li>Experience</li></Link>
-                <Link href="/Promo"><li>Promo</li></Link>
-                <Link href="/Help"><li>Help</li></Link>
                 <Link href="/Help"><li></li></Link>
                 <Link href="/Login">
                     <li className="flex">
