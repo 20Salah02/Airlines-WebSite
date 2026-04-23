@@ -27,7 +27,7 @@ export default function TravelExp(){
     ]
 
     return(
-        <div className="lg:mt-15">
+        <div id="Experience" className="lg:mt-15">
             
             <div className="lg:space-y-6 space-y-3 w-full">
                 <h2 className="lg:text-4xl text-3xl font-light text-gray-600">

@@ -41,7 +41,7 @@ export default function NewsLetter(){
 
 
     return(
-        <div className="relative lg:h-120 h-135">
+        <div id="Alerts" className="relative lg:h-120 h-135">
             <Image
                 src="/NL_Background_Desktop.avif"
                 alt="NL_Background_Desktop"

@@ -171,7 +171,7 @@ export default function VoyageSuggetions(){
     }, [])
 
     return(
-        <div className="relative bg-zinc-100">
+        <div id="Offers" className="relative bg-zinc-100">
             <div>
                 <h2 className="lg:text-4xl text-3xl font-light text-gray-600">Find great fares</h2>
             </div>
