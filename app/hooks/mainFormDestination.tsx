@@ -230,7 +230,7 @@ export default function HandleDestination({
             {/*DESKTOP*/}
             {!isMobile && isOpen && result.length > 0 && (
                 <ul
-                    className="absolute top-full mt-2 rounded-md bg-white overflow-y-auto z-9999 max-h-72 w-125"
+                    className="absolute top-full mt-2 rounded-md bg-white overflow-y-auto z-[9999] max-h-72 w-125"
                     style={{
                         left: dropdownPosition === "right" ? "auto" : "0",
                         right: dropdownPosition === "right" ? "0" : "auto",

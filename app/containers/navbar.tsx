@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 //
 
-const scrollToSection = (id) => {
+const scrollToSection = (id: string) => {
   const el = document.getElementById(id)
   if (el) {
     el.scrollIntoView({ behavior: "smooth" })

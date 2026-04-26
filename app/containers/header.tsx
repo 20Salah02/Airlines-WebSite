@@ -10,7 +10,7 @@ import Link from "next/link"
 export default function Myheader(){
 
     return(
-        <div  className="relative text-amber-50 ">
+        <div  className="relative text-amber-50 z-50">
             <div className="relative z-20"><Nav/></div>
             <div className="lg:p-20 md:p-14 p-8 pt-34"> 
                 <Image
