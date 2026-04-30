@@ -77,7 +77,7 @@ export default function Footer(){
                             height={60}
                             alt="World’s Best Airline"
                         />
-                        <h5>World’s Best Airline</h5>
+                        <h5>Top Rated Airline</h5>
                     </div>
                     <div className="flex items-center space-x-4">
                         <Image
@@ -86,7 +86,7 @@ export default function Footer(){
                             height={60}
                             alt="World’s Best Airline"
                         />
-                        <h5>World&apos;s Best Business Class</h5>
+                        <h5>Customer Satisfaction Award</h5>
                     </div>
                     <div className="flex items-center space-x-4">
                         <Image

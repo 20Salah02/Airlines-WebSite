@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation"
 //
 import HandleDestination from "@/app/hooks/mainFormDestination"
 import { calculateFlight } from "@/app/flies/Booking/Containers/flightCalculator"
+// skelton
+import Skeleton , {SkeletonTheme} from 'react-loading-skeleton'
 
 
 
@@ -41,6 +43,11 @@ export default function VoyageSuggetions(){
 
     const [openBooking , setOpenBooking] = useState<Record<number ,boolean>>({})
 
+    // for skelton
+    const [loading, setLoading] = useState(true)
+
+
+
     //
     const { setBooking } = useBooking();
     //
@@ -58,6 +65,7 @@ export default function VoyageSuggetions(){
             setDestinationFrom(casablancaAirport);
             setBooking(prev => ({ ...prev, from: casablancaAirport }));
         }
+        setLoading(false)
         });
     }, []);
 
@@ -255,7 +263,16 @@ export default function VoyageSuggetions(){
                     ref={scrollRef}
                     className="flex lg:hidden overflow-x-auto gap-4 snap-x snap-mandatory pb-4 no-scrollbar"
                 >
-                    {suggestionAirpots.map((airport , index) => (
+                    {loading ? (
+                        <SkeletonTheme baseColor="#cbd5e1" highlightColor="#e2e8f0">
+                        {Array.from({ length: 3 }).map((_, i) => (
+                            <div key={i} className="min-w-[85%] snap-start relative h-70 mt-4 rounded-2xl overflow-hidden">
+                            <Skeleton height="100%" borderRadius="1rem" />
+                            </div>
+                        ))}
+                        </SkeletonTheme>
+                    ) : (
+                    suggestionAirpots.map((airport , index) => (
                         <div
                             key={airport.id}
                             className="min-w-[85%] snap-start relative h-70 flex items-end mt-4"
@@ -308,8 +325,7 @@ export default function VoyageSuggetions(){
                             </div>
                         </div>
                         
-                    ))}
-                    
+                    )))}
                 </div>
                 <div className="flex justify-center mt-4 gap-2 lg:hidden">
                     {suggestionAirpots.map((_, i) => (
@@ -329,7 +345,27 @@ export default function VoyageSuggetions(){
 
 
                 <div className="hidden lg:grid grid-cols-4 grid-rows-2 gap-6 mt-4">
-                    {suggestionAirpots.map((airport , index) =>{
+                    {loading ? (
+                        <SkeletonTheme baseColor="#cbd5e1" highlightColor="#e2e8f0">
+                            {Array.from({ length: 9 }).map((_, index) => {
+                                let span = ""
+                                if (index === 0) span = "col-span-2 row-span-1"
+                                else if (index === 1 || index === 2) span = "col-span-1"
+                                else if (index === 3 || index === 4) span = "col-span-1"
+                                else if (index === 5) span = "col-span-2"
+                                else if (index === 6) span = "col-span-2 row-span-1"
+                                else span = "col-span-1"
+
+                                return (
+                                <div key={index} className={`relative mt-4 h-70 rounded-2xl overflow-hidden ${span}`}>
+                                    <Skeleton height="100%" borderRadius="1rem" />
+                                </div>
+                                )
+                            })}
+                        </SkeletonTheme>
+                    ) : (
+
+                    suggestionAirpots.map((airport , index) =>{
                         let span = ""
 
                         if (index === 0) span = "col-span-2 row-span-1"
@@ -343,6 +379,7 @@ export default function VoyageSuggetions(){
                             key={airport.id} 
                             className={`relative py-5 mt-4  h-70 flex items-end justify-between ${span} `}
                         >
+
                             <div 
                                 onMouseEnter={() => setOpenBooking(prev => ({ ...prev, [airport.id]: true }))}
                                 onMouseLeave={() => setOpenBooking(prev => ({ ...prev, [airport.id]: false }))}
@@ -391,7 +428,7 @@ export default function VoyageSuggetions(){
                                 </div>
                             </div>
                         </div>
-                    )})}
+                    )}))}
                 </div>
             </div>
         </div>
