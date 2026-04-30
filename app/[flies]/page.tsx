@@ -2,6 +2,7 @@
 import FlightsNav from "../flies/Booking/Containers/nav"
 import FliesHeader from "../flies/Booking/Containers/header"
 import FlightResults from "../flies/Booking/Containers/flightsresults"
+import Footer from "../containers/footer"
 
 export default function Flies(){
 
@@ -13,6 +14,7 @@ export default function Flies(){
                     <div><FliesHeader/></div>
                     <div><FlightResults/></div>
                 </div>
+                <div><Footer/></div>
             </div>
         </div>
     )

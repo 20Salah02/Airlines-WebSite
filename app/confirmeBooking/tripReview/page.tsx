@@ -3,6 +3,9 @@ import FlightsNav from "@/app/flies/Booking/Containers/nav"
 import TripReviewDetails from "./containers/tripDetails"
 import ReviewTheTrips from "./containers/reviewTrips"
 import PassengerDetailsReview from "./containers/passengerDetailsReview"
+import Footer from "@/app/containers/footer"
+
+
 export default function TripReview(){
 
     return(
@@ -18,6 +21,9 @@ export default function TripReview(){
                     <div className="lg:flex-1 ">
                         <TripReviewDetails/>
                     </div>
+            </div>
+            <div>
+                <Footer/>
             </div>
         </div>
     )

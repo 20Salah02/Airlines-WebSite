@@ -1,17 +1,21 @@
 
-import FlightsNav from "../flies/Booking/Containers/nav"
-import FliesHeader from "../flies/Booking/Containers/header"
-import FlightResults from "../flies/Booking/Containers/flightsresults"
+// import FlightsNav from "../flies/Booking/Containers/nav"
+// import FliesHeader from "../flies/Booking/Containers/header"
+// import FlightResults from "../flies/Booking/Containers/flightsresults"
+// import Footer from "../containers/footer"
 
-export default function Flies(){
+// export default function Flies(){
 
-    return(
-        <div className="bg-zinc-100 container">
-            <div className="mx-8">
-                <div><FlightsNav/></div>
-                <div><FliesHeader/></div>
-                <div><FlightResults/></div>
-            </div>
-        </div>
-    )
-}
+//     return(
+//         <div className="bg-zinc-100 container">
+//             <div className="mx-8">
+//                 <div><FlightsNav/></div>
+//                 <div><FliesHeader/></div>
+//                 <div><FlightResults/></div>
+//             </div>
+//             <div>
+//                 <Footer/>
+//             </div>
+//         </div>
+//     )
+// }

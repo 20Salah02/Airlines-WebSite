@@ -2,6 +2,7 @@
 import FlightsNav from "../flies/Booking/Containers/nav"
 import TripDetails from "./containers/tripDetails"
 import PassengerDetails from "./containers/passengerDetails"
+import Footer from "../containers/footer"
 
 
 
@@ -14,6 +15,7 @@ export default function BookingConfirmation(){
                 <PassengerDetails/>
                 <TripDetails/>
             </div>
+            <Footer/>
         </div>
     )
 }
