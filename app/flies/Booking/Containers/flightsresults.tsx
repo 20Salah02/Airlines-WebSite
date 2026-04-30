@@ -17,6 +17,11 @@ import ChangeCurrency from "./changeCurrency"
 //
 import { FareType } from "@/app/contexts/bookingContext"
 import { useFlightResultContext } from "@/app/contexts/priceContext"
+// skelton
+import Skeleton , {SkeletonTheme} from 'react-loading-skeleton'
+
+
+
 
 //
 type OpenResultType = {
@@ -110,6 +115,7 @@ export default function FlightResults(){
 
     //
     const {flightResult} = useFlightResultContext()
+    const loading = !flightResult
 
     const basePrice = flightResult?.price ?? 0
     const flightDurationHour = flightResult?.durationHours
@@ -150,7 +156,26 @@ export default function FlightResults(){
             </div>
             {/*  */}
 
-            {FlightsSchedules.map((flight , index) => {
+            {loading ? (
+                <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                        <div key={i} className="bg-white rounded-4xl lg:px-5 py-9 p-4 my-4">
+                            <div className="flex lg:flex-row flex-col items-center justify-between">
+                                <div className="lg:w-1/3 w-full space-y-4">
+                                    <Skeleton width={120} height={16} />
+                                    <Skeleton height={40} />
+                                    <Skeleton width={80} height={16} />
+                                </div>
+                                <div className="lg:flex gap-4 mt-4 lg:mt-0 hidden">
+                                    <Skeleton width={200} height={130} borderRadius="1rem" />
+                                    <Skeleton width={200} height={130} borderRadius="1rem" />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </SkeletonTheme>
+            ) : (
+            FlightsSchedules.map((flight , index) => {
                 const depTime = formatTime(flight.departureHour, flight.departureMin)
                 const arrTime = calcArrival(flight.departureHour, flight.departureMin, durationHours, durationMins)
                 const isEcoOpen     = openClass?.index === index && openClass?.type === "eco"
@@ -257,7 +282,7 @@ export default function FlightResults(){
                         </div>
                     </div>
                 )
-            })}
+            }))}
 
 
             <div
