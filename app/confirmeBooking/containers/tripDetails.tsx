@@ -10,12 +10,21 @@ import { useSearchParams } from "next/navigation";
 //
 import FlightDetails from "@/app/flies/Booking/Containers/flightDetails";
 import PaymentDetails from "./paymentDetails";
-//
-
+// skelton
+import Skeleton , {SkeletonTheme} from "react-loading-skeleton"
 export default function TripDetails(){
 
     const [openResult, setOpenResult] = useState<"outbound" | "return" | null>(null)
     const [openPayment , setOpenPayment] = useState<boolean | null>(false)
+
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setMounted(true), 0)
+        return () => clearTimeout(timer)
+    }, [])
+
+const loading = !mounted
 
     function formatDate(date?: Date | null) {
     if (!date) return "";
@@ -56,43 +65,69 @@ export default function TripDetails(){
         <div className="flex flex-col lg:h-fit bg-white lg:w-2/5 w-full p-5 rounded-3xl space-y-2">
             <div className="space-y-2">
                 <h1 className="font-medium text-[17px] text-red-900">Trip details</h1>
-                <p>{tripType === "round-trip" ? "Round trip" : "One way"}</p>
-            </div>
-
-            
-            <div >
-                <div onClick={() => setOpenResult("outbound")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
-                    <div className="space-y-1">
-                        <h2 className="text-[17px] font-medium text-red-900">{from?.city} <span className="text-black font-normal">to</span> {to?.city}</h2>
-                        <h3 className="text-[14px] text-gray-700">{formatDate(firstDay)}</h3>
-                    </div>
-                    <h4>
-                        <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"></path></svg>
-                    </h4>
-                </div>
-                {tripType === "round-trip" && (
-                    <div onClick={() => setOpenResult("return")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
-                        <div className="space-y-1">
-                            <h2 className="text-[17px] font-medium text-red-900">{to?.city} <span className="text-black font-normal">to</span> {from?.city}</h2>
-                            <h3 className="text-[14px] text-gray-700">{formatDate(lastDay)}</h3>
-                        </div>
-                        <h4>
-                            <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"></path></svg>
-                        </h4>
-                    </div>
+                {loading ? (
+                    <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                        <Skeleton width={80} height={16} />
+                    </SkeletonTheme>
+                ) : (
+                    <p>{tripType === "round-trip" ? "Round trip" : "One way"}</p>
                 )}
             </div>
+            
+            <div>
+                {loading ? (
+                    <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                        <div className="py-2.5 space-y-2 border-b border-b-gray-300">
+                            <Skeleton width="70%" height={20} />
+                            <Skeleton width="40%" height={14} />
+                        </div>
+                        <div className="py-2.5 space-y-2">
+                            <Skeleton width="70%" height={20} />
+                            <Skeleton width="40%" height={14} />
+                        </div>
+                    </SkeletonTheme>
+                ) : (
+                    <>
+                        <div onClick={() => setOpenResult("outbound")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
+                            <div className="space-y-1">
+                                <h2 className="text-[17px] font-medium text-red-900">{from?.city} <span className="text-black font-normal">to</span> {to?.city}</h2>
+                                <h3 className="text-[14px] text-gray-700">{formatDate(firstDay)}</h3>
+                            </div>
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"></path></svg></h4>
+                        </div>
+                        {tripType === "round-trip" && (
+                            <div onClick={() => setOpenResult("return")} className="flex justify-between items-center border-b border-b-gray-300 py-2.5 cursor-pointer">
+                                <div className="space-y-1">
+                                    <h2 className="text-[17px] font-medium text-red-900">{to?.city} <span className="text-black font-normal">to</span> {from?.city}</h2>
+                                    <h3 className="text-[14px] text-gray-700">{formatDate(lastDay)}</h3>
+                                </div>
+                                <h4><svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 1024 1024"><path fill="currentColor" d="M340.9 149.3a30.6 30.6 0 0 0 0 42.8L652.7 512L341 831.9a30.6 30.6 0 0 0 0 42.7a29 29 0 0 0 41.7 0l331.6-340.3a32 32 0 0 0 0-44.6L382.6 149.4a29 29 0 0 0-41.7 0z"></path></svg></h4>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
+
             <div className="flex flex-col py-2">
-                <div className="flex justify-between  space-y-1">
-                    <h2 className="text-[17px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[17px] text-red-900">{format(totalPrice)}</h3>
-                </div>
-                <p
-                    className="underline decoration-solid font-medium cursor-pointer w-fit"
-                    onClick={() => setOpenPayment(prev => !prev)}
-                >
-                    Payment Summary
-                </p>
+                {loading ? (
+                    <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                        <div className="flex justify-between">
+                            <Skeleton width={100} height={20} />
+                            <Skeleton width={80} height={20} />
+                        </div>
+                        <Skeleton width={120} height={16} style={{ marginTop: 4 }} />
+                    </SkeletonTheme>
+                ) : (
+                    <>
+                        <div className="flex justify-between space-y-1">
+                            <h2 className="text-[17px] text-gray-700">Grand Total</h2>
+                            <h3 className="font-medium text-[17px] text-red-900">{format(totalPrice)}</h3>
+                        </div>
+                        <p className="underline decoration-solid font-medium cursor-pointer w-fit" onClick={() => setOpenPayment(prev => !prev)}>
+                            Payment Summary
+                        </p>
+                    </>
+                )}
             </div>
 
             <div
