@@ -7,11 +7,21 @@ import { useSearchParams } from "next/navigation"
 import { useState , useEffect } from "react"
 //
 import PaymentDetails from "../../containers/paymentDetails"
+// skelton
+import Skeleton , {SkeletonTheme} from "react-loading-skeleton"
 
 
 export default function TripReviewDetails(){
 
     const [openPayment , setOpenPayment] = useState<boolean | null>(false)
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setMounted(true), 0)
+        return () => clearTimeout(timer)
+    }, [])
+
+const loading = !mounted
 
     const {format} = useCurrency()
 
@@ -36,16 +46,28 @@ export default function TripReviewDetails(){
         <div className="bg-white p-4 rounded-3xl w-full space-y-4 h-fit sticky top-10">
             <h2 className="font-medium text-[18px] text-red-900">Trip details</h2>
             <div className="flex flex-col py-2">
-                <div className="flex justify-between  space-y-1">
-                    <h2 className="text-[17px] text-gray-700">Grand Total</h2>
-                    <h3 className="font-medium text-[17px] text-red-900">{format(totalPrice)}</h3>
-                </div>
-                <p 
-                    className="text-[15px] underline decoration-solid font-medium cursor-pointer w-fit"
-                    onClick={() => setOpenPayment(prev => !prev)}
-                >
-                    Payement Summary
-                </p>
+                {loading ? (
+                    <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                        <div className="flex justify-between">
+                            <Skeleton width={100} height={20} />
+                            <Skeleton width={80} height={20} />
+                        </div>
+                        <Skeleton width={120} height={16} style={{ marginTop: 4 }} />
+                    </SkeletonTheme>
+                ) : (
+                    <>
+                        <div className="flex justify-between space-y-1">
+                            <h2 className="text-[17px] text-gray-700">Grand Total</h2>
+                            <h3 className="font-medium text-[17px] text-red-900">{format(totalPrice)}</h3>
+                        </div>
+                        <p
+                            className="text-[15px] underline decoration-solid font-medium cursor-pointer w-fit"
+                            onClick={() => setOpenPayment(prev => !prev)}
+                        >
+                            Payement Summary
+                        </p>
+                    </>
+                )}
             </div>
             <div className="flex items-start space-x-3">
                 <input className="w-7 h-7 cursor-pointer accent-red-900" type="checkbox" id="terms"/>
