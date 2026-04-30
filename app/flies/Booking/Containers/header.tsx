@@ -4,6 +4,8 @@
 import { useBooking } from "@/app/contexts/bookingContext"
 //
 import { useSearchParams } from "next/navigation"
+// skelton
+import Skeleton , {SkeletonTheme} from 'react-loading-skeleton'
 
 
 export default function FliesHeader(){
@@ -18,6 +20,7 @@ export default function FliesHeader(){
     }
 
     const { booking } = useBooking()
+    const loading = !booking.from || !booking.to
     
     const search = useSearchParams()
     const step = search.get("step")
@@ -33,11 +36,23 @@ export default function FliesHeader(){
     
     return(
         <div className="lg:my-17 my-8 font-light">
-            <h6>{formatDate(firstDay)}</h6>
-            <div className="lg:text-5xl text-3xl text-gray-600">
-                <h2 className="lg:py-4 py-2">Select Your Departure Flight</h2>
-                <h1>From <span className="text-red-900">{from?.city}</span> to <span  className="text-red-900">{to?.city}</span></h1>
+        {loading ? (
+            <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                <Skeleton width="30%" height={16} />
+                <div className="space-y-5 mt-2">
+                    <Skeleton width="70%" height={50} />
+                    <Skeleton width="80%" height={50} />
+                </div>
+            </SkeletonTheme>
+        ) : (
+            <div>
+                <h6>{formatDate(firstDay)}</h6>
+                <div className="lg:text-5xl text-3xl text-gray-600">
+                    <h2 className="lg:py-4 py-2">Select Your Departure Flight</h2>
+                    <h1>From <span className="text-red-900">{from?.city}</span> to <span  className="text-red-900">{to?.city}</span></h1>
+                </div>
             </div>
+        )}
         </div>
     )
 }

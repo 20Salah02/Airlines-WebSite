@@ -12,6 +12,11 @@ import FlightEdit from "./flightEdit"
 //
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser , faRightLeft , faCalendar , faUsers , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons"
+// skelton
+import Skeleton , {SkeletonTheme} from 'react-loading-skeleton'
+
+
+
 
 export default function FlightsNav(){
 
@@ -27,6 +32,7 @@ export default function FlightsNav(){
     const [openFormEdit , setOpenFormEdit] = useState<boolean>(false)
 
     const { booking, } = useBooking();
+    const loading = !booking.from || !booking.to 
     
     const search = useSearchParams()
     const step = search.get("step"); // outbound / return
@@ -63,6 +69,13 @@ export default function FlightsNav(){
                     </li>
                 </Link>
                 <li onClick={() => setOpenFormEdit(prev => !prev)}>
+                    {loading ? (
+                        <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
+                            <div style={{ width: "55vw" }}>
+                                <Skeleton  height={60} borderRadius="2rem" />
+                            </div>
+                        </SkeletonTheme>
+                    ) : (
                     <div className="flex lg:flex-row flex-col items-center space-y-2 lg:space-y-0 lg:p-4 p-2 border border-gray-300 rounded-4xl cursor-pointer">
                         <div className="flex border-gray-300">
                             <div className="flex items-center px-3 border-r border-gray-300">
@@ -84,6 +97,7 @@ export default function FlightsNav(){
                             <h3 className="lg:text-[16px] text-[14px]">Modify Search</h3>
                         </div>
                     </div>
+                    )}
                 </li>
                 <Link href="/Login">
                     <li className="flex border lg:rounded-4xl rounded-full p-3 border-red-900 text-red-900">
