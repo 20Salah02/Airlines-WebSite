@@ -1,5 +1,7 @@
 "use client"
 
+//
+import { Suspense } from "react"
 // context
 import { useBooking } from "@/app/contexts/bookingContext"
 //
@@ -8,7 +10,7 @@ import { useSearchParams } from "next/navigation"
 import Skeleton , {SkeletonTheme} from 'react-loading-skeleton'
 
 
-export default function FliesHeader(){
+function FliesHeaderContent(){
 
     function formatDate(date?: Date | null) {
     if (!date) return "";
@@ -54,5 +56,14 @@ export default function FliesHeader(){
             </div>
         )}
         </div>
+    )
+}
+
+
+export default function FliesHeader() {
+    return (
+        <Suspense fallback={null}>
+            <FliesHeaderContent/>
+        </Suspense>
     )
 }

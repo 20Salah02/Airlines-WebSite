@@ -10,7 +10,6 @@ import {
   faBars,
   faXmark,
   faChevronRight,
-  faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons"
 
 const NAV_H      = 72   
@@ -27,7 +26,6 @@ export default function Nav() {
   const [scrolled, setScrolled]             = useState(false)
   const [hidden,   setHidden]               = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [searchQuery, setSearchQuery]       = useState("")
   const [mounted, setMounted]               = useState(false)  
 
   const lastScrollY = useRef(0)
@@ -114,7 +112,7 @@ export default function Nav() {
           className="flex items-center justify-between px-5"
         >
           <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-            <div className="relative w-[82px] h-[54px]">
+            <div className="relative w-20.5 h-13.5">
               <Image src="/logo-black.png" alt="Logo" fill style={{ objectFit: "contain" }} />
             </div>
           </Link>
@@ -131,7 +129,7 @@ export default function Nav() {
         <Link
           href="/Login"
           onClick={() => setMobileMenuOpen(false)}
-          className="flex items-center justify-between px-5 py-[15px]"
+          className="flex items-center justify-between px-5 py-3.75"
           style={{ backgroundColor: "#6b0c2b", flexShrink: 0 }}
         >
           <span className="text-white font-semibold text-[15px] tracking-wide">
@@ -148,23 +146,23 @@ export default function Nav() {
             <button
               key={link.id}
               onClick={() => { scrollToSection(link.id); setMobileMenuOpen(false) }}
-              className="w-full flex items-center justify-between px-5 py-[18px]
+              className="w-full flex items-center justify-between px-5 py-4.5
                          hover:bg-zinc-50 active:bg-zinc-100 transition-colors"
               style={{ borderBottom: "1px solid #f4f4f5" }}
             >
               <span className="text-zinc-800 font-medium text-[16px]">{link.label}</span>
-              <FontAwesomeIcon icon={faChevronRight} className="text-zinc-300 w-[14px] h-[14px]" />
+              <FontAwesomeIcon icon={faChevronRight} className="text-zinc-300 w-3.5 h-3.5" />
             </button>
           ))}
 
           <div style={{ borderTop: "1px solid #f4f4f5", margin: "8px 0" }} />
 
           <button
-            className="w-full flex items-center justify-between px-5 py-[18px] hover:bg-zinc-50 transition-colors"
+            className="w-full flex items-center justify-between px-5 py-4.5 hover:bg-zinc-50 transition-colors"
             style={{ borderBottom: "1px solid #f4f4f5" }}
           >
             <span className="text-zinc-800 font-medium text-[16px]">Help</span>
-            <FontAwesomeIcon icon={faChevronRight} className="text-zinc-300 w-[14px] h-[14px]" />
+            <FontAwesomeIcon icon={faChevronRight} className="text-zinc-300 w-3.5 h-3.5" />
           </button>
         </div>
 
@@ -191,8 +189,8 @@ export default function Nav() {
           <div className="h-full flex items-center justify-between">
 
             {/* logo */}
-            <Link href="/" className="flex-shrink-0">
-              <div className="relative w-[120px] h-[60px]">
+            <Link href="/" className="shrink-0">
+              <div className="relative w-30 h-15">
                 <Image
                   src="/Logo-white.png" alt="Logo" fill priority
                   style={{ objectFit: "contain", transition: "opacity 0.3s",
@@ -228,7 +226,7 @@ export default function Nav() {
                     transition: "background-color 0.2s, color 0.2s, border-color 0.2s",
                   }}
                     className={`${scrolled ? "text-zinc-600" : "text-white"}
-                    "flex items-center gap-2 px-5 py-[7px] rounded-full text-[15px] font-semibold
+                    "flex items-center gap-2 px-5 py-1.75 rounded-full text-[15px] font-semibold
                              hover:bg-red-900 hover:text-white hover:border-red-900"`}
                 >
                   <FontAwesomeIcon icon={faUser} className="w-3.5 h-3.5" />
@@ -250,7 +248,7 @@ export default function Nav() {
                 aria-label="Open menu"
                 className={`${scrolled ? "text-zinc-400" : "text-white"}`}
               >
-                <FontAwesomeIcon icon={faBars} className="w-[22px] h-[22px]" />
+                <FontAwesomeIcon icon={faBars} className="w-5.5 h-5.5" />
               </button>
             </div>
 

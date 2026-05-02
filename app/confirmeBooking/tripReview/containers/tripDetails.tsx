@@ -4,14 +4,14 @@ import { useBooking } from "@/app/contexts/bookingContext"
 import { useCurrency } from "@/app/contexts/currencyContext"
 import { useSearchParams } from "next/navigation"
 //
-import { useState , useEffect } from "react"
+import { useState , useEffect ,Suspense } from "react"
 //
 import PaymentDetails from "../../containers/paymentDetails"
 // skelton
 import Skeleton , {SkeletonTheme} from "react-loading-skeleton"
 
 
-export default function TripReviewDetails(){
+function TripReviewDetailContent(){
 
     const [openPayment , setOpenPayment] = useState<boolean | null>(false)
     const [mounted, setMounted] = useState(false)
@@ -112,5 +112,14 @@ const loading = !mounted
                 </div>
             </div>
         </div>
+    )
+}
+
+
+export default function TripReviewDetail() {
+    return (
+        <Suspense fallback={<div className="flex flex-col lg:h-fit bg-white lg:w-2/5 w-full p-5 rounded-3xl space-y-2" />}>
+            <TripReviewDetailContent />
+        </Suspense>
     )
 }

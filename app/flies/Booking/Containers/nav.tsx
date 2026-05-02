@@ -6,7 +6,7 @@ import Image from "next/image"
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useSearchParams } from "next/navigation"
 //
-import { useState , useEffect} from "react"
+import { useState , useEffect , Suspense} from "react"
 //
 import FlightEdit from "./flightEdit"
 //
@@ -18,7 +18,7 @@ import Skeleton , {SkeletonTheme} from 'react-loading-skeleton'
 
 
 
-export default function FlightsNav(){
+function FlightsNavContent(){
 
     function formatNavDate(date?: Date | null) {
     if (!date) return "";
@@ -133,5 +133,14 @@ export default function FlightsNav(){
                 </div>
             </div>
         </div>
+    )
+}
+
+
+export default function FlightsNav() {
+    return (
+        <Suspense fallback={null}>
+            <FlightsNavContent/>
+        </Suspense>
     )
 }

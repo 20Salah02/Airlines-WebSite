@@ -1,7 +1,7 @@
+"use client"
 
-"use client";
 
-import { useEffect } from "react";
+import { useEffect , Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 //
 import { useBooking } from "@/app/contexts/bookingContext";
@@ -66,7 +66,7 @@ export function calculateFlight(
 }
 
 
-export default function FlightCalculator() {
+function FlightCalculatorContent() {
   const search = useSearchParams();
   const { booking } = useBooking();
   const { setFlightResult } = useFlightResultContext();
@@ -93,4 +93,13 @@ export default function FlightCalculator() {
   ]);
 
   return null; 
+}
+
+
+export default function FlightCalculator() {
+    return (
+        <Suspense fallback={null}>
+            <FlightCalculatorContent />
+        </Suspense>
+    )
 }

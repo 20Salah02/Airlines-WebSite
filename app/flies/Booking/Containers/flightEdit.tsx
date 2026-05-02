@@ -4,7 +4,7 @@
 
 import { useBooking } from "@/app/contexts/bookingContext"
 //
-import { useState , useRef , useEffect , useCallback} from "react"
+import { useState , useRef , useEffect , useCallback , Suspense} from "react"
 //
 import { useRouter } from "next/navigation"
 //
@@ -43,7 +43,7 @@ function formatDate(date?: Date | null) {
 
 
 
-export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
+function FlightEditContent({ setOpenFormEdit }: FlightEditProps){
 
 
     const { booking, setBooking} = useBooking()
@@ -299,3 +299,12 @@ export default function FlightEdit({ setOpenFormEdit }: FlightEditProps){
         </div>
     )
 } 
+
+
+export default function FlightEdit({ setOpenFormEdit }: FlightEditProps) {
+    return (
+        <Suspense fallback={null}>
+            <FlightEditContent setOpenFormEdit={setOpenFormEdit} />
+        </Suspense>
+    )
+}

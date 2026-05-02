@@ -5,7 +5,7 @@ import { useBooking } from "@/app/contexts/bookingContext"
 import { useCurrency } from "@/app/contexts/currencyContext"
 import { useOutsideClick } from "@/app/hooks/dropDownClose"
 //
-import { useState , useEffect , useRef } from "react"
+import { useState , useEffect , useRef , Suspense } from "react"
 //
 import { useSearchParams , useRouter } from "next/navigation"
 //
@@ -29,7 +29,7 @@ type OpenResultType = {
     departureTime: string,
     arrivalTime: string
 }
-export default function FlightResults(){
+function FlightResultsContent(){
 
     const [openClass, setOpenClass] = useState<{ index: number; type: "eco" | "business" } | null>(null)
     const [openPhoneIndex, setOpenPhoneIndex] = useState<number | null>(null)       
@@ -349,5 +349,15 @@ export default function FlightResults(){
             </div>
 
         </div>
+    )
+}
+
+
+
+export default function FlightResults() {
+    return (
+        <Suspense fallback={null}>
+            <FlightResultsContent/>
+        </Suspense>
     )
 }
