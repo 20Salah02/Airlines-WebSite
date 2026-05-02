@@ -2,30 +2,33 @@
 
 import { useBooking } from "@/app/contexts/bookingContext"
 import { useCurrency } from "@/app/contexts/currencyContext"
+import { usePassenger } from "@/app/contexts/passengerContext" 
 import { useSearchParams } from "next/navigation"
-//
-import { useState , useEffect ,Suspense } from "react"
-//
+import { useState, useEffect, Suspense } from "react"
+import { useRouter } from "next/navigation" 
+import { supabase } from "@/app/lib/supabase"
 import PaymentDetails from "../../containers/paymentDetails"
-// skelton
-import Skeleton , {SkeletonTheme} from "react-loading-skeleton"
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
 
 
-function TripReviewDetailContent(){
+function TripReviewDetailContent() {
 
-    const [openPayment , setOpenPayment] = useState<boolean | null>(false)
+    const [openPayment, setOpenPayment] = useState<boolean | null>(false)
     const [mounted, setMounted] = useState(false)
+    const [loading2, setLoading2] = useState(false) 
+    const [checked, setChecked] = useState(false)   
 
     useEffect(() => {
         const timer = setTimeout(() => setMounted(true), 0)
         return () => clearTimeout(timer)
     }, [])
 
-const loading = !mounted
+    const loading = !mounted
 
-    const {format} = useCurrency()
-
-    const {booking} = useBooking()
+    const { format , currency } = useCurrency()
+    const { booking } = useBooking()
+    const { passenger } = usePassenger() 
+    const router = useRouter()           
     const search = useSearchParams()
     const step = search.get("step")
     const isOutbound = step !== "return"
@@ -33,16 +36,56 @@ const loading = !mounted
     const tripType = isOutbound ? booking.tripType : ""
     const goingPrice = isOutbound ? booking.outboundFlight?.price ?? 0 : booking.returnFlight?.price ?? 0;
     const returnPrice = isOutbound ? booking.returnFlight?.price ?? 0 : booking.outboundFlight?.price ?? 0;
+    const totalPrice = tripType === "round-trip" ? goingPrice + returnPrice : goingPrice
 
-    const totalPrice = tripType === "round-trip" ? goingPrice  + returnPrice : goingPrice
-
-    //
     useEffect(() => {
         document.body.style.overflow = openPayment ? "hidden" : ""
         return () => { document.body.style.overflow = "" }
     }, [openPayment])
 
-    return(
+
+    const handlePayment = async () => {
+        if (!checked) return alert("Please accept the terms first")
+
+        setLoading2(true)
+
+        const { error } = await supabase
+            .from('bookings')
+            .insert({
+
+                title:          passenger.title,
+                gender:         passenger.gender,
+                first_name:     passenger.firstName,
+                last_name:      passenger.lastName,
+                email:          passenger.email,
+                phone:          passenger.phone,
+                nationality:    passenger.nationality,
+                birthday:       passenger.birthday,
+
+                from_city:       booking.from?.city,
+                to_city:         booking.to?.city,
+                trip_type:       booking.tripType,
+                passengers:      booking.passengers,
+                departure_date:  booking.dates?.departure,
+                return_date:     booking.dates?.return,
+                outbound_flight: booking.outboundFlight,
+                return_flight:   booking.returnFlight,
+                total_price:     totalPrice,
+                currency:        currency
+            })
+
+        setLoading2(false)
+
+        if (error) {
+            console.error(error)
+            alert("Something went wrong, please try again")
+            return
+        }
+
+        router.push("/booking/confirmed")
+    }
+
+    return (
         <div className="bg-white p-4 rounded-3xl w-full space-y-4 h-fit sticky top-10">
             <h2 className="font-medium text-[18px] text-red-900">Trip details</h2>
             <div className="flex flex-col py-2">
@@ -70,51 +113,44 @@ const loading = !mounted
                 )}
             </div>
             <div className="flex items-start space-x-3">
-                <input className="w-7 h-7 cursor-pointer accent-red-900" type="checkbox" id="terms"/>
+                <input
+                    className="w-7 h-7 cursor-pointer accent-red-900"
+                    type="checkbox"
+                    id="terms"
+                    checked={checked} // ✅
+                    onChange={() => setChecked(p => !p)} // ✅
+                />
                 <label className="text-[15px]" htmlFor="terms">
-                    I have read and accept the purchase conditions and fare rules, 
+                    I have read and accept the purchase conditions and fare rules,
                     as well as all the terms and conditions and general conditions
                     of carriage applicable to my flight.
                 </label>
             </div>
+
             <button
-                className="bg-red-900 border-2 border-red-900 rounded-full w-full py-3 font-bold text-md text-amber-50 cursor-pointer hover:bg-red-800 transition"
+                onClick={handlePayment}
+                disabled={loading2}
+                className="bg-red-900 border-2 border-red-900 rounded-full w-full py-3 font-bold text-md text-amber-50 cursor-pointer hover:bg-red-800 transition disabled:opacity-50"
             >
-                Continue the payment
+                {loading2 ? "Processing..." : "Continue the payment"}
             </button>
 
             <div
-                className={`
-                    fixed inset-0 z-40 bg-black/40
-                    transition-opacity duration-300
-                    ${openPayment ? "opacity-100 " : "opacity-0 pointer-events-none"}
-                `}
+                className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ${openPayment ? "opacity-100" : "opacity-0 pointer-events-none"}`}
                 onClick={() => setOpenPayment(null)}
             >
                 <div
-                    className={`
-                        fixed bg-white transition-all duration-300 ease-in-out
-                        
-                        bottom-0 left-0 w-full h-[80vh] rounded-t-2xl
-                        ${openPayment ? "translate-y-0" : "translate-y-full"}
-
-                        lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none 
-                        lg:bottom-auto
-                        ${openPayment ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}
-                    `}
+                    className={`fixed bg-white transition-all duration-300 ease-in-out bottom-0 left-0 w-full h-[80vh] rounded-t-2xl ${openPayment ? "translate-y-0" : "translate-y-full"} lg:top-0 lg:right-0 lg:left-auto lg:h-screen lg:w-1/2 lg:rounded-none lg:bottom-auto ${openPayment ? "lg:translate-y-0 lg:translate-x-0" : "lg:translate-x-full lg:translate-y-0"}`}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {openPayment && (
-                        <PaymentDetails
-                            setOpen={() => setOpenPayment(null)}
-                        />
+                        <PaymentDetails setOpen={() => setOpenPayment(null)} />
                     )}
                 </div>
             </div>
         </div>
     )
 }
-
 
 export default function TripReviewDetail() {
     return (
