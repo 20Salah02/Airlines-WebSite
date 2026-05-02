@@ -19,3 +19,7 @@ export default function BookingConfirmation(){
         </div>
     )
 }
+export const metadata = {
+  title: "Confirm Your Booking | Salah Airlines",
+  description: "Enter your passenger details and payment information to complete your flight reservation securely.",
+}

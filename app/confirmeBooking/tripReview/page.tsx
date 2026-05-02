@@ -28,3 +28,8 @@ export default function TripReview(){
         </div>
     )
 }
+
+export const metadata = {
+  title: "Review Your Trip | Salah Airlines",
+  description: "Double-check your flight details, passenger info, and total cost before finalizing your booking.",
+}
