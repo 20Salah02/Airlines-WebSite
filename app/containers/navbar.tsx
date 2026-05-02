@@ -81,7 +81,7 @@ export default function Nav() {
         style={{
           position:        "fixed",
           inset:           0,
-          zIndex:          9998,
+          zIndex:          9999,
           backgroundColor: "rgba(0,0,0,0.5)",
           opacity:         mobileMenuOpen ? 1 : 0,
           pointerEvents:   mobileMenuOpen ? "auto" : "none",
@@ -114,8 +114,8 @@ export default function Nav() {
           className="flex items-center justify-between px-5"
         >
           <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-            <div className="relative w-[52px] h-[44px]">
-              <Image src="/Logo-dark.png" alt="Logo" fill style={{ objectFit: "contain" }} />
+            <div className="relative w-[82px] h-[54px]">
+              <Image src="/logo-black.png" alt="Logo" fill style={{ objectFit: "contain" }} />
             </div>
           </Link>
           <button
@@ -185,21 +185,21 @@ export default function Nav() {
           backgroundColor: scrolled ? "#ffffff" : "transparent",
           borderBottom:    scrolled ? "1px solid #d4d4d8" : "1px solid transparent",
         }}
-        className="fixed top-0 left-0 w-full z-50"
+        className="fixed top-0 left-0 w-full z-9999"
       >
         <div className="h-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <div className="h-full flex items-center justify-between">
 
             {/* logo */}
             <Link href="/" className="flex-shrink-0">
-              <div className="relative w-[60px] h-[50px]">
+              <div className="relative w-[120px] h-[60px]">
                 <Image
-                  src="/Logo.png" alt="Logo" fill priority
+                  src="/Logo-white.png" alt="Logo" fill priority
                   style={{ objectFit: "contain", transition: "opacity 0.3s",
                            opacity: scrolled ? 0 : 1, position: "absolute" }}
                 />
                 <Image
-                  src="/Logo-dark.png" alt="Logo" fill priority
+                  src="/logo-black.png" alt="Logo" fill priority
                   style={{ objectFit: "contain", transition: "opacity 0.3s",
                            opacity: scrolled ? 1 : 0, position: "absolute" }}
                 />

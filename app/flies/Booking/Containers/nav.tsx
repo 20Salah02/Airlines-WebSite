@@ -60,10 +60,10 @@ export default function FlightsNav(){
                 <Link href="/">
                     <li className="lg:flex hidden">
                         <Image 
-                            src="/Logo.png"
+                            src="/Logo-red.png"
                             alt="Logo"
-                            width={60}
-                            height={50}
+                            width={120}
+                            height={80}
                             priority
                         />
                     </li>
