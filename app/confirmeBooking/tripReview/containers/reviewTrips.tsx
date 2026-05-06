@@ -8,7 +8,7 @@ import { useFlightResultContext } from "@/app/contexts/priceContext"
 import Image from "next/image"
 //
 import FlightDetails from "@/app/flies/Booking/Containers/flightDetails"
-// skelton
+// 
 import Skeleton , {SkeletonTheme} from "react-loading-skeleton"
 
 
@@ -216,7 +216,7 @@ export default function ReviewTheTrips(){
                 className={`
                     fixed inset-0 z-40 bg-black/40
                     transition-opacity duration-300
-                    ${flightDetails ? "opacity-100 " : "opacity-0 pointer-events-none"}
+                    ${flightDetails ? "opacity-100" : "opacity-0 pointer-events-none"}
                 `}
                 onClick={() => setFlightDetails(null)}
             >
