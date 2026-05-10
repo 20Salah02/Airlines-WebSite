@@ -9,7 +9,7 @@ import Footer from "@/app/containers/footer"
 export default function TripReview(){
 
     return(
-        <div className="flex flex-col bg-zinc-100 lg:space-y-20 space-y-10 w-full ">
+        <div className="flex flex-col bg-zinc-100 lg:space-y-20 space-y-10 w-full  ">
             <div>
                 <FlightsNav/>
             </div>
