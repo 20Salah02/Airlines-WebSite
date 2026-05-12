@@ -82,7 +82,7 @@ function TripReviewDetailContent() {
             return
         }
 
-        router.push("/booking/confirmed")
+        router.push("/flies/Booking/confirmed")
     }
 
     return (
