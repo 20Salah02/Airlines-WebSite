@@ -21,8 +21,8 @@ export default function Reference() {
     const passengers = booking.passengers
 
     return (
-        <div className="flex flex-col items-center justify-center mt-10 px-4">
-            <div className="relative w-full sm:w-[60%] bg-white border border-gray-300 rounded-xl overflow-visible">
+        <div className="flex flex-col items-center justify-center">
+            <div className="relative w-full bg-white border border-gray-300 rounded-xl overflow-visible">
 
                 <div className="flex flex-col items-center py-3 px-6">
                     <h3 className=" font-medium">Booking Reference</h3>
@@ -39,11 +39,11 @@ export default function Reference() {
 
                     <div className="flex sm:flex-col flex-row gap-6 sm:gap-4 flex-1 w-full">
                         <div className="flex-1">
-                            <p className="text-[11px] text-gray-400 uppercase tracking-wider">From</p>
+                            <p className="text-[12px] text-gray-500 uppercase tracking-wider">From</p>
                             <p className="text-sm font-medium">{`${from?.city} (${from?.iata})`}</p>
                         </div>
                         <div className="flex-1">
-                            <p className="text-[11px] text-gray-400 uppercase tracking-wider">To</p>
+                            <p className="text-[12px] text-gray-500 uppercase tracking-wider">To</p>
                             <p className="text-sm font-medium">{`${to?.city} (${to?.iata})`}</p>
                         </div>
                     </div>
@@ -53,11 +53,11 @@ export default function Reference() {
 
                     <div className="flex sm:flex-col flex-row gap-6 sm:gap-4 flex-1 w-full">
                         <div className="flex-1">
-                            <p className="text-[11px] text-gray-400 uppercase tracking-wider">Departure Date</p>
+                            <p className="text-[12px] text-gray-500 uppercase tracking-wider">Departure Date</p>
                             <p className="text-sm font-medium">{formatDate(firstDay)}</p>
                         </div>
                         <div className="flex-1">
-                            <p className="text-[11px] text-gray-400 uppercase tracking-wider">Return Date</p>
+                            <p className="text-[12px] text-gray-500 uppercase tracking-wider">Return Date</p>
                             <p className="text-sm font-medium">{formatDate(lastDay)}</p>
                         </div>
                     </div>
@@ -67,11 +67,11 @@ export default function Reference() {
 
                     <div className="flex sm:flex-col flex-row gap-6 sm:gap-4 flex-1 w-full">
                         <div className="flex-1">
-                            <p className="text-[11px] text-gray-400 uppercase tracking-wider">Flight</p>
+                            <p className="text-[12px] text-gray-500 uppercase tracking-wider">Flight</p>
                             <p className="text-sm font-medium">SL0123</p>
                         </div>
                         <div className="flex-1">
-                            <p className="text-[11px] text-gray-400 uppercase tracking-wider">Passengers</p>
+                            <p className="text-[12px] text-gray-500 uppercase tracking-wider">Passengers</p>
                             <p className="text-sm font-medium">{passengers}</p>
                         </div>
                     </div>
