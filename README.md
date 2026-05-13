@@ -12,7 +12,7 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 ---
 
-![Homepage](https://github.com/user-attachments/assets/055ec77f-5d01-4418-b1a6-0c3a4fdca7a7)
+![Homepage](https://github.com/user-attachments/assets/fb13d30a-88a1-4006-a469-d555ffd70454)
 
 ---
 
@@ -20,31 +20,31 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 | Homepage | Search Form |
 |----------|-------------|
-| ![](https://github.com/user-attachments/assets/055ec77f-5d01-4418-b1a6-0c3a4fdca7a7) | ![](https://github.com/user-attachments/assets/8505effe-9262-4211-a115-0547ff65cea6) |
+| ![](https://github.com/user-attachments/assets/d432c8e9-752c-40a4-bd82-017dd8490629) | ![](https://github.com/user-attachments/assets/cd0e0f56-6b01-43a9-bca5-249d57628061) |
 
 | Flight Results | Flight Details |
 |----------------|---------------|
-| ![](https://github.com/user-attachments/assets/13491354-eadd-47bc-873d-e5b31b1a8b36) | ![](https://github.com/user-attachments/assets/3ed53376-2e63-40c0-bf46-0bf27a6868fd) |
+| ![](https://github.com/user-attachments/assets/364edcdc-728b-48bb-81f7-eae22f2dbb3b) | ![](https://github.com/user-attachments/assets/e218b736-5410-44ab-8f73-7134d245c9c4) |
 
 | Booking Page | Passenger Info |
 |--------------|---------------|
-| ![](https://github.com/user-attachments/assets/187ab676-5e4f-4a23-92bf-2ca98ec52872) | ![](https://github.com/user-attachments/assets/60797c81-52b1-4b8b-9c85-c2002264b112) |
+| ![](https://github.com/user-attachments/assets/60797c81-52b1-4b8b-9c85-c2002264b112) | ![](https://github.com/user-attachments/assets/3e608669-0faa-4f8b-ac03-991380f4e215) |
 
-| Payment — Stripe | Trip Summary |
+| Payment  | Trip Summary |
 |------------------|--------------|
-| ![](https://github.com/user-attachments/assets/3e608669-0faa-4f8b-ac03-991380f4e215) | ![](https://github.com/user-attachments/assets/e218b736-5410-44ab-8f73-7134d245c9c4) |
+| ![](https://github.com/user-attachments/assets/3ed53376-2e63-40c0-bf46-0bf27a6868fd) | ![](https://github.com/user-attachments/assets/187ab676-5e4f-4a23-92bf-2ca98ec52872) |
 
-| Login Page | Google OAuth |
+| Login Page | Data Base |
 |------------|--------------|
-| ![](https://github.com/user-attachments/assets/ab725e14-c6f2-472a-a327-7c2817d6dced) | ![](https://github.com/user-attachments/assets/364edcdc-728b-48bb-81f7-eae22f2dbb3b) |
+| ![](https://github.com/user-attachments/assets/8505effe-9262-4211-a115-0547ff65cea6) | ![](https://github.com/user-attachments/assets/156934ca-439d-41b9-ab1c-6d3f7fa392c4) |
 
 | Email Verification | Offers Section |
 |--------------------|---------------|
-| ![](https://github.com/user-attachments/assets/cd0e0f56-6b01-43a9-bca5-249d57628061) | ![](https://github.com/user-attachments/assets/fb13d30a-88a1-4006-a469-d555ffd70454) |
+| ![](https://github.com/user-attachments/assets/1a71269d-7e9e-4d96-944d-e401e34c37f9) | ![]https://github.com/user-attachments/assets/1ec13777-bc38-4a78-8228-c51c7cd765d8) |
 
-| Mobile View | Mobile Booking |
+| Change Currency | Modify Search |
 |-------------|---------------|
-| ![](https://github.com/user-attachments/assets/d432c8e9-752c-40a4-bd82-017dd8490629) | ![](https://github.com/user-attachments/assets/951b841f-023d-47af-bfc1-2edba18f9058) |
+| ![](https://github.com/user-attachments/assets/ab725e14-c6f2-472a-a327-7c2817d6dced) | ![](https://github.com/user-attachments/assets/95d784b4-fa04-425d-9a6b-592e42e32116) |
 
 | Performance Score — 96/100 |
 |---------------------------|
