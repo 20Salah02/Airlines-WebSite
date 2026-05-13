@@ -8,13 +8,6 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 ---
 
-## Preview
-
----
-
-![Homepage](https://github.com/user-attachments/assets/fb13d30a-88a1-4006-a469-d555ffd70454)
-
----
 
 ##  Screenshots
 
@@ -44,7 +37,7 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 | Change Currency | Modify Search |
 |-------------|---------------|
-| ![](https://github.com/user-attachments/assets/ab725e14-c6f2-472a-a327-7c2817d6dced) | ![](https://github.com/user-attachments/assets/95d784b4-fa04-425d-9a6b-592e42e32116) |
+| ![](https://github.com/user-attachments/assets/ab725e14-c6f2-472a-a327-7c2817d6dced) | ![](https://github.com/user-attachments/assets/1ec13777-bc38-4a78-8228-c51c7cd765d8) |
 
 | Performance Score — 96/100 |
 |---------------------------|
