@@ -71,7 +71,7 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 - **Currency Exchange API** — Live currency conversion with local caching
 - **Phone Flags API** — Country codes and flags for phone input
-- **Airport Data** — 500+ airports with IATA codes, coordinates, and city info (JSON)
+- **Airport Data** — 14.000+ airports with IATA codes, coordinates, and city info (JSON)
 
 ---
 
