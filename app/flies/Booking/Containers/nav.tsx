@@ -99,7 +99,7 @@ function FlightsNavContent(){
                     </div>
                     )}
                 </li>
-                <Link href="/Login">
+                <Link href="/signin">
                     <li className="flex border lg:rounded-4xl rounded-full p-3 border-red-900 text-red-900">
                         <p className="w-5 "><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></p>
                         <p className="lg:flex hidden">Login</p>

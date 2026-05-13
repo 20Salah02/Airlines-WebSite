@@ -127,7 +127,7 @@ export default function Nav() {
         </div>
 
         <Link
-          href="/Login"
+          href="/signin"
           onClick={() => setMobileMenuOpen(false)}
           className="flex items-center justify-between px-5 py-3.75"
           style={{ backgroundColor: "#6b0c2b", flexShrink: 0 }}
@@ -220,7 +220,7 @@ export default function Nav() {
               ))}
               <li>
                 <Link
-                  href="/Login"
+                  href="/signin"
                   style={{
                     border:     `1.5px solid ${scrolled ? "#1a1a1a" : "#ffffff"}`,
                     transition: "background-color 0.2s, color 0.2s, border-color 0.2s",
