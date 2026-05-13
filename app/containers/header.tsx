@@ -7,7 +7,6 @@ export default function Myheader(){
     return(
         <div className="relative text-amber-50 z-50">
 
-            {/* Mobile: nav floats over image */}
             <div className="relative md:hidden">
                 <div className="relative w-full aspect-4/3">
                     <Image
@@ -39,12 +38,11 @@ export default function Myheader(){
                         <h1 className="lg:text-3xl md:text-2xl leading-10">
                             Plan your travels again,<br/> with our growing network
                         </h1>
-                        <Link href="/flies">
-                            <button className="bg-transparent border-2 border-amber-50 rounded-full lg:px-8 lg:py-4 md:px-6 md:py-4 px-4 py-2 my-8 font-bold text-amber-50 cursor-pointer hover:text-fuchsia-950 hover:bg-amber-50 transition-all duration-300">
-                                Book Now
-                            </button>
-                        </Link>
-                    </div>
+
+                        <button className="bg-transparent border-2 border-amber-50 rounded-full lg:px-8 lg:py-4 md:px-6 md:py-4 px-4 py-2 my-8 font-bold text-amber-50 cursor-pointer hover:text-fuchsia-950 hover:bg-amber-50 transition-all duration-300">
+                            Book Now
+                        </button>
+                </div>
                 </div>
             </div>
 
