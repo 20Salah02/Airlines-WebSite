@@ -1,3 +1,4 @@
+<img width="1920" height="1080" alt="Screenshot (3891)" src="https://github.com/user-attachments/assets/380dde9c-e57f-45b4-b2e3-3019077beb75" />
 
 #  Salah Airlines — Full-Stack Airline Booking System
 
@@ -9,7 +10,7 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 ## Preview
 
-
+https://github.com/user-attachments/assets/055ec77f-5d01-4418-b1a6-0c3a4fdca7a7
 
 ---
 
