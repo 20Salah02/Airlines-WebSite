@@ -8,7 +8,7 @@ import Reference from "./components/bookingReference"
 export default function Confirmed(){
     
     return(
-        <div className="space-y-25">
+        <div className="space-y-25 bg-zinc-50">
            <Nav/>
            <ConfirmedHeader/>
            <Reference/>
