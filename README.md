@@ -33,7 +33,7 @@ A complete, production-ready airline booking platform built with Next.js, TypeSc
 
 | Email Verification | Offers Section |
 |--------------------|---------------|
-| ![](https://github.com/user-attachments/assets/1a71269d-7e9e-4d96-944d-e401e34c37f9) | ![]https://github.com/user-attachments/assets/1ec13777-bc38-4a78-8228-c51c7cd765d8) |
+| ![](https://github.com/user-attachments/assets/1a71269d-7e9e-4d96-944d-e401e34c37f9) | ![](https://github.com/user-attachments/assets/1ec13777-bc38-4a78-8228-c51c7cd765d8) |
 
 | Change Currency | Modify Search |
 |-------------|---------------|
