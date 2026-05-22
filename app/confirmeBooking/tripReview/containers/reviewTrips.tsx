@@ -21,7 +21,7 @@ export default function ReviewTheTrips(){
     }
     const [mounted, setMounted] = useState(false)
 
-    useEffect(() => {
+    useEffect(() => { 
         const timer = setTimeout(() => setMounted(true), 0)
         return () => clearTimeout(timer)
     }, [])
