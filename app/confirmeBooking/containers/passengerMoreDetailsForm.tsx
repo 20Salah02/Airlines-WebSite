@@ -12,11 +12,6 @@ import { usePassenger } from "@/app/contexts/passengerContext"
 import { useRouter } from "next/navigation";
 
 //
-type CountryAPI = {
-  name: { common: string }
-  idd?: { root: string; suffixes?: string[] }
-  cca2: string
-}
 
 type Country = {
   name: string
@@ -38,24 +33,30 @@ export default function PassengerMoreDetails() {
   const [errors, setErrors] = useState<{ email?: boolean; phone?: boolean }>({})
 
   useEffect(() => {
-    fetch("https://restcountries.com/v3.1/all?fields=name,idd,cca2")
-      .then(res => res.json())
-      .then((data: CountryAPI[]) => {
-        if (!Array.isArray(data)) return
+  fetch(
+    "https://api.restcountries.com/countries/v5?limit=100&response_fields=names.common,calling_codes,codes.alpha_2,flag.emoji",
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_COUNTRIES_API_KEY}`,
+      },
+    }
+  )
+    .then(res => res.json())
+    .then(response => {
+      const formatted: Country[] = response.data.objects
+        .filter((c: any) => c.calling_codes?.length)
+        .map((c: any) => ({
+          name: c.names.common,
+          dial: `+${c.calling_codes[0]}`,
+          flag: c.flag.emoji || getFlagEmoji(c.codes.alpha_2),
+        }))
+        .sort((a: Country, b: Country) => a.name.localeCompare(b.name));
 
-        const formatted: Country[] = data
-          .filter(c => c.idd?.root)
-          .map(c => ({
-            name: c.name.common,
-            dial: c.idd!.root + (c.idd!.suffixes ? c.idd!.suffixes[0] : ""),
-            flag: getFlagEmoji(c.cca2),
-          }))
-          .sort((a, b) => a.name.localeCompare(b.name))
-
-        setCountries(formatted)
-      })
-  }, [])
-
+      setCountries(formatted);
+    })
+    .catch(console.error);
+  }, []);
+  
   const defaultCountryCode =
     countries.find(c => c.name === passenger?.nationality)?.dial || "+212"
   const [countryCode, setCountryCode] = useState(defaultCountryCode)
